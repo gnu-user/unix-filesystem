@@ -3,4 +3,12 @@
 //A Pointer to the free block linked list, which will take 8 bytes,
 //A Pointer to the Inode table for the root directory, which will take 8 bytes,
 //(Integer) A Device id, which will take up 4 bytes.
-//A Pointer to the bad block linked, which will take up 8 bytes
+
+struct super_block
+{
+	int size_of_disk;
+	int block_size;
+	int free_block_list;	//Address to the first free block
+	int root_dir;			//Address to the root directory
+	int device_id;
+};
