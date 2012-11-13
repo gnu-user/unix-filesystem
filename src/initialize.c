@@ -9,26 +9,13 @@
 
 #include "blockio.h"
 
-/* size of blocks on simulated disk */
-#define BLKSIZE  128
-/* number of blocks on simulated disk */
-#define NUMBLKS  512
-
-static int initialize()
+static void initialize(int erase)
 {
-	char null_block[BLKSIZE];
-
-	/*Create Null Block*/
-	for (int i = 0; i < BLKSIZE; i++)
+	if (erase == 1)
 	{
-		null_block[j] = '0';
-	}
-
-	/*Set every block to null*/
-	for(int i = 0; i < NUMBLKS; i++)
-	{
-		put_block(i, null_block);
+		init_disk();
 	}
 
 	/*Initialize the Superblock struct*/
+
 }
