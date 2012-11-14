@@ -10,12 +10,16 @@
  * (Integer) A Device id, which will take up 4 bytes.
 */
 #include <stdint.h>
+#include <stdbool.h>
 
-struct super_block
-{
+typedef struct{
 	uint32_t size_of_disk;
 	uint32_t block_size;
 	uint32_t free_block_list;	//Address to the first free block
 	uint32_t root_dir;			//Address to the root directory
 	uint32_t device_id;
-};
+} superblock;
+
+typedef struct{
+	bool blocks[];
+} freeblock;
