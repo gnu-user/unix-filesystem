@@ -20,7 +20,7 @@
 #define SUPER_BLOCK	  0
 #define FREE_BLOCK 2
 
-static void initialize(int erase)
+void sfs_initialize(int erase)
 {
 
 	if (erase == 1)
@@ -62,14 +62,14 @@ static void initialize(int erase)
 
 }
 
-//Allocate all of the blocks to the free block list
+/**
+ * Allocate all of the blocks to the free block list
+ */
 void free_block_init(void)
 {
-	//freeblock fb;
 	bool freeblock[BLKSIZE];
 
 	//Divide the blocks array up into multiple
-	//fb.blocks[BLKSIZE];
 	int num_free_block = (int)(floor(NUMBLKS/BLKSIZE));
 
 	for(int i = 0; i < num_free_block+FREE_BLOCK;i++)
@@ -82,11 +82,18 @@ void free_block_init(void)
 		{
 			freeblock[i] = false;
 		}
+		/**
+		 * It might not work because it is expecting a char* but is
+		 * given a bool. Might be better just to store a char 0 or 1
+		 */
 		put_block(FREE_BLOCK+j, freeblock);
 	}
 }
 
-static void wipe_disk(void)
+/**
+ * Wipes the drive block by block
+ */
+void wipe_disk(void)
 {
 	char* buffer = calloc(128, sizeof(char));
 	for(int i = 0; i < NUMBLKS; i++)
