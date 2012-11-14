@@ -9,6 +9,8 @@
  * A Pointer to the Inode table for the root directory, which will take 8 bytes,
  * (Integer) A Device id, which will take up 4 bytes.
 */
+#include <stdint.h>
+
 struct super_block
 {
 	uint32_t size_of_disk;
