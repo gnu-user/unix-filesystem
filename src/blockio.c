@@ -8,6 +8,7 @@
 #include <limits.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "blockio.h"
 
 /* file for storing simulated disk's data */
 #define DISKFILE "simdisk.data"
@@ -18,7 +19,6 @@
 /* mode used to create disk file */
 /* allows read and write by owner and by group */
 #define DISKFILEMODE  S_IRUSR|S_IWUSR|S_IRWXG
-
 
 /* descriptor of disk data file once opened
    negative value indicates that disk data file

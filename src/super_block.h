@@ -20,6 +20,8 @@ typedef struct{
 	uint32_t device_id;
 } superblock;
 
-typedef struct{
+/*typedef struct{
 	bool blocks[];
 } freeblock;
+*/
+//extern bool blocks[];
