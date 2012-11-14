@@ -51,10 +51,11 @@ void free_block_init(void)
 	freeblock fb;
 
 	//Divide the blocks array up into multiple
-	fb.blocks[BLKSIZE];
-	for(int j = 0; j < (int)(ceil(NUMBLKS/BLKSIZE)); j++)
+	//fb.blocks[BLKSIZE];
+	int num_free_block = (int)(floor(NUMBLKS/BLKSIZE));
+	for(int j = 0; j < num_free_block; j++)
 	{
-		for(int i = 2; i < BLKSIZE; i++)
+		for(int i = num_free_block; i < BLKSIZE; i++)
 		{
 			fb.blocks[i]= false;
 		}
