@@ -6,3 +6,5 @@ extern int
 put_block(int blknum,    /* which disk block to update */
 	  char *buf);    /* where in memory to get new disk block contents */
 
+extern int
+init_disk();
