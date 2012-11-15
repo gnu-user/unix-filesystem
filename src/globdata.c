@@ -8,7 +8,7 @@ char* allocate_buf(char* buf, uint32_t size)
 	return buf;
 }
 
-char* copy_to_buf(void* buf1, char* buf2, uint32_t size1, uint32_t size2)
+char* copy_to_buf(char* buf1, char* buf2, uint32_t size1, uint32_t size2)
 {
 	if(size1 > size2 || buf1 == NULL)
 	{
@@ -25,3 +25,10 @@ char* copy_to_buf(void* buf1, char* buf2, uint32_t size1, uint32_t size2)
 
 	return buf2;
 }
+
+
+/**
+ * System wide open file table
+ * Needs to have at least 5 instances (to have 5 files open at once)
+ **/
+
