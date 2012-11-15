@@ -47,7 +47,7 @@ int sfs_initialize(int erase)
 		 * list block, a pointer to the root directory Inode block.
 		 **/
 
-		int root_dir = (int)(floor(NUMBLKS/BLKSIZE))+1;
+		int root_dir = (int)(ceil(NUMBLKS/BLKSIZE))+1;
 		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_BLOCK, root_dir, 0};
 
 		/**
@@ -95,7 +95,7 @@ void free_block_init(void)
 	bool freeblock[BLKSIZE];
 	char* buf = NULL;
 	//Divide the blocks array up into multiple
-	int num_free_block = (int)(floor(NUMBLKS/BLKSIZE));
+	int num_free_block = (int)(ceil(NUMBLKS/BLKSIZE));
 
 	for(int i = 0; i < num_free_block+FREE_BLOCK;i++)
 	{
