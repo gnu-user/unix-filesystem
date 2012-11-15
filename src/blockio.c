@@ -71,7 +71,7 @@ init_disk()
 *************************************************/
 int
 get_block(int blknum,
-	  char *buf)
+	  byte *buf)
 {
   if (blknum >= NUMBLKS || blknum < 0) {
     fprintf(stderr,"get_block: invalid block number: %d\n",blknum);
@@ -108,7 +108,7 @@ get_block(int blknum,
 *************************************************/
 int
 put_block(int blknum,
-	  char *buf)
+	  byte *buf)
 {
   if (blknum >= NUMBLKS || blknum < 0) {
     fprintf(stderr,"put_block: invalid block number: %d\n",blknum);

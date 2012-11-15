@@ -14,7 +14,7 @@
 #define SUPER_BLOCK	  0
 #define FREE_BLOCK 2
 
-char write_buffer[BLKSIZE];
+byte write_buffer[BLKSIZE];
 
 /**
  * Initialize the superblock for the file system.
@@ -31,7 +31,7 @@ char write_buffer[BLKSIZE];
  */
 int sfs_initialize(int erase)
 {
-	char* buf;
+	byte* buf;
 	if (erase == 1 || erase == 0)
 	{
 		if (erase == 1)
@@ -53,13 +53,13 @@ int sfs_initialize(int erase)
 		/**
 		 * Allocate a buffer to write to the block.
 		 */
-		//buf = allocate_buf(buf, BLKSIZE);
+		buf = allocate_buf(buf, BLKSIZE);
 
 		/**
 		 * Copy the superblock into to buffer
 		 */
-		//buf = copy_to_buf((char*)sb, buf, BLKSIZE, sizeof(sb));
-		//put_block(1, buf);
+		buf = copy_to_buf((byte *)&sb, buf, BLKSIZE, sizeof(sb));
+		put_block(1, buf);
 
 		/**
 		 * Initialize the free_block list starting at the third index after the
@@ -93,7 +93,7 @@ int sfs_initialize(int erase)
 void free_block_init(void)
 {
 	bool freeblock[BLKSIZE];
-	char* buf = NULL;
+	byte* buf = NULL;
 	//Divide the blocks array up into multiple
 	int num_free_block = (int)(ceil(NUMBLKS/BLKSIZE));
 
@@ -116,7 +116,7 @@ void free_block_init(void)
 		/**
 		 * Copy the boolean array into to buffer
 		 */
-		buf = copy_to_buf((char*)freeblock, buf, BLKSIZE, sizeof(freeblock));
+		buf = copy_to_buf((byte*)freeblock, buf, BLKSIZE, sizeof(freeblock));
 
 		/**
 		 * Store the buffer onto the disk.

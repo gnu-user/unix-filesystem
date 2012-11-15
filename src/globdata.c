@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* allocate_buf(char* buf, uint32_t size)
+byte* allocate_buf(byte* buf, uint32_t size)
 {
-	buf = (char *) calloc(size, sizeof(char));
+	buf = (byte *) calloc(size, sizeof(byte));
 	return buf;
 }
 
-char* copy_to_buf(char* buf1, char* buf2, uint32_t size1, uint32_t size2)
+byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
 {
 	if(size1 > size2 || buf1 == NULL)
 	{
 		return NULL;
 	}
 
-	buf2 = (char *) calloc(size2, sizeof(char));
+	buf2 = (byte *) calloc(size2, sizeof(byte));
 
 	if(buf2 == NULL)
 	{

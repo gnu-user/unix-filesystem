@@ -17,13 +17,15 @@
 /* number of files that can be open at once */
 #define NUMOFL	  32
 
-extern char write_buffer[BLKSIZE];
+typedef uint8_t byte;
 
-extern char read_buffer[BLKSIZE];
+extern byte write_buffer[BLKSIZE];
 
-extern char* allocate_buf(char* buf, uint32_t size);
+extern byte read_buffer[BLKSIZE];
 
-extern char* copy_to_buf(char* buf1, char* buf2, uint32_t size1,
+extern byte* allocate_buf(byte* buf, uint32_t size);
+
+extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1,
 							uint32_t size2);
 
 /**
