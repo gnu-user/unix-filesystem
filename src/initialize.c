@@ -13,6 +13,7 @@
 
 #define SUPER_BLOCK	  0
 #define FREE_BLOCK 2
+#define ROOT_DIR 2
 
 byte write_buffer[BLKSIZE];
 
@@ -58,8 +59,8 @@ int sfs_initialize(int erase)
 		/**
 		 * Copy the superblock into to buffer
 		 */
-		buf = copy_to_buf((byte *)&sb, buf, BLKSIZE, sizeof(sb));
-		put_block(1, buf);
+		buf = (byte *) copy_to_buf((byte *)&sb, (byte *)buf, sizeof(sb), BLKSIZE);
+		put_block(0, buf);
 
 		/**
 		 * Initialize the free_block list starting at the third index after the
@@ -76,8 +77,8 @@ int sfs_initialize(int erase)
 		 * determined that it will write to (aka the first block after the last
 		 * block in the free block list blocks.
 		 **/
-		//sfs_create('/', 1)
-		return 0;
+		//sfs_create('/', 1);
+		return 1;
 	}
 	else
 	{
@@ -97,15 +98,20 @@ void free_block_init(void)
 	//Divide the blocks array up into multiple
 	int num_free_block = (int)(ceil(NUMBLKS/BLKSIZE));
 
-	for(int i = 0; i < num_free_block+FREE_BLOCK;i++)
-	{
-		freeblock[i] = true;
-	}
 	for(int j = 0; j < num_free_block; j++)
 	{
-		for(int i = num_free_block+FREE_BLOCK; i < BLKSIZE; i++)
+		for(int i = 0; i < BLKSIZE; i++)
 		{
 			freeblock[i] = false;
+
+			/**
+			 * Initializes the super block, journal blocks, free block list
+			 * blocks, root directory Inode block, root directory index block
+			 */
+			if(i < num_free_block+FREE_BLOCK+ROOT_DIR && j == 0)
+			{
+				freeblock[i] = true;
+			}
 		}
 
 		/**
@@ -131,11 +137,11 @@ void free_block_init(void)
 void wipe_disk(void)
 {
 	//Create the null block of data
-	char* buffer = allocate_buf(buffer, BLKSIZE);
+	byte* buffer = allocate_buf(buffer, BLKSIZE);
 
 	//Go block to block setting them to null
 	for(int i = 0; i < NUMBLKS; i++)
 	{
-		put_block(i, buffer);
+		int a = put_block(i, buffer);
 	}
 }

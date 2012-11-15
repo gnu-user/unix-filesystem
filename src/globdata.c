@@ -15,13 +15,13 @@ byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
 		return NULL;
 	}
 
-	buf2 = (byte *) calloc(size2, sizeof(byte));
+	buf2 = calloc(size2, sizeof(byte));
 
 	if(buf2 == NULL)
 	{
 		return NULL;
 	}
-	memcpy(buf2, buf1, size1);
+	buf2 = memcpy(buf2, buf1, size1);
 
 	return buf2;
 }
