@@ -11,24 +11,20 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "super_block.h"
-
-/* size of blocks on simulated disk */
-#define BLKSIZE  128
-/* number of blocks on simulated disk */
-#define NUMBLKS  512
+#include "globdata.h"
 
 #define SUPER_BLOCK	  0
 #define FREE_BLOCK 2
 
+char write_buffer[BLKSIZE];
+
 /**
  * Initializes the disk.
  * @param erase int,
- * If this value is 1 then it will erase every block
- * on the disk and then re-create the super block,
- * free block list blocks and the root directory.
- * If the value is 0 then it will re-create the
- * super block, the free block list blocks and the
- * root directory.
+ * If this value is 1 then it will erase every block on the disk and then
+ * re-create the super block, free block list blocks and the root directory.
+ * If the value is 0 then it will re-create the super block, the free block
+ * list blocks and the root directory.
  */
 int sfs_initialize(int erase)
 {
@@ -51,7 +47,7 @@ int sfs_initialize(int erase)
 		int root_dir = (int)(floor(NUMBLKS/BLKSIZE))+1;
 		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_BLOCK, root_dir, 0};
 
-		//put_block(1, sb.information);
+		//put_block(1, (char *) sb);
 
 		/**
 		 * Initialize the free_block list starting at the third index
@@ -89,7 +85,7 @@ int sfs_initialize(int erase)
 void free_block_init(void)
 {
 	bool freeblock[BLKSIZE];
-
+	char* buf = NULL;
 	//Divide the blocks array up into multiple
 	int num_free_block = (int)(floor(NUMBLKS/BLKSIZE));
 
@@ -107,7 +103,10 @@ void free_block_init(void)
 		 * It might not work because it is expecting a char* but is
 		 * given a bool. Might be better just to store a char 0 or 1
 		 */
-		put_block(FREE_BLOCK+j, freeblock);
+		buf = allocate_buf(buf, BLKSIZE);
+
+		buf = copy_to_buf((char*)freeblock, buf, BLKSIZE, sizeof(freeblock));
+		put_block(FREE_BLOCK+j, buf);
 	}
 }
 
@@ -117,7 +116,7 @@ void free_block_init(void)
 void wipe_disk(void)
 {
 	//Create the null block of data
-	char* buffer = calloc(128, sizeof(char));
+	char* buffer = calloc(BLKSIZE, sizeof(char));
 
 	//Go block to block setting them to null
 	for(int i = 0; i < NUMBLKS; i++)
