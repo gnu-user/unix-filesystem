@@ -55,5 +55,5 @@ int sfs_create(char *pathname, int type)
 	 * return value > 0 the file create was a success
 	 * return value <= 0 the file create was unsuccessful
 	 */
-	return 0;
+	return 1;
 }

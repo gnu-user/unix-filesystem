@@ -33,6 +33,8 @@ byte write_buffer[BLKSIZE];
 int sfs_initialize(int erase)
 {
 	byte* buf;
+	int retval = 0;
+
 	if (erase == 1 || erase == 0)
 	{
 		if (erase == 1)
@@ -40,7 +42,12 @@ int sfs_initialize(int erase)
 			/**
 			 * Erase Disk and reallocate to free block list
 			 */
-			wipe_disk();
+			retval = wipe_disk();
+
+			if(retval != 0)
+			{
+				return retval;
+			}
 		}
 
 		/**
@@ -60,13 +67,23 @@ int sfs_initialize(int erase)
 		 * Copy the superblock into to buffer
 		 */
 		buf = (byte *) copy_to_buf((byte *)&sb, (byte *)buf, sizeof(sb), BLKSIZE);
-		put_block(0, buf);
+		retval = put_block(0, buf);
+
+		if(retval != 0)
+		{
+			return retval;
+		}
 
 		/**
 		 * Initialize the free_block list starting at the third index after the
 		 * super block and the journal
 		 **/
-		free_block_init();
+		retval = free_block_init();
+
+		if(retval != 0)
+		{
+			return retval;
+		}
 
 		/**
 		 * Initialize the root directory. This will be the first block
@@ -77,7 +94,13 @@ int sfs_initialize(int erase)
 		 * determined that it will write to (aka the first block after the last
 		 * block in the free block list blocks.
 		 **/
-		//sfs_create('/', 1);
+		retval = sfs_create('/', 1);
+
+		if(retval > 0)
+		{
+			return retval;
+		}
+
 		return 1;
 	}
 	else
@@ -90,11 +113,16 @@ int sfs_initialize(int erase)
 
 /**
  * Allocate all of the blocks to the free block list
+ *
+ * @return a integer value
+ * if the free block init fails the value will be -1
+ * otherwise it will be 0
  */
-void free_block_init(void)
+int free_block_init(void)
 {
 	bool freeblock[BLKSIZE];
 	byte* buf = NULL;
+	int retval = 0;
 	//Divide the blocks array up into multiple
 	int num_free_block = (int)(ceil(NUMBLKS/BLKSIZE));
 
@@ -127,21 +155,32 @@ void free_block_init(void)
 		/**
 		 * Store the buffer onto the disk.
 		 */
-		put_block(FREE_BLOCK+j, buf);
+		retval = put_block(FREE_BLOCK+j, buf);
+		if(retval != 0)
+		{
+			return retval;
+		}
 	}
+	return 0;
 }
 
 /**
  * Wipes the drive block by block
  */
-void wipe_disk(void)
+int wipe_disk(void)
 {
 	//Create the null block of data
 	byte* buffer = allocate_buf(buffer, BLKSIZE);
+	int retval = 0;
 
 	//Go block to block setting them to null
 	for(int i = 0; i < NUMBLKS; i++)
 	{
-		int a = put_block(i, buffer);
+		retval = put_block(i, buffer);
+		if(retval != 0)
+		{
+			return retval;
+		}
 	}
+	return 0;
 }
