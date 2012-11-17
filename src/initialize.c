@@ -6,16 +6,14 @@
  **/
 
 #include "blockio.h"
-#include <stdlib.h>
 #include <stdbool.h>
 #include "super_block.h"
 #include "globdata.h"
 
 #define SUPER_BLOCK	  0
-#define FREE_BLOCK 2
+#define FREE_BLOCK 3
+#define FREE_INDEX 2
 #define ROOT_DIR 2
-
-byte write_buffer[BLKSIZE];
 
 /**
  * Initialize the superblock for the file system.
@@ -32,7 +30,7 @@ byte write_buffer[BLKSIZE];
  */
 int sfs_initialize(int erase)
 {
-	byte* buf;
+	byte* buf = NULL;
 	int retval = 0;
 
 	if (erase == 1 || erase == 0)
@@ -56,7 +54,7 @@ int sfs_initialize(int erase)
 		 **/
 
 		int root_dir = (int)(ceil(NUMBLKS/BLKSIZE))+1;
-		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_BLOCK, root_dir, 0};
+		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_INDEX, root_dir, 0};
 
 		/**
 		 * Allocate a buffer to write to the block.
@@ -147,12 +145,15 @@ int free_block_init(void)
 	bool freeblock[BLKSIZE];
 	byte* buf = NULL;
 	int retval = 0;
+
 	//Divide the blocks array up into multiple
 	int num_free_block = (int)(ceil(NUMBLKS/BLKSIZE));
 
 	/**
 	 * Add support for free block list index block.
 	 */
+	int* index_block = NULL;
+	index_block = (int*) calloc(num_free_block, sizeof(int));
 
 	for(int j = 0; j < num_free_block; j++)
 	{
@@ -171,6 +172,11 @@ int free_block_init(void)
 		}
 
 		/**
+		 * Add block to index
+		 */
+		index_block[j] = FREE_BLOCK+j;
+
+		/**
 		 * Allocate a buffer to write to the block.
 		 */
 		buf = allocate_buf(buf, BLKSIZE);
@@ -178,7 +184,7 @@ int free_block_init(void)
 		/**
 		 * Copy the boolean array into to buffer
 		 */
-		buf = copy_to_buf((byte*)freeblock, buf, BLKSIZE, sizeof(freeblock));
+		buf = copy_to_buf((byte*)freeblock, buf, sizeof(freeblock), BLKSIZE);
 
 		/**
 		 * Store the buffer onto the disk.
@@ -189,6 +195,22 @@ int free_block_init(void)
 			return retval;
 		}
 	}
+	buf = allocate_buf(buf, BLKSIZE);
+
+	/**
+	 * Copy the boolean array into to buffer
+	 */
+	buf = copy_to_buf((byte*)index_block, buf, num_free_block*sizeof(int), BLKSIZE);
+
+	/**
+	 * Store the buffer onto the disk.
+	 */
+	retval = put_block(FREE_INDEX, buf);
+	if(retval != 0)
+	{
+		return retval;
+	}
+
 	return 0;
 }
 
@@ -202,7 +224,10 @@ int free_block_init(void)
 int wipe_disk(void)
 {
 	//Create the null block of data
-	byte* buffer = allocate_buf(buffer, BLKSIZE);
+	byte* buffer = NULL;
+
+	buffer = allocate_buf(buffer, BLKSIZE);
+
 	int retval = 0;
 
 	//Go block to block setting them to null
