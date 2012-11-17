@@ -1,30 +1,36 @@
 #include "free_block_list.h"
 
-write_fbl(char * buf)
+/**
+ * TODO Make the return type for this int and other functions returning int into the ERROR_CODES enumeration.
+ */
+int write_fbl(free_block_list* fbl)
 {
 	/*
-	 1> Read the journal from disk and copy it into a buffer
-	 //read_journal();
+	 //Check if the first journal entry contains a LINK_FBL entry:
+	 if (journal[0] == NULL)
+	 {
+	 //then use the the FBL index from the SB,
+	 //read from the superblock:extern used_indices*
+	 location_of_fbl = get_free_block_index();
+	 }
 
-	 2> Check if the first journal entry contains a LINK_FBL entry:
-	 if (journal[0] == NULL) then use the the FBL index from the SB,
-	 else use the FBL located at arg1 of the journal_entry at journal[0]
-
-	 //read from the superblock:
-	 //read_fbl(0)
-	 //location_of_old_fbl = get_free_block_index();
-
+	 else{
+	 //else use the FBL located at arg1 of the journal_entry at journal[0]
 	 //read from the journalled index:
-	 //location_of_old_fbl = journal[0].arg1;
-	 //read_fbl(location_of_old_fbl);
+	 location_of_fbl = journal[0].arg1;
+	 }
+
+	 //update the current free block list by marking the existing FBL's blocks as unused.
+	 update_fbl(buf, index_fbl_blocks(location_of_fbl), calc_free_blocks(fbl, ));
+
+
 
 	 3> Call the update FBL method which updates the FBL entry in memory. It will
 	 take the FBL buffer in memory as the first argument, an array of all the
-	 indexes to mark as used as the second argument, and an array of all the
-	 indexes to mark as unused as the third argument.
+	 locations to mark as used as the second argument, and an array of all the
+	 locations to mark as unused as the third argument.
 
-	 //next_block = nextAvailableBlock();
-	 //sizeOfFBL = ceil(NUMBLOCKS/(BLKSIZE - sizeof(index)));
+
 
 	 //The indices that need to be marked as freed are the ones we used for the old FBL.
 	 // freeBlocks = create a new free_indices: this requires that next_block is called sizeOfFBL times,
@@ -38,7 +44,7 @@ write_fbl(char * buf)
 	 or just code it in the .c file DURRR
 
 	 4> Write the FBL to the selected blocks on the hard drive.
-	 //loop this statement for all the indices in freeBlocks, using i as an index
+	 //loop this statement for all the locations in freeBlocks, using i as a location
 	 //{
 	 //    put_block(freeBlocks[i], );
 	 //}
@@ -55,4 +61,19 @@ write_fbl(char * buf)
 	 //link_fbl();
 
 	 */
+}
+
+free_block_list* read_fbl(free_block_list* fbl, uint32_t index)
+{
+	/*
+	 --> Calls the iterate_fbl which iterates through the nodes in the
+	 free_block_list linked list
+	 */
+}
+
+free_locations* calc_free_blocks(free_block_list* fbl)
+{
+	//1. Get the free block list.
+	//2. Traverse it and add any blocks marked as empty to an array of type free_indices.
+	//3. Return the array.
 }
