@@ -1,4 +1,74 @@
 #include "free_block_list.h"
+#include <stdbool.h>
+
+free_locations* calc_free_blocks(free_block_list* fbl)
+{
+	//1. Get the free block list.
+	//2. Traverse it and add any blocks marked as empty to an array of type free_indices.
+	//3. Return the array.
+
+/*
+	locations_buf = calloc(NUMBLKS, sizeof(free_location))
+	count = 0
+
+	for (i = 0, i < NUMBLKS, i++)
+	{
+		if (! fbl[i])
+		{
+			locations_buf[count] = i
+			count++
+		}
+	}
+
+	return locations_buf
+
+ */
+
+}
+
+
+free_locations* calc_num_free_blocks(free_block_list* fbl, uint32_t num_blocks)
+{
+	//1. Get the free block list.
+	//2. Traverse it and add num_blocks specified marked as empty to an array of type free_indices.
+	//3. Return the array.
+
+	/*
+	    // num_blocks + 1 items in order to null terminate
+		locations_buf = calloc(num_blocks +1, sizeof(free_location))
+		count = 0
+
+		for (i = 0, i < NUMBLKS, i++)
+		{
+			// If found the num_blocks specified break
+			if (count == num_blocks)
+			{
+				break;
+			}
+			if (! fbl[i])
+			{
+				locations_buf[count] = i
+				count++
+			}
+		}
+
+		return locations_buf
+
+	 */
+}
+
+
+free_location get_free_block(free_block_list* fbl)
+{
+/*
+	free_block = calc_free_blocks(fbl, 1);
+
+	update_fbl(fbl, free_block);
+
+	return free_block;
+*/
+}
+
 
 /**
  * TODO Make the return type for this int and other functions returning int into the ERROR_CODES enumeration.
@@ -63,6 +133,7 @@ int write_fbl(free_block_list* fbl)
 	 */
 }
 
+
 free_block_list* read_fbl(free_block_list* fbl, uint32_t index)
 {
 	/*
@@ -71,9 +142,50 @@ free_block_list* read_fbl(free_block_list* fbl, uint32_t index)
 	 */
 }
 
-free_locations* calc_free_blocks(free_block_list* fbl)
+
+static used_locations* index_fbl_blocks(uint32_t index)
 {
-	//1. Get the free block list.
-	//2. Traverse it and add any blocks marked as empty to an array of type free_indices.
-	//3. Return the array.
+
+}
+
+
+static free_block_list* iterate_fbl(uint32_t index)
+{
+
+}
+
+
+free_block_list* update_fbl(free_block_list* fbl,
+							used_locations used,
+							free_locations free)
+{
+ 	/* Iterate through each item in the used and free locations array,
+ 	 * for each item in the array update the free block list
+	 */
+	if (used != NULL)
+	{
+		uint32_t i = 0;
+
+		while (used[i] != NULL)
+		{
+			// Mark each of the fbl locations specifed as used
+			fbl[used[i]] = true;
+			++i;
+		}
+
+	}
+	if (free != NULL)
+	{
+		uint32_t i = 0;
+
+		while (free[i] != NULL)
+		{
+			// Mark each of the fbl locations specifed as free
+			fbl[free[i]] = false;
+			++i;
+		}
+
+	}
+
+	return fbl;
 }
