@@ -1,4 +1,5 @@
 #include "blockio.h"
+#include "super_block.h"
 
 /** sfs_create
  * Create a file with the pathname specified if there is not already a file with
@@ -24,36 +25,48 @@
 int sfs_create(char *pathname, int type)
 {
 	//TODO create create_file
+	int root_dir;
 	/**
 	 * Check for valid type = 0 or = 1
-	 * Check if there is enough space to allocate for the new file/directory
 	 */
+	if(type == 0 || type == 1)
+	{
+		/**
+		 * Check if there is enough space to allocate for the new file/directory
+		 */
 
-	/**
-	 * Parse pathname
-	 */
-	//parse_path(pathname);
+		/**
+		 * Parse pathname
+		 */
+		//parse_path(pathname);
 
-	/**
-	 * Retrieve the Superblock.
-	 * Retrieve the root director Inode
-	 * Retrieve the root director's index block
-	 * Use the path name to traverse the file structure
-	 * 	- Repeatedly Retrieve director's Inode, then the index block to
-	 * 	  retrieve the next directory and so on...
-	 * 	- This progress is done until the path has been completed or the file
-	 * 	  has been found.
-	 * 	- The file can not be found
-	 * 	- The path name could be invalid it could be either bad entry or
-	 * 	  directory not found
-	 * Check if the there is another file with the given name
-	 * 	- If there is another file, there is an invalid file name error
-	 * Create
-	 * 	- if type = 0 create the file's Inode block, index block, and data block
-	 * 	- if type = 1 create the directory's Inode block, and index block
-	 *
-	 * return value > 0 the file create was a success
-	 * return value <= 0 the file create was unsuccessful
-	 */
-	return 1;
+		/**
+		 * Retrieve the root direct's location
+		 */
+		root_dir = get_root();
+
+
+		/**
+		 * Retrieve the root director Inode
+		 * Retrieve the root director's index block
+		 * Use the path name to traverse the file structure
+		 * 	- Repeatedly Retrieve director's Inode, then the index block to
+		 * 	  retrieve the next directory and so on...
+		 * 	- This progress is done until the path has been completed or the file
+		 * 	  has been found.
+		 * 	- The file can not be found
+		 * 	- The path name could be invalid it could be either bad entry or
+		 * 	  directory not found
+		 * Check if the there is another file with the given name
+		 * 	- If there is another file, there is an invalid file name error
+		 * Create
+		 * 	- if type = 0 create the file's Inode block, index block, and data block
+		 * 	- if type = 1 create the directory's Inode block, and index block
+		 *
+		 * return value > 0 the file create was a success
+		 * return value <= 0 the file create was unsuccessful
+		 */
+		return 1;
+	}
+	return 0;
 }

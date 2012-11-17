@@ -27,15 +27,20 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 	//TODO create encryption
 	//TODO create decryption
 
-	/**
-	 * Validate the file descriptor on the system-wide-open file table
-	 *  - If the file descriptor is not found return error
-	 * Use the offset to find the start of where to read in the block
-	 * Read the specified bytes of the given length into the buffer
-	 *
-	 * return value > 0 if the file was read successfully
-	 * return value <= 0 if the file was read unsuccessfully
-	 */
+	if(fd >= 0 && start > 0 && start < BLKSIZE && length > 0 &&
+			start+length < BLKSIZE)
+	{
+		/**
+		 * Validate the file descriptor on the system-wide-open file table
+		 *  - If the file descriptor is not found return error
+		 * Use the offset to find the start of where to read in the block
+		 * Read the specified bytes of the given length into the buffer
+		 *
+		 * return value > 0 if the file was read successfully
+		 * return value <= 0 if the file was read unsuccessfully
+		 */
 
-	return 1;
+		return 1;
+	}
+	return 0;
 }

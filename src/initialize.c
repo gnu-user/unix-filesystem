@@ -8,7 +8,6 @@
 #include "blockio.h"
 #include <stdbool.h>
 #include "super_block.h"
-#include "globdata.h"
 
 #define SUPER_BLOCK	  0
 #define FREE_BLOCK 3

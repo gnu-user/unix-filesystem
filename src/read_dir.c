@@ -24,15 +24,19 @@ int sfs_readdir(int fd, char *mem_pointer)
 {
 	//TODO create readdir
 
-	/**
-	 * Validate the file descriptor on the System open file table
-	 * 	- Throw an error otherwise
-	 * Retrieve the contents of the directory's index block. Use the Inode to
-	 * retrieve the names of the contents. Store the values into mem_pointer.
-	 *
-	 * return value > 0 for a successful read dir
-	 * return value = 0 if there is no contents in dir
-	 * return value < 0 for a unsuccessful read dir
-	 */
-	return 0;
+	if(fd >= 0)
+	{
+		/**
+		 * Validate the file descriptor on the System open file table
+		 * 	- Throw an error otherwise
+		 * Retrieve the contents of the directory's index block. Use the Inode to
+		 * retrieve the names of the contents. Store the values into mem_pointer.
+		 *
+		 * return value > 0 for a successful read dir
+		 * return value = 0 if there is no contents in dir
+		 * return value < 0 for a unsuccessful read dir
+		 */
+		return 0;
+	}
+	return -1;
 }

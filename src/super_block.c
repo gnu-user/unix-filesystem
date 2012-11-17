@@ -1,6 +1,6 @@
 #include "super_block.h"
 
-superblock* get_super_block()
+superblock* get_super_block(void)
 {
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(SUPER_BLOCK, buf);

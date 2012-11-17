@@ -14,12 +14,19 @@ int sfs_close(int fd)
 	//TODO create close_file
 
 	/**
-	 * Validate the file descriptor on the System open file table
-	 * 	- Throw an error otherwise
-	 * 	Remove the file descriptor from the System open file table
-	 *
-	 * 	return value > 0 the file close was a success
-	 * 	return value <= 0 the file close was unsuccessful
+	 * Check if a valid file descriptor is given
 	 */
-	return 1;
+	if(fd >= 0)
+	{
+		/**
+		 * Validate the file descriptor on the System open file table
+		 * 	- Throw an error otherwise
+		 * 	Remove the file descriptor from the System open file table
+		 *
+		 * 	return value > 0 the file close was a success
+		 * 	return value <= 0 the file close was unsuccessful
+		 */
+		return 1;
+	}
+	return 0;
 }

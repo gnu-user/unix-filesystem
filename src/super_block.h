@@ -19,7 +19,7 @@ typedef struct{
 	byte uuid[16];
 } superblock;
 
-extern superblock* get_super_block();
+extern superblock* get_super_block(void);
 
 extern int get_root(void);
 

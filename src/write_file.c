@@ -30,22 +30,26 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 	//TODO create encryption
 	//TODO create decryption
 
-	/**
-	 * Validate the file descriptor on the System open file table
-	 * 	- Throw an error otherwise
-	 * Check the encryption property
-	 * 	- If encrypted it will be decrypted
-	 * Check if the new write will fit onto the hard disk
-	 * 	- If the new write does not fit, through error
-	 * 	- If there is enough space allocate the space from the free block list
-	 * Write the data
-	 * Check if the file needs to be encrypted
-	 * 	- If it needs to be encrypted, encrypt the file
-	 * Store the file into the block(s)
-	 *
-	 * return value > 0 if write was successful
-	 * return value <= 0 then the write was a fail
-	 */
-
-	return 1;
+	if(fd >= 0 && start > 0 && start < BLKSIZE && length > 0 &&
+				start+length < BLKSIZE)
+	{
+		/**
+		 * Validate the file descriptor on the System open file table
+		 * 	- Throw an error otherwise
+		 * Check the encryption property
+		 * 	- If encrypted it will be decrypted
+		 * Check if the new write will fit onto the hard disk
+		 * 	- If the new write does not fit, through error
+		 * 	- If there is enough space allocate the space from the free block list
+		 * Write the data
+		 * Check if the file needs to be encrypted
+		 * 	- If it needs to be encrypted, encrypt the file
+		 * Store the file into the block(s)
+		 *
+		 * return value > 0 if write was successful
+		 * return value <= 0 then the write was a fail
+		 */
+		return 1;
+	}
+	return 0;
 }

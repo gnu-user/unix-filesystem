@@ -27,26 +27,84 @@
  * encrypted) will take up 4 bytes.
  **/
 
-#include <stdint.h>
-#include <stdbool.h>
+#include "I_node.h"
+#include "blockio.h"
 
-typedef struct{
-	char name[7];
-	bool file;
-	bool read;
-	bool write;
-	bool execute;
-	uint32_t date_of_create;
-	uint32_t date_last_accessed;
-	uint32_t date_last_modified;
-	uint32_t file_owner;
-	uint32_t last_user_modified;
-	short file_size; 				//Might need to be unsigned
-	uint32_t location;				//Address of the index block
-	bool encrypted;
-	uint32_t check_sum;
-} inode;
+inode* get_inode(int block_num)
+{
+	char* buf = allocate_buf(buf, BLKSIZE);
+	int retval = get_block(block_num, buf);
 
+	if(retval != 0)
+	{
+		return NULL;
+	}
+	return (inode*) buf;
+}
+
+int get_index_block(int block_num)
+{
+	char* buf = allocate_buf(buf, BLKSIZE);
+	int retval = get_block(block_num, buf);
+
+	if(retval != 0)
+	{
+		return retval;
+	}
+	return ((inode*) buf)->location;
+}
+
+int get_type(int block_num)
+{
+	//type
+	char* buf = allocate_buf(buf, BLKSIZE);
+	int retval = get_block(block_num, buf);
+
+	if(retval != 0)
+	{
+		return retval;
+	}
+	return ((inode*) buf)->type;
+}
+
+int get_size(int block_num)
+{
+	//file_size
+	char* buf = allocate_buf(buf, BLKSIZE);
+	int retval = get_block(block_num, buf);
+
+	if(retval != 0)
+	{
+		return retval;
+	}
+	return ((inode*) buf)->file_size;
+}
+
+int get_encrypted(int block_num)
+{
+	//encrypted
+	char* buf = allocate_buf(buf, BLKSIZE);
+	int retval = get_block(block_num, buf);
+
+	if(retval != 0)
+	{
+		return retval;
+	}
+	return ((inode*) buf)->encrypted;
+}
+
+char* get_name(int block_num)
+{
+	//name[7]
+	char* buf = allocate_buf(buf, BLKSIZE);
+	int retval = get_block(block_num, buf);
+
+	if(retval != 0)
+	{
+		return NULL;
+	}
+	return ((inode*) buf)->name;
+}
 /*
  * inode block
  * get index block
