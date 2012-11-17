@@ -30,6 +30,14 @@
 #include "I_node.h"
 #include "blockio.h"
 
+/**
+ * Get the I_node given the block index of the Inode
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return inode pointer of the Inode at the given location.
+ * If Inode is null the Inode was not found.
+ */
 inode* get_inode(int block_num)
 {
 	char* buf = allocate_buf(buf, BLKSIZE);
@@ -42,6 +50,15 @@ inode* get_inode(int block_num)
 	return (inode*) buf;
 }
 
+/**
+ * Get the index block from the Inode given the location of the Inode
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return index integer
+ * If index >= 0 then the function was successful,
+ * if index < 0 then the function was unsuccessful
+ */
 int get_index_block(int block_num)
 {
 	char* buf = allocate_buf(buf, BLKSIZE);
@@ -54,6 +71,16 @@ int get_index_block(int block_num)
 	return ((inode*) buf)->location;
 }
 
+/**
+ * Get the type of the inode, whether it is a directory or a file
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return the type of the file
+ * If type = 0 then the Inode is for a directory,
+ * if type = 1 then the Inode is for a file,
+ * otherwise the function has failed.
+ */
 int get_type(int block_num)
 {
 	//type
@@ -67,9 +94,24 @@ int get_type(int block_num)
 	return ((inode*) buf)->type;
 }
 
+/**
+ * Get size of the file
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return the size of the file
+ * if the size >= 0 then the function was successful
+ * if the size < 0 then the function was unsuccessful
+ */
 int get_size(int block_num)
 {
-	//file_size
+	/**
+	 * Check if the type is a file
+	 */
+	if (get_type(block_num) != 0)
+	{
+		return -1;
+	}
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(block_num, buf);
 
@@ -80,9 +122,26 @@ int get_size(int block_num)
 	return ((inode*) buf)->file_size;
 }
 
+/**
+ * Check if the file is encrypted
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return whether the file is encrypted
+ * if encrypt is 0 then the file is not encrypted
+ * if encrypt is 1 then the file is encrypted
+ * otherwise the function was unsuccessful
+ */
 int get_encrypted(int block_num)
 {
-	//encrypted
+	/**
+	 * Check if the type is a file
+	 */
+	if(get_type(block_num) == 0)
+	{
+		return 0;
+	}
+
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(block_num, buf);
 
@@ -93,6 +152,14 @@ int get_encrypted(int block_num)
 	return ((inode*) buf)->encrypted;
 }
 
+/**
+ * Get the name of the file
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return a char pointer to the file's name
+ * if the file's name = NULL then the function was unsuccessful
+ */
 char* get_name(int block_num)
 {
 	//name[7]
@@ -105,6 +172,7 @@ char* get_name(int block_num)
 	}
 	return ((inode*) buf)->name;
 }
+
 /*
  * inode block
  * get index block

@@ -1,4 +1,5 @@
 #include "blockio.h"
+#include "I_node.h"
 
 /** sfs_open
  * Opens the file specified by the pathname, if the file is successfully opened
@@ -38,5 +39,81 @@ int sfs_open(char *pathname)
 	 * Return file descriptor.
 	 */
 
+	return 0;
+}
+
+/**
+ * The all of the information stored in the given file descriptor's Inode.
+ *
+ * @param fd integer, the file descriptor.
+ *
+ * @return an integer value,
+ * if the value > 0 then the function is successful
+ * if the value <= 0 then the function is unsuccessful
+ */
+int show_information(fd)
+{
+	if(fd >= 0)
+	{
+		/**
+		 * Get the Inode from the swoft given the fd
+		 */
+		inode node;
+
+		printf("Name: %s", node->name);
+		if(node->type == true)
+		{
+			printf("Type: directory");
+		}
+		else
+		{
+			printf("Type: directory");
+		}
+		char read = '-';
+		char write = '-';
+		char execute= '-';
+		if(node->read == true)
+		{
+			read = 'R';
+		}
+		if(node->write == true)
+		{
+			write = 'W';
+		}
+		if(node->execute == true)
+		{
+			execute ='X';
+		}
+
+		printf("Privileges: %c%c%c", read, write, execute);
+
+		printf("Date created: %d", node->date_of_create);
+
+		printf("Date last accessed: %d", node->date_last_accessed);
+
+		printf("Date last modified: %d", node->date_last_modified);
+
+		printf("File owner: %d", node->file_owner);
+
+		printf("Last user modified: %d", node->last_user_modified);
+
+		printf("File size: %d", node->file_size);
+
+		printf("Index Block Location: %d", node->location);
+
+		if(node->encrypted == true)
+		{
+			printf("Encrypted: True");
+		}
+		else
+		{
+			printf("Encrypted: False");
+		}
+
+		printf("Check sum: %d", node->check_sum);
+
+
+		return 1;
+	}
 	return 0;
 }
