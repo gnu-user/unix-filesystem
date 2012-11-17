@@ -4,6 +4,8 @@
  *  Created on: Nov 16, 2012
  *      Author: jon
  */
+#include <stdint.h>
+#include "globdata.h"
 
 //TODO use malloc for this; it should be size: ceil(BLOCKSIZE/sizeof(uint32_t))
 typedef uint32_t* index_block;
@@ -11,14 +13,23 @@ typedef uint32_t* index_block;
 // Array of locations for the index blocks on disk
 typedef uint32_t* locations;
 
+// A single location
+typedef uint32_t location;
+
 //TODO add a linked list for storing the indices
 
 
 
 /**
+ * Generates the indexes for the data blocks and writes the indexes containing
+ * the locations to disk.
  *
+ * It returns the location of the first index, which can then be used to write the
+ * data to the blocks.
  */
-generate_index
+location generate_index(byte* data);
+
+
 
 
 index_block read_index_block(uint32_t index_on_disk);
@@ -48,7 +59,7 @@ void link_index_block();
  * @param array_indices Array of the indices for the index blocks on disk, updated
  * with each successive recursive call
  *
- * @return The pointer to the array_indices containint an array of the indices for the
+ * @return The pointer to the array_indices containing an array of the indices for the
  * index blocks on disk, NULL if error occurred.
  *
  */
