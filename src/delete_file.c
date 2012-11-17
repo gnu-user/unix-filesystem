@@ -47,5 +47,5 @@ int sfs_delete(char *pathname)
 	 * return value > 0 then the file was deleted successfully.
 	 * return value <= 0 then the file failed to be delete.
 	 */
-	return 0;
+	return 1;
 }

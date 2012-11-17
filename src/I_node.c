@@ -1,7 +1,7 @@
 /**
  * The structures used for the Inode component of the file system:
  *
- * (Char [6]) The file name contains the user name given to the file
+ * (Char [7]) The file name contains the user name given to the file
  * or directory, it will take up 6 bytes and limited to 6 characters
  * (Boolean) File type identifies whether the index file points to
  * file (1) or a directory (0) which will take up 1 byte.
@@ -31,7 +31,7 @@
 #include <stdbool.h>
 
 typedef struct{
-	char name[6];
+	char name[7];
 	bool file;
 	bool read;
 	bool write;
@@ -46,3 +46,11 @@ typedef struct{
 	bool encrypted;
 	uint32_t check_sum;
 } inode;
+
+/*
+ * inode block
+ * get index block
+ * get inode
+ *
+ */
+

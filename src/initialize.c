@@ -67,7 +67,7 @@ int sfs_initialize(int erase)
 		 * Copy the superblock into to buffer
 		 */
 		buf = (byte *) copy_to_buf((byte *)&sb, (byte *)buf, sizeof(sb), BLKSIZE);
-		retval = put_block(0, buf);
+		retval = put_block(SUPER_BLOCK, buf);
 
 		if(retval != 0)
 		{
@@ -96,10 +96,34 @@ int sfs_initialize(int erase)
 		 **/
 		retval = sfs_create('/', 1);
 
-		if(retval > 0)
+		if(retval <= 0)
 		{
 			return retval;
 		}
+
+
+		buf = allocate_buf(buf, BLKSIZE);
+
+		retval = get_block(SUPER_BLOCK, buf);
+
+		if(retval != 0)
+		{
+			return retval;
+		}
+
+		/**
+		 * Retrieve the super block
+		 */
+		superblock *super = get_super_block (buf);
+
+		/**
+		 * Display the super block
+		 */
+		printf("size of disk, %d\n", super->size_of_disk);
+		printf("block size, %d\n", super->block_size);
+		printf("free_block_list, %d\n", super->free_block_list);
+		printf("root dir, %d\n", super->root_dir);
+		printf("device id, %d\n", super->device_id);
 
 		return 1;
 	}
@@ -125,6 +149,10 @@ int free_block_init(void)
 	int retval = 0;
 	//Divide the blocks array up into multiple
 	int num_free_block = (int)(ceil(NUMBLKS/BLKSIZE));
+
+	/**
+	 * Add support for free block list index block.
+	 */
 
 	for(int j = 0; j < num_free_block; j++)
 	{
@@ -166,6 +194,10 @@ int free_block_init(void)
 
 /**
  * Wipes the drive block by block
+ *
+ * @return a integer value
+ * if the free block init fails the value will be -1
+ * otherwise it will be 0
  */
 int wipe_disk(void)
 {
