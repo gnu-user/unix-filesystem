@@ -37,5 +37,5 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 	 * return value <= 0 if the file was read unsuccessfully
 	 */
 
-	return 0;
+	return 1;
 }

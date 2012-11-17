@@ -21,5 +21,5 @@ int sfs_close(int fd)
 	 * 	return value > 0 the file close was a success
 	 * 	return value <= 0 the file close was unsuccessful
 	 */
-	return 0;
+	return 1;
 }
