@@ -27,7 +27,7 @@ typedef uint32_t* locations;
  * It returns the location of the first index, which can then be used to write the
  * data to the blocks.
  */
-location generate_index(byte* data);
+uint32_t generate_index(byte* data);
 
 
 

@@ -13,7 +13,7 @@
  * 1) Journal: Link the newly created FBL.
  * 2) Journal: Link the newly created index block to it's inode.
  */
-location generate_index(byte* data)
+uint32_t generate_index(byte* data)
 {
 	/*
 	 * PSEUDOCODE:

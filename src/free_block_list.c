@@ -1,7 +1,7 @@
 #include "free_block_list.h"
 #include <stdbool.h>
 
-free_locations* calc_free_blocks(free_block_list* fbl)
+free_locations calc_free_blocks(free_block_list fbl)
 {
 	//1. Get the free block list.
 	//2. Traverse it and add any blocks marked as empty to an array of type free_indices.
@@ -27,7 +27,7 @@ free_locations* calc_free_blocks(free_block_list* fbl)
 }
 
 
-free_locations* calc_num_free_blocks(free_block_list* fbl, uint32_t num_blocks)
+free_locations calc_num_free_blocks(free_block_list fbl, uint32_t num_blocks)
 {
 	//1. Get the free block list.
 	//2. Traverse it and add num_blocks specified marked as empty to an array of type free_indices.
@@ -58,7 +58,7 @@ free_locations* calc_num_free_blocks(free_block_list* fbl, uint32_t num_blocks)
 }
 
 
-free_location get_free_block(free_block_list* fbl)
+free_location get_free_block(free_block_list fbl)
 {
 /*
 	free_block = calc_free_blocks(fbl, 1);
@@ -73,7 +73,7 @@ free_location get_free_block(free_block_list* fbl)
 /**
  * TODO Make the return type for this int and other functions returning int into the ERROR_CODES enumeration.
  */
-int write_fbl(free_block_list* fbl)
+int write_fbl(free_block_list fbl)
 {
 	/*
 	 //Check if the first journal entry contains a LINK_FBL entry:
@@ -134,7 +134,7 @@ int write_fbl(free_block_list* fbl)
 }
 
 
-static free_block_list* read_fbl(free_block_list* fbl, uint32_t index)
+static free_block_list* read_fbl(free_block_list fbl, uint32_t index)
 {
 	/*
 	 --> Calls the iterate_fbl which iterates through the nodes in the
@@ -143,7 +143,7 @@ static free_block_list* read_fbl(free_block_list* fbl, uint32_t index)
 }
 
 
-static used_locations* index_fbl_blocks(uint32_t index)
+static used_locations index_fbl_blocks(uint32_t index)
 {
 
 }
@@ -155,7 +155,7 @@ static free_block_list* iterate_fbl(uint32_t index)
 }
 
 
-free_block_list* update_fbl(free_block_list* fbl,
+free_block_list* update_fbl(free_block_list fbl,
 							used_locations used,
 							free_locations free)
 {

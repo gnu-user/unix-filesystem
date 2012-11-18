@@ -37,14 +37,14 @@ typedef bool free_block_list[NUMBLKS];
  * Finds free blocks that exist on the given free block list and
  * returns them as a free locations.
  */
-free_locations* calc_free_blocks(free_block_list* fbl);
+free_locations calc_free_blocks(free_block_list fbl);
 
 
 /**
  * Finds the specified number of free blocks on the given free block list,
  * and returns them if there are enough free.
  */
-free_locations* calc_num_free_blocks(free_block_list* fbl, uint32_t num_blocks);
+free_locations calc_num_free_blocks(free_block_list fbl, uint32_t num_blocks);
 
 
 /**
@@ -55,7 +55,7 @@ free_locations* calc_num_free_blocks(free_block_list* fbl, uint32_t num_blocks);
  * in the fbl, it essentially operates as a wrapper for calc_free_blocks and update_fbl
  *
  */
-free_location get_free_block(free_block_list* fbl);
+free_location get_free_block(free_block_list fbl);
 
 
 /**
@@ -64,7 +64,7 @@ free_location get_free_block(free_block_list* fbl);
  * After the new FBL is written to disk, a journal entry is created and
  * journalled, which links the superblock to the new FBL.
  */
-extern int write_fbl(free_block_list* fbl);
+extern int write_fbl(free_block_list fbl);
 
 
 /**
@@ -72,13 +72,13 @@ extern int write_fbl(free_block_list* fbl);
  * index provided by the FBL entry in the journal[0].arg1 and load the FBL by
  * iterating through each node and concatenating them all within one buffer.
  */
-free_block_list* read_fbl(free_block_list* fbl, uint32_t index);
+static free_block_list* read_fbl(free_block_list fbl, uint32_t index);
 
 
 /**
  * Determine what blocks the FBL uses and return all of them as an array (used locations).
  */
-used_locations* index_fbl_blocks(uint32_t index);
+static used_locations index_fbl_blocks(uint32_t index);
 
 
 /**
@@ -87,7 +87,7 @@ used_locations* index_fbl_blocks(uint32_t index);
  * @param index The index of the free_block_list index block
  *
  */
-free_block_list* iterate_fbl(uint32_t index);
+static free_block_list* iterate_fbl(uint32_t index);
 
 
 /**
@@ -96,7 +96,7 @@ free_block_list* iterate_fbl(uint32_t index);
  * to mark as used as the second argument, and an array of all the locations to mark
  * as unused as the third argument.
  */
-free_block_list* update_fbl(free_block_list* fbl,
+free_block_list* update_fbl(free_block_list fbl,
 							used_locations used,
 							free_locations free);
 
