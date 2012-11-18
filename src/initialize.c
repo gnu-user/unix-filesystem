@@ -112,7 +112,7 @@ int sfs_initialize(int erase)
 		/**
 		 * Retrieve the super block
 		 */
-		superblock *super = get_super_block (buf);
+		superblock *super = get_super_block();
 
 		/**
 		 * Display the super block
