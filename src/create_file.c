@@ -1,5 +1,6 @@
 #include "blockio.h"
 #include "super_block.h"
+#include "I_node.h"
 
 /** sfs_create
  * Create a file with the pathname specified if there is not already a file with
@@ -42,27 +43,57 @@ int sfs_create(char *pathname, int type)
 
 		/**
 		 * Retrieve the root direct's location
+		 *  - Retrieve the root's Inode location
 		 */
 		root_dir = get_root();
 
+		/**
+		 * Get the root's index block location
+		 */
+		int root_index = get_index_block(root_dir);
 
 		/**
-		 * Retrieve the root director Inode
-		 * Retrieve the root director's index block
-		 * Use the path name to traverse the file structure
-		 * 	- Repeatedly Retrieve director's Inode, then the index block to
-		 * 	  retrieve the next directory and so on...
-		 * 	- This progress is done until the path has been completed or the file
-		 * 	  has been found.
-		 * 	- The file can not be found
-		 * 	- The path name could be invalid it could be either bad entry or
-		 * 	  directory not found
+		 * Iterate through the rest of the directories (until the lowest
+		 * directory is found)
+		 */
+
+		/**
 		 * Check if the there is another file with the given name
 		 * 	- If there is another file, there is an invalid file name error
-		 * Create
-		 * 	- if type = 0 create the file's Inode block, index block, and data block
-		 * 	- if type = 1 create the directory's Inode block, and index block
-		 *
+		 */
+
+		inode new_block;
+		//new_block->name = last_element_in_pathname;
+		if(type == 0){
+			new_block.type = false;
+		}
+		else{
+			new_block.type = true;
+		}
+
+		/**
+		 * Create index block
+		 */
+
+		/**
+		 * Create data block (IF file block)
+		 */
+
+		/**
+		 * Allocate blocks
+		 */
+
+		/**
+		 * Assign locations
+		 * 	- Store the index block's location in the Inode block
+		 * 	- Store the data block's location in the index block
+		 */
+
+		/**
+		 * Store the blocks onto the disk at the assigned locations.
+		 */
+
+		/**
 		 * return value > 0 the file create was a success
 		 * return value <= 0 the file create was unsuccessful
 		 */

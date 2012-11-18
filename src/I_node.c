@@ -173,10 +173,3 @@ char* get_name(int block_num)
 	return ((inode*) buf)->name;
 }
 
-/*
- * inode block
- * get index block
- * get inode
- *
- */
-

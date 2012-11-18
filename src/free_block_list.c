@@ -166,24 +166,24 @@ free_block_list* update_fbl(free_block_list* fbl,
 	{
 		uint32_t i = 0;
 
-		while (used[i] != NULL)
+		/*while (used[i] != NULL)
 		{
 			// Mark each of the fbl locations specifed as used
 			fbl[used[i]] = true;
 			++i;
-		}
+		}*/
 
 	}
 	if (free != NULL)
 	{
 		uint32_t i = 0;
 
-		while (free[i] != NULL)
+		/*while (free[i] != NULL)
 		{
 			// Mark each of the fbl locations specifed as free
 			fbl[free[i]] = false;
 			++i;
-		}
+		}*/
 
 	}
 

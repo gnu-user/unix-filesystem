@@ -1,5 +1,7 @@
 #include "blockio.h"
 #include "I_node.h"
+#include "super_block.h"
+#include "system_open_file_table.h"
 
 /** sfs_open
  * Opens the file specified by the pathname, if the file is successfully opened
@@ -17,6 +19,8 @@ int sfs_open(char *pathname)
 {
 	//TODO create open
 
+	int root_dir;
+
 	/**
 	 * Parse pathname
 	 */
@@ -24,20 +28,40 @@ int sfs_open(char *pathname)
 
 	/**
 	 * Retrieve the Superblock.
-	 * Retrieve the root director Inode
-	 * Retrieve the root director's index block
-	 * Use the path name to traverse the file structure
-	 * 	- Repeatedly Retrieve director's Inode, then the index block to
-	 * 	  retrieve the next directory and so on...
-	 * 	- This progress is done until the path has been completed or the file
-	 * 	  has been found.
-	 * 	- The file can not be found
-	 * 	- The path name could be invalid it could be either bad entry or
-	 * 	  directory not found
+	 * 	- Retrieve the root's Inode location
+	 */
+	root_dir = get_root();
+
+	/**
+	 * Get the root's index block location
+	 */
+	int root_index = get_index_block(root_dir);
+
+	/**
+	 * Retrieve list of contents in the root directory
+	 * Iterate through the contents of the root directory and locate the
+	 * directory or file that is found at the first index of the path parsed.
+	 */
+
+	/**
+	 * Iterate through the rest of the directories (until the file desired is
+	 * found)
+	 * Errors thrown are:
+	 * 	- File not found
+	 * 	- Invalid pathway (directory not found)
+	 */
+
+	/**
 	 * Retrieve the Inode of the desired file.
 	 * Create file descriptor.
 	 * Return file descriptor.
 	 */
+
+	//Given the Inode has been found:
+
+	//int file_inode = 0;
+
+	//return add_to_swoft(file_inode);
 
 	return 0;
 }
@@ -60,8 +84,8 @@ int show_information(fd)
 		 */
 		inode node;
 
-		printf("Name: %s", node->name);
-		if(node->type == true)
+		printf("Name: %s", node.name);
+		if(node.type == true)
 		{
 			printf("Type: directory");
 		}
@@ -72,36 +96,36 @@ int show_information(fd)
 		char read = '-';
 		char write = '-';
 		char execute= '-';
-		if(node->read == true)
+		if(node.read == true)
 		{
 			read = 'R';
 		}
-		if(node->write == true)
+		if(node.write == true)
 		{
 			write = 'W';
 		}
-		if(node->execute == true)
+		if(node.execute == true)
 		{
 			execute ='X';
 		}
 
 		printf("Privileges: %c%c%c", read, write, execute);
 
-		printf("Date created: %d", node->date_of_create);
+		printf("Date created: %d", node.date_of_create);
 
-		printf("Date last accessed: %d", node->date_last_accessed);
+		printf("Date last accessed: %d", node.date_last_accessed);
 
-		printf("Date last modified: %d", node->date_last_modified);
+		printf("Date last modified: %d", node.date_last_modified);
 
-		printf("File owner: %d", node->file_owner);
+		printf("File owner: %d", node.file_owner);
 
-		printf("Last user modified: %d", node->last_user_modified);
+		printf("Last user modified: %d", node.last_user_modified);
 
-		printf("File size: %d", node->file_size);
+		printf("File size: %d", node.file_size);
 
-		printf("Index Block Location: %d", node->location);
+		printf("Index Block Location: %d", node.location);
 
-		if(node->encrypted == true)
+		if(node.encrypted == true)
 		{
 			printf("Encrypted: True");
 		}
@@ -110,7 +134,7 @@ int show_information(fd)
 			printf("Encrypted: False");
 		}
 
-		printf("Check sum: %d", node->check_sum);
+		printf("Check sum: %d", node.check_sum);
 
 
 		return 1;

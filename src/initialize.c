@@ -30,6 +30,7 @@
 int sfs_initialize(int erase)
 {
 	byte* buf = NULL;
+	int root_dir = 0;
 	int retval = 0;
 
 	if (erase == 1 || erase == 0)
@@ -52,7 +53,7 @@ int sfs_initialize(int erase)
 		 * list block, a pointer to the root directory Inode block.
 		 **/
 
-		int root_dir = (int)(ceil(NUMBLKS/BLKSIZE))+1;
+		root_dir = (int)(ceil(NUMBLKS/BLKSIZE))+1;
 		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_INDEX, root_dir, 0};
 
 		/**
@@ -111,7 +112,7 @@ int sfs_initialize(int erase)
 		/**
 		 * Retrieve the super block
 		 */
-		superblock *super = get_super_block (buf);
+		superblock *super = get_super_block();
 
 		/**
 		 * Display the super block
@@ -171,7 +172,7 @@ int free_block_init(void)
 		}
 
 		/**
-		 * Add block to index
+		 * Add block pointer to index
 		 */
 		index_block[j] = FREE_BLOCK+j;
 

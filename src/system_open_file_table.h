@@ -6,7 +6,8 @@
  */
 
 #include "globdata.h"
-//#include "I_node.h"
+#include "index_block.h"
+#include "I_node.h"
 
 #ifndef SYSTEM_OPEN_FILE_TABLE_H_
 #define SYSTEM_OPEN_FILE_TABLE_H_
@@ -18,5 +19,8 @@
 typedef struct{
 	inode fd[NUMOFL];
 } swoft;
+
+extern swoft system_open_tb;
+extern int add_to_swoft(location block_num);
 
 #endif /* SYSTEM_OPEN_FILE_TABLE_H_ */

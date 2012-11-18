@@ -30,7 +30,7 @@ extern int calc_uuid();
 extern int validate_uuid();
 
 /*
- * freebock
+ * freeblock
  * add index
  * remove index
  * read index block
