@@ -5,7 +5,7 @@
  *      Author: joseph
  */
 
-#include "globdata.h"
+#include "glob_data.h"
 //#include "I_node.h"
 
 #ifndef SYSTEM_OPEN_FILE_TABLE_H_
@@ -14,6 +14,8 @@
 /**
  * System wide open file table contains an array of file descriptors that will
  * be open.
+ *
+ * Needs to have at least 5 instances (to have 5 files open at once)
  */
 typedef struct{
 	inode fd[NUMOFL];

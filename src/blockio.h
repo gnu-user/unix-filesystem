@@ -1,4 +1,4 @@
-#include "globdata.h"
+#include "glob_data.h"
 
 extern int
 get_block(int blknum,    /* which disk block to retrieve */

@@ -134,7 +134,7 @@ int write_fbl(free_block_list* fbl)
 }
 
 
-free_block_list* read_fbl(free_block_list* fbl, uint32_t index)
+static free_block_list* read_fbl(free_block_list* fbl, uint32_t index)
 {
 	/*
 	 --> Calls the iterate_fbl which iterates through the nodes in the

@@ -3,8 +3,11 @@
  *
  * The file system journal
  */
+#include "glob_data.h"
+#include "glob_func.h"
 #include <stdlib.h>
-#include "globdata.h"
+#include <stdio.h>
+#include <stdbool.h>
 
 /**
  * Enumeration of the different journal entry types

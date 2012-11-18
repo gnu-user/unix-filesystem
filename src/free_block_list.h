@@ -4,7 +4,7 @@
  *  Created on: Nov 16, 2012
  *      Author: jon
  */
-#include "globdata.h"
+#include "glob_data.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -72,13 +72,13 @@ extern int write_fbl(free_block_list* fbl);
  * index provided by the FBL entry in the journal[0].arg1 and load the FBL by
  * iterating through each node and concatenating them all within one buffer.
  */
-static free_block_list* read_fbl(free_block_list* fbl, uint32_t index);
+free_block_list* read_fbl(free_block_list* fbl, uint32_t index);
 
 
 /**
  * Determine what blocks the FBL uses and return all of them as an array (used locations).
  */
-static used_locations* index_fbl_blocks(uint32_t index);
+used_locations* index_fbl_blocks(uint32_t index);
 
 
 /**
@@ -87,7 +87,7 @@ static used_locations* index_fbl_blocks(uint32_t index);
  * @param index The index of the free_block_list index block
  *
  */
-static free_block_list* iterate_fbl(uint32_t index);
+free_block_list* iterate_fbl(uint32_t index);
 
 
 /**

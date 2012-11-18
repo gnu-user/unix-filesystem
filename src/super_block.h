@@ -8,7 +8,8 @@
  * (Integer) A Device id, which will take up 4 bytes.
 */
 #include <stdint.h>
-#include "globdata.h"
+#include "glob_data.h"
+#include "glob_func.h"
 
 typedef struct{
 	uint32_t size_of_disk;
