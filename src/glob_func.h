@@ -7,6 +7,7 @@
 #include "glob_data.h"
 #include <stdint.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #ifndef GLOB_FUNC_H_
 #define GLOB_FUNC_H_
@@ -44,5 +45,43 @@ extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
  *
  */
 extern void* concat(void* dest, void* src, uint32_t size);
+
+
+/**
+ * TODO WRITE UNIT TEST & TEST FUNCTION
+ *
+ * Tokenizes the path provided into an array of tokens for each component in the path and
+ * returns an array to a null terminated array of tokens.
+ *
+ * For example using path = "/foo/bar" the resulting tokens array would be
+ *
+ * [0]	=>	"foo"
+ * [1]	=>	"bar"
+ * [2]	=>	NULL
+ *
+ * @note If an error occurs a NULL pointer will be returned
+ *
+ * @pre Each component in the pathname must be at most (including the NULL
+ * termination) MAX_COMP_LEN otherwise an error occurs, NULL pointer returned
+ *
+ * @param pathname  The pathname to tokenize
+ * @param tokens A pointer to the 2D tokens array which will be populated
+ *
+ * @return A pointer to the 2D tokens array
+ */
+extern char** tokenize_path(char* pathname, char** tokens);
+
+
+/**
+ * TODO WRITE UNIT TEST & TEST FUNCTION
+ *
+ * Frees the memory allocated for the tokens
+ *
+ * @param tokens The NULL terminated 2D array filled with tokens to be freed
+ *
+ * @return True if the memory was freed, false if an error occured
+ */
+extern bool free_tokens(char **tokens);
+
 
 #endif /* GLOB_FUNC_H_ */

@@ -1,11 +1,12 @@
 #ifndef I_NODE_H_
 #define I_NODE_H_
 
+#include "glob_data.h"
 #include <stdint.h>
 #include <stdbool.h>
 
 typedef struct{
-	char name[7];
+	char name[MAX_NAME_LEN];
 	bool type;
 	bool read;
 	bool write;
