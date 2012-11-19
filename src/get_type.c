@@ -18,14 +18,23 @@
 int sfs_gettype(char *pathname)
 {
 	//TODO test gettype
-	uint32_t inode_location = NULL;
+	uint32_t* inode_location = NULL;
+	char** tokens = NULL;
 
+	/**
+	 * Parse the pathname
+	 */
+	tokens = tokenize_path(pathname);
+	if(tokens == NULL)
+	{
+		return 0;
+	}
 	/**
 	 * Traverse the file system to find the desired inode
 	 */
 	inode_location = traverse_file_system(pathname, false);
 
-	if(inode_location == 0)
+	if(inode_location == NULL)
 	{
 		return -1;
 	}
@@ -34,5 +43,5 @@ int sfs_gettype(char *pathname)
 	 * Retrieve the file type from the Inode
 	 * return the file type from the Inode
 	 */
-	return get_type(inode_location);
+	return get_type(inode_location[0]);
 }

@@ -89,25 +89,25 @@ int sfs_create(char *pathname, int type)
 		/**
 		 * Create index block
 		 */
-		//create/generate index block
+		//generate_index()
 
-		/**
-		 * Create data block (IF file block)
-		 */
+		if (type == 0)
+		{
+			/**
+			 * Create data block
+			 */
+		}
 
 		/**
 		 * Allocate blocks
 		 * Set as being used on the free block list
 		 */
+		//update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block);
 
 		/**
 		 * Assign locations
 		 * 	- Store the index block's location in the Inode block
 		 * 	- Store the data block's location in the index block
-		 */
-
-		/**
-		 * Store the blocks onto the disk at the assigned locations.
 		 */
 
 		/**

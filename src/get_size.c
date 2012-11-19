@@ -22,13 +22,23 @@ int sfs_getsize(char *pathname)
 	int type = -1;
 	uint32_t index_block = NULL;
 	uint32_t inode_location = NULL;
+	char** tokens = NULL;
+
+	/**
+	 * Parse the pathname
+	 */
+	tokens = tokenize_path(pathname);
+	if(tokens == NULL)
+	{
+		return 0;
+	}
 
 	/**
 	 * Traverse the file system to find the desired inode
 	 */
 	inode_location = traverse_file_system(pathname, false);
 
-	if(inode_location == 0)
+	if(inode_location == NULL)
 	{
 		return -1;
 	}
@@ -40,21 +50,21 @@ int sfs_getsize(char *pathname)
 	 * 	- If file:
 	 * 		get size
 	 */
-	type = get_type(inode_location);
+	type = get_type(inode_location[0]);
 	if(type == 0)
 	{
 		/**
 		 * Get the size of the file from the Inode
 		 * return the size of the file
 		 */
-		return get_size(inode_location);
+		return get_size(inode_location[0]);
 	}
 	else if(type == 1)
 	{
 		/**
 		 * Get the index block's location
 		 */
-		index_block = get_index_block(inode_location);
+		index_block = get_index_block(inode_location[0]);
 
 		/**
 		 * Return the number of locations found in the index block(s)

@@ -20,6 +20,7 @@ int sfs_delete(char *pathname)
 	uint32_t* inode_location = NULL;
 	locations index_block = NULL;
 	uint32_t inode = NULL;
+	int type = -1;
 
 	/**
 	 * Parse the pathname
@@ -59,25 +60,35 @@ int sfs_delete(char *pathname)
 	 * 			- If so:
 	 * 				Error, user can only delete directories that are empty
 	 */
-	if(get_type(inode) == 1)
+	type = get_type(inode);
+
+	if(iterate_index(inode_location[0], index_block) == NULL || (type == 1 &&
+			index_block != NULL))
 	{
-		if(iterate_index(inode_location[0], index_block) != NULL)
-		{
-			return 0;
-		}
+		return 0;
+	}
+
+
+	if(type == 0)
+	{
+		/**
+		 * Delete the data blocks (each time update the free_block list)
+		 */
+		update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block);
 	}
 
 	/**
-	 * Update the status of the Inode, index block (and data blocks) in the free
-	 * block list blocks.
-	 *
-	 * These blocks will need to be deleted the order of:
-	 * data blocks (if file)
-	 * index block
-	 * Inode
-	 *
-	 * Since the data block locations are stored in the index block and the
-	 * index block's location is stored in the Inode
+	 * Delete the index blocks (each time update the free_block list)
+	 */
+	//update_fbl(iterate_fbl(get_free_block_index()), NULL, indexes);
+
+	/**
+	 * Delete the Inode block (update the free_block list)
+	 */
+	update_fbl(iterate_fbl(get_free_block_index()), NULL, inode);
+
+	/**
+	 * Delete the index location from the index block of the parent directory
 	 */
 
 	/**
