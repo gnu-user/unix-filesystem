@@ -1,23 +1,21 @@
 #include "traverse_tree.h"
 #include "super_block.h"
 
-uint32_t traverse_file_system(char* pathname, bool create)
+/**
+ * Change it to take a char**
+ * create 2 other functions
+ * 	1. traverse to the specified last Inode
+ * 	2. traverse to the second last Inode and return the name of the last token
+ * 	in the char**
+ */
+uint32_t* traverse_file_system(char** tokens, bool create)
 {
 	int root_dir;
-	uint32_t inode_location = 0;
-	locations index_block = NULL;
+	uint32_t inode_location[2] = {NULL, NULL};
+	locations index_block;
 	int index;
 	int second_last = 0;
 	int i = 0;
-
-	/**
-	 * Parse pathname
-	 */
-	char** tokens = tokenize_path(pathname);
-	if(tokens == NULL)
-	{
-		return 0;
-	}
 
 	/**
 	 * Retrieve the Superblock.
@@ -37,7 +35,7 @@ uint32_t traverse_file_system(char* pathname, bool create)
 	 */
 
 	if(iterate_index(index, index_block) == NULL){
-		return 0;
+		return NULL;
 	}
 
 	/**
@@ -47,7 +45,7 @@ uint32_t traverse_file_system(char* pathname, bool create)
 
 	//tokens[0] cannot be null unless something messed up, since you cannot open
 	//up a file with a path that only contains '/'
-	inode_location = find_inode(index_block, tokens[0]);
+	inode_location[0] = find_inode(index_block, tokens[0]);
 
 	/**
 	 * General structure of the traversal:
@@ -71,29 +69,30 @@ uint32_t traverse_file_system(char* pathname, bool create)
 		/**
 		 * get the list of locations from the index block
 		 */
-		index = get_index_block(inode_location);
+		index = get_index_block(inode_location[0]);
 
 
 		/**
 		 * index block is empty
 		 */
 		if(iterate_index(index, index_block) == NULL){
-			return 0;
+			return NULL;
 		}
 
 		/**
 		 * Find the inode with the given name, the current token
-		 *	/
+		 */
 		inode_location = find_inode(index_block, tokens[i]);
 
 		/**
 		 * Inode not found, aka file/directory not found
 		 */
-		if (inode_location == NULL)
+		if (inode_location[0] == NULL)
 		{
-			return 0;
+			return NULL;
 		}
 		i++;
 	}
+	inode_location[1] = i+1;
 	return inode_location;
 }

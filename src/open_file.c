@@ -17,14 +17,24 @@
 int sfs_open(char *pathname)
 {
 	//TODO test open
-	uint32_t inode_location = NULL;
+	uint32_t* inode_location = NULL;
+	char** tokens = NULL;
+
+	/**
+	 * Parse the pathname
+	 */
+	tokens = tokenize_path(pathname);
+	if(tokens == NULL)
+	{
+		return 0;
+	}
 
 	/**
 	 * Traverse the file system to find the desired inode
 	 */
 	inode_location = traverse_file_system(pathname, false);
 
-	if(inode_location == 0)
+	if(inode_location == NULL)
 	{
 		return -1;
 	}
@@ -35,7 +45,7 @@ int sfs_open(char *pathname)
 	 * Return file descriptor.
 	 */
 
-	return add_to_swoft(inode_location);
+	return add_to_swoft(inode_location[0]);
 }
 
 /**

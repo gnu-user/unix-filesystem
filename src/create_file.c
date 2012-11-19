@@ -28,25 +28,57 @@ int sfs_create(char *pathname, int type)
 {
 	//TODO create create_file
 	inode new_block = NULL;
+	char** tokens;
+	uint32_t* inode_location = NULL;
+	locations index_block = NULL;
+
 	/**
 	 * Check for valid type = 0 or = 1
 	 */
 	if(type == 0 || type == 1)
 	{
-		uint32_t inode_location = NULL;
+		/**
+		 * Parse the pathname
+		 */
+		tokens = tokenize_path(pathname);
+		if(tokens == NULL)
+		{
+			return 0;
+		}
 
 		/**
-		 * Traverse the file system to find the desired inode
+		 * Traverse the file system to find the directory containing the desired
+		 * inode
 		 */
-		inode_location = traverse_file_system(pathname, true);
+		inode_location = traverse_file_system(tokens, true);
+
+		if(inode_location == NULL)
+		{
+			return 0;
+		}
+		/**
+		 * inode_location[0] = the location of the directory's inode,
+		 * inode_location[1] = the token index for the last element
+		 */
 
 		/**
 		 * Check if the there is another file with the given name
 		 * 	- If there is another file, there is an invalid file name error
 		 */
+		if(iterate_index(inode_location[0], index_block) == NULL){
+			return 0;
+		}
+
+		/**
+		 * File/directory already exists
+		 */
+		if(find_inode(index_block, tokens[inode_location[1]]) != NULL)
+		{
+			return 0;
+		}
 
 
-		//new_block->name = last_element_in_pathname;
+		new_block->name = tokens[inode_location[1]];
 		if(type == 0){
 			new_block.type = false;
 		}
@@ -57,23 +89,25 @@ int sfs_create(char *pathname, int type)
 		/**
 		 * Create index block
 		 */
+		//generate_index()
 
-		/**
-		 * Create data block (IF file block)
-		 */
+		if (type == 0)
+		{
+			/**
+			 * Create data block
+			 */
+		}
 
 		/**
 		 * Allocate blocks
+		 * Set as being used on the free block list
 		 */
+		//update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block);
 
 		/**
 		 * Assign locations
 		 * 	- Store the index block's location in the Inode block
 		 * 	- Store the data block's location in the index block
-		 */
-
-		/**
-		 * Store the blocks onto the disk at the assigned locations.
 		 */
 
 		/**
