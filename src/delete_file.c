@@ -1,4 +1,5 @@
 #include "blockio.h"
+#include "traverse_tree.h"
 
 /** sfs_delete
  * Delete a file with the pathname specified.

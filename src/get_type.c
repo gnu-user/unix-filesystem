@@ -1,5 +1,7 @@
 #include "blockio.h"
 #include "I_node.h"
+#include "traverse_tree.h"
+
 /** sfs_gettype
  * Get the type of the file with the pathname specified.
  *
