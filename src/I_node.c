@@ -173,14 +173,14 @@ char* get_name(int block_num)
 	return ((inode*) buf)->name;
 }
 
-uint32_t find_inode(locations inodes, char* name)
+uint32_t find_inode(locations index_blocks, char* name)
 {
 	int i = 0;
-	while(inodes[i] != NULL)
+	while(index_blocks[i] != NULL)
 	{
-		if(strcmp(get_name(inodes[i]),name)==0)
+		if(strcmp(get_name(index_blocks[i]),name)==0)
 		{
-			return inodes[i];
+			return index_blocks[i];
 		}
 		i++;
 	}
