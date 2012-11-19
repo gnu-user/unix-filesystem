@@ -94,7 +94,16 @@ static free_block_list* iterate_fbl(uint32_t index);
  * The update FBL method updates the FBL entry in memory. It will take
  * the FBL buffer in memory as the first argument, an array of all the locations
  * to mark as used as the second argument, and an array of all the locations to mark
- * as unused as the third argument.
+ * as unused as the third argument. If the arguments used or free are NULL then no blocks
+ * are marked for that type.
+ *
+ * @pre parameters used, free MUST be NULL terminated arrays of locations
+ *
+ * @param used A NULL terminated array of locations to mark as used in the fbl, if it is NULL
+ * then no locations are marked as used
+ * @param free A NULL terminated array of locations to mark as free in the fbl, if it is NULL
+ * then no locations are marked as free
+ *
  */
 free_block_list* update_fbl(free_block_list fbl,
 							used_locations used,
