@@ -2,9 +2,9 @@
 #define I_NODE_H_
 
 #include "glob_data.h"
-#include "blockio.h"
 #include <stdint.h>
 #include <stdbool.h>
+#include "index_block.h"
 
 typedef struct{
 	char name[MAX_NAME_LEN];

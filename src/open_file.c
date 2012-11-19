@@ -1,8 +1,6 @@
-#include "blockio.h"
 #include "I_node.h"
-#include "index_block.h"
-#include "super_block.h"
 #include "system_open_file_table.h"
+#include "traverse_tree.h"
 
 /** sfs_open
  * Opens the file specified by the pathname, if the file is successfully opened
@@ -18,94 +16,9 @@
  */
 int sfs_open(char *pathname)
 {
-	//TODO create open
-	int root_dir;
-	uint32_t inode_location = 0;
-	locations index_block = NULL;
-	int index;
-	int i = 0;
+	uint32_t inode_location = NULL;
 
-	/**
-	 * Parse pathname
-	 */
-	char** tokens = tokenize_path(pathname, tokens);
-	if(tokens == NULL)
-	{
-		return -1;
-	}
-
-	/**
-	 * Retrieve the Superblock.
-	 * 	- Retrieve the root's Inode location
-	 */
-	root_dir = get_root();
-
-	/**
-	 * Get the root's index block location
-	 */
-	index = get_index_block(root_dir);
-
-	/**
-	 * Retrieve list of contents in the root directory
-	 * Iterate through the contents of the root directory and locate the
-	 * directory or file that is found at the first index of the path parsed.
-	 */
-
-	if(iterate_index(index, index_block) == NULL){
-		return -1;
-	}
-
-	/**
-	 * Create a function that will go through the locations from the index block
-	 * and check if a given file/directory is contained
-	 */
-
-	//tokens[0] cannot be null unless something messed up, since you cannot open
-	//up a file with a path that only contains '/'
-	inode_location = find_inode(index_block, tokens[0]);
-	/**
-	 * General structure of the traversal:
-	 * 	- From Inode get index block location
-	 * 	- From index block get locations
-	 * 	- Compare locations with pathname's next entry
-	 * 	Loop again...
-	 * Errors thrown are:
-	 * 	- File not found
-	 * 	- Invalid pathway (directory not found)
-	 */
-
-	while(tokens[i+1] != NULL)
-	{
-		index_block = NULL;
-
-		/**
-		 * get the list of locations from the index block
-		 */
-		index = get_index_block(inode_location);
-
-
-		/**
-		 * index block is empty
-		 */
-		if(iterate_index(index, index_block) == NULL){
-			return -1;
-		}
-
-		/**
-		 * Find the inode with the given name, the current token
-		 */
-		inode_location = find_inode(index_block, tokens[i]);
-
-		/**
-		 * Inode not found, aka file/directory not found
-		 */
-		if (inode_location == NULL)
-		{
-			return -1;
-		}
-		i++;
-	}
-
+	traverse_file_system(pathname);
 
 	/**
 	 * Retrieve the Inode of the desired file.
@@ -132,7 +45,7 @@ int show_information(fd)
 		/**
 		 * Get the Inode from the swoft given the fd
 		 */
-		inode node;
+		inode node = system_open_tb.fd[fd];
 
 		printf("Name: %s", node.name);
 		if(node.type == true)
