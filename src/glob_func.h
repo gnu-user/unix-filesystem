@@ -21,11 +21,16 @@ extern byte* allocate_buf(byte* buf, uint32_t size);
 extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2);
 
 /**
+ * TODO UPDATE CONCAT TO TAKE A DOUBLE POINTER FOR DEST BECAUSE REALLOC MAY ACTUALLY
+ * SET DEST TO A DIFFERENT POINTER ADDRESS, THE PARENT NEEDS TO BE UPDATED....
+ *
+ * TODO WRITE UNIT TEST & TEST FUNCTION
+ *
  * Concatenates two arrays, a dest and a src array into a single array
  * containing the contents of both arrays, the terminating null character in
  * dest is overwritten by the first character of src, and a NULL character
- * is included at the end of the new array. A pointer to the resulting array
- * containing the contents of both arrays is then returned.
+ * is included at the end of the new array. A pointer dest containing the resulting
+ * array containing the contents of both arrays is then returned.
  *
  * TODO Should this free the src or let the person who called it handle that
  * is there ever a case where you still want to use the two items after concat???
@@ -37,14 +42,14 @@ extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
  * if either is NULL they are not used and NULL is simply returned
  * @pre The arrays dest and source must contain the same data type
  *
- * @param dest pointer to a NULL terminated array
+ * @param dest double pointer to a NULL terminated array, dest is passed by reference
  * @param source pointer to a NULL terminated array
  * @param size The size in bytes of each item in the array
  *
  * @return A pointer to the resulting array containing the concatenated results
  *
  */
-extern void* concat(void* dest, void* src, uint32_t size);
+extern void* concat(void** dest, void* src, uint32_t size);
 
 
 /**
