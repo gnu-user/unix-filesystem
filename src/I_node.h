@@ -2,8 +2,11 @@
 #define I_NODE_H_
 
 #include "glob_data.h"
+#include "blockio.h"
 #include <stdint.h>
 #include <stdbool.h>
+#include "index_block.h"
+
 
 typedef struct{
 	char name[MAX_NAME_LEN];
@@ -47,7 +50,7 @@ extern char* get_name(int block_num);
  * @return The location of the inode with a name that matches the request
  *
  */
-uint32_t find_inode(uint32_t location, char* name);
+extern uint32_t find_inode(locations inodes, char* name);
 
 
 #endif /* I_NODE_H_ */

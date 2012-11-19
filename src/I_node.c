@@ -28,7 +28,7 @@
  **/
 
 #include "I_node.h"
-#include "blockio.h"
+
 
 /**
  * Get the I_node given the block index of the Inode
@@ -173,8 +173,16 @@ char* get_name(int block_num)
 	return ((inode*) buf)->name;
 }
 
-
-uint32_t find_inode(uint32_t location, char* name)
+uint32_t find_inode(locations inodes, char* name)
 {
-
+	int i = 0;
+	while(inodes[i] != NULL)
+	{
+		if(strcmp(get_name(inodes[i]),name)==0)
+		{
+			return inodes[i];
+		}
+		i++;
+	}
+	return NULL;
 }

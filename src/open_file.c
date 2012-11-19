@@ -1,5 +1,6 @@
 #include "blockio.h"
 #include "I_node.h"
+#include "index_block.h"
 #include "super_block.h"
 #include "system_open_file_table.h"
 
@@ -18,8 +19,10 @@
 int sfs_open(char *pathname)
 {
 	//TODO create open
-
 	int root_dir;
+	uint32_t inode_location = 0;
+	locations index_block = NULL;
+	int index;
 
 	/**
 	 * Parse pathname
@@ -39,7 +42,7 @@ int sfs_open(char *pathname)
 	/**
 	 * Get the root's index block location
 	 */
-	int root_index = get_index_block(root_dir);
+	index = get_index_block(root_dir);
 
 	/**
 	 * Retrieve list of contents in the root directory
@@ -47,13 +50,41 @@ int sfs_open(char *pathname)
 	 * directory or file that is found at the first index of the path parsed.
 	 */
 
+	if(iterate_index(index, index_block) == NULL){
+		return -1;
+	}
 	/**
-	 * Iterate through the rest of the directories (until the file desired is
-	 * found)
+	 * Create a function that will go through the locations from the index block
+	 * and check if a given file/directory is contained
+	 */
+	//inode_location = find_inode(index_block, pathname.nextElement);
+
+	/**
+	 * General structure of the traversal:
+	 * 	- From Inode get index block location
+	 * 	- From index block get locations
+	 * 	- Compare locations with pathname's next entry
+	 * 	Loop again...
 	 * Errors thrown are:
 	 * 	- File not found
 	 * 	- Invalid pathway (directory not found)
 	 */
+
+	/*while(pathname.hasNext() && pathname.next + 1 != NULL)
+	{
+		index_block = NULL;
+		index = get_index_block(inode_location);
+
+		if(iterate_index(index, index_block) == NULL){
+			return -1;
+		}
+		//inode_location = find_inode(index_block, pathname.nextElement);
+		if (inode_location == NULL)
+		{
+			return -1;
+		}
+	}*/
+
 
 	/**
 	 * Retrieve the Inode of the desired file.
@@ -61,13 +92,7 @@ int sfs_open(char *pathname)
 	 * Return file descriptor.
 	 */
 
-	//Given the Inode has been found:
-
-	//int file_inode = 0;
-
-	//return add_to_swoft(file_inode);
-
-	return 0;
+	return add_to_swoft(inode_location);
 }
 
 /**
