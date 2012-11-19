@@ -1,4 +1,5 @@
 #include "traverse_tree.h"
+#include "super_block.h"
 
 uint32_t traverse_file_system(char* pathname)
 {

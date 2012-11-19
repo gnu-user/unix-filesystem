@@ -55,7 +55,7 @@ int sfs_initialize(int erase)
 		 **/
 
 		root_dir = (int)(ceil(NUMBLKS/BLKSIZE))+1;
-		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_INDEX, root_dir, 0};
+		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_INDEX, root_dir, 0, NULL};
 
 		/**
 		 * Allocate a buffer to write to the block.
@@ -113,7 +113,7 @@ int sfs_initialize(int erase)
 		/**
 		 * Retrieve the super block
 		 */
-		superblock *super = get_super_block();
+		superblock* super = get_super_block();
 
 		/**
 		 * Display the super block

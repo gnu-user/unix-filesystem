@@ -2,7 +2,7 @@
 
 superblock* get_super_block(void)
 {
-	char* buf = allocate_buf(buf, BLKSIZE);
+	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(SUPER_BLOCK, buf);
 
 	if(retval != 0)
@@ -14,7 +14,7 @@ superblock* get_super_block(void)
 
 int get_root(void)
 {
-	char* buf = allocate_buf(buf, BLKSIZE);
+	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(SUPER_BLOCK, buf);
 
 	if(retval != 0)
@@ -27,7 +27,7 @@ int get_root(void)
 
 int get_free_block_index(void)
 {
-	char* buf = allocate_buf(buf, BLKSIZE);
+	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(SUPER_BLOCK, buf);
 
 	if(retval != 0)

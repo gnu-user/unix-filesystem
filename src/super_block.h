@@ -7,8 +7,6 @@
  * A Pointer to the Inode table for the root directory, which will take 8 bytes,
  * (Integer) A Device id, which will take up 4 bytes.
 */
-#include <stdint.h>
-#include "glob_data.h"
 #include "glob_func.h"
 
 typedef struct{
