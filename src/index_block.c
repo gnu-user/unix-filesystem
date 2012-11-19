@@ -1,5 +1,6 @@
 #include "index_block.h"
-#include "globdata.h"
+#include "glob_data.h"
+#include "glob_func.h"
 
 
 /*
@@ -12,7 +13,7 @@
  * 1) Journal: Link the newly created FBL.
  * 2) Journal: Link the newly created index block to it's inode.
  */
-location generate_index(byte* data)
+uint32_t generate_index(byte* data)
 {
 	/*
 	 * PSEUDOCODE:
@@ -60,4 +61,38 @@ location generate_index(byte* data)
 	 * 	return where[0];
 	 *
 	 */
+}
+
+
+locations iterate_index(uint32_t location, locations data_blocks)
+{
+/*
+	// Read the index block from the drive at location specified
+	index block = get_block(location)
+	uint32_t i  = 0;
+
+	/*
+	 * Add each data location in the index block to the array of data locations
+	 * only iterate up to the 2nd last item as the index block may have a linked index
+	 *
+	for (i = 0; i < ceil(BLKSIZE / sizeof(location)) - 1; i++)
+	{
+		if block[i] == NULL
+		{
+			return concat(data_blocks, NULL)
+		}
+
+		concat(data_blocks, block[i])
+	}
+
+
+	// If the index block links to another index, iterate over the index block recursively
+	if (block[i+1] != null)
+	{
+		iterate_indix(block[i+1], data_blocks);
+	}
+
+	// Index block doesn't link to another index, null terminate the array of data locations
+	return concat(data_blocks, NULL);
+*/
 }

@@ -6,6 +6,7 @@
  **/
 
 #include "blockio.h"
+#include <stdio.h>
 #include <stdbool.h>
 #include "super_block.h"
 

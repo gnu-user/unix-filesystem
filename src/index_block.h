@@ -5,16 +5,16 @@
  *      Author: jon
  */
 #include <stdint.h>
-#include "globdata.h"
+#include "glob_data.h"
 
 //TODO use malloc for this; it should be size: ceil(BLOCKSIZE/sizeof(uint32_t))
-typedef uint32_t* index_block;
+typedef uint32_t* index;
 
-// Array of locations for the index blocks on disk
+// Array of locations for blocks on disk
 typedef uint32_t* locations;
 
-// A single location
-typedef uint32_t location;
+// A single location for a block on disk
+//typedef uint32_t location;
 
 //TODO add a linked list for storing the indices
 
@@ -27,12 +27,12 @@ typedef uint32_t location;
  * It returns the location of the first index, which can then be used to write the
  * data to the blocks.
  */
-location generate_index(byte* data);
+uint32_t generate_index(byte* data);
 
 
 
 
-index_block read_index_block(uint32_t index_on_disk);
+index read_index(uint32_t index_on_disk);
 
 /*
  * Adds a location to the next available entry in the index block, if the index block is
@@ -46,7 +46,9 @@ add_location(uint32_t* index_block, uint32_t location);
 
 remove_location();
 
-void link_index_block();
+void link_index();
+
+
 
 /**
  * Get the first index block, and increase the length of the buffer by one for each index we get.
@@ -63,4 +65,4 @@ void link_index_block();
  * index blocks on disk, NULL if error occurred.
  *
  */
-uint32_t* iterate_index_blocks(index_block *cur_index, locations *cur_locations);
+locations iterate_index(uint32_t location, locations data_blocks);
