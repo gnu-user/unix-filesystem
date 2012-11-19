@@ -16,8 +16,19 @@
 int sfs_delete(char *pathname)
 {
 	//TODO create delete_file
+	char** tokens;
+	uint32_t* inode_location = NULL;
+	locations index_block = NULL;
+	uint32_t inode = NULL;
 
-	uint32_t inode_location = NULL;
+	/**
+	 * Parse the pathname
+	 */
+	tokens = tokenize_path(pathname);
+	if(tokens == NULL)
+	{
+		return 0;
+	}
 
 	/**
 	 * Traverse the file system to find the desired inode
@@ -25,9 +36,20 @@ int sfs_delete(char *pathname)
 	 */
 	inode_location = traverse_file_system(pathname, true);
 
-	if(inode_location == 0)
+	if(inode_location == NULL)
 	{
 		return -1;
+	}
+
+	if(iterate_index(inode_location[0], index_block) == NULL){
+		return 0;
+	}
+
+	inode = find_inode(index_block, tokens[inode_location[1]]);
+
+	if(inode == NULL)
+	{
+		return 0;
 	}
 
 	/**
@@ -37,6 +59,13 @@ int sfs_delete(char *pathname)
 	 * 			- If so:
 	 * 				Error, user can only delete directories that are empty
 	 */
+	if(get_type(inode) == 1)
+	{
+		if(iterate_index(inode_location[0], index_block) != NULL)
+		{
+			return 0;
+		}
+	}
 
 	/**
 	 * Update the status of the Inode, index block (and data blocks) in the free
