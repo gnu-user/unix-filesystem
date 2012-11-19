@@ -16,9 +16,18 @@
  */
 int sfs_open(char *pathname)
 {
+	//TODO test open
 	uint32_t inode_location = NULL;
 
-	traverse_file_system(pathname);
+	/**
+	 * Traverse the file system to find the desired inode
+	 */
+	inode_location = traverse_file_system(pathname);
+
+	if(inode_location == 0)
+	{
+		return -1;
+	}
 
 	/**
 	 * Retrieve the Inode of the desired file.

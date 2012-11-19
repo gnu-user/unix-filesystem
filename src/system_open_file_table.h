@@ -25,4 +25,9 @@ typedef struct{
 extern swoft system_open_tb;
 extern int add_to_swoft(uint32_t block_num);
 
+/**
+ * validate whether the fd is a valid fd in the swoft
+ */
+extern int validate_fd(int fd);
+
 #endif /* SYSTEM_OPEN_FILE_TABLE_H_ */
