@@ -1,5 +1,6 @@
 #include "blockio.h"
 #include "I_node.h"
+#include "traverse_tree.h"
 
 /** sfs_getsize
  * Get the size (in blocks) of the file with the pathname specified.

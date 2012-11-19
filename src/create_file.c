@@ -1,6 +1,7 @@
 #include "blockio.h"
 #include "super_block.h"
 #include "I_node.h"
+#include "traverse_tree.h"
 
 /** sfs_create
  * Create a file with the pathname specified if there is not already a file with
