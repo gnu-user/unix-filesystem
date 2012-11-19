@@ -1,4 +1,5 @@
 #include "blockio.h"
+#include "I_node.h"
 
 /** sfs_getsize
  * Get the size (in blocks) of the file with the pathname specified.
@@ -12,28 +13,24 @@
  */
 int sfs_getsize(char *pathname)
 {
-	//TODO create get_size
+	//TODO test getsize
+
+	uint32_t inode_location = NULL;
 
 	/**
-	 * Parse pathname
+	 * Traverse the file system to find the desired inode
 	 */
-	//parse_path(pathname);
+	inode_location = traverse_file_system(pathname);
+
+	if(inode_location == 0)
+	{
+		return -1;
+	}
 
 	/**
-	 * Retrieve the Superblock.
-	 * Retrieve the root director Inode
-	 * Retrieve the root director's index block
-	 * Use the path name to traverse the file structure
-	 * 	- Repeatedly Retrieve director's Inode, then the index block to
-	 * 	  retrieve the next directory and so on...
-	 * 	- This progress is done until the path has been completed or the file
-	 * 	  has been found.
-	 * 	- The file can not be found
-	 * 	- The path name could be invalid it could be either bad entry or
-	 * 	  directory not found
-	 * Retrieve the Inode of the desired file.
 	 * Get the size of the file from the Inode
 	 * return the size of the file
 	 */
-	return 0;
+
+	return get_size(inode_location);
 }

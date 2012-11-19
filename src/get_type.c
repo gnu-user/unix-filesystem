@@ -1,5 +1,5 @@
 #include "blockio.h"
-
+#include "I_node.h"
 /** sfs_gettype
  * Get the type of the file with the pathname specified.
  *
@@ -15,28 +15,23 @@
  */
 int sfs_gettype(char *pathname)
 {
-	//TODO create gettype
+	//TODO test gettype
+	uint32_t inode_location = NULL;
 
 	/**
-	 * Parse pathname
+	 * Traverse the file system to find the desired inode
 	 */
-	//parse_path(pathname);
+	inode_location = traverse_file_system(pathname);
+
+	if(inode_location == 0)
+	{
+		return -1;
+	}
 
 	/**
-	 * Retrieve the Superblock.
-	 * Retrieve the root director Inode
-	 * Retrieve the root director's index block
-	 * Use the path name to traverse the file structure
-	 * 	- Repeatedly Retrieve director's Inode, then the index block to
-	 * 	  retrieve the next directory and so on...
-	 * 	- This progress is done until the path has been completed or the file
-	 * 	  has been found.
-	 * 	- The file can not be found
-	 * 	- The path name could be invalid it could be either bad entry or
-	 * 	  directory not found
-	 * Retrieve the Inode of the desired file.
 	 * Retrieve the file type from the Inode
 	 * return the file type from the Inode
 	 */
-	return 0;
+
+	return get_type(inode_location);
 }

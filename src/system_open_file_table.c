@@ -81,3 +81,8 @@ int find_opening(void)
 
 	return -1;
 }
+
+int validate_fd(int fd)
+{
+	return 0;
+}

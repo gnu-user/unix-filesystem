@@ -32,30 +32,12 @@ int sfs_create(char *pathname, int type)
 	 */
 	if(type == 0 || type == 1)
 	{
-		/**
-		 * Check if there is enough space to allocate for the new file/directory
-		 */
+		uint32_t inode_location = NULL;
 
 		/**
-		 * Parse pathname
+		 * Traverse the file system to find the desired inode
 		 */
-		//parse_path(pathname);
-
-		/**
-		 * Retrieve the root direct's location
-		 *  - Retrieve the root's Inode location
-		 */
-		root_dir = get_root();
-
-		/**
-		 * Get the root's index block location
-		 */
-		int root_index = get_index_block(root_dir);
-
-		/**
-		 * Iterate through the rest of the directories (until the lowest
-		 * directory is found)
-		 */
+		inode_location = traverse_file_system(pathname);
 
 		/**
 		 * Check if the there is another file with the given name
