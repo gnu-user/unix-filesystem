@@ -17,6 +17,8 @@
 #define NUMBLKS  512
 /* number of files that can be open at once */
 #define NUMOFL	  32
+/* maximum length of a component in a pathname including the NULL char */
+#define MAX_NAME_LEN 7
 
 #define SUPER_BLOCK	0
 #define FREE_BLOCK 	3

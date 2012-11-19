@@ -78,3 +78,57 @@ void* concat(void* dest, void* src, uint32_t size)
 	free(src);
 	return dest;
 }
+
+
+char** tokenize_path(char* pathname, char** tokens)
+{
+	/*  NULL initialize the tokenizer pointer and 2D array of tokens */
+	char *ptr_tkn = NULL;
+	tokens = NULL;
+	uint32_t num_tokens = 0;
+
+	/* Get the first token */
+	ptr_tkn = strtok(pathname, "/");
+
+	/* Copy the tokens into an array of tokens */
+	while (ptr_tkn != NULL)
+	{
+		/* Increase the tokens array size for an additional token */
+		tokens = (char**)realloc(tokens, ++num_tokens * sizeof(char*));
+
+		/* Copy the token into the array */
+		(tokens)[num_tokens - 1] = (char*)calloc(strlen(ptr_tkn), sizeof(char*));
+		strncpy((*tokens)[num_tokens - 1], ptr_tkn, strlen(ptr_tkn));
+
+		ptr_tkn = strtok(NULL, "/");
+	}
+
+	/* Increase the tokens array size for a final NULL termination token */
+	tokens = (char**)realloc(tokens, ++num_tokens * sizeof(char*));
+	(tokens)[num_tokens - 1] = (char*)calloc(1, sizeof(char*));
+	(tokens)[num_tokens - 1] = NULL;
+
+	return tokens;
+}
+
+
+bool free_tokens(char **tokens)
+{
+	uint32_t i = 0;
+
+	/* Free the memory allocated for each of the tokens in the 2D array */
+	if (tokens != NULL)
+	{
+		while (tokens[i] != NULL)
+		{
+			free(tokens[i]);
+			++i;
+		}
+		free(tokens);
+	}
+	else
+	{
+		return false;
+	}
+	return true;
+}
