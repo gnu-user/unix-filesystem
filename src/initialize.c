@@ -100,7 +100,6 @@ int sfs_initialize(int erase)
 			return retval;
 		}
 
-
 		buf = allocate_buf(buf, BLKSIZE);
 
 		retval = get_block(SUPER_BLOCK, buf);

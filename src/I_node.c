@@ -184,5 +184,5 @@ uint32_t find_inode(locations index_blocks, char* name)
 		}
 		i++;
 	}
-	return NULL;
+	return 0;
 }

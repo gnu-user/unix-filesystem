@@ -23,20 +23,53 @@
 int sfs_readdir(int fd, char *mem_pointer)
 {
 	//TODO create readdir
-
+	inode directory = NULL;
+	locations index_block = NULL;
 	if(fd >= 0)
 	{
+
 		/**
-		 * Validate the file descriptor on the System open file table
-		 * 	- Throw an error otherwise
-		 * Retrieve the contents of the directory's index block. Use the Inode to
-		 * retrieve the names of the contents. Store the values into mem_pointer.
-		 *
+		 * Validate the file descriptor
+		 */
+		if(validate_fd(fd) > 0)
+		{
+			return -1;
+		}
+
+		/**
+		 * Retrieve the contents of the directory's index block. Use the Inode
+		 * to retrieve the names of the contents. Store the values into
+		 * mem_pointer.
+		 */
+		directory = get_swoft_inode(fd);
+
+		/**
+		 * If the inode is not a directory return an error
+		 */
+		if(directory.type != 1)
+		{
+			return -1;
+		}
+
+		/**
+		 * Iterate through the index block
+		 * TODO ensure that iterate_index returns a null value for index_block
+		 * when the directory is empty
+		 */
+		iterate_index(directory.location, index_block);
+
+		mem_pointer = (char*) index_block;
+
+		/**
 		 * return value > 0 for a successful read dir
 		 * return value = 0 if there is no contents in dir
 		 * return value < 0 for a unsuccessful read dir
 		 */
-		return 0;
+		if(mem_pointer == NULL)
+		{
+			return 0;
+		}
+		return 1;
 	}
 	return -1;
 }

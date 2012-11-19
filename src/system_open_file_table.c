@@ -84,5 +84,14 @@ int find_opening(void)
 
 int validate_fd(int fd)
 {
-	return 0;
+	if(system_open_tb.taken[fd] == true)
+	{
+		return 0;
+	}
+	return -1;
+}
+
+inode get_swoft_inode(fd)
+{
+	return system_open_tb.fd[fd];
 }

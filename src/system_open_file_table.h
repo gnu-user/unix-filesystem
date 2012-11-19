@@ -30,4 +30,6 @@ extern int add_to_swoft(uint32_t block_num);
  */
 extern int validate_fd(int fd);
 
+extern inode get_swoft_inode(fd);
+
 #endif /* SYSTEM_OPEN_FILE_TABLE_H_ */

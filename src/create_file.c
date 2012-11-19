@@ -99,10 +99,14 @@ int sfs_create(char *pathname, int type)
 		}
 
 		/**
+		 * Get free blocks
+		 */
+		//get_free_block()
+
+		/**
 		 * Allocate blocks
 		 * Set as being used on the free block list
 		 */
-		//update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block);
 
 		/**
 		 * Assign locations

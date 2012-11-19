@@ -68,7 +68,6 @@ int sfs_delete(char *pathname)
 		return 0;
 	}
 
-
 	if(type == 0)
 	{
 		/**
