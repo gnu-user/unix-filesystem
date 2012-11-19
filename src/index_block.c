@@ -63,7 +63,8 @@ uint32_t generate_index(byte* data)
 	 */
 }
 
-
+// TODO FIX THE VARIABLE NAMES THIS CAN ALSO BE USED TO RETURN THE
+// LOCATIONS OF INDODES IN THE CASE OF A DIRECTORY
 locations iterate_index(uint32_t location, locations data_blocks)
 {
 /*

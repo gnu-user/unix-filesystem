@@ -173,3 +173,8 @@ char* get_name(int block_num)
 	return ((inode*) buf)->name;
 }
 
+
+uint32_t find_inode(uint32_t location, char* name)
+{
+
+}

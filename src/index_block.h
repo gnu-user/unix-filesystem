@@ -50,6 +50,9 @@ void link_index();
 
 
 
+// TODO FIX THE VARIABLE NAMES THIS CAN ALSO BE USED TO RETURN THE
+// LOCATIONS OF INDODES IN THE CASE OF A DIRECTORY
+// TODO FIX THIS FUNCTION DESCRIPTION, ITS OUT OF DATE WITH THE CURRENT CODE
 /**
  * Get the first index block, and increase the length of the buffer by one for each index we get.
  * When we reach the value ceil(BLOCKSIZE/sizeof(uint32_t) = the last entry in the index block, recursively
