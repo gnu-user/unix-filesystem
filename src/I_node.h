@@ -39,15 +39,16 @@ extern char* get_name(int block_num);
  * the name that matches the request. If the inode is found in the index then the
  * location of the inode is returned, otherwise if it is not found NULL is returned.
  *
- * @note The function only searches one directory index at a time, if a directory contains
- * many files and thus multiple indexes, you must call find_inode for EACH index.
+ * @pre index_blocks MUST be a NULL terminated
  *
- * @param location The location of the directory index
+ * @param locations A NULL terminated array of index block locations
  * @param name The name of the file/directory
- * @return The location of the inode with a name that matches the request
+ *
+ * @return The location of the inode with a name that matches the request, NULL if
+ * not found
  *
  */
-uint32_t find_inode(uint32_t location, char* name);
+uint32_t find_inode(locations index_blocks, char* name);
 
 
 #endif /* I_NODE_H_ */
