@@ -23,12 +23,13 @@ int sfs_open(char *pathname)
 	uint32_t inode_location = 0;
 	locations index_block = NULL;
 	int index;
+	int i = 0;
 
 	/**
 	 * Parse pathname
 	 */
-	char** tokens = NULL;
-	if(tokenize_path(pathname, tokens) == NULL)
+	char** tokens = tokenize_path(pathname, tokens);
+	if(tokens == NULL)
 	{
 		return -1;
 	}
@@ -53,12 +54,15 @@ int sfs_open(char *pathname)
 	if(iterate_index(index, index_block) == NULL){
 		return -1;
 	}
+
 	/**
 	 * Create a function that will go through the locations from the index block
 	 * and check if a given file/directory is contained
 	 */
-	//inode_location = find_inode(index_block, pathname.nextElement);
 
+	//tokens[0] cannot be null unless something messed up, since you cannot open
+	//up a file with a path that only contains '/'
+	inode_location = find_inode(index_block, tokens[0]);
 	/**
 	 * General structure of the traversal:
 	 * 	- From Inode get index block location
@@ -70,20 +74,37 @@ int sfs_open(char *pathname)
 	 * 	- Invalid pathway (directory not found)
 	 */
 
-	/*while(pathname.hasNext() && pathname.next + 1 != NULL)
+	while(tokens[i+1] != NULL)
 	{
 		index_block = NULL;
+
+		/**
+		 * get the list of locations from the index block
+		 */
 		index = get_index_block(inode_location);
 
+
+		/**
+		 * index block is empty
+		 */
 		if(iterate_index(index, index_block) == NULL){
 			return -1;
 		}
-		//inode_location = find_inode(index_block, pathname.nextElement);
+
+		/**
+		 * Find the inode with the given name, the current token
+		 */
+		inode_location = find_inode(index_block, tokens[i]);
+
+		/**
+		 * Inode not found, aka file/directory not found
+		 */
 		if (inode_location == NULL)
 		{
 			return -1;
 		}
-	}*/
+		i++;
+	}
 
 
 	/**
