@@ -70,7 +70,7 @@ int find_opening(void)
 	for(int i = 0; i < NUMOFL; i++)
 	{
 		//TODO fix comparison
-		if(system_open_tb.fd[i] == NULL)
+		if(system_open_tb.taken[i] == false)
 		{
 			return i;
 		}

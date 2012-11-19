@@ -19,6 +19,7 @@
  */
 typedef struct{
 	inode fd[NUMOFL];
+	bool taken[NUMOFL];
 } swoft;
 
 extern swoft system_open_tb;
