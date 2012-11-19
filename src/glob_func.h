@@ -53,7 +53,7 @@ extern void* concat(void* dest, void* src, uint32_t size);
  * Tokenizes the path provided into an array of tokens for each component in the path and
  * returns an array to a null terminated array of tokens.
  *
- * For example using path = "/foo/bar" the resulting tokens array would be
+ * For example using pathname = "/foo/bar" the resulting tokens array would be
  *
  * [0]	=>	"foo"
  * [1]	=>	"bar"
@@ -62,14 +62,14 @@ extern void* concat(void* dest, void* src, uint32_t size);
  * @note If an error occurs a NULL pointer will be returned
  *
  * @pre Each component in the pathname must be at most (including the NULL
- * termination) MAX_COMP_LEN otherwise an error occurs, NULL pointer returned
+ * termination) MAX_NAME_LEN otherwise an error occurs, NULL pointer returned
  *
  * @param pathname  The pathname to tokenize
  * @param tokens A pointer to the 2D tokens array which will be populated
  *
  * @return A pointer to the 2D tokens array
  */
-extern char** tokenize_path(char* pathname, char** tokens);
+extern char** tokenize_path(char* pathname);
 
 
 /**

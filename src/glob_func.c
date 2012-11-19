@@ -80,11 +80,11 @@ void* concat(void* dest, void* src, uint32_t size)
 }
 
 
-char** tokenize_path(char* pathname, char** tokens)
+char** tokenize_path(char* pathname)
 {
 	/*  NULL initialize the tokenizer pointer and 2D array of tokens */
 	char *ptr_tkn = NULL;
-	tokens = NULL;
+	char **tokens = NULL;
 	uint32_t num_tokens = 0;
 
 	/* Get the first token */
@@ -97,16 +97,15 @@ char** tokenize_path(char* pathname, char** tokens)
 		tokens = (char**)realloc(tokens, ++num_tokens * sizeof(char*));
 
 		/* Copy the token into the array */
-		(tokens)[num_tokens - 1] = (char*)calloc(strlen(ptr_tkn), sizeof(char*));
-		strncpy((*tokens)[num_tokens - 1], ptr_tkn, strlen(ptr_tkn));
+		tokens[num_tokens - 1] = (char*)calloc(strlen(ptr_tkn), sizeof(char*));
+		strncpy(tokens[num_tokens - 1], ptr_tkn, strlen(ptr_tkn));
 
 		ptr_tkn = strtok(NULL, "/");
 	}
 
 	/* Increase the tokens array size for a final NULL termination token */
 	tokens = (char**)realloc(tokens, ++num_tokens * sizeof(char*));
-	(tokens)[num_tokens - 1] = (char*)calloc(1, sizeof(char*));
-	(tokens)[num_tokens - 1] = NULL;
+	tokens[num_tokens - 1] = NULL;
 
 	return tokens;
 }
