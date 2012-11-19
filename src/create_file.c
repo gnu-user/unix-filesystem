@@ -27,7 +27,7 @@
 int sfs_create(char *pathname, int type)
 {
 	//TODO create create_file
-	int root_dir;
+	inode new_block = NULL;
 	/**
 	 * Check for valid type = 0 or = 1
 	 */
@@ -38,14 +38,14 @@ int sfs_create(char *pathname, int type)
 		/**
 		 * Traverse the file system to find the desired inode
 		 */
-		inode_location = traverse_file_system(pathname);
+		inode_location = traverse_file_system(pathname, true);
 
 		/**
 		 * Check if the there is another file with the given name
 		 * 	- If there is another file, there is an invalid file name error
 		 */
 
-		inode new_block;
+
 		//new_block->name = last_element_in_pathname;
 		if(type == 0){
 			new_block.type = false;

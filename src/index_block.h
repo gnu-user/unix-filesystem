@@ -69,3 +69,15 @@ void link_index();
  *
  */
 locations iterate_index(uint32_t location, locations data_blocks);
+
+/**
+ * Count the number of locations given the index block's location
+ *
+ * @param location the location of the index block on disk
+ *
+ * @return the number of locations found in the index block
+ * if number = 0 then the directory is empty
+ * if number > 0 then the function was successful
+ * if number < 0 then the function was unsuccessful
+ */
+int count_locations(uint32_t location);

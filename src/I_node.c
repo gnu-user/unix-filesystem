@@ -4,7 +4,7 @@
  * (Char [7]) The file name contains the user name given to the file
  * or directory, it will take up 6 bytes and limited to 6 characters
  * (Boolean) File type identifies whether the index file points to
- * file (1) or a directory (0) which will take up 1 byte.
+ * file (0) or a directory (1) which will take up 1 byte.
  * (Boolean) File permissions is whether the file has read, write
  * executable which will take up 4 bytes.
  * (Integer) File created date stores the date the file was created
@@ -77,8 +77,8 @@ int get_index_block(int block_num)
  * @param block_num integer, the block index of the Inode
  *
  * @return the type of the file
- * If type = 0 then the Inode is for a directory,
- * if type = 1 then the Inode is for a file,
+ * If type = 1 then the Inode is for a directory,
+ * if type = 0 then the Inode is for a file,
  * otherwise the function has failed.
  */
 int get_type(int block_num)
@@ -137,7 +137,7 @@ int get_encrypted(int block_num)
 	/**
 	 * Check if the type is a file
 	 */
-	if(get_type(block_num) == 0)
+	if(get_type(block_num) != 0)
 	{
 		return 0;
 	}

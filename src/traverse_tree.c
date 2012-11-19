@@ -1,12 +1,13 @@
 #include "traverse_tree.h"
 #include "super_block.h"
 
-uint32_t traverse_file_system(char* pathname)
+uint32_t traverse_file_system(char* pathname, bool create)
 {
 	int root_dir;
 	uint32_t inode_location = 0;
 	locations index_block = NULL;
 	int index;
+	int second_last = 0;
 	int i = 0;
 
 	/**
@@ -58,8 +59,12 @@ uint32_t traverse_file_system(char* pathname)
 	 * 	- File not found
 	 * 	- Invalid pathway (directory not found)
 	 */
+	if(create == true)
+	{
+		second_last = 1;
+	}
 
-	while(tokens[i+1] != NULL)
+	while(tokens[i+1+second_last] != NULL)
 	{
 		index_block = 0;
 
@@ -78,7 +83,7 @@ uint32_t traverse_file_system(char* pathname)
 
 		/**
 		 * Find the inode with the given name, the current token
-		 */
+		 *	/
 		inode_location = find_inode(index_block, tokens[i]);
 
 		/**

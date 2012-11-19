@@ -97,3 +97,22 @@ locations iterate_index(uint32_t location, locations data_blocks)
 	return concat(data_blocks, NULL);
 */
 }
+
+int count_locations(uint32_t location)
+{
+	locations loc = NULL;
+
+	/**
+	 * Need to make sure that if there are not locations in the index block that
+	 * rather then null, 0 is returned.
+	 */
+	if(iterate_index(location, loc) == NULL)
+	{
+		return -1;
+	}
+
+	/**
+	 * iterate through the loc pointer and determine the number of locations
+	 */
+	return 0;
+}

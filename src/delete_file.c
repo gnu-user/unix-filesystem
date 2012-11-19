@@ -21,8 +21,9 @@ int sfs_delete(char *pathname)
 
 	/**
 	 * Traverse the file system to find the desired inode
+	 * get the inode above the one you desired
 	 */
-	inode_location = traverse_file_system(pathname);
+	inode_location = traverse_file_system(pathname, true);
 
 	if(inode_location == 0)
 	{
@@ -30,14 +31,27 @@ int sfs_delete(char *pathname)
 	}
 
 	/**
-	 *** Note that deleting a block also means to update the free block list
-	 *** with the new status of the block (aka free)
-	 * Recursively delete all of the blocks assosicated to the index block.
-	 * 	- this will account for both directories and files.
-	 * Delete the index block
-	 * Delete the Inode
-	 * Delete the pointer in the containing directory's index block.
+	 * Check if it is a directory
+	 * 	- If so:
+	 * 		Check if the directory is empty
+	 * 			- If so:
+	 * 				Error, user can only delete directories that are empty
+	 */
+
+	/**
+	 * Update the status of the Inode, index block (and data blocks) in the free
+	 * block list blocks.
 	 *
+	 * These blocks will need to be deleted the order of:
+	 * data blocks (if file)
+	 * index block
+	 * Inode
+	 *
+	 * Since the data block locations are stored in the index block and the
+	 * index block's location is stored in the Inode
+	 */
+
+	/**
 	 * return value > 0 then the file was deleted successfully.
 	 * return value <= 0 then the file failed to be delete.
 	 */
