@@ -4,6 +4,8 @@
  **/
 #include "system_open_file_table.h"
 
+swoft system_open_tb = {0};
+
 /**
  * Add the inode to the swoft
  *
@@ -15,9 +17,13 @@
  * if the value == -2 then the inode was not found
  * otherwise the function was unsuccessful
  */
-int add_to_swoft(location block_num)
+int add_to_swoft(uint32_t block_num)
 {
-	int index = find_opening();
+	inode* test = NULL;
+	int index = -1;
+
+	index = find_opening();
+
 
 	/**
 	 * The swoft is full
@@ -30,7 +36,7 @@ int add_to_swoft(location block_num)
 	/**
 	 * Retrieve the Inode
 	 */
-	inode* test = get_inode(block_num);
+	test = get_inode(block_num);
 
 	/**
 	 * Check if the Inode was found
@@ -44,7 +50,7 @@ int add_to_swoft(location block_num)
 	 * Store the Inode in the swoft
 	 */
 	//TODO de-reference...
-	//system_open_tb.fd[index] = test;
+	system_open_tb.fd[index] = *test;
 
 	/**
 	 * return the file descriptor (index)
@@ -64,10 +70,10 @@ int find_opening(void)
 	for(int i = 0; i < NUMOFL; i++)
 	{
 		//TODO fix comparison
-		/*if(system_open_tb.fd[i] == NULL)
+		if(system_open_tb.fd[i] == NULL)
 		{
 			return i;
-		}*/
+		}
 
 		//Temp
 		return 0;

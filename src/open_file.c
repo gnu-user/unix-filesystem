@@ -24,7 +24,11 @@ int sfs_open(char *pathname)
 	/**
 	 * Parse pathname
 	 */
-	//parse_path(pathname);
+	char** tokens = NULL;
+	if(tokenize_path(pathname, tokens) == NULL)
+	{
+		return -1;
+	}
 
 	/**
 	 * Retrieve the Superblock.

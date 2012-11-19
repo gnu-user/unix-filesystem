@@ -5,8 +5,7 @@
  *      Author: joseph
  */
 
-#include "globdata.h"
-#include "index_block.h"
+#include "glob_data.h"
 #include "I_node.h"
 
 #ifndef SYSTEM_OPEN_FILE_TABLE_H_
@@ -23,6 +22,6 @@ typedef struct{
 } swoft;
 
 extern swoft system_open_tb;
-extern int add_to_swoft(location block_num);
+extern int add_to_swoft(uint32_t block_num);
 
 #endif /* SYSTEM_OPEN_FILE_TABLE_H_ */
