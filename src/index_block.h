@@ -43,8 +43,16 @@ add_location(uint32_t* index_block, uint32_t location);
 
 
 
-
-remove_location();
+/**
+ * This should take the location of the location to be removed.
+ *
+ * @param the list of locations TODO see if this is really needed
+ * @param the location to be removed
+ *
+ * @return if > 0 success
+ * if <= 0 failure
+ */
+int remove_location(uint32_t* index_block, uint32_t location);
 
 void link_index();
 
@@ -81,3 +89,13 @@ locations iterate_index(uint32_t location, locations data_blocks);
  * if number < 0 then the function was unsuccessful
  */
 int count_locations(uint32_t location);
+
+/**
+ * Locate the index block locations on disk.
+ *
+ * @param location the location of the initial index block
+ *
+ * @return a list of index blocks locations
+ * if there is an error the value returned will be NULL
+ */
+uint32_t* index_block_locations(uint32_t location);

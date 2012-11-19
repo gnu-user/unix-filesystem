@@ -116,3 +116,9 @@ int count_locations(uint32_t location)
 	 */
 	return 0;
 }
+
+uint32_t* index_block_locations(uint32_t location)
+{
+
+	return NULL;
+}

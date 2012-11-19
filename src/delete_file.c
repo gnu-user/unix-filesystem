@@ -80,7 +80,8 @@ int sfs_delete(char *pathname)
 	/**
 	 * Delete the index blocks (each time update the free_block list)
 	 */
-	//update_fbl(iterate_fbl(get_free_block_index()), NULL, indexes);
+	update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block_locations
+			(get_index_block(inode)));
 
 	/**
 	 * Delete the Inode block (update the free_block list)
@@ -90,6 +91,8 @@ int sfs_delete(char *pathname)
 	/**
 	 * Delete the index location from the index block of the parent directory
 	 */
+
+	//remove_location(get_index_block(inode_location[0]));
 
 	/**
 	 * return value > 0 then the file was deleted successfully.

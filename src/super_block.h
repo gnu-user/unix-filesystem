@@ -20,9 +20,9 @@ typedef struct{
 
 extern superblock* get_super_block(void);
 
-extern int get_root(void);
+extern uint32_t get_root(void);
 
-extern int get_free_block_index(void);
+extern uint32_t get_free_block_index(void);
 
 extern int calc_uuid();
 

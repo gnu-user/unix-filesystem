@@ -59,7 +59,7 @@ inode* get_inode(int block_num)
  * If index >= 0 then the function was successful,
  * if index < 0 then the function was unsuccessful
  */
-int get_index_block(int block_num)
+uint32_t get_index_block(int block_num)
 {
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(block_num, buf);

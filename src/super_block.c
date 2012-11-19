@@ -12,7 +12,7 @@ superblock* get_super_block(void)
 	return (superblock*) buf;
 }
 
-int get_root(void)
+uint32_t get_root(void)
 {
 	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(SUPER_BLOCK, buf);
@@ -25,7 +25,7 @@ int get_root(void)
 	return ((superblock*) buf)->root_dir;
 }
 
-int get_free_block_index(void)
+uint32_t get_free_block_index(void)
 {
 	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = get_block(SUPER_BLOCK, buf);
