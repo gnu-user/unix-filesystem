@@ -33,9 +33,19 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 		/**
 		 * Validate the file descriptor on the system-wide-open file table
 		 *  - If the file descriptor is not found return error
+		 */
+		if (validate_fd(fd) < 0)
+		{
+			return 0;
+		}
+
+		/**
 		 * Use the offset to find the start of where to read in the block
 		 * Read the specified bytes of the given length into the buffer
-		 *
+		 */
+
+
+		/**
 		 * return value > 0 if the file was read successfully
 		 * return value <= 0 if the file was read unsuccessfully
 		 */
