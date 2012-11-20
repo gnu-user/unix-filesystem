@@ -29,64 +29,85 @@ typedef uint32_t* used_locations;
  */
 typedef bool free_block_list[NUMBLKS];
 
-static free_block_list fbl;
+static free_block_list fbl = {0};
 
 /**
- * @return the pointer to the free block list
+ * @return the pointer to the static instance of free block list in memory
  */
-//free_block_list get_free_block(void);
+free_block_list get_free_block(void);
+
 
 /**
- * Finds free blocks that exist on the given free block list and
- * returns them as a free locations.
+ * Finds all of the free blocks that exist in the static instance of the free block list
+ * in memory and returns them as a free locations.
+ *
+ * Used to calculate the total amount of available disk space
+ *
  */
-free_locations calc_free_blocks(free_block_list fbl);
+free_locations calc_total_free_blocks(void);
 
 
 /**
- * Finds the specified number of free blocks on the given free block list,
- * and returns them if there are enough free.
+ * Finds the specified number of free blocks in the static instance of the free block
+ * in memory list dand returns them if there are enough free.
+ *
+ * Used to calculate whether there is enough disk space before starting to create the
+ * file
  */
-free_locations calc_num_free_blocks(free_block_list fbl, uint32_t num_blocks);
+free_locations calc_num_free_blocks(uint32_t num_blocks);
 
 
 /**
- * Finds the next free block on the specified free block list (fbl), marks it as used on the fbl,
- * and returns the location of the block.
+ * Finds the next free block in the static free block list (fbl), marks it as used in the
+ * fbl and returns the location of the block.
  *
  * get_free_block calculates a single free block and then marks that block as used
- * in the fbl, it essentially operates as a wrapper for calc_free_blocks and update_fbl
+ * in the fbl, it essentially operates as a facade for calc_free_blocks and update_fbl when
+ * you only want to get one block at a time
  *
  */
-free_location get_free_block(free_block_list fbl);
+free_location get_free_block(void);
 
 
 /**
- * Writes the free block list to disk.
+ * Writes the static free block list in memory to disk, it essentially syncs the
+ * fbl in memory with the instance on disk.
  *
- * After the new FBL is written to disk, a journal entry is created and
- * journalled, which links the superblock to the new FBL.
+ * After the new FBL is written to disk, a journal entry is created, which links the
+ * superblock to the new FBL.
  */
-extern int write_fbl(free_block_list fbl);
+extern int write_fbl(void);
 
 
 /**
  * Read the FBL from disk using the index either provided by the superblock or the
- * index provided by the FBL entry in the journal[0].arg1 and load the FBL by
- * iterating through each node and concatenating them all within one buffer.
+ * index provided by the FBL entry in the journal[0].arg1 and loads the FBL by
+ * iterating through each location within its index and concatenating them all into
+ * one buffer, which then overwrites the current static fbl in memory.
+ *
+ * @param location The location of the fbl's index block on disk
+ *
  */
-static free_block_list* read_fbl(free_block_list fbl, uint32_t index);
+static free_block_list* read_fbl(uint32_t location);
 
 
 /**
  * Determine what blocks the FBL uses and return all of them as an array (used locations).
+ *
+ * TODO REMOVE THIS, IT IS ONLY IN THE NON-INDEXED VERSIONS OF FBLS, WE NOW CALL GENERATE
+ * INDEX TO CREATE INDICES FOR A NEW INSTANCE OF AN FBL ON THE DISK
  */
-static used_locations index_fbl_blocks(uint32_t index);
+//static used_locations index_fbl_blocks(uint32_t index);
 
 
 /**
+ *
+ * TODO ADD A NOTE THAT THIS IS CALLED INTERNALLY BY READ_FBL WHEN READING THE FBL FROM DISK
+ * TODO THIS IS LITERALLY A WRAPPER FOR ITERATE INDEX THAT CHANGES THE RETURN TYPE TO TYPE FREE_BLOCk_LIST
+ *
  * Iterates through the free_block_list index block, concatenates the blocks, and
  * returns a pointer to a buffer containing the entire free_block_list.
+ *
  * @param index The index of the free_block_list index block
  *
  */
@@ -94,13 +115,12 @@ static free_block_list* iterate_fbl(uint32_t index);
 
 
 /**
- * The update FBL method updates the FBL entry in memory. It will take
- * the FBL buffer in memory as the first argument, an array of all the locations
- * to mark as used as the second argument, and an array of all the locations to mark
- * as unused as the third argument. If the arguments used or free are NULL then no blocks
- * are marked for that type.
+ * The update FBL method updates the static FBL entry in memory. It will take
+ * an array of all the locations to mark as used as the first argument, and an
+ * array of all the locations to mark as unused as the second argument. If the
+ * arguments used or free are NULL then no blocks are marked for that type.
  *
- * @pre parameters used, free MUST be NULL terminated arrays of locations
+ * @pre parameters used and free MUST be NULL terminated arrays of locations
  *
  * @param used A NULL terminated array of locations to mark as used in the fbl, if it is NULL
  * then no locations are marked as used
@@ -108,8 +128,7 @@ static free_block_list* iterate_fbl(uint32_t index);
  * then no locations are marked as free
  *
  */
-free_block_list* update_fbl(free_block_list fbl,
-							used_locations used,
+free_block_list* update_fbl(used_locations used,
 							free_locations free);
 
 
