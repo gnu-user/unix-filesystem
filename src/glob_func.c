@@ -31,11 +31,12 @@ byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
 	return buf2;
 }
 
+
 // NOTE a prime example of when static type systems break down in generic programming
-void* concat(void* dest, void* src, uint32_t size)
+void* concat(void** dest, void* src, uint32_t size)
 {
 	/* UNDEFINED if dest OR src NULL */
-	if (dest == NULL || src == NULL)
+	if (*dest == NULL || src == NULL)
 	{
 		return NULL;
 	}
@@ -44,7 +45,7 @@ void* concat(void* dest, void* src, uint32_t size)
 	 * using pointer arithmetic
 	 */
 	uint32_t i = 0, j = 0;
-	byte* _dest = (byte*) dest;
+	byte* _dest = (byte*) *dest;
 	byte* _src = (byte*) src;
 
 	/* Get the number of items in each array using the size as an index multiplier */
@@ -58,8 +59,8 @@ void* concat(void* dest, void* src, uint32_t size)
 	}
 
 	/* Reallocate dest to contain the results using size as a multiplier */
-	dest = realloc(dest, ((i+j+1) * size));
-	_dest = (byte *) dest;
+	*dest = realloc(dest, ((i+j+1) * size));
+	_dest = (byte *) *dest;
 
 	if (_dest != NULL)
 	{
@@ -76,7 +77,7 @@ void* concat(void* dest, void* src, uint32_t size)
 
 	/* Free the memory used by src and return dest pointer */
 	free(src);
-	return dest;
+	return _dest;
 }
 
 
