@@ -3,8 +3,6 @@
  */
 #include "glob_data.h"
 #include "glob_func.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 byte* allocate_buf(byte* buf, uint32_t size)

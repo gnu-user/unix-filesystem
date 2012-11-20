@@ -1,6 +1,5 @@
 #include "blockio.h"
 #include "index_block.h"
-#include "I_node.h"
 #include "system_open_file_table.h"
 
 /** sfs_readdir

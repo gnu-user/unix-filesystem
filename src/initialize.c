@@ -9,11 +9,6 @@
 #include <stdio.h>
 #include "super_block.h"
 
-#define SUPER_BLOCK	  0
-#define FREE_BLOCK 3
-#define FREE_INDEX 2
-#define ROOT_DIR 2
-
 /**
  * Initialize the superblock for the file system.
  * @param erase integer, Determines whether or not to delete the contents of the
