@@ -31,6 +31,9 @@ int sfs_create(char *pathname, int type)
 	char** tokens;
 	uint32_t* inode_location = NULL;
 	locations index_block = NULL;
+	uint32_t index_location = NULL;
+	uint32_t data_location = NULL;
+	uint32_t new_inode_location = NULL;
 
 	/**
 	 * Check for valid type = 0 or = 1
@@ -52,10 +55,14 @@ int sfs_create(char *pathname, int type)
 		 */
 		inode_location = traverse_file_system(tokens, true);
 
+		/**
+		 * Invalid path or path does not exist
+		 */
 		if(inode_location == NULL)
 		{
 			return 0;
 		}
+
 		/**
 		 * inode_location[0] = the location of the directory's inode,
 		 * inode_location[1] = the token index for the last element
@@ -76,7 +83,6 @@ int sfs_create(char *pathname, int type)
 		{
 			return 0;
 		}
-
 
 		strcpy(new_block.name, tokens[inode_location[1]]);
 		if(type == 0){
@@ -102,6 +108,10 @@ int sfs_create(char *pathname, int type)
 		//file_owner = cur_user;
 		//last_user_modified = cur_user;
 
+		/**
+		 * Get a free block location for the Inode
+		 */
+		new_inode_location = get_free_block();
 
 		/**
 		 * Create index block
@@ -113,12 +123,13 @@ int sfs_create(char *pathname, int type)
 			/**
 			 * Create data block
 			 */
+			data_location = get_free_block();
 		}
 
 		/**
 		 * Get free blocks
 		 */
-		//get_free_block()
+		index_location = get_free_block();
 
 		/**
 		 * Allocate blocks
@@ -127,8 +138,22 @@ int sfs_create(char *pathname, int type)
 
 		/**
 		 * Assign locations
+		 *  - Store the Inode's location in the index block of the parent
 		 * 	- Store the index block's location in the Inode block
 		 * 	- Store the data block's location in the index block
+		 */
+		new_block.location = index_location;
+
+		//index_block.index = data_location;
+
+		/**
+		 * Store the blocks on disk
+		 * 	- If there is an error while writing, de-allocate the blocks
+		 * 	  return error
+		 */
+
+		/**
+		 * Add the inode's location to the parent's index list
 		 */
 
 		/**

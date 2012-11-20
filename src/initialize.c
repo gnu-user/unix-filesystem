@@ -6,8 +6,8 @@
  **/
 
 #include "blockio.h"
-#include <stdio.h>
 #include "super_block.h"
+#include "free_block_list.h"
 
 /**
  * Initialize the superblock for the file system.
@@ -136,75 +136,24 @@ int sfs_initialize(int erase)
  */
 int free_block_init(void)
 {
-	bool freeblock[BLKSIZE];
-	byte* buf = NULL;
-	int retval = 0;
-
 	//Divide the blocks array up into multiple
-	int num_free_block = (int)(ceil(NUMBLKS/BLKSIZE));
+	uint32_t num_free_block = (uint32_t)(ceil(NUMBLKS/BLKSIZE));
 
 	/**
-	 * Add support for free block list index block.
+	 * Create a list of the blocks used
+	 * Create a list of blocks that are remaining
 	 */
-	int* index_block = NULL;
-	index_block = (int*) calloc(num_free_block, sizeof(int));
+	uint32_t* used = (uint32_t *) calloc(num_free_block, sizeof(uint32_t));
 
-	for(int j = 0; j < num_free_block; j++)
+	for(uint32_t i = 0; i < num_free_block; i++)
 	{
-		for(int i = 0; i < BLKSIZE; i++)
-		{
-			freeblock[i] = false;
-
-			/**
-			 * Initializes the super block, journal blocks, free block list
-			 * blocks, root directory Inode block, root directory index block
-			 */
-			if(i < num_free_block+FREE_BLOCK+ROOT_DIR && j == 0)
-			{
-				freeblock[i] = true;
-			}
-		}
-
-		/**
-		 * Add block pointer to index
-		 */
-		index_block[j] = FREE_BLOCK+j;
-
-		/**
-		 * Allocate a buffer to write to the block.
-		 */
-		buf = allocate_buf(buf, BLKSIZE);
-
-		/**
-		 * Copy the boolean array into to buffer
-		 */
-		buf = copy_to_buf((byte*)freeblock, buf, sizeof(freeblock), BLKSIZE);
-
-		/**
-		 * Store the buffer onto the disk.
-		 */
-		retval = put_block(FREE_BLOCK+j, buf);
-		if(retval != 0)
-		{
-			return retval;
-		}
-	}
-	buf = allocate_buf(buf, BLKSIZE);
-
-	/**
-	 * Copy the boolean array into to buffer
-	 */
-	buf = copy_to_buf((byte*)index_block, buf, num_free_block*sizeof(int), BLKSIZE);
-
-	/**
-	 * Store the buffer onto the disk.
-	 */
-	retval = put_block(FREE_INDEX, buf);
-	if(retval != 0)
-	{
-		return retval;
+		used[i] = i;
 	}
 
+	if(update_fbl(used, NULL) == NULL)
+	{
+		return -1;
+	}
 	return 0;
 }
 
@@ -225,7 +174,7 @@ int wipe_disk(void)
 	int retval = 0;
 
 	//Go block to block setting them to null
-	for(int i = 0; i < NUMBLKS; i++)
+	for(uint32_t i = 0; i < NUMBLKS; i++)
 	{
 		retval = put_block(i, buffer);
 		if(retval != 0)
