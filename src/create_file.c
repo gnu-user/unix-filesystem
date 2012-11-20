@@ -70,7 +70,7 @@ int sfs_create(char *pathname, int type)
 		}
 
 		/**
-		 * File/directory already exists
+		 * Check File/directory already exists
 		 */
 		if(find_inode(index_block, tokens[inode_location[1]]) != NULL)
 		{
@@ -81,10 +81,27 @@ int sfs_create(char *pathname, int type)
 		strcpy(new_block.name, tokens[inode_location[1]]);
 		if(type == 0){
 			new_block.type = false;
+			//file_size = 3 blocks * block size
 		}
-		else{
+		else
+		{
 			new_block.type = true;
+			/**
+			 * Identify whether the file is encrypted
+			 */
+			new_block.encrypted = 0;
+			//file_size = 2 blocks * block size
 		}
+
+		/**
+		 * Fill in the information to be stored in the Inode
+		 */
+		//date_of_create = cur_date;
+		//date_last_accessed = cur_date;
+		//date_last_modified = cur_date;
+		//file_owner = cur_user;
+		//last_user_modified = cur_user;
+
 
 		/**
 		 * Create index block
