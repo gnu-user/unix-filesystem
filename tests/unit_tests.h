@@ -32,13 +32,23 @@
  * TODO MAKE A NICE WRAPPER THAT IS MORE HIGH LEVEL, ACTUALLY
  * STARTS A TEST SUITE
  */
-extern start_suite(char * tsuite);
+extern start_suite(char* tsuite);
 
 /* Displays output stating that it is starting a test case
  * TODO MAKE A NICE WRAPPER THAT IS MORE HIGH LEVEL, ACTUALLY
  * STARTS A TEST CASE
  */
-extern start_test(char * tcase);
+extern start_test(char* name, void* tcase());
+
+/*
+ * Displays output stating that an individual test has failed
+ */
+extern test_fail(char* test);
+
+/*
+ * Displays output stating that an individual test has passed
+ */
+extern test_fail(char* test);
 
 
 #endif /* UNIT_TESTS_H_ */

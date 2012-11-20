@@ -22,10 +22,39 @@ start_suite(char* tsuite)
 	puts(BOLDWHITE "========================================\n");
 }
 
-start_test(char* tcase)
+//start_test(char* tcase)
+start_test(char* name, void* tcase())
 {
-	printf(BOLDWHITE "Executing %s Test Case\n", tcase);
+	printf(BOLDWHITE "Executing %s Test Case\n", name);
 	puts(BOLDWHITE "-----------------------------------------\n");
+
+	/* Execute the test case and display the whether the results */
+
+	if (tcase() == EXIT_SUCCESS)
+	{
+		printf(YELLOW "Test Case %s Passed", name);
+	}
+	else
+	{
+		printf(MAGENTA "Test Case %s Failed", name);
+	}
+}
+
+
+/*
+ * Displays output stating that an individual test has failed
+ */
+test_fail(char* test)
+{
+	printf(RED "%s Failed\n", test);
+}
+
+/*
+ * Displays output stating that an individual test has passed
+ */
+test_pass(char* test)
+{
+	printf(GREEN "%s Passed\n", test);
 }
 
 
@@ -43,10 +72,10 @@ int unit_test(void)
 	/* Start the blockio Test Suite */
 	start_suite("blockio");
 
-	/* Start the get_block test case */
-	start_test("get_block");
-
 	/* Execute the get_block test case */
+	start_test("get_block", &test_get_block);
+
+	/*
 	if (test_get_block() == EXIT_SUCCESS)
 	{
 		puts(YELLOW "get_block test case Passed");
@@ -54,7 +83,7 @@ int unit_test(void)
 	else
 	{
 		puts(MAGENTA "get_block test case Failed");
-	}
+	}*/
 
 	/* Clear the colours */
 	puts(RESET);
