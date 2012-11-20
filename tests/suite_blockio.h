@@ -13,5 +13,10 @@
  */
 extern int test_get_block(void);
 
+/*
+ * put_block test case
+ */
+extern int test_put_block(void);
+
 
 #endif /* SUITE_BLOCKIO_H_ */

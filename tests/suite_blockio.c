@@ -3,25 +3,76 @@
 #include <stdlib.h>
 
 /*
- * get_block test case
+ * get_block test cases
+ *
  */
-int test_get_block(void)
-{
-	byte temp[128] = {0};
-	int blknum = 1000;
-
-	/* Start the get_block test case */
-	//start_test("get_block");
+int test_get_block(void) {
+	byte temp[128] = { 0 };
+	int blknum;
 
 	/* Test 1 -- get_block with a block that exists */
-	if (get_block(blknum, temp) != 0)
-	{
-		test_fail("Unit Test 1");
+	blknum = 5;
+	if (get_block(blknum, temp) != 0) {
+		test_fail("Unit Test Part 1");
 		return EXIT_FAILURE;
+	} else {
+		test_pass("Unit Test Part 1");
 	}
-	else
-	{
-		test_pass("Unit Test 2");
+
+	/* Test 2 -- get_block with a block that is below the 0th index */
+	blknum = -5;
+	if (get_block(blknum, temp) == 0) {
+		test_fail("Unit Test Part 2");
+		return EXIT_FAILURE;
+	} else {
+		test_pass("Unit Test Part 2");
+	}
+
+	/* Test 3 -- get_block with a block that is above the largest index */
+	blknum = NUMBLKS + 1;
+	if (get_block(blknum, temp) == 0) {
+		test_fail("Unit Test Part 3");
+		return EXIT_FAILURE;
+	} else {
+		test_pass("Unit Test Part 3");
+	}
+
+	return EXIT_SUCCESS;
+}
+
+/*
+ * put_block test cases
+ *
+ */
+int test_put_block(void) {
+	byte temp[128] = { 1 };
+	int blknum;
+
+	/* Test 1 -- put_block with a block that exists */
+	blknum = 5;
+	if (put_block(blknum, temp) != 0) {
+		test_fail("Unit Test Part 1");
+		return EXIT_FAILURE;
+	} else {
+		test_pass("Unit Test Part 1");
+	}
+
+	/* Test 2 -- put_block with a block that is below the 0th index */
+	blknum = -5;
+	if (put_block(blknum, temp) == 0) {
+		test_fail("Unit Test Part 2");
+		return EXIT_FAILURE;
+	} else {
+		test_pass("Unit Test Part 2");
+	}
+
+	/* Test 3 -- put_block with a block that is above the largest index */
+	blknum = NUMBLKS + 1;
+	if (put_block(blknum, temp) == 0) {
+		test_fail("Unit Test Part 3");
+		return EXIT_FAILURE;
+	} else {
+		test_pass("Unit Test Part 3");
 	}
 
 	return EXIT_SUCCESS;

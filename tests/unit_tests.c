@@ -13,30 +13,28 @@
 
 
 /* Displays output stating that it is starting a test suite
- * TODO MAKE A NICE WRAPPER THAT IS MORE HIGH LEVEL, ACTUALLY
- * STARTS A TEST SUITE
  */
 start_suite(char* tsuite)
 {
-	printf(BOLDWHITE "Executing %s Test Suite\n", tsuite);
+	printf(BOLDWHITE "\nExecuting %s Test Suite\n", tsuite);
 	puts(BOLDWHITE "========================================\n");
 }
 
 //start_test(char* tcase)
 start_test(char* name, void* tcase())
 {
-	printf(BOLDWHITE "Executing %s Test Case\n", name);
+	printf(BOLDWHITE "\nExecuting %s Test Case\n", name);
 	puts(BOLDWHITE "-----------------------------------------\n");
 
 	/* Execute the test case and display the whether the results */
 
 	if (tcase() == EXIT_SUCCESS)
 	{
-		printf(YELLOW "Test Case %s Passed", name);
+		printf(YELLOW "\nTest Case %s Passed", name);
 	}
 	else
 	{
-		printf(MAGENTA "Test Case %s Failed", name);
+		printf(MAGENTA "\nTest Case %s Failed", name);
 	}
 }
 
@@ -74,16 +72,8 @@ int unit_test(void)
 
 	/* Execute the get_block test case */
 	start_test("get_block", &test_get_block);
-
-	/*
-	if (test_get_block() == EXIT_SUCCESS)
-	{
-		puts(YELLOW "get_block test case Passed");
-	}
-	else
-	{
-		puts(MAGENTA "get_block test case Failed");
-	}*/
+	/* Execute the put_block test case */
+	start_test("put_block", &test_put_block);
 
 	/* Clear the colours */
 	puts(RESET);
