@@ -1,14 +1,14 @@
 #include "free_block_list.h"
 #include <stdbool.h>
 
-/*
-free_block_list get_free_block(void)
+
+free_block_list* get_free_block_list(void)
 {
 	return NULL;
 }
-*/
 
-free_locations calc_free_blocks(free_block_list fbl)
+
+free_locations calc_total_free_blocks(void)
 {
 	//1. Get the free block list.
 	//2. Traverse it and add any blocks marked as empty to an array of type free_indices.
@@ -34,7 +34,7 @@ free_locations calc_free_blocks(free_block_list fbl)
 }
 
 
-free_locations calc_num_free_blocks(free_block_list fbl, uint32_t num_blocks)
+free_locations calc_num_free_blocks(uint32_t num_blocks)
 {
 	//1. Get the free block list.
 	//2. Traverse it and add num_blocks specified marked as empty to an array of type free_indices.
@@ -65,7 +65,7 @@ free_locations calc_num_free_blocks(free_block_list fbl, uint32_t num_blocks)
 }
 
 
-free_location get_free_block(free_block_list fbl)
+free_location get_free_block(void)
 {
 /*
 	free_block = calc_free_blocks(fbl, 1);
@@ -80,7 +80,7 @@ free_location get_free_block(free_block_list fbl)
 /**
  * TODO Make the return type for this int and other functions returning int into the ERROR_CODES enumeration.
  */
-int write_fbl(free_block_list fbl)
+int write_fbl(void)
 {
 	/*
 	 //Check if the first journal entry contains a LINK_FBL entry:
@@ -141,29 +141,34 @@ int write_fbl(free_block_list fbl)
 }
 
 
-static free_block_list* read_fbl(free_block_list fbl, uint32_t index)
+static free_block_list* read_fbl(uint32_t location)
 {
 	/*
 	 --> Calls the iterate_fbl which iterates through the nodes in the
 	 free_block_list linked list
 	 */
+	return NULL;
 }
 
+
+/*
+ * TODO REMOVE THIS, IT IS ONLY IN THE NON-INDEXED VERSIONS OF FBLS, WE NOW CALL GENERATE
+ * INDEX TO CREATE INDICES FOR A NEW INSTANCE OF AN FBL ON THE DISK
 
 static used_locations index_fbl_blocks(uint32_t index)
 {
 
 }
-
+*/
 
 static free_block_list* iterate_fbl(uint32_t index)
 {
 
+	return NULL;
 }
 
 
-free_block_list* update_fbl(free_block_list fbl,
-							used_locations used,
+free_block_list* update_fbl(used_locations used,
 							free_locations free)
 {
  	/* Iterate through each item in the used and free locations array,

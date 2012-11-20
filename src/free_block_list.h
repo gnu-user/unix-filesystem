@@ -34,7 +34,7 @@ static free_block_list fbl = {0};
 /**
  * @return the pointer to the static instance of free block list in memory
  */
-free_block_list get_free_block(void);
+free_block_list* get_free_block_list(void);
 
 
 /**
