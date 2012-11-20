@@ -1,6 +1,11 @@
 #include "free_block_list.h"
 #include <stdbool.h>
 
+free_block_list get_free_block(void)
+{
+	return NULL;
+}
+
 free_locations calc_free_blocks(free_block_list fbl)
 {
 	//1. Get the free block list.

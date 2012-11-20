@@ -22,7 +22,6 @@ typedef uint32_t free_location;
 typedef uint32_t* free_locations;
 typedef uint32_t* used_locations;
 
-
 /**
  * The free_block_list is an array containing the free blocks on disk.
  * Elements are marked as free (false), or used (true).
@@ -30,6 +29,12 @@ typedef uint32_t* used_locations;
  */
 typedef bool free_block_list[NUMBLKS];
 
+static free_block_list fbl;
+
+/**
+ * @return the pointer to the free block list
+ */
+free_block_list get_free_block(void);
 
 /**
  * Finds free blocks that exist on the given free block list and
