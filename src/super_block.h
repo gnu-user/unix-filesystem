@@ -9,6 +9,9 @@
 */
 #include "glob_func.h"
 
+#ifndef SUPER_BLOCK_H_
+#define SUPER_BLOCK_H_
+
 typedef struct{
 	uint32_t size_of_disk;
 	uint32_t block_size;
@@ -28,15 +31,4 @@ extern int calc_uuid();
 
 extern int validate_uuid();
 
-/*
- * freeblock
- * add index
- * remove index
- * read index block
- * (static) calculate # of indexes in the current index
- * (static) chain index block (used for linking to next block)
- * (static) iterate thought block (if at the last element in the index block it
- *   should automatically give the first element of the next block
- * (static) return what is at the current location)
- *
- */
+#endif /* SUPER_BLOCK_H_ */

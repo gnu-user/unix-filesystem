@@ -1,11 +1,7 @@
-/*
- * index_block.h
- *
- *  Created on: Nov 16, 2012
- *      Author: jon
- */
-#include <stdint.h>
 #include "glob_data.h"
+
+#ifndef INDEX_BLOCK_H_
+#define INDEX_BLOCK_H_
 
 //TODO use malloc for this; it should be size: ceil(BLOCKSIZE/sizeof(uint32_t))
 typedef uint32_t* index;
@@ -99,3 +95,5 @@ int count_locations(uint32_t location);
  * if there is an error the value returned will be NULL
  */
 uint32_t* index_block_locations(uint32_t location);
+
+#endif /* INDEX_BLOCK_H_ */

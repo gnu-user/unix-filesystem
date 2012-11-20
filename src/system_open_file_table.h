@@ -1,11 +1,3 @@
-/*
- * system_open_file_table.h
- *
- *  Created on: 2012-11-17
- *      Author: joseph
- */
-
-#include "glob_data.h"
 #include "I_node.h"
 
 #ifndef SYSTEM_OPEN_FILE_TABLE_H_

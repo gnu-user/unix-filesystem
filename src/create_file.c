@@ -2,6 +2,7 @@
 #include "super_block.h"
 #include "I_node.h"
 #include "traverse_tree.h"
+#include "string.h"
 
 /** sfs_create
  * Create a file with the pathname specified if there is not already a file with
@@ -78,7 +79,7 @@ int sfs_create(char *pathname, int type)
 		}
 
 
-		strcpy(new_block.name, *tokens[inode_location[1]]);
+		strcpy(new_block.name, tokens[inode_location[1]]);
 		if(type == 0){
 			new_block.type = false;
 		}
