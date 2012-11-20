@@ -10,7 +10,7 @@
 /* Include the test suites */
 #include "unit_tests.h"
 #include "suite_blockio.h"
-
+#include "suite_glob_func.h"
 
 /* Displays output stating that it is starting a test suite
  */
@@ -69,11 +69,18 @@ int unit_test(void)
 
 	/* Start the blockio Test Suite */
 	start_suite("blockio");
-
 	/* Execute the get_block test case */
 	start_test("get_block", &test_get_block);
 	/* Execute the put_block test case */
 	start_test("put_block", &test_put_block);
+
+
+	/* Start the global functions test suite */
+	start_suite("glob_func");
+	/* Execute the concat test case */
+	start_test("concat", &test_concat);
+	/* Execute the tokenize_path test case */
+	start_test("tokenize_path", &test_tokenize_path);
 
 	/* Clear the colours */
 	puts(RESET);

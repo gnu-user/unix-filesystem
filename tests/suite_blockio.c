@@ -1,3 +1,10 @@
+/*
+ * suite_glob_func.h
+ *
+ *  Created on: Nov 20, 2012
+ *      Author: dsmullen
+ */
+#include "suite_blockio.h"
 #include "unit_tests.h"
 #include "../src/glob_data.h"
 #include <stdlib.h>
