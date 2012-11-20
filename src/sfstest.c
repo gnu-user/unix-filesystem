@@ -19,6 +19,7 @@
    copy for the purposes of testing your file system implementation.
 ******************************************************/
 #include <stdio.h>
+#include "glob_data.h"
 
 /*****************************************************
    templates for the sfs interface functions
@@ -105,7 +106,11 @@ int p1,p2,p3;
    main test routine
 ******************************************************/
 
+#ifdef UNIT_TESTING
+sfs_test()
+#else
 main()
+#endif
 {
   int i;
   int retval;  /* used to hold return values of file system calls */
