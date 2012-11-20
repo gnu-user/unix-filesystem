@@ -26,6 +26,9 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 	//TODO create read
 	//TODO create encryption
 	//TODO create decryption
+	inode file_inode = NULL;
+	uint32_t index_block = 0;
+	locations data_blocks = NULL;
 
 	if(fd >= 0 && start > 0 && start < BLKSIZE && length > 0 &&
 			start+length < BLKSIZE)
@@ -48,10 +51,22 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 		 * Get Inode
 		 * 	- check that it is a file
 		 */
+		file_inode = get_swoft_inode(fd);
+
+		/**
+		 * Decrypt here if needed
+		 */
 
 		/**
 		 * Get index block
 		 */
+		index_block = file_inode.location;
+
+		if (iterate_index(index_block, data_blocks) == NULL)
+		{
+			return 0;
+		}
+
 
 		/**
 		 * Search for offset point in data blocks
