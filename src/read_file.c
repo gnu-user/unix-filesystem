@@ -44,6 +44,29 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 		 * Read the specified bytes of the given length into the buffer
 		 */
 
+		/**
+		 * Get Inode
+		 * 	- check that it is a file
+		 */
+
+		/**
+		 * Get index block
+		 */
+
+		/**
+		 * Search for offset point in data blocks
+		 *  Given:
+		 *  - 128 bytes per block, 31 blocks per index block
+		 */
+
+		/**
+		 * Read for the required length
+		 *  Given:
+		 *  - 128 bytes per block, 31 blocks per index
+		 *  (since multiple blocks could be desired)
+		 *
+		 *  Stored in mem_pointer
+		 */
 
 		/**
 		 * return value > 0 if the file was read successfully
