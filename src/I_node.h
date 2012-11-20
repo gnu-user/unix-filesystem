@@ -1,10 +1,9 @@
-#ifndef I_NODE_H_
-#define I_NODE_H_
-
 #include "glob_data.h"
-#include <stdint.h>
 #include <stdbool.h>
 #include "index_block.h"
+
+#ifndef I_NODE_H_
+#define I_NODE_H_
 
 typedef struct{
 	char name[MAX_NAME_LEN];

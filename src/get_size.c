@@ -1,5 +1,4 @@
 #include "blockio.h"
-#include "I_node.h"
 #include "traverse_tree.h"
 
 /** sfs_getsize

@@ -5,9 +5,7 @@
  *      Author: jon
  */
 #include "glob_data.h"
-#include <stdlib.h>
 #include <stdio.h>
-#include <stdint.h>
 #include <stdbool.h>
 
 #ifndef FREE_BLOCK_LIST_H_

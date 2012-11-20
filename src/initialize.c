@@ -7,13 +7,7 @@
 
 #include "blockio.h"
 #include <stdio.h>
-#include <stdbool.h>
 #include "super_block.h"
-
-#define SUPER_BLOCK	  0
-#define FREE_BLOCK 3
-#define FREE_INDEX 2
-#define ROOT_DIR 2
 
 /**
  * Initialize the superblock for the file system.
