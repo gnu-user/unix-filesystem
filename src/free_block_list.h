@@ -34,7 +34,7 @@ static free_block_list fbl;
 /**
  * @return the pointer to the free block list
  */
-free_block_list get_free_block(void);
+//free_block_list get_free_block(void);
 
 /**
  * Finds free blocks that exist on the given free block list and
