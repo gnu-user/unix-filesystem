@@ -98,5 +98,5 @@ inode get_swoft_inode(fd)
 
 void remove_fd(int fd)
 {
-	system_open_tb.taken = false;
+	system_open_tb.taken[fd] = false;
 }

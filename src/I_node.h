@@ -23,6 +23,8 @@ typedef struct{
 	uint32_t check_sum;
 } inode;
 
+extern inode get_null_inode();
+
 extern inode* get_inode(int block_num);
 
 extern uint32_t get_index_block(int block_num);

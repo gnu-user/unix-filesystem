@@ -20,8 +20,8 @@ int sfs_getsize(char *pathname)
 	//TODO finish getsize
 	//TODO test getsize
 	int type = -1;
-	uint32_t index_block = NULL;
-	uint32_t inode_location = NULL;
+	uint32_t index_block = 0;
+	uint32_t* inode_location = NULL;
 	char** tokens = NULL;
 
 	/**

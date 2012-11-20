@@ -30,6 +30,27 @@
 #include "I_node.h"
 
 
+inode get_null_inode()
+{
+	inode i = {
+			.name = "",
+			.type = false,
+			.read = true,
+			.write = true,
+			.execute = true,
+			.date_of_create = 0,
+			.date_last_accessed = 0,
+			.date_last_modified = 0,
+			.file_owner = 0,
+			.last_user_modified = 0,
+			.file_size = 0,
+			.location = 0,
+			.encrypted = false,
+			.check_sum = 0
+	};
+	return i;
+}
+
 /**
  * Get the I_node given the block index of the Inode
  *

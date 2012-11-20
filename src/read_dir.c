@@ -1,4 +1,7 @@
 #include "blockio.h"
+#include "index_block.h"
+#include "I_node.h"
+#include "system_open_file_table.h"
 
 /** sfs_readdir
  * Reads the file name components from a directory file. The first time
@@ -23,7 +26,7 @@
 int sfs_readdir(int fd, char *mem_pointer)
 {
 	//TODO create readdir
-	inode directory = NULL;
+	inode directory = get_null_inode();
 	locations index_block = NULL;
 	if(fd >= 0)
 	{

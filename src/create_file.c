@@ -27,7 +27,7 @@
 int sfs_create(char *pathname, int type)
 {
 	//TODO create create_file
-	inode new_block = NULL;
+	inode new_block = get_null_inode();
 	char** tokens;
 	uint32_t* inode_location = NULL;
 	locations index_block = NULL;
@@ -78,7 +78,7 @@ int sfs_create(char *pathname, int type)
 		}
 
 
-		new_block->name = tokens[inode_location[1]];
+		strcpy(new_block.name, *tokens[inode_location[1]]);
 		if(type == 0){
 			new_block.type = false;
 		}

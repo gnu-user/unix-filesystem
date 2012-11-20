@@ -82,7 +82,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		/**
 		 * Find the inode with the given name, the current token
 		 */
-		inode_location = find_inode(index_block, tokens[i]);
+		inode_location[0] = find_inode(index_block, tokens[i]);
 
 		/**
 		 * Inode not found, aka file/directory not found

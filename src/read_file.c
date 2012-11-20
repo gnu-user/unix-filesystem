@@ -1,4 +1,7 @@
 #include "blockio.h"
+#include "I_node.h"
+#include "index_block.h"
+#include "system_open_file_table.h"
 
 /** sfs_read
  * Copy the length of bytes of data specified from a regular file to memory
@@ -26,7 +29,7 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 	//TODO create read
 	//TODO create encryption
 	//TODO create decryption
-	inode file_inode = NULL;
+	inode file_inode = get_null_inode();
 	uint32_t index_block = 0;
 	locations data_blocks = NULL;
 

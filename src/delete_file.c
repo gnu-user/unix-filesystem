@@ -1,5 +1,6 @@
 #include "blockio.h"
 #include "traverse_tree.h"
+#include "free_block_list.h"
 
 /** sfs_delete
  * Delete a file with the pathname specified.
@@ -73,19 +74,19 @@ int sfs_delete(char *pathname)
 		/**
 		 * Delete the data blocks (each time update the free_block list)
 		 */
-		update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block);
+		//update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block);
 	}
 
 	/**
 	 * Delete the index blocks (each time update the free_block list)
 	 */
-	update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block_locations
-			(get_index_block(inode)));
+	//update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block_locations
+			//(get_index_block(inode)));
 
 	/**
 	 * Delete the Inode block (update the free_block list)
 	 */
-	update_fbl(iterate_fbl(get_free_block_index()), NULL, inode);
+	//update_fbl(iterate_fbl(get_free_block_index()), NULL, inode);
 
 	/**
 	 * Delete the index location from the index block of the parent directory
