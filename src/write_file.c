@@ -34,18 +34,44 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 				start+length < BLKSIZE)
 	{
 		/**
-		 * Validate the file descriptor on the System open file table
-		 * 	- Throw an error otherwise
+		 * Validate the file descriptor on the system-wide-open file table
+		 *  - If the file descriptor is not found return error
+		 */
+		if (validate_fd(fd) < 0)
+		{
+			return 0;
+		}
+		/**
 		 * Check the encryption property
 		 * 	- If encrypted it will be decrypted
+		 */
+
+		/**
+		 * Check if start+length-1 > file_size-(Inode(1) + index_block(n))
+		 * 	- return error if so
+		 */
+
+		/**
 		 * Check if the new write will fit onto the hard disk
 		 * 	- If the new write does not fit, through error
 		 * 	- If there is enough space allocate the space from the free block list
+		 *
+		 * 	Enough space involves re-writing the entire file, and if the file is
+		 * 	being appended it the given length /BLKSIZE
+		 */
+		/*if(calc_num_free_blocks(file_size) == NULL)
+		{
+			return 0;
+		}*/
+
+		/**
 		 * Write the data
 		 * Check if the file needs to be encrypted
 		 * 	- If it needs to be encrypted, encrypt the file
 		 * Store the file into the block(s)
-		 *
+		 */
+
+		/**
 		 * return value > 0 if write was successful
 		 * return value <= 0 then the write was a fail
 		 */

@@ -34,7 +34,7 @@ int sfs_create(char *pathname, int type)
 	locations index_block = NULL;
 	uint32_t index_location = NULL;
 	uint32_t data_location = NULL;
-	uint32_t new_inode_location[2] = {NULL, NULL};
+	uint32_t new_inode_location[3] = {NULL, NULL, NULL};
 	byte* buf = NULL;
 	int retval = 0;
 
@@ -169,9 +169,12 @@ int sfs_create(char *pathname, int type)
 		{
 			/**
 			 * De-allocate the index blocks
-			 * TODO add a de-allocation of index block if inode fails to write
 			 */
-
+			new_inode_location[1] = index_location;
+			if(update_fbl(NULL, new_inode_location) == NULL)
+			{
+				return -1;
+			}
 			return 0;
 		}
 
@@ -180,6 +183,19 @@ int sfs_create(char *pathname, int type)
 		 * TODO check for success addition to parent index block
 		 */
 		add_location(inode_location[0], new_inode_location);
+
+		/**
+		 * If add location fails de-allocate Inode and index block
+		 */
+		/*if(add_location_error)
+		{
+			new_inode_location[1] = index_location;
+			if(update_fbl(NULL, new_inode_location) == NULL)
+			{
+				return -1;
+			}
+			return 0;
+		}*/
 
 		/**
 		 * return value > 0 the file create was a success
