@@ -22,8 +22,14 @@ typedef uint32_t* locations;
  *
  * It returns the location of the first index, which can then be used to write the
  * data to the blocks.
+ *
+ * TODO document this more
+ *
+ * @param num_blocks The number of blocks to generate indexes for
+ *
+ *
  */
-uint32_t generate_index(byte* data);
+uint32_t generate_index(uint32_t num_blocks);
 
 
 
@@ -49,6 +55,8 @@ add_location(uint32_t* index_block, uint32_t location);
  * if <= 0 failure
  */
 int remove_location(uint32_t* index_block, uint32_t location);
+
+
 
 void link_index();
 
