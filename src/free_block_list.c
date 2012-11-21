@@ -80,7 +80,7 @@ free_location get_free_block(void)
 /**
  * TODO Make the return type for this int and other functions returning int into the ERROR_CODES enumeration.
  */
-int write_fbl(void)
+bool write_fbl(void)
 {
 	/*
 	 //Check if the first journal entry contains a LINK_FBL entry:
@@ -161,7 +161,7 @@ static used_locations index_fbl_blocks(uint32_t index)
 }
 */
 
-static free_block_list* iterate_fbl(uint32_t index)
+static free_block_list* iterate_fbl(uint32_t location)
 {
 
 	return NULL;

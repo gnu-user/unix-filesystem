@@ -16,7 +16,6 @@
  * to update the entries in the FBL, and are convenience definitions for use
  * in update_fbl. These can never be bigger than the number of blocks on disk.
  */
-typedef uint32_t free_location;
 
 //TODO ALL OF THESE HAVE TO BE NULL TERMINATED!!!!!!!!!!
 typedef uint32_t* free_locations;
@@ -32,9 +31,14 @@ typedef bool free_block_list[NUMBLKS];
 static free_block_list fbl = {0};
 
 /**
+ * Gets the free block list independently from where it is located, if the free
+ * block list does not already exist in memory (file system has just started) it
+ * will read the free block list from disk and set the static instance of the
+ * free block list in memory, then return the pointer to that instance in memory.
+ *
  * @return the pointer to the static instance of free block list in memory
  */
-free_block_list* get_free_block_list(void);
+extern free_block_list* get_free_block_list(void);
 
 
 /**
@@ -43,18 +47,24 @@ free_block_list* get_free_block_list(void);
  *
  * Used to calculate the total amount of available disk space
  *
+ * @return An array containing all of the free locations
  */
-free_locations calc_total_free_blocks(void);
+extern free_locations calc_total_free_blocks(void);
 
 
 /**
  * Finds the specified number of free blocks in the static instance of the free block
- * in memory list dand returns them if there are enough free.
+ * list in memory. It returns NULL if there are not enough free blocks, otherwise it
+ * returns an array of the free locations.
  *
  * Used to calculate whether there is enough disk space before starting to create the
  * file
+ *
+ * @param num_blocks The number of free blocks needed
+ * @return An array of the free locations, or NULL if there are not enough free blocks
+ *
  */
-free_locations calc_num_free_blocks(uint32_t num_blocks);
+extern free_locations calc_num_free_blocks(uint32_t num_blocks);
 
 
 /**
@@ -65,8 +75,10 @@ free_locations calc_num_free_blocks(uint32_t num_blocks);
  * in the fbl, it essentially operates as a facade for calc_free_blocks and update_fbl when
  * you only want to get one block at a time
  *
+ * @return The location of a free block
+ *
  */
-free_location get_free_block(void);
+extern uint32_t get_free_block(void);
 
 
 /**
@@ -75,8 +87,11 @@ free_location get_free_block(void);
  *
  * After the new FBL is written to disk, a journal entry is created, which links the
  * superblock to the new FBL.
+ *
+ * @return True if the free block list was successfully written to disk, false
+ * otherwise
  */
-extern int write_fbl(void);
+extern bool write_fbl(void);
 
 
 /**
@@ -108,10 +123,10 @@ static free_block_list* read_fbl(uint32_t location);
  * Iterates through the free_block_list index block, concatenates the blocks, and
  * returns a pointer to a buffer containing the entire free_block_list.
  *
- * @param index The index of the free_block_list index block
+ * @param location The location of the index for the free_block_list
  *
  */
-static free_block_list* iterate_fbl(uint32_t index);
+static free_block_list* iterate_fbl(uint32_t location);
 
 
 /**
@@ -122,10 +137,10 @@ static free_block_list* iterate_fbl(uint32_t index);
  *
  * @pre parameters used and free MUST be NULL terminated arrays of locations
  *
- * @param used A NULL terminated array of locations to mark as used in the fbl, if it is NULL
- * then no locations are marked as used
- * @param free A NULL terminated array of locations to mark as free in the fbl, if it is NULL
- * then no locations are marked as free
+ * @param used A NULL terminated array of locations to mark as used in the fbl,
+ * if it is NULL then no locations are marked as used
+ * @param free A NULL terminated array of locations to mark as free in the fbl,
+ * if it is NULL then no locations are marked as free
  *
  */
 free_block_list* update_fbl(used_locations used,
