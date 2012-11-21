@@ -1,6 +1,7 @@
 #include "block_func.h"
 #include "index_block.h"
 #include "system_open_file_table.h"
+#include <math.h>
 
 /** sfs_read
  * Copy the length of bytes of data specified from a regular file to memory
@@ -32,9 +33,10 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 	inode file_inode = get_null_inode();
 	uint32_t index_block = 0;
 	locations data_blocks = NULL;
+	byte* data_block = NULL;
+	uint32_t start_block = NULL;
 
-	if(fd >= 0 && start > 0 && start < BLKSIZE && length > 0 &&
-			start+length < BLKSIZE)
+	if(fd >= 0 && start >= -1 && length > 0)
 	{
 		/**
 		 * Validate the file descriptor on the system-wide-open file table
@@ -44,6 +46,10 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 		{
 			return 0;
 		}
+
+		/**
+		 * Check the journal for entries (if needs to flush)
+		 */
 
 		/**
 		 * Use the offset to find the start of where to read in the block
@@ -57,10 +63,6 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 		file_inode = get_swoft_inode(fd);
 
 		/**
-		 * Decrypt here if needed
-		 */
-
-		/**
 		 * Get index block
 		 */
 		index_block = file_inode.location;
@@ -69,6 +71,36 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 		{
 			return 0;
 		}
+
+		/**
+		 * Since start is offset (number of bytes offset)
+		 * ceil(start/BLKSIZE)
+		 */
+
+		/**
+		 * Count the number of data blocks
+		 */
+		int count = 0;
+		while(data_blocks[count] != NULL)
+		{
+			count++;
+		}
+
+		if(start+length > count*BLKSIZE)
+		{
+			return 0;
+		}
+
+		/**
+		 * copy the data block at start into memory
+		 * TODO figure out how to fix missing reference for ceil
+		 */
+		//start_block = (uint32_t)(ceil(start/BLKSIZE));
+		//data_block = data_blocks[start_block];
+
+		/**
+		 * concat the mem_pointer to the blocks before it (and after)
+		 */
 
 
 		/**

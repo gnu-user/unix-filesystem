@@ -90,7 +90,6 @@ int sfs_delete(char *pathname)
 	/**
 	 * Delete the index location from the index block of the parent directory
 	 */
-
 	//remove_location(get_index_block(inode_location[0]));
 
 	/**
