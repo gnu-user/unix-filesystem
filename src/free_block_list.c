@@ -65,7 +65,7 @@ free_locations calc_num_free_blocks(uint32_t num_blocks)
 }
 
 
-free_location get_free_block(void)
+uint32_t get_free_block(void)
 {
 /*
 	free_block = calc_free_blocks(fbl, 1);

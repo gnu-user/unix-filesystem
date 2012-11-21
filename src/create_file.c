@@ -2,6 +2,7 @@
 #include "super_block.h"
 #include "traverse_tree.h"
 #include "string.h"
+#include <time.h>
 
 /** sfs_create
  * Create a file with the pathname specified if there is not already a file with
@@ -33,7 +34,9 @@ int sfs_create(char *pathname, int type)
 	locations index_block = NULL;
 	uint32_t index_location = NULL;
 	uint32_t data_location = NULL;
-	uint32_t new_inode_location = NULL;
+	uint32_t new_inode_location[2] = {NULL, NULL};
+	byte* buf = NULL;
+	int retval = 0;
 
 	/**
 	 * Check for valid type = 0 or = 1
@@ -84,19 +87,80 @@ int sfs_create(char *pathname, int type)
 			return 0;
 		}
 
+		/**
+		 * Get a free block location for the Inode
+		 */
+		new_inode_location[0] = get_free_block();
+
 		strcpy(new_block.name, tokens[inode_location[1]]);
+
 		if(type == 0){
+			/**
+			 * Check if there is enough space on the disk for the new create
+			 * (3 blocks for file)
+			 */
+			if(calc_num_free_blocks(3) == NULL)
+			{
+				/**
+				 * Not enough space
+				 */
+				return -1;
+			}
+
 			new_block.type = false;
-			//file_size = 3 blocks * block size
+			new_block.file_size = 3 * BLKSIZE;
+			if(calc_num_free_blocks(3) == NULL)
+			{
+				return 0;
+			}
+
+			/**
+			 * Create an index block empty index block
+			 */
+			index_location = generate_index(0);
 		}
 		else
 		{
+			/**
+			 * Check if there is enough space on the disk for the new create
+			 * (2 blocks for directory)
+			 */
+			if(calc_num_free_blocks(2) == NULL)
+			{
+				/**
+				 * Not enough space
+				 */
+				return -1;
+			}
 			new_block.type = true;
 			/**
 			 * Identify whether the file is encrypted
 			 */
 			new_block.encrypted = 0;
-			//file_size = 2 blocks * block size
+			new_block.file_size = 2 * BLKSIZE;
+			if(calc_num_free_blocks(2) == NULL)
+			{
+				return 0;
+			}
+
+			/**
+			 * Create an index block that contains 1 data block
+			 */
+			index_location = generate_index(1);
+		}
+
+		if (index_location == NULL)
+		{
+			/**
+			 * de-allocate the inode
+			 * TODO make sure that the new_inode_location is null terminated
+			 */
+
+			if(update_fbl(NULL, new_inode_location) == NULL)
+			{
+				return -1;
+			}
+			return 0;
 		}
 
 		/**
@@ -109,52 +173,57 @@ int sfs_create(char *pathname, int type)
 		//last_user_modified = cur_user;
 
 		/**
-		 * Get a free block location for the Inode
-		 */
-		new_inode_location = get_free_block();
-
-		/**
-		 * Create index block
-		 */
-		//generate_index()
-
-		if (type == 0)
-		{
-			/**
-			 * Create data block
-			 */
-			data_location = get_free_block();
-		}
-
-		/**
-		 * Get free blocks
-		 */
-		index_location = get_free_block();
-
-		/**
-		 * Allocate blocks
-		 * Set as being used on the free block list
-		 */
-
-		/**
 		 * Assign locations
-		 *  - Store the Inode's location in the index block of the parent
 		 * 	- Store the index block's location in the Inode block
 		 * 	- Store the data block's location in the index block
 		 */
 		new_block.location = index_location;
-
-		//index_block.index = data_location;
 
 		/**
 		 * Store the blocks on disk
 		 * 	- If there is an error while writing, de-allocate the blocks
 		 * 	  return error
 		 */
+		buf = allocate_buf(buf, BLKSIZE);
+
+		buf = (byte *) copy_to_buf((byte *)&new_block, (byte *)buf, sizeof(new_block), BLKSIZE);
+		retval = put_block(new_inode_location[0], buf);
+
+		if(retval != 0)
+		{
+			/**
+			 * De-allocate the index blocks
+			 * TODO add a de-allocation of index block if inode fails to write
+			 */
+
+			return 0;
+		}
+
+		index_block = NULL;
+		if(iterate_index(index_location, index_block) == NULL){
+			return 0;
+		}
+
+		byte* buf = NULL;
+		buf = allocate_buf(buf, BLKSIZE);
+
+		retval = put_block(index_block[0], buf);
+
+		if(retval != 0)
+		{
+			/**
+			 * De-allocate the index block and the inode
+			 * TODO added a de-allocation of index block and inode if data
+			 * block fails to write
+			 */
+			return 0;
+		}
 
 		/**
 		 * Add the inode's location to the parent's index list
+		 * TODO check for success addition to parent index block
 		 */
+		add_location(inode_location[0], new_inode_location);
 
 		/**
 		 * return value > 0 the file create was a success
