@@ -1,6 +1,6 @@
-#include "blockio.h"
 #include "super_block.h"
 #include "traverse_tree.h"
+#include "block_func.h"
 #include "string.h"
 #include <time.h>
 
@@ -163,7 +163,7 @@ int sfs_create(char *pathname, int type)
 		buf = allocate_buf(buf, BLKSIZE);
 
 		buf = (byte *) copy_to_buf((byte *)&new_block, (byte *)buf, sizeof(new_block), BLKSIZE);
-		retval = put_block(new_inode_location[0], buf);
+		retval = write_block(new_inode_location[0], buf);
 
 		if(retval != 0)
 		{

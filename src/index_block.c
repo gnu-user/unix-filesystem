@@ -1,6 +1,7 @@
 #include "index_block.h"
 #include "glob_data.h"
 #include "glob_func.h"
+#include "block_func.h"
 
 
 /*
@@ -76,7 +77,7 @@ locations iterate_index(uint32_t location, locations data_blocks)
 {
 /*
 	// Read the index block from the drive at location specified
-	index block = get_block(location)
+	index block = read_block(location)
 	uint32_t i  = 0;
 
 	/*
