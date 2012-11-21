@@ -28,7 +28,7 @@
  **/
 
 #include "I_node.h"
-
+#include "block_func.h"
 
 inode get_null_inode()
 {
@@ -62,7 +62,7 @@ inode get_null_inode()
 inode* get_inode(int block_num)
 {
 	char* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(block_num, buf);
+	int retval = read_block(block_num, buf);
 
 	if(retval != 0)
 	{
@@ -83,7 +83,7 @@ inode* get_inode(int block_num)
 uint32_t get_index_block(int block_num)
 {
 	char* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(block_num, buf);
+	int retval = read_block(block_num, buf);
 
 	if(retval != 0)
 	{
@@ -106,7 +106,7 @@ int get_type(int block_num)
 {
 	//type
 	char* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(block_num, buf);
+	int retval = read_block(block_num, buf);
 
 	if(retval != 0)
 	{
@@ -134,7 +134,7 @@ int get_size(int block_num)
 		return -1;
 	}
 	char* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(block_num, buf);
+	int retval = read_block(block_num, buf);
 
 	if(retval != 0)
 	{
@@ -164,7 +164,7 @@ int get_encrypted(int block_num)
 	}
 
 	char* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(block_num, buf);
+	int retval = read_block(block_num, buf);
 
 	if(retval != 0)
 	{
@@ -185,7 +185,7 @@ char* get_name(int block_num)
 {
 	//name[7]
 	char* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(block_num, buf);
+	int retval = read_block(block_num, buf);
 
 	if(retval != 0)
 	{

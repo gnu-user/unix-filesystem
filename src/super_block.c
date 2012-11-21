@@ -1,9 +1,10 @@
 #include "super_block.h"
+#include "block_func.h"
 
 superblock* get_super_block(void)
 {
 	byte* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(SUPER_BLOCK, buf);
+	int retval = read_block(SUPER_BLOCK, buf);
 
 	if(retval != 0)
 	{
@@ -15,7 +16,7 @@ superblock* get_super_block(void)
 uint32_t get_root(void)
 {
 	byte* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(SUPER_BLOCK, buf);
+	int retval = read_block(SUPER_BLOCK, buf);
 
 	if(retval != 0)
 	{
@@ -28,7 +29,7 @@ uint32_t get_root(void)
 uint32_t get_free_block_index(void)
 {
 	byte* buf = allocate_buf(buf, BLKSIZE);
-	int retval = get_block(SUPER_BLOCK, buf);
+	int retval = read_block(SUPER_BLOCK, buf);
 
 	if(retval != 0)
 	{

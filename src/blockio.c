@@ -70,7 +70,7 @@ init_disk()
 *    - Returns 0 if successful, -1 otherwise
 *************************************************/
 int
-get_block(int blknum,
+get_block(uint32_t blknum,
 	  byte *buf)
 {
   if (blknum >= NUMBLKS || blknum < 0) {
@@ -107,7 +107,7 @@ get_block(int blknum,
 *    - Returns 0 if successful, -1 otherwise
 *************************************************/
 int
-put_block(int blknum,
+put_block(uint32_t blknum,
 	  byte *buf)
 {
   if (blknum >= NUMBLKS || blknum < 0) {

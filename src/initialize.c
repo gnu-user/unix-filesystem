@@ -5,7 +5,7 @@
  * Initialize the super block
  **/
 
-#include "blockio.h"
+#include "block_func.h"
 #include "super_block.h"
 #include "free_block_list.h"
 
@@ -60,7 +60,7 @@ int sfs_initialize(int erase)
 		 * Copy the superblock into to buffer
 		 */
 		buf = (byte *) copy_to_buf((byte *)&sb, (byte *)buf, sizeof(sb), BLKSIZE);
-		retval = put_block(SUPER_BLOCK, buf);
+		retval = write_block(SUPER_BLOCK, buf);
 
 		if(retval != 0)
 		{
@@ -96,7 +96,7 @@ int sfs_initialize(int erase)
 
 		buf = allocate_buf(buf, BLKSIZE);
 
-		retval = get_block(SUPER_BLOCK, buf);
+		retval = read_block(SUPER_BLOCK, buf);
 
 		if(retval != 0)
 		{
@@ -176,7 +176,7 @@ int wipe_disk(void)
 	//Go block to block setting them to null
 	for(uint32_t i = 0; i < NUMBLKS; i++)
 	{
-		retval = put_block(i, buffer);
+		retval = write_block(i, buffer);
 		if(retval != 0)
 		{
 			return retval;

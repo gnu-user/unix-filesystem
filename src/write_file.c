@@ -1,4 +1,4 @@
-#include "blockio.h"
+#include "block_func.h"
 
 /** sfs_write
  * Write the length bytes of data specified from a memory location to the
@@ -30,8 +30,7 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 	//TODO create encryption
 	//TODO create decryption
 
-	if(fd >= 0 && start > 0 && start < BLKSIZE && length > 0 &&
-				start+length < BLKSIZE)
+	if(fd >= 0 && length > 0 && start >= -1)
 	{
 		/**
 		 * Validate the file descriptor on the system-wide-open file table
@@ -59,10 +58,29 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 		 * 	Enough space involves re-writing the entire file, and if the file is
 		 * 	being appended it the given length /BLKSIZE
 		 */
-		/*if(calc_num_free_blocks(file_size) == NULL)
+
+		/*
+		read_block inode (data++)
+		iterate index //now we have all data locations (Ibuf)
+		date+= length(databuf)
+		databuf[] = getData(IBuf)
+		modifydate(start, databuf, acutaldata)
+		if(calc_num_free_blocks(data + num_of_index_blocks(length(databuf))) == NULL)
 		{
 			return 0;
-		}*/
+		}
+		inode_location = get_free_block;
+		data_location = generate_index(length(databuf));
+		int i = 0;
+		while(data_location[i] != NULL)
+		{
+			write_block(data_location[i], databuf[i])
+			i++;
+		}
+		populate inode in Inode buf(index_location)
+		write_block(inode_location, inode_buf)
+		journal link inode
+		*/
 
 		/**
 		 * Write the data
@@ -78,4 +96,38 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 		return 1;
 	}
 	return 0;
+}
+
+/**
+ * if start >= then actual data is inserted (overrides) from start for the
+ * length of actual data.
+ * if start == -1 then actual data is appended to the end of the databuf
+ *
+ * @return databuf containing actual_dat
+ */
+uint32_t* modify_data(uint32_t start, uint32_t* databuf, uint32_t* actual_data)
+{
+	return 0;
+}
+
+uint32_t* getData(uint32_t* location)
+{
+	int i = 0;
+	uint32_t* databuf = NULL;
+	byte* buf = NULL;
+	int retval = 0;
+
+	while(location[i] != NULL)
+	{
+		buf = allocate_buf(buf, BLKSIZE);
+
+		retval = read_block(location[i], buf);
+		if(retval != 0)
+		{
+			return NULL;
+		}
+		concat(databuf, buf);
+		i++;
+	}
+	return databuf;
 }
