@@ -59,7 +59,7 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 		 * 	being appended it the given length /BLKSIZE
 		 */
 
-		/*
+		/* Based off the codes
 		read_block inode (data++)
 		iterate index //now we have all data locations (Ibuf)
 		date+= length(databuf)
@@ -71,16 +71,43 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 		}
 		inode_location = get_free_block;
 		data_location = generate_index(length(databuf));
-		int i = 0;
-		while(data_location[i] != NULL)
-		{
-			write_block(data_location[i], databuf[i])
-			i++;
-		}
+
 		populate inode in Inode buf(index_location)
+		Update date modified, date accessed, and last user to access
 		write_block(inode_location, inode_buf)
 		journal link inode
 		*/
+
+		/** Based off a night of sleep and the codes
+		 * concat the mem_pointer to the blocks before it (and after)
+		 *
+		 *
+		 * blocks_needed = 1 //FOR INODE
+		 * data_blocks = iterate_index(inode.location)
+		 * data_buf = read_in_data(data_blocks)
+		 *
+		 * if start > 0
+		 * 	if start + length > length of data_blocks in bytes
+		 * 		return invalid write past file size
+		 * 	data_buf = data_buf{until_start} conact mem_pointer conact data_buf
+		 * 	after start + length}
+		 * if start == -1
+		 * 	data_buf = data_buf{all} concat mem_pointer
+		 *
+		 * divide into blocks(data_buf)
+		 * data += get number of data blocks
+		 * if(calc_num_free_blocks(data + num_of_index_blocks(data-1))) == NULL) //1 for the inode
+		 * 	return 0;
+		 * inode_location = get_free_block();
+		 * data_blocks data_location = generate_index(d)
+		 *
+		 * int i = 0;
+		 * while(data_location[i] != NULL)
+		 * 	write_block(data_location.data_blocks[i], databuf[i])
+		 * 	i++;
+		 * populate_inode (data_location.index_block)
+		 * journal link parent's index to inode
+		 */
 
 		/**
 		 * Write the data

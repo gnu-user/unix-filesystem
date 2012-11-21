@@ -60,6 +60,11 @@ int sfs_readdir(int fd, char *mem_pointer)
 		 */
 		iterate_index(directory.location, index_block);
 
+		/**
+		 * TODO decided if directory is access if a user reads it or if a
+		 * user reads any file below it
+		 * Update last_accessed
+		 */
 		mem_pointer = (char*) index_block;
 
 		/**

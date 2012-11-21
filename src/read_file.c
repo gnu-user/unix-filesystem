@@ -99,7 +99,11 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 		//data_block = data_blocks[start_block];
 
 		/**
-		 * concat the mem_pointer to the blocks before it (and after)
+		 * data_buf = data_blocks parsed
+		 * Search through data_buf for byte start where start >= 0
+		 * if start+length > length(data_buf)
+		 * 	return invalid read past end of file.
+		 * mem_pointer = copy data_buf from start to index = start + length
 		 */
 
 
@@ -116,6 +120,10 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 		 *  (since multiple blocks could be desired)
 		 *
 		 *  Stored in mem_pointer
+		 */
+
+		/**
+		 * Update last_accessed
 		 */
 
 		/**

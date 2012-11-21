@@ -39,11 +39,16 @@ int sfs_open(char *pathname)
 	}
 
 	/**
+	 * TODO decided if open constitudes accessing a file
+	 * if successful open
+	 * update last date accessed
+	 */
+
+	/**
 	 * Retrieve the Inode of the desired file.
 	 * Create file descriptor.
 	 * Return file descriptor.
 	 */
-
 	return add_to_swoft(inode_location[0]);
 }
 
