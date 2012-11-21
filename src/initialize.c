@@ -8,6 +8,7 @@
 #include "block_func.h"
 #include "super_block.h"
 #include "free_block_list.h"
+#include <math.h>
 
 /**
  * Initialize the superblock for the file system.

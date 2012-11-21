@@ -86,10 +86,17 @@ static int link_fbl(uint32_t index);
 
 /**
  * Links an inode into an index block.
- * @param dest_index The index of the inode you wish to link the source_index inode into
- * @param source_index The index of the inode which is to be linked
+ * @param dest_index The index of the inode you wish to link the inode_location inode into
+ * @param source_index The location of the inode to be added to the index
  */
-static int link_inode(uint32_t dest_index, uint32_t source_index);
+static int link_inode(uint32_t dest_index, uint32_t inode_location);
+
+/**
+ * Unlinks an inode from an index block.
+ * @param dest_index The index of the inode you wish to remove the link the inode_location inode into
+ * @param source_index The location of the inode to be remove from the index
+ */
+static int remove_inode(uint32_t dest_index, uint32_t inode_location);
 
 /**
  * is_journal_full returns a boolean true if the journal is full and false if

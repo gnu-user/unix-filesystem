@@ -143,6 +143,7 @@ int sfs_create(char *pathname, int type)
 
 		/**
 		 * Fill in the information to be stored in the Inode
+		 * TODO fill in times and user info
 		 */
 		//date_of_create = cur_date;
 		//date_last_accessed = cur_date;
@@ -184,6 +185,7 @@ int sfs_create(char *pathname, int type)
 		 * Add the inode's location to the parent's index list
 		 * If add location fails de-allocate Inode and index block
 		 * TODO check for success addition to parent index block
+		 * TODO link the inode to the parent Inode
 		 */
 		/*if(link_inode(inode_location[0], new_inode_location) < 0)
 		{
@@ -194,6 +196,7 @@ int sfs_create(char *pathname, int type)
 			}
 			return 0;
 		}*/
+
 		/**
 		 * TODO journal fbl as well
 		 */
