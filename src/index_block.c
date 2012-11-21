@@ -14,7 +14,7 @@
  * 1) Journal: Link the newly created FBL.
  * 2) Journal: Link the newly created index block to it's inode.
  */
-uint32_t generate_index(uint32_t num_blocks)
+data_index generate_index(uint32_t num_blocks)
 {
 	/*
 	 * PSEUDOCODE:
@@ -64,10 +64,12 @@ uint32_t generate_index(uint32_t num_blocks)
 	 */
 }
 
+/*
 int link_inode(uint32_t* index_block, uint32_t location)
 {
 	return 1;
-}
+} */
+
 
 // TODO FIX THE VARIABLE NAMES THIS CAN ALSO BE USED TO RETURN THE
 // LOCATIONS OF INDODES IN THE CASE OF A DIRECTORY
@@ -104,6 +106,7 @@ locations iterate_index(uint32_t location, locations data_blocks)
 */
 }
 
+
 int count_locations(uint32_t location)
 {
 	locations loc = NULL;
@@ -123,7 +126,7 @@ int count_locations(uint32_t location)
 	return 0;
 }
 
-uint32_t* index_block_locations(uint32_t location)
+locations index_block_locations(uint32_t location)
 {
 
 	return NULL;
