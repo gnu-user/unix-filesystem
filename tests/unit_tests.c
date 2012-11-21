@@ -17,7 +17,7 @@
 start_suite(char* tsuite)
 {
 	printf(BOLDWHITE "\nExecuting %s Test Suite\n", tsuite);
-	puts(BOLDWHITE "========================================\n");
+	puts(BOLDWHITE "========================================");
 }
 
 //start_test(char* tcase)
