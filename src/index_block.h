@@ -14,7 +14,7 @@ typedef uint32_t* locations;
  */
 typedef struct {
 	uint32_t index_location;
-	locations data_lcations;
+	locations data_locations;
 } data_index;
 
 // A single location for a block on disk

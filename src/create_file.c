@@ -1,6 +1,7 @@
 #include "super_block.h"
 #include "traverse_tree.h"
 #include "block_func.h"
+#include "journal.h"
 #include "string.h"
 #include <time.h>
 
@@ -33,7 +34,7 @@ int sfs_create(char *pathname, int type)
 	char** tokens;
 	uint32_t* inode_location = NULL;
 	locations index_block = NULL;
-	uint32_t index_location = NULL;
+	data_index index_location = {0};
 	uint32_t data_location = NULL;
 	uint32_t new_inode_location[3] = {NULL, NULL, NULL};
 	byte* buf = NULL;
@@ -126,7 +127,7 @@ int sfs_create(char *pathname, int type)
 		 */
 		index_location = generate_index(0);
 
-		if (index_location == NULL)
+		if(index_location.index_location == NULL)
 		{
 			/**
 			 * de-allocate the inode
@@ -154,7 +155,7 @@ int sfs_create(char *pathname, int type)
 		 * 	- Store the index block's location in the Inode block
 		 * 	- Store the data block's location in the index block
 		 */
-		new_block.location = index_location;
+		new_block.location = index_location.index_location;
 
 		/**
 		 * Store the blocks on disk
@@ -171,7 +172,7 @@ int sfs_create(char *pathname, int type)
 			/**
 			 * De-allocate the index blocks
 			 */
-			new_inode_location[1] = index_location;
+			new_inode_location[1] = index_location.index_location;
 			if(update_fbl(NULL, new_inode_location) == NULL)
 			{
 				return -1;
@@ -184,15 +185,15 @@ int sfs_create(char *pathname, int type)
 		 * If add location fails de-allocate Inode and index block
 		 * TODO check for success addition to parent index block
 		 */
-		if(link_inode(inode_location[0], new_inode_location) < 0)
+		/*if(link_inode(inode_location[0], new_inode_location) < 0)
 		{
-			new_inode_location[1] = index_location;
+			new_inode_location[1] = index_location.index_location;
 			if(update_fbl(NULL, new_inode_location) == NULL)
 			{
 				return -1;
 			}
 			return 0;
-		}
+		}*/
 		/**
 		 * TODO journal fbl as well
 		 */
