@@ -19,8 +19,8 @@ int sfs_delete(char *pathname)
 	//TODO create delete_file
 	char** tokens;
 	uint32_t* inode_location = NULL;
-	locations index_block = NULL;
-	uint32_t inode = NULL;
+	locations index_block = {NULL};
+	uint32_t* inode = {NULL, NULL};
 	int type = -1;
 
 	/**
@@ -47,9 +47,9 @@ int sfs_delete(char *pathname)
 		return 0;
 	}
 
-	inode = find_inode(index_block, tokens[inode_location[1]]);
+	inode[0] = find_inode(index_block, tokens[inode_location[1]]);
 
-	if(inode == NULL)
+	if(inode[0] == NULL)
 	{
 		return 0;
 	}
@@ -61,7 +61,7 @@ int sfs_delete(char *pathname)
 	 * 			- If so:
 	 * 				Error, user can only delete directories that are empty
 	 */
-	type = get_type(inode);
+	type = get_type(inode[0]);
 
 	if(iterate_index(inode_location[0], index_block) == NULL || (type == 1 &&
 			index_block != NULL))
@@ -74,19 +74,18 @@ int sfs_delete(char *pathname)
 		/**
 		 * Delete the data blocks (each time update the free_block list)
 		 */
-		//update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block);
+		update_fbl(NULL, index_block);
 	}
 
 	/**
 	 * Delete the index blocks (each time update the free_block list)
 	 */
-	//update_fbl(iterate_fbl(get_free_block_index()), NULL, index_block_locations
-			//(get_index_block(inode)));
+	update_fbl(NULL, index_block_locations(get_index_block(inode[0])));
 
 	/**
 	 * Delete the Inode block (update the free_block list)
 	 */
-	//update_fbl(iterate_fbl(get_free_block_index()), NULL, inode);
+	update_fbl(NULL, inode);
 
 	/**
 	 * Delete the index location from the index block of the parent directory

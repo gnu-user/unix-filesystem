@@ -73,6 +73,7 @@ void link_index();
  * otherwise the function has failed
  *
  * TODO verify if this is the right function for the job.
+ * TODO remove since this is implemented in journal
  */
 int link_inode(uint32_t* index_block, uint32_t location);
 

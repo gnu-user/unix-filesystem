@@ -4,6 +4,7 @@
 #include "string.h"
 #include <time.h>
 
+#define CREATE_SIZE 2
 /** sfs_create
  * Create a file with the pathname specified if there is not already a file with
  * the same pathname, the pathname must contain the full directory path. The
@@ -91,7 +92,7 @@ int sfs_create(char *pathname, int type)
 		 * Check if there is enough space on the disk for the new create
 		 * (2 blocks for directory or file)
 		 */
-		if(calc_num_free_blocks(2) == NULL)
+		if(calc_num_free_blocks(CREATE_SIZE) == NULL)
 		{
 			/**
 			 * Not enough space
@@ -108,7 +109,7 @@ int sfs_create(char *pathname, int type)
 
 		if(type == 0){
 			new_block.type = false;
-			new_block.file_size = 2 * BLKSIZE;
+			new_block.file_size = CREATE_SIZE * BLKSIZE;
 		}
 		else
 		{
@@ -117,7 +118,7 @@ int sfs_create(char *pathname, int type)
 			 * Identify whether the file is encrypted
 			 */
 			new_block.encrypted = 0;
-			new_block.file_size = 2 * BLKSIZE;
+			new_block.file_size = CREATE_SIZE * BLKSIZE;
 		}
 
 		/**
@@ -192,6 +193,9 @@ int sfs_create(char *pathname, int type)
 			}
 			return 0;
 		}
+		/**
+		 * TODO journal fbl as well
+		 */
 
 		/**
 		 * return value > 0 the file create was a success
