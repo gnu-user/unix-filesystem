@@ -28,6 +28,7 @@ int sfs_read(int fd, int start, int length, char *mem_pointer)
 	//TODO create read
 	//TODO create encryption
 	//TODO create decryption
+
 	inode file_inode = get_null_inode();
 	uint32_t index_block = 0;
 	locations data_blocks = NULL;

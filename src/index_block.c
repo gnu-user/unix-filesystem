@@ -63,6 +63,11 @@ uint32_t generate_index(uint32_t num_blocks)
 	 */
 }
 
+int link_inode(uint32_t* index_block, uint32_t location)
+{
+	return 1;
+}
+
 // TODO FIX THE VARIABLE NAMES THIS CAN ALSO BE USED TO RETURN THE
 // LOCATIONS OF INDODES IN THE CASE OF A DIRECTORY
 locations iterate_index(uint32_t location, locations data_blocks)

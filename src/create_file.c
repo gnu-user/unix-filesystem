@@ -180,14 +180,10 @@ int sfs_create(char *pathname, int type)
 
 		/**
 		 * Add the inode's location to the parent's index list
+		 * If add location fails de-allocate Inode and index block
 		 * TODO check for success addition to parent index block
 		 */
-		add_location(inode_location[0], new_inode_location);
-
-		/**
-		 * If add location fails de-allocate Inode and index block
-		 */
-		/*if(add_location_error)
+		if(link_inode(inode_location[0], new_inode_location) < 0)
 		{
 			new_inode_location[1] = index_location;
 			if(update_fbl(NULL, new_inode_location) == NULL)
@@ -195,7 +191,7 @@ int sfs_create(char *pathname, int type)
 				return -1;
 			}
 			return 0;
-		}*/
+		}
 
 		/**
 		 * return value > 0 the file create was a success

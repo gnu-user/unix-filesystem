@@ -40,8 +40,10 @@ index read_index(uint32_t index_on_disk);
  * Adds a location to the next available entry in the index block, if the index block is
  * full then calls a helper function, link_index_block(), which creates another block and links
  * it to the end of the index_block.
+ *
+ * TODO remove
  */
-add_location(uint32_t* index_block, uint32_t location);
+//add_location(uint32_t* index_block, uint32_t location);
 
 
 
@@ -60,7 +62,19 @@ int remove_location(uint32_t* index_block, uint32_t location);
 
 void link_index();
 
-
+/**
+ * link inode links the inode to the index block of the parent (directory)
+ *
+ * @param the index block list
+ * @param the location to be added to the index block
+ *
+ * @return an integer value
+ * if value > 0 then function was successful
+ * otherwise the function has failed
+ *
+ * TODO verify if this is the right function for the job.
+ */
+int link_inode(uint32_t* index_block, uint32_t location);
 
 // TODO FIX THE VARIABLE NAMES THIS CAN ALSO BE USED TO RETURN THE
 // LOCATIONS OF INDODES IN THE CASE OF A DIRECTORY
