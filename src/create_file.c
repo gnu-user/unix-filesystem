@@ -88,6 +88,18 @@ int sfs_create(char *pathname, int type)
 		}
 
 		/**
+		 * Check if there is enough space on the disk for the new create
+		 * (2 blocks for directory or file)
+		 */
+		if(calc_num_free_blocks(2) == NULL)
+		{
+			/**
+			 * Not enough space
+			 */
+			return -1;
+		}
+
+		/**
 		 * Get a free block location for the Inode
 		 */
 		new_inode_location[0] = get_free_block();
@@ -95,59 +107,23 @@ int sfs_create(char *pathname, int type)
 		strcpy(new_block.name, tokens[inode_location[1]]);
 
 		if(type == 0){
-			/**
-			 * Check if there is enough space on the disk for the new create
-			 * (3 blocks for file)
-			 */
-			if(calc_num_free_blocks(3) == NULL)
-			{
-				/**
-				 * Not enough space
-				 */
-				return -1;
-			}
-
 			new_block.type = false;
-			new_block.file_size = 3 * BLKSIZE;
-			if(calc_num_free_blocks(3) == NULL)
-			{
-				return 0;
-			}
-
-			/**
-			 * Create an index block empty index block
-			 */
-			index_location = generate_index(0);
+			new_block.file_size = 2 * BLKSIZE;
 		}
 		else
 		{
-			/**
-			 * Check if there is enough space on the disk for the new create
-			 * (2 blocks for directory)
-			 */
-			if(calc_num_free_blocks(2) == NULL)
-			{
-				/**
-				 * Not enough space
-				 */
-				return -1;
-			}
 			new_block.type = true;
 			/**
 			 * Identify whether the file is encrypted
 			 */
 			new_block.encrypted = 0;
 			new_block.file_size = 2 * BLKSIZE;
-			if(calc_num_free_blocks(2) == NULL)
-			{
-				return 0;
-			}
-
-			/**
-			 * Create an index block that contains 1 data block
-			 */
-			index_location = generate_index(1);
 		}
+
+		/**
+		 * Create an index block empty index block
+		 */
+		index_location = generate_index(0);
 
 		if (index_location == NULL)
 		{
@@ -196,26 +172,6 @@ int sfs_create(char *pathname, int type)
 			 * TODO add a de-allocation of index block if inode fails to write
 			 */
 
-			return 0;
-		}
-
-		index_block = NULL;
-		if(iterate_index(index_location, index_block) == NULL){
-			return 0;
-		}
-
-		byte* buf = NULL;
-		buf = allocate_buf(buf, BLKSIZE);
-
-		retval = put_block(index_block[0], buf);
-
-		if(retval != 0)
-		{
-			/**
-			 * De-allocate the index block and the inode
-			 * TODO added a de-allocation of index block and inode if data
-			 * block fails to write
-			 */
 			return 0;
 		}
 
