@@ -70,10 +70,10 @@ int test_concat(void)
 
 int test_tokenize_path(void)
 {
-	/* Test 1 -- tokenize_path using a test path*/
-	char ** testtokens = tokenize_path("/test/path");
+	/* Test 1 -- tokenize_path using a valid test path*/
+	char * testtokens1 = tokenize_path("/test/path");
 
-	if ((testtokens[0] != "test") && (testtokens[1] != "path"))
+	if ((testtokens1[0] != "test") && (testtokens1[1] != "path"))
 	{
 		test_fail("Unit Test Part 1");
 		return EXIT_FAILURE;
@@ -84,9 +84,53 @@ int test_tokenize_path(void)
 	}
 
 	/**
-	 * Test 2 - tokenize_path using invalid paths
-	 * TODO come up with some tests for invalid paths like "/test/crap/path//invalid" or "/./../.../...."
-	 * or other paths containing invalid chars like '.' or '\'
+	 * Test 2 - tokenize_path using an invalid path (4th token is null)
+	 * "/test/crap/path//"
+	 * Should return NULL.
 	 */
+	char *testtokens2 = tokenize_path("/test/crap/path//");
+	if (testtokens2)
+	{
+		test_fail("Unit Test Part 2");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		test_pass("Unit Test Part 2");
+	}
+
+	/**
+	 * Test 3 - tokenize_path using invalid path (tokens consist of '.', ' ',
+	 *  which is an invalid char)
+	 *  "/./../.../...."
+	 *  Should return NULL.
+	 */
+	char *testtokens3 = tokenize_path("/./../.../..../ /");
+	if (testtokens3)
+	{
+		test_fail("Unit Test Part 3");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		test_pass("Unit Test Part 3");
+	}
+
+	/**
+	 * Test 4 - tokenize_path using invalid path (path is too long, >6 chars in tokens)
+	 *  "/supercalafragilisticexpialidocious/megasuperlongpath/gthansix/notvald/notval/not/balls"
+	 *  Should return NULL.
+	 */
+	char *testtokens4 = tokenize_path("/supercalafragilisticexpialidocious/megasuperlongpath/gthansix/notvald/notval/not/balls");
+	if (testtokens4)
+	{
+		test_fail("Unit Test Part 4");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		test_pass("Unit Test Part 4");
+	}
+
 	return EXIT_SUCCESS;
 }
