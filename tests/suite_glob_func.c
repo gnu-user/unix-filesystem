@@ -164,5 +164,62 @@ int test_tokenize_path(void)
 		test_pass("Unit Test Part 4");
 	}
 
+	/**
+	 * Test 5 - tokenize_path using invalid path (path has a space)
+	 *  "/bad path/path/bad/bad"
+	 *  Should return NULL.
+	 */
+	char testpath5[] = "/bad path/path/bad/bad";
+
+	char** testtokens5 = tokenize_path();
+
+	if (testtokens5)
+	{
+		test_fail("Unit Test Part 5");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		test_pass("Unit Test Part 5");
+	}
+
+	/**
+	 * Test 6 - tokenize_path using root
+	 *  "/"
+	 *  Should return an array with only one token, which is NULL.
+	 */
+	char testpath6[] = "/";
+
+	char** testtokens6 = tokenize_path();
+
+	if (testtokens6[0] != '\0' || !testtokens6)
+	{
+		test_fail("Unit Test Part 6");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		test_pass("Unit Test Part 6");
+	}
+
+	/**
+	 * Test 7 - tokenize_path using a file inside root
+	 *  "/"
+	 *  Should return an array with only one token, which is NULL.
+	 */
+	char testpath7[] = "/file";
+
+	char** testtokens7 = tokenize_path();
+
+	if (testtokens7[0] != '\0' || testtokens7[1] != "file")
+	{
+		test_fail("Unit Test Part 7");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		test_pass("Unit Test Part 7");
+	}
+
 	return EXIT_SUCCESS;
 }
