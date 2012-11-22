@@ -42,6 +42,31 @@ extern void* concat(void* src_1, void* src_2, uint32_t size);
 
 
 /**
+ * Concatenates a specified number of bytes from src_2 to src_1, into a
+ * single NULL terminated array containing the contents of both arrays. The
+ * difference is that when performing concatenation it concatenates a specified
+ * number of bytes from src_2 to src_1.
+ *
+ * The terminating NULL character in src_1 is overwritten by the first character of
+ * src_2, and a NULL character is included at the end of the new array. A pointer
+ * to the resulting array containing the contents of both arrays is then returned.
+ *
+ * @pre The arary src_1 MUST BE NULL TERMINATED
+ * @pre The arrays to concatenate MUST contain the same data type for the concatenation
+ * to function properly
+ * @pre The specified len, must be <= the length of src_2
+ *
+ * @param src_1 A pointer to a NULL terminated array
+ * @param src_2 A pointer to an  array
+ * @param size The size in bytes of each item in the array
+ * @param len The length in BYTES of the data to concatenate from src_2 to src_1
+ *
+ * @return A pointer to the resulting array containing the concatenated results
+ */
+extern void* concat_len(void* src_1, void* src_2, uint32_t size, uint32_t len);
+
+
+/**
  * TODO WRITE UNIT TEST & TEST FUNCTION
  * TODO Add support for checking that each component in the pathname is at most MAX_NAME_LEN
  *

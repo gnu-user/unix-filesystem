@@ -113,6 +113,60 @@ void* concat(void* src_1, void* src_2, uint32_t size)
 }
 
 
+void* concat_len(void* src_1, void* src_2, uint32_t size, uint32_t len)
+{
+	/* Cast each pointer to a byte* for byte-by-byte concatenation
+	 * using pointer arithmetic
+	 */
+	uint32_t i = 0;
+	/* Number of null characters, for null terminated data it's length of size */
+	uint32_t num_null = 0;
+	byte* _src_1 = (byte*) src_1;
+	void* result = NULL;
+
+	/* Get the number of items in each array using the size as an index multiplier
+	 *
+	 * In order to check for NULL have to verify that all bytes give the size of data
+	 * contain NULL, for example the NULL character for uint32_t is 00 00 00 00
+	 */
+	if (_src_1 != NULL)
+	{
+		while (true)
+		{
+			num_null = 0;
+
+			for (uint32_t k = 0; k < size; ++k)
+			{
+				if (_src_1[(i * size) + k] == NULL)
+				{
+					++num_null;
+				}
+			}
+
+			/* Reached the NULL character for data type */
+			if (num_null == size)
+			{
+				break;
+			}
+
+			/* Increment counter for number of items in array */
+			++i;
+		}
+	}
+
+	/* Create a new NULL terminated buffer to hold the concatenation results */
+	result = calloc(i+len+1, size);
+
+	/* Perform the concatenation, store the results in result, use pointer arithmetic for
+	 * the offset of the first item to concatenate the second item to
+	 */
+	memcpy(result, src_1, i * size);
+	memcpy((result + (i * size)), src_2, len * size);
+
+	return result;
+}
+
+
 char** tokenize_path(char* pathname)
 {
 	/*  NULL initialize the tokenizer pointer and 2D array of tokens */
