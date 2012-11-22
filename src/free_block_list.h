@@ -26,7 +26,10 @@ typedef uint32_t* used_locations;
  * Elements are marked as free (false), or used (true).
  * The superblock always points to the index node of the free_block_list.
  */
-typedef bool free_block_list[NUMBLKS];
+typedef struct
+{
+	bool free_blocks[NUMBLKS];
+} free_block_list;
 
 static free_block_list fbl;
 
@@ -34,10 +37,12 @@ static free_block_list fbl;
  * Gets the free block list independently from where it is located, if the free
  * block list does not already exist in memory (file system has just started) it
  * will read the free block list from disk and set the static instance of the
- * free block list in memory, then return the pointer to that instance in memory.
+ * free block list in memory, then return the pointer to that instance in memory,
+ * if an error occurs a NULL pointer is returned.
  *
  * @param current_fbl Takes a pointer to the current FBL's static instance in memory.
- * @return The pointer to the static instance of free block list in memory
+ * @return The pointer to the static instance of free block list in memory, NULL
+ * if an error occurred.
  */
 extern free_block_list* get_free_block_list(free_block_list* current_fbl);
 

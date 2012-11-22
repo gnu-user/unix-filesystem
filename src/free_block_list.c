@@ -1,11 +1,16 @@
 #include "free_block_list.h"
 #include <stdbool.h>
 
-static free_block_list fbl = { false };
+static free_block_list fbl =
+{
+	.free_blocks = { false }
+};
+
 
 free_block_list* get_free_block_list(free_block_list* current_fbl)
 {
 	uint32_t fbl_location = 0;
+	free_block_list* tmp_fbl = NULL;
 
 	/* If the current_fbl argument is NULL read from memory/disk */
 	if (current_fbl == NULL)
@@ -13,19 +18,37 @@ free_block_list* get_free_block_list(free_block_list* current_fbl)
 		/* If the current free block list in memory has not been set (the
 		 * superblock at index 0 is marked as 0) read the FBL from disk
 		 */
-		if (fbl[0] == false)
+		if (fbl.free_blocks[0] == false)
 		{
+			/* Read the FBL from disk and update the instance in memory */
 			fbl_location = get_free_block_index();
+			tmp_fbl = read_fbl(fbl_location);
 
-			//fbl = &((free_block_list) (*read_fbl(fbl_location)))[0];
-			//fbl = &(*(read_fbl(fbl_location))[0]);
-			memcpy(fbl, *read_fbl(fbl_location), NUMBLKS);
+			if (tmp_fbl != NULL)
+			{
+				/* Overwrite the current fbl with the fbl from disk */
+				memcpy(&fbl, tmp_fbl, sizeof(free_block_list));
+
+				/* Free the temp fbl buffer */
+				free(tmp_fbl);
+			}
+			else
+			{
+				return NULL;
+			}
 		}
 
-		return fbl;
+		return &fbl;
 	}
+	else
+	{
+		/* Update the static instance of fbl in memory with instance of the
+		 * fbl pointed by current_fbl
+		 */
+		memcpy(&fbl, current_fbl, sizeof(free_block_list));
 
-	return current_fbl;
+		return current_fbl;
+	}
 }
 
 
@@ -221,5 +244,5 @@ free_block_list* update_fbl(used_locations used,
 
 	}
 
-	return fbl;
+	return &fbl;
 }
