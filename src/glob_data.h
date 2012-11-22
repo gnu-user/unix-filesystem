@@ -30,4 +30,6 @@
 
 typedef uint8_t byte;
 
+typedef byte block[BLKSIZE];
+
 #endif /* GLOBDATA_H_ */
