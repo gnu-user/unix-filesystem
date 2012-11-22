@@ -110,7 +110,7 @@ int test_tokenize_path(void)
 	 */
 	char testpath2[] = "/test//path/crap//";
 
-	char** testtokens2 = tokenize_path();
+	char** testtokens2 = tokenize_path(testpath2);
 
 	//TODO modify tokenize_path so that if any of the tokens along the array are null, return a null pointer
 	//this way the old test string will no longer work.
@@ -170,7 +170,7 @@ int test_tokenize_path(void)
 	 */
 	char testpath5[] = "/bad path/path/bad/bad";
 
-	char** testtokens5 = tokenize_path();
+	char** testtokens5 = tokenize_path(testpath5);
 
 	if (testtokens5)
 	{
@@ -189,9 +189,9 @@ int test_tokenize_path(void)
 	 */
 	char testpath6[] = "/";
 
-	char** testtokens6 = tokenize_path();
+	char** testtokens6 = tokenize_path(testpath6);
 
-	if (testtokens6[0] != '\0' || !testtokens6)
+	if (!testtokens6 || testtokens6[0] != NULL)
 	{
 		test_fail("Unit Test Part 6");
 		return EXIT_FAILURE;
@@ -208,9 +208,9 @@ int test_tokenize_path(void)
 	 */
 	char testpath7[] = "/file";
 
-	char** testtokens7 = tokenize_path();
+	char** testtokens7 = tokenize_path(testpath7);
 
-	if (testtokens7[0] != '\0' || testtokens7[1] != "file")
+	if (!testtokens6 || strcmp(testtokens7[0], "file") != 0 || testtokens7[1] != NULL)
 	{
 		test_fail("Unit Test Part 7");
 		return EXIT_FAILURE;

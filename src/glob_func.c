@@ -216,6 +216,12 @@ char** tokenize_path(char* pathname)
 
 static bool validate_path(char* pathname)
 {
+	/* NULL pathname, error */
+	if (pathname == NULL)
+	{
+		return false;
+	}
+
 	/* Error if the pathname contains multiple path delimiters */
 	if (strstr(pathname, "//") != NULL)
 	{
