@@ -128,7 +128,6 @@ int test_tokenize_path(void)
 	/**
 	 * Test 3 - tokenize_path using invalid path (tokens consist of '.', ' ',
 	 *  which is an invalid char)
-	 *  "/./../.../...."
 	 *  Should return NULL.
 	 */
 	char testpath3[] = "/./../.../..../ /";

@@ -66,6 +66,7 @@ int main(void)
 int unit_test(void)
 #endif
 {
+	/***************************************************************/
 
 	/* Start the blockio Test Suite */
 	start_suite("blockio");
@@ -74,6 +75,7 @@ int unit_test(void)
 	/* Execute the put_block test case */
 	start_test("put_block", &test_put_block);
 
+	/***************************************************************/
 
 	/* Start the global functions test suite */
 	start_suite("glob_func");
@@ -81,6 +83,19 @@ int unit_test(void)
 	start_test("concat", &test_concat);
 	/* Execute the tokenize_path test case */
 	start_test("tokenize_path", &test_tokenize_path);
+
+	/***************************************************************/
+
+	/* Start the free_block_list test suite */
+	start_suite("free_block_list");
+	/* Execute the get_free_block_list test case */
+	start_test("get_free_block_list", &test_get_free_block_list);
+	/* Execute the update_fbl test case */
+	start_test("update_fbl", &test_update_fbl);
+	/* Execute the get_free_block test case */
+	start_test("get_free_block", &test_get_free_block);
+
+	/***************************************************************/
 
 	/* Clear the colours */
 	puts(RESET);

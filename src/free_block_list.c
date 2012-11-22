@@ -2,8 +2,11 @@
 #include <stdbool.h>
 
 
-free_block_list* get_free_block_list(void)
+free_block_list* get_free_block_list(free_block_list* current_fbl)
 {
+	//if current_fbl is null, get from disk
+	//else use current_fbl
+
 	return NULL;
 }
 

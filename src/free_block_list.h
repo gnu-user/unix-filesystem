@@ -36,9 +36,10 @@ static free_block_list fbl = {0};
  * will read the free block list from disk and set the static instance of the
  * free block list in memory, then return the pointer to that instance in memory.
  *
- * @return the pointer to the static instance of free block list in memory
+ * @param current_fbl Takes a pointer to the current FBL's static instance in memory.
+ * @return The pointer to the static instance of free block list in memory
  */
-extern free_block_list* get_free_block_list(void);
+extern free_block_list* get_free_block_list(free_block_list* current_fbl);
 
 
 /**
