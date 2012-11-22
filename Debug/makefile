@@ -10,6 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include tests/subdir.mk
 -include src/subdir.mk
+-include .metadata/.plugins/org.eclipse.cdt.make.core/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -30,7 +31,7 @@ all: unix-filesystem
 unix-filesystem: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc -lm -o "unix-filesystem" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc  -o "unix-filesystem" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

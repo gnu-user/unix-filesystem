@@ -83,8 +83,9 @@ uint32_t get_free_block(void)
 /**
  * TODO Make the return type for this int and other functions returning int into the ERROR_CODES enumeration.
  */
-bool write_fbl(void)
+bool write_fbl(free_block_list* current_fbl)
 {
+	//TODO USE THE POINTER TO current_fbl FOR WHAT TO WRITE TO DISK!
 	/*
 	 //Check if the first journal entry contains a LINK_FBL entry:
 	 if (journal[0] == NULL)

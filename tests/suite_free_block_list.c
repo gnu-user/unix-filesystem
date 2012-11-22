@@ -14,26 +14,24 @@
 #include <stdbool.h>
 #include <string.h>
 
+
 int test_get_free_block_list(void)
 {
 
 	//This will act as our static FBL in memory. We will also use this
 	//value as our test string.
-	const free_block_list* fblTestData = {1,0,1,1,0,1,1,1,1,0,1,1,0,1,0,0};
-	static free_block_list* fbl;
+	const free_block_list fblTestData = {1,0,1,1,0,1,1,1,1,0,1,1,0,1,0,0};
+	static free_block_list fbl;
 	memcpy(fbl, fblTestData, sizeof(free_block_list));
 
 	/**
 	 * Test 1 - test whether we can retrieve the fbl from our local static instance
 	 */
 
-	static free_block_list* test_fbl1;
+	static free_block_list test_fbl1;
 	test_fbl1 = get_free_block_list(fbl);
 
-	/**
-	 * TODO verify that free_block_list is the size we want, not sizeof(bool)
-	 */
-	if (!memcmp(fbl, test_fbl1,sizeof(free_block_list)))
+	if (memcmp(fbl, test_fbl1,sizeof(free_block_list)) != 0)
 	{
 		test_fail("Unit Test Part 1");
 		return EXIT_FAILURE;
@@ -47,15 +45,14 @@ int test_get_free_block_list(void)
 	 * Test 2 - test whether we can retrieve the fbl from disk
 	 */
 
+	write_fbl(fbl);
 	free(fbl);
-	static free_block_list* test_fbl2;
+	static free_block_list test_fbl2;
 
+	//TODO fix error: typedef not being applied here for some reason
 	test_fbl2 = get_free_block_list(fbl);
 
-	/**
-	 * TODO verify that free_block_list is the size we want, not sizeof(bool)
-	 */
-	if (!test_fbl2 || !fbl || memcmp(fbl,fblTestData,sizeof(free_block_list)))
+	if (!test_fbl2 || !fbl || (memcmp(fbl,fblTestData,sizeof(free_block_list)!= 0)))
 	{
 		test_fail("Unit Test Part 2");
 		return EXIT_FAILURE;
