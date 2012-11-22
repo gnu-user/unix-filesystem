@@ -104,14 +104,17 @@ int test_tokenize_path(void)
 	}
 
 	/**
-	 * Test 2 - tokenize_path using an invalid path (4th token is null)
-	 * "/test/crap/path//"
+	 * Test 2 - tokenize_path using an invalid path (2nd and 5th tokens are null)
+	 * "/test//path/crap//"
 	 * Should return NULL.
 	 */
-	char testpath2[] = "/test/crap/path//";
+	char testpath2[] = "/test//path/crap//";
 
 	char** testtokens2 = tokenize_path();
 
+	//TODO modify tokenize_path so that if any of the tokens along the array are null, return a null pointer
+	//this way the old test string will no longer work.
+	//if (testtokens2[0] == "test" && testtokens2[1] != '\0' && testtokens2[2] == "path" && testtokens2[3] == "crap" && testtokens2[4] == '\0')
 	if (testtokens2)
 	{
 		test_fail("Unit Test Part 2");
