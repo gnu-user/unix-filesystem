@@ -20,36 +20,25 @@ extern byte* allocate_buf(byte* buf, uint32_t size);
 
 extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2);
 
+
 /**
- * TODO UPDATE CONCAT TO TAKE A DOUBLE POINTER FOR DEST BECAUSE REALLOC MAY ACTUALLY
- * SET DEST TO A DIFFERENT POINTER ADDRESS, THE PARENT NEEDS TO BE UPDATED....
+ * Concatenates two NULL termianted arrays, a src_1 and a src_2 array into a
+ * single NULL terminated array containing the contents of both arrays. The
+ * terminating NULL character in src_1 is overwritten by the first character of
+ * src_2, and a NULL character is included at the end of the new array. A pointer
+ * to the resulting array containing the contents of both arrays is then returned.
  *
- * TODO WRITE UNIT TEST & TEST FUNCTION
+ * @pre The arrays src_1 and src_2 MUST BE NULL TERMINATED
+ * @pre The arrays to concatenate MUST contain the same data type for the concatenation
+ * to function properly
  *
- * Concatenates two arrays, a dest and a src array into a single array
- * containing the contents of both arrays, the terminating null character in
- * dest is overwritten by the first character of src, and a NULL character
- * is included at the end of the new array. A pointer dest containing the resulting
- * array containing the contents of both arrays is then returned.
- *
- * TODO Should this free the src or let the person who called it handle that
- * is there ever a case where you still want to use the two items after concat???
- *
- * @note the function automatically frees the memory for the src array after 
- * successfully copying the contents of both into the resulting new array
- *
- * @pre The function is UNDEFINED if the destination or source pointer are NULL
- * if either is NULL they are not used and NULL is simply returned
- * @pre The arrays dest and source must contain the same data type
- *
- * @param dest double pointer to a NULL terminated array, dest is passed by reference
- * @param source pointer to a NULL terminated array
+ * @param src_1 A pointer to a NULL terminated array
+ * @param src_2 A pointer to a NULL terminated array
  * @param size The size in bytes of each item in the array
  *
  * @return A pointer to the resulting array containing the concatenated results
- *
  */
-extern void* concat(void** dest, void* src, uint32_t size);
+extern void* concat(void* src_1, void* src_2, uint32_t size);
 
 
 /**

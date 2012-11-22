@@ -4,6 +4,8 @@
 #include "glob_data.h"
 #include "glob_func.h"
 #include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 byte* allocate_buf(byte* buf, uint32_t size)
 {
@@ -31,51 +33,83 @@ byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
 
 
 // NOTE a prime example of when static type systems break down in generic programming
-void* concat(void** dest, void* src, uint32_t size)
+void* concat(void* src_1, void* src_2, uint32_t size)
 {
-	/* UNDEFINED if dest OR src NULL */
-	if (*dest == NULL || src == NULL)
-	{
-		return NULL;
-	}
-
 	/* Cast each pointer to a byte* for byte-by-byte concatenation
 	 * using pointer arithmetic
 	 */
 	uint32_t i = 0, j = 0;
-	byte* _dest = (byte*) *dest;
-	byte* _src = (byte*) src;
+	/* Number of null characters, for null terminated data it's length of size */
+	uint32_t num_null = 0;
+	byte* _src_1 = (byte*) src_1;
+	byte* _src_2 = (byte*) src_2;
+	void* result = NULL;
 
-	/* Get the number of items in each array using the size as an index multiplier */
-	while (_dest[i * size] != NULL)
+	/* Get the number of items in each array using the size as an index multiplier
+	 *
+	 * In order to check for NULL have to verify that all bytes give the size of data
+	 * contain NULL, for example the NULL character for uint32_t is 00 00 00 00
+	 */
+	if (_src_1 != NULL)
 	{
-		++i;
-	}
-	while (_src[j * size] != NULL)
-	{
-		++j;
-	}
-
-	/* Reallocate dest to contain the results using size as a multiplier */
-	*dest = realloc(dest, ((i+j+1) * size));
-	_dest = (byte *) *dest;
-
-	if (_dest != NULL)
-	{
-		/* Concatenate the two arrays using byte-by-byte concatenation */
-		for (uint32_t k = i * size; k < (i+j+1) * size; ++k)
+		while (true)
 		{
-			_dest[k] = _src[k - (i * size)];
+			num_null = 0;
+
+			for (uint32_t k = 0; k < size; ++k)
+			{
+				if (_src_1[(i * size) + k] == NULL)
+				{
+					++num_null;
+				}
+			}
+
+			/* Reached the NULL character for data type */
+			if (num_null == size)
+			{
+				break;
+			}
+
+			/* Increment counter for number of items in array */
+			++i;
 		}
 	}
-	else
+
+	if (_src_2 != NULL)
 	{
-		return NULL;
+		while (true)
+		{
+			num_null = 0;
+
+			for (uint32_t k = 0; k < size; ++k)
+			{
+				if (_src_2[(j * size) + k] == NULL)
+				{
+					++num_null;
+				}
+			}
+
+			/* Reached the NULL character for data type */
+			if (num_null == size)
+			{
+				break;
+			}
+
+			/* Increment counter for number of items in array */
+			++j;
+		}
 	}
 
-	/* Free the memory used by src and return dest pointer */
-	free(src);
-	return _dest;
+	/* Create a new NULL terminated buffer to hold the concatenation results */
+	result = calloc(i+j+1, size);
+
+	/* Perform the concatenation, store the results in result, use pointer arithmetic for
+	 * the offset of the first item to concatenate the second item to
+	 */
+	memcpy(result, src_1, i * size);
+	memcpy((result + (i * size)), src_2, j * size);
+
+	return result;
 }
 
 
