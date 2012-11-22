@@ -92,6 +92,31 @@ extern char** tokenize_path(char* pathname);
 
 
 /**
+ * A Static function used by tokenize_path to verify that the pathname is valid before
+ * tokenizing, returns true if the path is valid, returns false if there are errors in the
+ * pathname.
+ *
+ * @param pathname The pathname
+ *
+ * @return True if the path is valid, false if path is invalid
+ *
+ */
+static bool validate_path(char* pathname);
+
+
+/**
+ * A Static function used by tokenize_path to verify that the pathname components are
+ * valid, returns true if the path is valid, returns false if there are errors in the
+ * pathname.
+ *
+ * @param tokens The 2D tokens array
+ *
+ * @return True if the tokens are valid, false if torkens are invalid
+ *
+ */
+static bool validate_tokens(char** tokens);
+
+/**
  * TODO WRITE UNIT TEST & TEST FUNCTION
  *
  * Frees the memory allocated for the tokens

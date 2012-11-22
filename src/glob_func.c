@@ -174,6 +174,12 @@ char** tokenize_path(char* pathname)
 	char** tokens = NULL;
 	uint32_t num_tokens = 0;
 
+	/* Validate the pathname before tokenizing */
+	if (!validate_path(pathname))
+	{
+		return NULL;
+	}
+
 	/* Get the first token */
 	ptr_tkn = strtok(pathname, "/");
 
@@ -194,8 +200,55 @@ char** tokenize_path(char* pathname)
 	tokens = (char**) realloc(tokens, ++num_tokens * sizeof(char*));
 	tokens[num_tokens - 1] = NULL;
 
+	/* Validate the tokens before returning the tokens array, return NULL if any
+	 * of the tokens are invalid
+	 */
+	if (!validate_tokens(tokens))
+	{
+		/* Free the memory allocated for tokens */
+		free_tokens(tokens);
+		return NULL;
+	}
+
 	return tokens;
 }
+
+
+static bool validate_path(char* pathname)
+{
+	/* Error if the pathname contains multiple path delimiters */
+	if (strstr(pathname, "//") != NULL)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+
+static bool validate_tokens(char** tokens)
+{
+	/* Validate the path by checking each token against a set of conditions */
+	uint32_t i = 0;
+	while (tokens[i] != NULL)
+	{
+		/* Error If the token is greater than MAX_NAME_LEN */
+		if (strlen(tokens[i]) > MAX_NAME_LEN)
+		{
+			return false;
+		}
+
+		/* Error if token contains a space character */
+		if (strchr(tokens[i], ' ') != NULL)
+		{
+			return false;
+		}
+		++i;
+	}
+
+	return true;
+}
+
 
 
 bool free_tokens(char **tokens)

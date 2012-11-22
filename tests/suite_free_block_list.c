@@ -16,10 +16,12 @@
 
 int test_get_free_block_list(void)
 {
+
 	//This will act as our static FBL in memory. We will also use this
 	//value as our test string.
-	const static free_block_list fblTestData = {1,0,1,1,0,1,1,1,1,0,1,1,0,1,0,0};
-	static free_block_list fbl = fblTestData;
+	const free_block_list* fblTestData = {1,0,1,1,0,1,1,1,1,0,1,1,0,1,0,0};
+	static free_block_list* fbl;
+	memcpy(fbl, fblTestData, sizeof(free_block_list));
 
 	/**
 	 * Test 1 - test whether we can retrieve the fbl from our local static instance
