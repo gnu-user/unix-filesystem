@@ -16,25 +16,25 @@
  */
 start_suite(char* tsuite)
 {
-	printf(BOLDWHITE "\nExecuting %s Test Suite\n", tsuite);
-	puts(BOLDWHITE "========================================");
+	printf(BOLDWHITE "\nExecuting %s Test Suite\n" RESET, tsuite);
+	puts(BOLDWHITE "========================================" RESET);
 }
 
 //start_test(char* tcase)
 start_test(char* name, void* tcase())
 {
-	printf(BOLDWHITE "\nExecuting %s Test Case\n", name);
-	puts(BOLDWHITE "-----------------------------------------\n");
+	printf(BOLDWHITE "\nExecuting %s Test Case\n" RESET, name);
+	puts(BOLDWHITE "-----------------------------------------\n" RESET);
 
 	/* Execute the test case and display the whether the results */
 
 	if (tcase() == EXIT_SUCCESS)
 	{
-		printf(YELLOW "\nTest Case %s Passed", name);
+		printf(BOLDYELLOW "\nTest Case %s Passed\n" RESET, name);
 	}
 	else
 	{
-		printf(MAGENTA "\nTest Case %s Failed", name);
+		printf(BOLDMAGENTA "\nTest Case %s Failed\n" RESET, name);
 	}
 }
 
@@ -44,7 +44,7 @@ start_test(char* name, void* tcase())
  */
 test_fail(char* test)
 {
-	printf(RED "%s Failed\n", test);
+	printf(BOLDRED "%s Failed\n" RESET, test);
 }
 
 /*
@@ -52,7 +52,7 @@ test_fail(char* test)
  */
 test_pass(char* test)
 {
-	printf(GREEN "%s Passed\n", test);
+	printf(BOLDGREEN "%s Passed\n" RESET, test);
 }
 
 

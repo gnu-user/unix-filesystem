@@ -19,7 +19,7 @@ int test_concat(void)
 	char test_srcblk1[] = "DEF";
 	char result1[] = "ABCDEF";
 
-	char* test1 = concat(&test_destblk1, test_srcblk1, sizeof(char));
+	char* test1 = concat(test_destblk1, test_srcblk1, sizeof(char));
 
 	if (strcmp(test1, result1) != 0)
 	{
@@ -36,7 +36,7 @@ int test_concat(void)
 	char test_srcblk2[] = "DEFGHI";
 	char result2[] = "ABCDEFGHI";
 
-	char* test2 = concat(&test_destblk2, test_srcblk2, sizeof(char));
+	char* test2 = concat(test_destblk2, test_srcblk2, sizeof(char));
 
 	if (strcmp(test2, result2) != 0)
 	{
@@ -53,9 +53,9 @@ int test_concat(void)
 	char test_srcblk3[] = "GHI";
 	char result3[] = "ABCDEFGHI";
 
-	char* test3 = concat(&test_destblk3, test_srcblk3, sizeof(char));
+	char* test3 = concat(test_destblk3, test_srcblk3, sizeof(char));
 
-	if (strcmp(test1, result1) != 0)
+	if (strcmp(test3, result3) != 0)
 	{
 		test_fail("Unit Test Part 3");
 		return EXIT_FAILURE;
@@ -63,6 +63,23 @@ int test_concat(void)
 	else
 	{
 		test_pass("Unit Test Part 3");
+	}
+
+	/* Test 4 -- concat two arrays of unsigned integers of equal length*/
+	uint32_t test_destblk4[3] = {1, 2, NULL};
+	uint32_t test_srcblk4[3] = {3, 4, NULL};
+	uint32_t result4[5] = {1, 2, 3, 4, NULL};
+
+	uint32_t* test4 = concat(test_destblk4, test_srcblk4, sizeof(uint32_t));
+
+	if (memcmp(test4, result4, 5 * sizeof(uint32_t)) != 0)
+	{
+		test_fail("Unit Test Part 4");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		test_pass("Unit Test Part 4");
 	}
 
 	return EXIT_SUCCESS;
