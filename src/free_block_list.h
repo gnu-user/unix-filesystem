@@ -28,7 +28,7 @@ typedef uint32_t* used_locations;
  */
 typedef bool free_block_list[NUMBLKS];
 
-static free_block_list fbl = {0};
+static free_block_list fbl;
 
 /**
  * Gets the free block list independently from where it is located, if the free

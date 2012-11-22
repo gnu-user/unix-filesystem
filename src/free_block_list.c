@@ -1,13 +1,31 @@
 #include "free_block_list.h"
 #include <stdbool.h>
 
+static free_block_list fbl = { false };
 
 free_block_list* get_free_block_list(free_block_list* current_fbl)
 {
-	//if current_fbl is null, get from disk
-	//else use current_fbl
+	uint32_t fbl_location = 0;
 
-	return NULL;
+	/* If the current_fbl argument is NULL read from memory/disk */
+	if (current_fbl == NULL)
+	{
+		/* If the current free block list in memory has not been set (the
+		 * superblock at index 0 is marked as 0) read the FBL from disk
+		 */
+		if (fbl[0] == false)
+		{
+			fbl_location = get_free_block_index();
+
+			//fbl = &((free_block_list) (*read_fbl(fbl_location)))[0];
+			//fbl = &(*(read_fbl(fbl_location))[0]);
+			memcpy(fbl, *read_fbl(fbl_location), NUMBLKS);
+		}
+
+		return fbl;
+	}
+
+	return current_fbl;
 }
 
 
