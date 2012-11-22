@@ -15,4 +15,5 @@ EXECUTABLES :=
 SUBDIRS := \
 tests \
 src \
+.metadata/.plugins/org.eclipse.cdt.make.core \
 

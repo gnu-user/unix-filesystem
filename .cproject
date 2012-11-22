@@ -34,8 +34,11 @@
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1956832116" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.924434767" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug">
-								<option id="gnu.c.link.option.ldflags.1250496339" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="-lm" valueType="string"/>
+								<option id="gnu.c.link.option.ldflags.1250496339" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="" valueType="string"/>
 								<option id="gnu.c.link.option.shared.894465084" name="Shared (-shared)" superClass="gnu.c.link.option.shared" value="false" valueType="boolean"/>
+								<option id="gnu.c.link.option.libs.1863997554" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="m"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1351530883" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -74,7 +77,7 @@
 								<option id="gnu.cpp.compiler.exe.release.option.optimization.level.918515756" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.exe.release.option.debugging.level.655745780" name="Debug Level" superClass="gnu.cpp.compiler.exe.release.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 							</tool>
-							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.217553509" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release">
+							<tool commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS} -lm" id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.217553509" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release">
 								<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.exe.release.option.optimization.level.427128145" name="Optimization Level" superClass="gnu.c.compiler.exe.release.option.optimization.level" valueType="enumerated"/>
 								<option id="gnu.c.compiler.exe.release.option.debugging.level.1784635376" name="Debug Level" superClass="gnu.c.compiler.exe.release.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.misc.other.1825212699" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -std=c99 -fshort-enums" valueType="string"/>
@@ -83,8 +86,11 @@
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1492167465" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.1123258748" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release">
-								<option id="gnu.c.link.option.ldflags.702158462" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="-lm" valueType="string"/>
+								<option id="gnu.c.link.option.ldflags.702158462" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="" valueType="string"/>
 								<option id="gnu.c.link.option.shared.214140651" name="Shared (-shared)" superClass="gnu.c.link.option.shared" value="true" valueType="boolean"/>
+								<option id="gnu.c.link.option.libs.161451699" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="m"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.470276458" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -107,6 +113,9 @@
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/unix-filesystem"/>
+		</configuration>
+		<configuration configurationName="Multiple configurations">
 			<resource resourceType="PROJECT" workspacePath="/unix-filesystem"/>
 		</configuration>
 		<configuration configurationName="Debug">

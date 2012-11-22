@@ -92,7 +92,7 @@ extern uint32_t get_free_block(void);
  * @return True if the free block list was successfully written to disk, false
  * otherwise
  */
-extern bool write_fbl(void);
+extern bool write_fbl(free_block_list* current_fbl);
 
 
 /**
