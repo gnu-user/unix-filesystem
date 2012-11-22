@@ -2,6 +2,96 @@
 #include "I_node.h"
 #include <math.h>
 #include "system_open_file_table.h"
+#include "index_block.h"
+
+/**
+ * if start >= then actual data is inserted (overrides) from start for the
+ * length of actual data.
+ * if start == -1 then actual data is appended to the end of the databuf
+ *
+ * @return databuf containing actual_dat
+ */
+block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data)
+{
+	int j = 0;
+	int k = 0;
+	byte * temp = NULL;
+	block* data_blocks = NULL;
+	if(start > 0)
+	{
+		for(int i = start; i < length+start; i++)
+		{
+			memcpy(data_buf[i], actual_data[j], BLKSIZE);
+			j++;
+		}
+		temp = data_buf;
+	}
+	else if(start ==-1)
+	{
+		while(data_buf[j] != NULL)
+		{
+			j++;
+		}
+		//does adding 1 to the end make it null terminated
+		j += length;
+		temp = (byte*) calloc(j+1, sizeof(byte));
+		for(int i = 0; i < j; i++)
+		{
+			if(i < j)
+			{
+				memcpy(temp, data_buf, BLKSIZE);
+			}
+			else
+			{
+				memcpy(temp, actual_data, BLKSIZE);
+			}
+		}
+	}
+
+	/**
+	 * Divide up the byte arrays into block arrays
+	 */
+	for(int i = 0; i < j; i++)
+	{
+		data_blocks[k][i] = temp[i];
+		if(i%BLKSIZE == 0 && i > 0)
+		{
+			k++;
+		}
+	}
+
+	return data_blocks;
+}
+
+/**
+ * TODO add decrypt block
+ */
+byte* get_data(uint32_t* location)
+{
+	int i = 0;
+	byte* databuf = NULL;
+	byte* temp = NULL;
+	byte* buf = NULL;
+	int retval = 0;
+
+	while(location[i] != NULL)
+	{
+		buf = allocate_buf(buf, BLKSIZE);
+
+		retval = read_block(location[i], buf);
+		if(retval != 0)
+		{
+			return NULL;
+		}
+		temp = (byte*) concat_len(databuf, buf, sizeof(byte), BLKSIZE);
+		free(databuf);
+		free(buf);
+		databuf = temp;
+
+		i++;
+	}
+	return databuf;
+}
 
 /** sfs_write
  * Write the length bytes of data specified from a memory location to the
@@ -119,7 +209,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		blocks_needed++; //Inode block space
 		inode_write = get_swoft_inode(fd);
 		data_block_locations = iterate_index(inode_write.location, data_block_locations);
-		data_buf = get_date(data_block_locations);
+		data_buf = get_data(data_block_locations);
 		i = 0;
 		while(data_buf[i] != NULL)
 		{
@@ -196,91 +286,4 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	return 0;
 }
 
-/**
- * if start >= then actual data is inserted (overrides) from start for the
- * length of actual data.
- * if start == -1 then actual data is appended to the end of the databuf
- *
- * @return databuf containing actual_dat
- */
-block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data)
-{
-	int j = 0;
-	int k = 0;
-	byte * temp = NULL;
-	block* data_blocks = NULL;
-	if(start > 0)
-	{
-		for(int i = start; i < length+start; i++)
-		{
-			memcpy(data_buf[i], actual_data[j], BLKSIZE);
-			j++;
-		}
-		temp = data_buf;
-	}
-	else if(start ==-1)
-	{
-		while(data_buf[j] != NULL)
-		{
-			j++;
-		}
-		//does adding 1 to the end make it null terminated
-		j += length;
-		temp = (byte*) calloc(j+1, sizeof(byte));
-		for(int i = 0; i < j; i++)
-		{
-			if(i < j)
-			{
-				memcpy(temp, data_buf, BLKSIZE);
-			}
-			else
-			{
-				memcpy(temp, actual_data, BLKSIZE);
-			}
-		}
-	}
 
-	/**
-	 * Divide up the byte arrays into block arrays
-	 */
-	for(int i = 0; i < j; i++)
-	{
-		data_blocks[k][i] = temp[i];
-		if(i%BLKSIZE == 0 && i > 0)
-		{
-			k++;
-		}
-	}
-
-	return data_blocks;
-}
-
-/**
- * TODO add decrypt block
- */
-byte* get_data(uint32_t* location)
-{
-	int i = 0;
-	byte* databuf = NULL;
-	byte* temp = NULL;
-	byte* buf = NULL;
-	int retval = 0;
-
-	while(location[i] != NULL)
-	{
-		buf = allocate_buf(buf, BLKSIZE);
-
-		retval = read_block(location[i], buf);
-		if(retval != 0)
-		{
-			return NULL;
-		}
-		temp = (byte*) concat_len(databuf, buf, sizeof(byte), BLKSIZE);
-		free(databuf);
-		free(buf);
-		databuf = temp;
-
-		i++;
-	}
-	return databuf;
-}

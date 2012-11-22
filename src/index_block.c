@@ -106,6 +106,10 @@ locations iterate_index(uint32_t location, locations data_blocks)
 */
 }
 
+uint32_t calc_index_blocks(uint32_t num_blocks)
+{
+	return 0;
+}
 
 int count_locations(uint32_t location)
 {
