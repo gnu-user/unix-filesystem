@@ -1,4 +1,7 @@
 #include "block_func.h"
+#include "I_node.h"
+#include <math.h>
+#include "system_open_file_table.h"
 
 /** sfs_write
  * Write the length bytes of data specified from a memory location to the
@@ -30,12 +33,15 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	//TODO create encryption
 	//TODO create decryption
 	uint32_t blocks_needed = 0;
-	inode inode_location = get_null_inode();
+	inode inode_write = get_null_inode();
 	uint32_t* new_inode_loc = NULL;
 	uint32_t* data_block_locations = NULL;
 	byte* temp = NULL;
 	byte* data_buf = NULL;
-	data_index data_location = NULL;
+	data_index data_location = {
+			.index_location = NULL,
+			.data_locations = NULL};
+	block* data_block = NULL;
 	int i = 0;
 
 	if(fd >= 0 && length > 0 && start >= -1)
@@ -111,8 +117,8 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 * journal link parent's index to inode
 		 */
 		blocks_needed++; //Inode block space
-		inode_location = get_swoft_inode(fd);
-		data_block_locations = iterate_index(inode_location.location);
+		inode_write = get_swoft_inode(fd);
+		data_block_locations = iterate_index(inode_write.location, data_block_locations);
 		data_buf = get_date(data_block_locations);
 		i = 0;
 		while(data_buf[i] != NULL)
@@ -146,9 +152,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		/**
 		 * Add the data to the data_buf
 		 */
-		temp = modify_data(start, length, data_buf, mem_pointer);
-		free(data_buf);
-		data_buf = temp;
+		data_block = modify_data(start, length, data_buf, mem_pointer);
 
 		/**
 		 * Break it back into blocks
@@ -166,11 +170,11 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		i = 0;
 		while(data_location.data_locations[i] != NULL)
 		{
-			write_block(data_location.data_locations[i], data_buf[i]);
+			write_block(data_location.data_locations[i], data_block[i]);
 			i++;
 		}
 
-		inode_location.location = data_location.index_location;
+		inode_write.location = data_location.index_location;
 
 		/**
 		 * journal link parent's index to inode
