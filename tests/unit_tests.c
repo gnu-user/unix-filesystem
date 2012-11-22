@@ -11,6 +11,7 @@
 #include "unit_tests.h"
 #include "suite_blockio.h"
 #include "suite_glob_func.h"
+#include "suite_free_block_list.h"
 
 /* Displays output stating that it is starting a test suite
  */
