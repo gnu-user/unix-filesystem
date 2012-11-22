@@ -9,6 +9,7 @@
 #include "unit_tests.h"
 #include "../src/glob_data.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 int test_concat(void)
@@ -88,9 +89,11 @@ int test_concat(void)
 int test_tokenize_path(void)
 {
 	/* Test 1 -- tokenize_path using a valid test path*/
-	char * testtokens1 = tokenize_path("/test/path");
+	char testpath1[] = "/test/path";
 
-	if ((testtokens1[0] != "test") && (testtokens1[1] != "path"))
+	char** testtokens1 = tokenize_path(testpath1);
+
+	if (strcmp(testtokens1[0], "test") != 0 || strcmp(testtokens1[1], "path") != 0)
 	{
 		test_fail("Unit Test Part 1");
 		return EXIT_FAILURE;
@@ -105,7 +108,10 @@ int test_tokenize_path(void)
 	 * "/test/crap/path//"
 	 * Should return NULL.
 	 */
-	char *testtokens2 = tokenize_path("/test/crap/path//");
+	char testpath2[] = "/test/crap/path//";
+
+	char** testtokens2 = tokenize_path();
+
 	if (testtokens2)
 	{
 		test_fail("Unit Test Part 2");
@@ -122,7 +128,10 @@ int test_tokenize_path(void)
 	 *  "/./../.../...."
 	 *  Should return NULL.
 	 */
-	char *testtokens3 = tokenize_path("/./../.../..../ /");
+	char testpath3[] = "/./../.../..../ /";
+
+	char** testtokens3 = tokenize_path(testpath3);
+
 	if (testtokens3)
 	{
 		test_fail("Unit Test Part 3");
@@ -138,7 +147,10 @@ int test_tokenize_path(void)
 	 *  "/supercalafragilisticexpialidocious/megasuperlongpath/gthansix/notvald/notval/not/balls"
 	 *  Should return NULL.
 	 */
-	char *testtokens4 = tokenize_path("/supercalafragilisticexpialidocious/megasuperlongpath/gthansix/notvald/notval/not/balls");
+	char testpath4[] = "/supercalafragilisticexpialidocious/megasuperlongpath/gthansix/notvald/notval/not/balls";
+
+	char** testtokens4 = tokenize_path();
+
 	if (testtokens4)
 	{
 		test_fail("Unit Test Part 4");

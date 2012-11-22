@@ -3,9 +3,9 @@
  */
 #include "glob_data.h"
 #include "glob_func.h"
-#include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 byte* allocate_buf(byte* buf, uint32_t size)
 {
@@ -170,8 +170,8 @@ void* concat_len(void* src_1, void* src_2, uint32_t size, uint32_t len)
 char** tokenize_path(char* pathname)
 {
 	/*  NULL initialize the tokenizer pointer and 2D array of tokens */
-	char *ptr_tkn = NULL;
-	char **tokens = NULL;
+	char* ptr_tkn = NULL;
+	char** tokens = NULL;
 	uint32_t num_tokens = 0;
 
 	/* Get the first token */
@@ -181,17 +181,17 @@ char** tokenize_path(char* pathname)
 	while (ptr_tkn != NULL)
 	{
 		/* Increase the tokens array size for an additional token */
-		tokens = (char**)realloc(tokens, ++num_tokens * sizeof(char*));
+		tokens = (char**) realloc(tokens, ++num_tokens * sizeof(char*));
 
 		/* Copy the token into the array */
-		tokens[num_tokens - 1] = (char*)calloc(strlen(ptr_tkn), sizeof(char*));
+		tokens[num_tokens - 1] = (char*) calloc(strlen(ptr_tkn), sizeof(char*));
 		strncpy(tokens[num_tokens - 1], ptr_tkn, strlen(ptr_tkn));
 
 		ptr_tkn = strtok(NULL, "/");
 	}
 
 	/* Increase the tokens array size for a final NULL termination token */
-	tokens = (char**)realloc(tokens, ++num_tokens * sizeof(char*));
+	tokens = (char**) realloc(tokens, ++num_tokens * sizeof(char*));
 	tokens[num_tokens - 1] = NULL;
 
 	return tokens;
