@@ -24,6 +24,18 @@ typedef struct {
 
 
 /**
+ * Calculates the number of index blocks that are needed in order to write
+ * the number of data blocks specified to the filesystem
+ *
+ * @param num_blocks The number of data blocks
+ *
+ * @return The number of index blocks needed to write the data blocks to the
+ * file system
+ */
+uint32_t calc_index_blocks(uint32_t num_blocks);
+
+
+/**
  *
  * TODO NEED TO UPDATE THE GENERATE_INDEX PSEUDOCODE TO HANDLE RETURNING
  * THE DATA_INDEX STRUCT
@@ -135,5 +147,6 @@ int count_locations(uint32_t location);
  * If there is an error the value returned will be NULL.
  */
 locations index_block_locations(uint32_t location);
+
 
 #endif /* INDEX_BLOCK_H_ */
