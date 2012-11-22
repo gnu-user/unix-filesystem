@@ -32,17 +32,17 @@ int
 sfs_read(int fd,
 	 int start,
 	 int length,
-	 char *mem_pointer);
+	 byte *mem_pointer);
 
 int
 sfs_write(int fd,
 	  int start,
 	  int length,
-	  char *mem_pointer);
+	  byte *mem_pointer);
 
 int
 sfs_readdir(int fd,
-	    char *mem_pointer);
+	    byte *mem_pointer);
 
 int
 sfs_close(int fd);

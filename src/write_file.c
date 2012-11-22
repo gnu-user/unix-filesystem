@@ -24,11 +24,19 @@
  * @exception INSUFFICIENT_DISK_SPACE If the length of the blocks to be written
  * is greater than the amount of available blocks on disk
  */
-int sfs_write(int fd, int start, int length, char *mem_pointer)
+int sfs_write(int fd, int start, int length, byte *mem_pointer)
 {
 	//TODO create write
 	//TODO create encryption
 	//TODO create decryption
+	uint32_t blocks_needed = 0;
+	inode inode_location = get_null_inode();
+	uint32_t* new_inode_loc = NULL;
+	uint32_t* data_block_locations = NULL;
+	byte* temp = NULL;
+	byte* data_buf = NULL;
+	data_index data_location = NULL;
+	int i = 0;
 
 	if(fd >= 0 && length > 0 && start >= -1)
 	{
@@ -40,10 +48,6 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 		{
 			return 0;
 		}
-		/**
-		 * Check the encryption property
-		 * 	- If encrypted it will be decrypted
-		 */
 
 		/**
 		 * Check if start+length-1 > file_size-(Inode(1) + index_block(n))
@@ -106,6 +110,71 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 		 * populate_inode (data_location.index_block)
 		 * journal link parent's index to inode
 		 */
+		blocks_needed++; //Inode block space
+		inode_location = get_swoft_inode(fd);
+		data_block_locations = iterate_index(inode_location.location);
+		data_buf = get_date(data_block_locations);
+		i = 0;
+		while(data_buf[i] != NULL)
+		{
+			i++;
+		}
+		blocks_needed += (int)ceil(i/BLKSIZE);
+
+		if(start >= 0)
+		{
+			if((start + length) >= i)
+			{
+				/**
+				 * Invalid override
+				 */
+				return -1;
+			}
+			/**
+			 * No new data blocks will be needed
+			 */
+
+		}
+		else if(start == -1)
+		{
+			/**
+			 * Add # of new blocks to blocks_needed
+			 */
+			blocks_needed += (int)ceil((start+length)/BLKSIZE);
+		}
+
+		/**
+		 * Add the data to the data_buf
+		 */
+		temp = modify_data(start, length, data_buf, mem_pointer);
+		free(data_buf);
+		data_buf = temp;
+
+		/**
+		 * Break it back into blocks
+		 */
+
+		if((calc_num_free_blocks(blocks_needed + calc_index_blocks(blocks_needed-1))) == NULL) //1 for the inode
+		{
+			return 0;
+		}
+
+		new_inode_loc = get_free_block();
+
+		data_location = generate_index(blocks_needed-1);
+
+		i = 0;
+		while(data_location.data_locations[i] != NULL)
+		{
+			write_block(data_location.data_locations[i], data_buf[i]);
+			i++;
+		}
+
+		inode_location.location = data_location.index_location;
+
+		/**
+		 * journal link parent's index to inode
+		 */
 
 		/**
 		 * Write the data
@@ -130,16 +199,66 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
  *
  * @return databuf containing actual_dat
  */
-uint32_t* modify_data(uint32_t start, uint32_t* databuf, uint32_t* actual_data)
+block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data)
 {
-	return 0;
+	int j = 0;
+	int k = 0;
+	byte * temp = NULL;
+	block* data_blocks = NULL;
+	if(start > 0)
+	{
+		for(int i = start; i < length+start; i++)
+		{
+			memcpy(data_buf[i], actual_data[j], BLKSIZE);
+			j++;
+		}
+		temp = data_buf;
+	}
+	else if(start ==-1)
+	{
+		while(data_buf[j] != NULL)
+		{
+			j++;
+		}
+		//does adding 1 to the end make it null terminated
+		j += length;
+		temp = (byte*) calloc(j+1, sizeof(byte));
+		for(int i = 0; i < j; i++)
+		{
+			if(i < j)
+			{
+				memcpy(temp, data_buf, BLKSIZE);
+			}
+			else
+			{
+				memcpy(temp, actual_data, BLKSIZE);
+			}
+		}
+	}
+
+	/**
+	 * Divide up the byte arrays into block arrays
+	 */
+	for(int i = 0; i < j; i++)
+	{
+		data_blocks[k][i] = temp[i];
+		if(i%BLKSIZE == 0 && i > 0)
+		{
+			k++;
+		}
+	}
+
+	return data_blocks;
 }
 
-uint32_t* get_data(uint32_t* location)
+/**
+ * TODO add decrypt block
+ */
+byte* get_data(uint32_t* location)
 {
 	int i = 0;
-	uint32_t* databuf = NULL;
-	uint32_t* temp = NULL;
+	byte* databuf = NULL;
+	byte* temp = NULL;
 	byte* buf = NULL;
 	int retval = 0;
 
@@ -152,7 +271,7 @@ uint32_t* get_data(uint32_t* location)
 		{
 			return NULL;
 		}
-		temp = (uint32_t*) concat(databuf, buf, sizeof(byte));
+		temp = (byte*) concat_len(databuf, buf, sizeof(byte), BLKSIZE);
 		free(databuf);
 		free(buf);
 		databuf = temp;

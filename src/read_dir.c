@@ -22,7 +22,7 @@
  * @exception INVALID_FILE_DESCRIPTOR If the file descriptor specified does not
  * exist
  */
-int sfs_readdir(int fd, char *mem_pointer)
+int sfs_readdir(int fd, byte *mem_pointer)
 {
 	//TODO create readdir
 	inode directory = get_null_inode();
