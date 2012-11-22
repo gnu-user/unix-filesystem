@@ -79,8 +79,6 @@ int sfs_write(int fd, int start, int length, char *mem_pointer)
 		*/
 
 		/** Based off a night of sleep and the codes
-		 * concat the mem_pointer to the blocks before it (and after)
-		 *
 		 *
 		 * blocks_needed = 1 //FOR INODE
 		 * data_blocks = iterate_index(inode.location)
@@ -137,10 +135,11 @@ uint32_t* modify_data(uint32_t start, uint32_t* databuf, uint32_t* actual_data)
 	return 0;
 }
 
-uint32_t* getData(uint32_t* location)
+uint32_t* get_data(uint32_t* location)
 {
 	int i = 0;
 	uint32_t* databuf = NULL;
+	uint32_t* temp = NULL;
 	byte* buf = NULL;
 	int retval = 0;
 
@@ -153,7 +152,11 @@ uint32_t* getData(uint32_t* location)
 		{
 			return NULL;
 		}
-		concat(databuf, buf);
+		temp = (uint32_t*) concat(databuf, buf, sizeof(byte));
+		free(databuf);
+		free(buf);
+		databuf = temp;
+
 		i++;
 	}
 	return databuf;
