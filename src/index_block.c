@@ -70,54 +70,79 @@ int link_inode(uint32_t* index_block, uint32_t location)
 } */
 
 
-// TODO FIX THE VARIABLE NAMES THIS CAN ALSO BE USED TO RETURN THE
-// LOCATIONS OF INDODES IN THE CASE OF A DIRECTORY
 locations iterate_index(uint32_t location, locations data_blocks)
 {
-	byte index__block[BLKSIZE + 1] = { 0 };
+	/* Index_block read from disk */
+	//uint32_t index_block[index_len] = { 0 };
+	//index index_block = NULL;
+	//index_block = (index) calloc(ceil(BLKSIZE / sizeof(location)), sizeof(location));
+	/* Index length, which is the number of data locations stored in an index block */
+	uint32_t index_len = floor(BLKSIZE / sizeof(location));
+	index index_block = calloc(index_len, sizeof(location));
+
+	locations tmp_data_blocks = NULL;
 	uint32_t i = 0;
 
 	/* Verify that the the index block location specified is valid */
-	if (location > 0 && location < NUMBLKS)
+	if (location <= 0 || location >= NUMBLKS)
 	{
 		/* Invalid index block location */
+		free(index_block);
 		return NULL;
 	}
 
-	if (read_block())
-
-
-
-/*
-	// Read the index block from the drive at location specified
-	index block = read_block(location)
-	uint32_t i  = 0;
+	/* Error reading the block */
+	if (read_block(location, (byte *)index_block) < 0)
+	{
+		free(index_block);
+		return NULL;
+	}
 
 	/*
 	 * Add each data location in the index block to the array of data locations
 	 * only iterate up to the 2nd last item as the index block may have a linked index
-	 *
-	for (i = 0; i < ceil(BLKSIZE / sizeof(location)) - 1; i++)
+	 */
+	for (i = 0; i < index_len - 1; ++i)
 	{
-		if block[i] == NULL
+		tmp_data_blocks = NULL;
+
+		/* No more locations stored in the index block, return the locations */
+		if (index_block[i] == NULL)
 		{
-			return concat(data_blocks, NULL)
+			/* Free dynamic memory and return the NULL terminated array of data blocks locations */
+			tmp_data_blocks = (locations) concat(data_blocks, NULL, sizeof(location));
+			free(data_blocks);
+			free(index_block);
+			return tmp_data_blocks;
+
 		}
 
-		concat(data_blocks, block[i])
+		/* Concatenate the data block location to the array of data block locations */
+		tmp_data_blocks = (locations) concat_len(data_blocks, &index_block[i], sizeof(location), 1);
+
+		/* If tmp_data_blocks NULL an error occurred concatenating the data */
+		if (tmp_data_blocks == NULL)
+		{
+			free(data_blocks);
+			free(index_block);
+			return NULL;
+		}
+
+		/* Free dynamic memory, assign data_blocks a pointer to the array of data block locations */
+		free(data_blocks);
+		data_blocks = tmp_data_blocks;
 	}
 
-
-	// If the index block links to another index, iterate over the index block recursively
-	if (block[i+1] != null)
+	/* If the index block links to another index, iterate over the index block recursively */
+	if (index_block[i+1] != NULL)
 	{
-		iterate_indix(block[i+1], data_blocks);
+		data_blocks = iterate_index(index_block[i+1], data_blocks);
 	}
 
-	// Index block doesn't link to another index, null terminate the array of data locations
-	return concat(data_blocks, NULL);
-*/
+	// Index block doesn't link to another index, return the array of data locations
+	return data_blocks;
 }
+
 
 uint32_t calc_index_blocks(uint32_t num_blocks)
 {

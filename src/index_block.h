@@ -110,12 +110,14 @@ data_index generate_index(uint32_t num_blocks);
  * call iterate_index on the index block at this index. When we reach a NULL location inside
  * the index block, we have reached the end of the indexes.
  *
+ * The function returns a NULL pointer if an error occurred
+ *
  * @param location The location of the first index block to iterate through
  * @param data_blocks An argument used by the function when it recursively calls itself,
  * the argument should be NULL when calling iterate_index for the first index location.
  *
  * @return A pointer to a NULL terminated array containing all of the data block locations
- * stored in the indices
+ * stored in the indices, the pointer is NULL if an error occurred
  */
 locations iterate_index(uint32_t location, locations data_blocks);
 
