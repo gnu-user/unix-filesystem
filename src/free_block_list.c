@@ -61,7 +61,35 @@ locations calc_total_free_blocks(void)
 	return locations_buf
 
  */
+	locations free_blocks = NULL;
+	uint32_t blocks_found = 0;
 
+	/* Get the location of the next available free block */
+	for (uint32_t i = 0; i < NUMBLKS; ++i)
+	{
+		if (fbl.free_blocks[i] == false)
+		{
+			/* Reallocate more memory to store the next location */
+			free_blocks = (locations) realloc(free_blocks, ((blocks_found + 1) * sizeof(uint32_t)));
+
+			/* Add the free location to the array of free blocks */
+			free_blocks[blocks_found] = i;
+
+			++blocks_found;
+		}
+	}
+
+	/* If free_blocks is NULL there are no free blocks available */
+	if (free_blocks == NULL)
+	{
+		return 0;
+	}
+
+	/* Null terminate the array of free blocks locations and return it */
+	free_blocks = (locations) realloc(free_blocks, ((blocks_found + 1) * sizeof(uint32_t)));
+	free_blocks[blocks_found +1] = NULL;
+
+	return free_blocks;
 }
 
 
