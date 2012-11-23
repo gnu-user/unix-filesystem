@@ -36,7 +36,7 @@ int
 sfs_write(int fd, int start, int length, byte *mem_pointer);
 
 int
-sfs_readdir(int fd, byte *mem_pointer);
+sfs_readdir(int fd, char *mem_pointer);
 
 int
 sfs_close(int fd);
