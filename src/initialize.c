@@ -28,6 +28,7 @@ int sfs_initialize(int erase)
 	byte* buf = NULL;
 	int root_dir = 0;
 	int retval = 0;
+	char root_name[] = "/";
 
 	if (erase == 1 || erase == 0)
 	{
@@ -88,7 +89,8 @@ int sfs_initialize(int erase)
 		 * determined that it will write to (aka the first block after the last
 		 * block in the free block list blocks.
 		 **/
-		retval = sfs_create('/', 1);
+
+		retval = sfs_create(root_name, 1);
 
 		if(retval <= 0)
 		{

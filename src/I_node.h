@@ -24,17 +24,17 @@ typedef struct{
 
 extern inode get_null_inode();
 
-extern inode* get_inode(int block_num);
+extern inode* get_inode(uint32_t block_num);
 
-extern uint32_t get_index_block(int block_num);
+extern uint32_t get_index_block(uint32_t block_num);
 
-extern int get_type(int block_num);
+extern int get_type(uint32_t block_num);
 
-extern int get_size(int block_num);
+extern uint32_t get_size(uint32_t block_num);
 
-extern int get_encrypted(int block_num);
+extern int get_encrypted(uint32_t block_num);
 
-extern char* get_name(int block_num);
+extern char* get_name(uint32_t block_num);
 
 extern uint32_t get_crc(uint32_t block_num);
 

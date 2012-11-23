@@ -58,41 +58,49 @@ int sfs_create(char *pathname, int type)
 		 * Traverse the file system to find the directory containing the desired
 		 * inode
 		 */
-		inode_location = traverse_file_system(tokens, true);
-
-		/**
-		 * Invalid path or path does not exist
-		 */
-		if(inode_location == NULL)
+		if(tokens[0] != NULL)
 		{
-			return 0;
+			inode_location = traverse_file_system(tokens, true);
+
+			/**
+			 * Invalid path or path does not exist
+			 */
+			if(inode_location == NULL)
+			{
+				return 0;
+			}
+
+			/**
+			 * inode_location[0] = the location of the directory's inode,
+			 * inode_location[1] = the token index for the last element
+			 */
+
+			/**
+			 * Check if the there is another file with the given name
+			 * 	- If there is another file, there is an invalid file name error
+			 */
+			if(iterate_index(inode_location[0], index_block) == NULL){
+				return 0;
+			}
+
+			/**
+			 * Check File/directory already exists
+			 */
+			if(find_inode(index_block, tokens[inode_location[1]]) != NULL)
+			{
+				return 0;
+			}
+
+			/**
+			 * Check if there is enough space on the disk for the new create
+			 * (2 blocks for directory or file)
+			 */
 		}
-
-		/**
-		 * inode_location[0] = the location of the directory's inode,
-		 * inode_location[1] = the token index for the last element
-		 */
-
-		/**
-		 * Check if the there is another file with the given name
-		 * 	- If there is another file, there is an invalid file name error
-		 */
-		if(iterate_index(inode_location[0], index_block) == NULL){
-			return 0;
-		}
-
-		/**
-		 * Check File/directory already exists
-		 */
-		if(find_inode(index_block, tokens[inode_location[1]]) != NULL)
+		else
 		{
-			return 0;
+			inode_location = SUPER_BLOCK;
 		}
 
-		/**
-		 * Check if there is enough space on the disk for the new create
-		 * (2 blocks for directory or file)
-		 */
 		if(calc_num_free_blocks(CREATE_SIZE) == NULL)
 		{
 			/**
@@ -106,7 +114,14 @@ int sfs_create(char *pathname, int type)
 		 */
 		new_inode_location[0] = get_free_block();
 
-		strcpy(new_block.name, tokens[inode_location[1]]);
+		if(tokens[0] != NULL)
+		{
+			strcpy(new_block.name, tokens[inode_location[1]]);
+		}
+		else{
+
+			strncpy(new_block.name, "/", 1);
+		}
 
 		if(type == 0){
 			new_block.type = false;
@@ -150,6 +165,10 @@ int sfs_create(char *pathname, int type)
 		//date_last_modified = cur_date;
 		//file_owner = cur_user;
 		//last_user_modified = cur_user;
+
+		/**
+		 * Generate CRC for inode for unique identifier
+		 */
 
 		/**
 		 * Assign locations

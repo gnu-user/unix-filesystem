@@ -47,6 +47,11 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	//up a file with a path that only contains '/'
 	inode_location[0] = find_inode(index_block, tokens[0]);
 
+	if(create == true)
+	{
+		second_last = 1;
+	}
+
 	/**
 	 * General structure of the traversal:
 	 * 	- From Inode get index block location
@@ -57,11 +62,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	 * 	- File not found
 	 * 	- Invalid pathway (directory not found)
 	 */
-	if(create == true)
-	{
-		second_last = 1;
-	}
-
 	while(tokens[i+1+second_last] != NULL)
 	{
 		index_block = 0;

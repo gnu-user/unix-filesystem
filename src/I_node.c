@@ -124,7 +124,7 @@ int get_type(uint32_t block_num)
  * if the size >= 0 then the function was successful
  * if the size < 0 then the function was unsuccessful
  */
-int get_size(uint32_t block_num)
+uint32_t get_size(uint32_t block_num)
 {
 	/**
 	 * Check if the type is a file
