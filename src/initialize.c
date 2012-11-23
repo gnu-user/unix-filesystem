@@ -4,7 +4,6 @@
  * Pre-defined bytes per block
  * Initialize the super block
  **/
-
 #include "initialize.h"
 #include "block_func.h"
 #include "super_block.h"

@@ -17,7 +17,7 @@
  */
 int sfs_delete(char *pathname)
 {
-	//TODO create delete_file
+	//TODO test delete
 	char** tokens;
 	uint32_t* parent_location = NULL;
 	locations index_block = {NULL};
@@ -107,6 +107,8 @@ int sfs_delete(char *pathname)
 
 	/**
 	 * Delete all swoft entries for the given file
+	 *
+	 * TODO change to use uuid not crc
 	 */
 	if(find_and_remove(get_name(inode_loc[0]), get_crc(inode_loc[0])))
 	{

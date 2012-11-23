@@ -30,7 +30,6 @@
  */
 int sfs_create(char *pathname, int type)
 {
-	//TODO create create_file
 	inode new_block = get_null_inode();
 	char** tokens;
 	uint32_t* inode_location = NULL;

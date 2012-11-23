@@ -216,7 +216,6 @@ static void get_random_bytes(void *buf, int nbytes)
 /*
  * Get the ethernet hardware address, if we can find it...
  *
- * XXX for a windows version, probably should use GetAdaptersInfo:
  * http://www.codeguru.com/cpp/i-n/network/networkinformation/article.php/c5451
  * commenting out get_node_id just to get gen_uuid to compile under windows
  * is not the right way to go!
@@ -282,7 +281,6 @@ static int get_node_id(unsigned char *node_id)
 		a = (unsigned char *) &sdlp->sdl_data[sdlp->sdl_nlen];
 #else
 		/*
-		 * XXX we don't have a way of getting the hardware
 		 * address
 		 */
 		close(sd);

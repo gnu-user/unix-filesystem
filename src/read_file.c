@@ -27,7 +27,6 @@
  */
 int sfs_read(int fd, int start, int length, byte *mem_pointer)
 {
-	//TODO create read
 	//TODO create encryption
 	//TODO create decryption
 

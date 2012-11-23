@@ -11,7 +11,6 @@
  */
 int sfs_close(int fd)
 {
-	//TODO create close_file
 	//TODO test close
 
 	/**
