@@ -32,6 +32,22 @@ byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
 }
 
 
+uint32_t calc_num_blocks(byte* buf)
+{
+	uint32_t i;
+	for (i = 0; i < MAX_IO_LENGTH + 1; ++i)
+	{
+		if (buf[i] == NULL)
+		{
+			return (ceil((i + 1) / BLKSIZE));
+		}
+	}
+
+	// Error occurred the buffer is larger than MAX_IO_LENGTH
+	return 0;
+}
+
+
 // NOTE a prime example of when static type systems break down in generic programming
 void* concat(void* src_1, void* src_2, uint32_t size)
 {
