@@ -151,13 +151,10 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		blocks_needed++; //Inode block space
 		inode_write = get_swoft_inode(fd);
 		data_block_locations = iterate_index(inode_write.location, data_block_locations);
+
 		data_buf = get_data(data_block_locations);
-		i = 0;
-		while(data_buf[i] != NULL)
-		{
-			i++;
-		}
-		blocks_needed += (int)ceil(i/BLKSIZE);
+
+		blocks_needed += get_num_datablocks(data_buf);
 
 		if(start >= 0)
 		{
