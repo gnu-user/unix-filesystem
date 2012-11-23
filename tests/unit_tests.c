@@ -31,11 +31,11 @@ start_test(char* name, void* tcase())
 
 	if (tcase() == EXIT_SUCCESS)
 	{
-		printf(BOLDYELLOW "\nTest Case %s Passed\n" RESET, name);
+		printf(BOLDGREEN "\nTest Case %s Passed\n" RESET, name);
 	}
 	else
 	{
-		printf(BOLDMAGENTA "\nTest Case %s Failed\n" RESET, name);
+		printf(BOLDRED "\nTest Case %s Failed\n" RESET, name);
 	}
 }
 
@@ -45,7 +45,7 @@ start_test(char* name, void* tcase())
  */
 test_fail(char* test)
 {
-	printf(BOLDRED "%s Failed\n" RESET, test);
+	printf(BOLDMAGENTA "%s Failed\n" RESET, test);
 }
 
 /*
@@ -53,7 +53,7 @@ test_fail(char* test)
  */
 test_pass(char* test)
 {
-	printf(BOLDGREEN "%s Passed\n" RESET, test);
+	printf(BOLDBLUE "%s Passed\n" RESET, test);
 }
 
 
