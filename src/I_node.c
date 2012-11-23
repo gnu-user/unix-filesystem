@@ -46,7 +46,7 @@ inode get_null_inode()
 			.location = 0,
 			.encrypted = false,
 			.check_sum = 0,
-			.uuid = 0
+			.uuid = NULL
 	};
 	uuid_generate(i.uuid);
 	return i;
@@ -72,6 +72,17 @@ inode* get_inode(uint32_t block_num)
 	return (inode*) buf;
 }
 
+unsigned char* get_uuid(uint32_t block_num)
+{
+	char* buf = allocate_buf(buf, BLKSIZE);
+	int retval = read_block(block_num, buf);
+
+	if(retval != 0)
+	{
+		return retval;
+	}
+	return *((inode*) buf)->uuid;
+}
 /**
  * Get the index block from the Inode given the location of the Inode
  *

@@ -78,7 +78,6 @@ int sfs_initialize(int erase)
 		 * Initialize the root directory. This will be the first block
 		 * initialized outside of the super block. The root_dir will contain an
 		 * Inode that points to a index block that is empty.
-		 *
 		 **/
 		retval = sfs_create(root_name, 1);
 
@@ -86,29 +85,6 @@ int sfs_initialize(int erase)
 		{
 			return retval;
 		}
-
-		buf = allocate_buf(buf, BLKSIZE);
-
-		retval = read_block(SUPER_BLOCK, buf);
-
-		if(retval != 0)
-		{
-			return retval;
-		}
-
-		/**
-		 * Retrieve the super block
-		 */
-		superblock* super = get_super_block();
-
-		/**
-		 * Display the super block
-		 */
-		printf("size of disk, %d\n", super->size_of_disk);
-		printf("block size, %d\n", super->block_size);
-		printf("free_block_list, %d\n", super->free_block_list);
-		printf("root dir, %d\n", super->root_dir);
-		printf("device id, %d\n", super->device_id);
 
 		return 1;
 	}

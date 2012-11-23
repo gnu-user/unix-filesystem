@@ -28,7 +28,7 @@ extern inode get_null_inode();
 
 extern inode* get_inode(uint32_t block_num);
 
-extern int get_uuid(uint32_t block_num);
+extern unsigned char* get_uuid(uint32_t block_num);
 
 extern uint32_t get_index_block(uint32_t block_num);
 
