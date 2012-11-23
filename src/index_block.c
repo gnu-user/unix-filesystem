@@ -105,7 +105,6 @@ locations iterate_index(uint32_t location, locations data_blocks)
 */
 }
 
-//TODO
 uint32_t calc_index_blocks(uint32_t num_blocks)
 {
 	return 0;

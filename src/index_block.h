@@ -21,6 +21,7 @@ typedef struct {
 
 
 /**
+ * TODO do IT
  * Calculates the number of index blocks that are needed in order to write
  * the number of data blocks specified to the filesystem
  *
