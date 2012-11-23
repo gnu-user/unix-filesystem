@@ -41,10 +41,10 @@
 #define MAX_NAME_LEN 7
 
 #define SUPER_BLOCK	0
-#define FBL_INDEX 	2
+uint32_t FBL_INDEX =		2;
 #define JOURNAL		1
 //TODO ROOT needs to be put at FBL_INDEX + number of FBL index blocks + number of FBL datablocks + 1
-//int ROOT = 2 +	calc_index_blocks(ceil(NUMBLOCKS/BLOCKSIZE)) +
+//uint32_t ROOT = 2 +	calc_index_blocks(ceil(NUMBLOCKS/BLOCKSIZE)) +
 
 typedef uint8_t byte;
 

@@ -27,7 +27,7 @@ int test_generate_index(void)
 
 	data_index testindex = generate_index (1);
 
-	testindex.index_location;
+	testindex.index_location == ROOT;
 
 	if (0)
 	{
