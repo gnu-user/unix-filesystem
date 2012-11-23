@@ -1,6 +1,6 @@
 #include "glob_data.h"
-#include <stdbool.h>
 #include "index_block.h"
+#include <stdbool.h>
 
 #ifndef I_NODE_H_
 #define I_NODE_H_

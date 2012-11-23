@@ -1,3 +1,4 @@
+#include "glob_data.h"
 #include "blockio.h"
 #include "traverse_tree.h"
 

@@ -32,4 +32,7 @@ typedef uint8_t byte;
 
 typedef byte block[BLKSIZE];
 
+/* A NULL terminated array of locations for blocks on disk */
+typedef uint32_t* locations;
+
 #endif /* GLOBDATA_H_ */

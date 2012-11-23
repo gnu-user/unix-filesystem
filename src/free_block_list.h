@@ -17,9 +17,6 @@
  * in update_fbl. These can never be bigger than the number of blocks on disk.
  */
 
-//TODO ALL OF THESE HAVE TO BE NULL TERMINATED!!!!!!!!!!
-typedef uint32_t* free_locations;
-typedef uint32_t* used_locations;
 
 /**
  * The free_block_list is an array containing the free blocks on disk.
@@ -40,11 +37,10 @@ static free_block_list fbl;
  * free block list in memory, then return the pointer to that instance in memory,
  * if an error occurs a NULL pointer is returned.
  *
- * @param current_fbl Takes a pointer to the current FBL's static instance in memory.
  * @return The pointer to the static instance of free block list in memory, NULL
  * if an error occurred.
  */
-extern free_block_list* get_free_block_list(free_block_list* current_fbl);
+extern free_block_list* get_free_block_list(void);
 
 
 /**
@@ -55,7 +51,7 @@ extern free_block_list* get_free_block_list(free_block_list* current_fbl);
  *
  * @return An array containing all of the free locations
  */
-extern free_locations calc_total_free_blocks(void);
+extern locations calc_total_free_blocks(void);
 
 
 /**
@@ -70,7 +66,7 @@ extern free_locations calc_total_free_blocks(void);
  * @return An array of the free locations, or NULL if there are not enough free blocks
  *
  */
-extern free_locations calc_num_free_blocks(uint32_t num_blocks);
+extern locations calc_num_free_blocks(uint32_t num_blocks);
 
 
 /**
@@ -81,7 +77,10 @@ extern free_locations calc_num_free_blocks(uint32_t num_blocks);
  * in the fbl, it essentially operates as a facade for calc_free_blocks and update_fbl when
  * you only want to get one block at a time
  *
- * @return The location of a free block
+ * If there are no free blocks available, it will return 0 (the superblock's location),
+ * which is always used by the superblock.
+ *
+ * @return The location of a free block. Return 0 if no free blocks available.
  *
  */
 extern uint32_t get_free_block(void);
@@ -149,8 +148,8 @@ static free_block_list* iterate_fbl(uint32_t location);
  * if it is NULL then no locations are marked as free
  *
  */
-free_block_list* update_fbl(used_locations used,
-							free_locations free);
+free_block_list* update_fbl(locations used,
+							locations free);
 
 
 #endif /* FREE_BLOCK_LIST_H_ */

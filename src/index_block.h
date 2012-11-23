@@ -6,9 +6,6 @@
 // TODO use malloc for this; it should be size: ceil(BLOCKSIZE/sizeof(uint32_t))
 typedef uint32_t* index;
 
-// Array of locations for blocks on disk
-typedef uint32_t* locations;
-
 /* Stuct containing the location of the first index and an array of the
  * data location
  */

@@ -7,52 +7,39 @@ static free_block_list fbl =
 };
 
 
-free_block_list* get_free_block_list(free_block_list* current_fbl)
+free_block_list* get_free_block_list(void)
 {
 	uint32_t fbl_location = 0;
 	free_block_list* tmp_fbl = NULL;
 
-	/* If the current_fbl argument is NULL read from memory/disk */
-	if (current_fbl == NULL)
+	/* If the current free block list in memory has not been set (the
+	 * superblock at index 0 is marked as 0) read the FBL from disk
+	 */
+	if (fbl.free_blocks[0] == false)
 	{
-		/* If the current free block list in memory has not been set (the
-		 * superblock at index 0 is marked as 0) read the FBL from disk
-		 */
-		if (fbl.free_blocks[0] == false)
+		/* Read the FBL from disk and update the instance in memory */
+		fbl_location = get_free_block_index();
+		tmp_fbl = read_fbl(fbl_location);
+
+		if (tmp_fbl != NULL)
 		{
-			/* Read the FBL from disk and update the instance in memory */
-			fbl_location = get_free_block_index();
-			tmp_fbl = read_fbl(fbl_location);
+			/* Overwrite the current fbl with the fbl from disk */
+			memcpy(&fbl, tmp_fbl, sizeof(free_block_list));
 
-			if (tmp_fbl != NULL)
-			{
-				/* Overwrite the current fbl with the fbl from disk */
-				memcpy(&fbl, tmp_fbl, sizeof(free_block_list));
-
-				/* Free the temp fbl buffer */
-				free(tmp_fbl);
-			}
-			else
-			{
-				return NULL;
-			}
+			/* Free the temp fbl buffer */
+			free(tmp_fbl);
 		}
-
-		return &fbl;
+		else
+		{
+			return NULL;
+		}
 	}
-	else
-	{
-		/* Update the static instance of fbl in memory with instance of the
-		 * fbl pointed by current_fbl
-		 */
-		memcpy(&fbl, current_fbl, sizeof(free_block_list));
 
-		return current_fbl;
-	}
+	return &fbl;
 }
 
 
-free_locations calc_total_free_blocks(void)
+locations calc_total_free_blocks(void)
 {
 	//1. Get the free block list.
 	//2. Traverse it and add any blocks marked as empty to an array of type free_indices.
@@ -78,7 +65,7 @@ free_locations calc_total_free_blocks(void)
 }
 
 
-free_locations calc_num_free_blocks(uint32_t num_blocks)
+locations calc_num_free_blocks(uint32_t num_blocks)
 {
 	//1. Get the free block list.
 	//2. Traverse it and add num_blocks specified marked as empty to an array of type free_indices.
@@ -215,35 +202,37 @@ static free_block_list* iterate_fbl(uint32_t location)
 }
 
 
-free_block_list* update_fbl(used_locations used,
-							free_locations free)
+free_block_list* update_fbl(locations used,
+							locations free)
 {
  	/* Iterate through each item in the used and free locations array,
  	 * for each item in the array update the free block list
 	 */
+
+	// TODO need to handle properly setting the first fbl index as used by the superblock
+	fbl.free_blocks[0] = true;
+
+	uint32_t i = 0;
+
 	if (used != NULL)
 	{
-		uint32_t i = 0;
-
-		/*while (used[i] != NULL)
+		while (used[i] != NULL)
 		{
-			// Mark each of the fbl locations specifed as used
-			fbl[used[i]] = true;
+			/* Mark each of the fbl locations specifed as used */
+			fbl.free_blocks[used[i]] = true;
 			++i;
-		}*/
-
+		}
 	}
 	if (free != NULL)
 	{
-		uint32_t i = 0;
+		i = 0;
 
-		/*while (free[i] != NULL)
+		while (free[i] != NULL)
 		{
-			// Mark each of the fbl locations specifed as free
-			fbl[free[i]] = false;
+			/* Mark each of the fbl locations specifed as free */
+			fbl.free_blocks[free[i]] = false;
 			++i;
-		}*/
-
+		}
 	}
 
 	return &fbl;
