@@ -26,7 +26,6 @@
  * (Integer) The check sum of the data (taken before it is
  * encrypted) will take up 4 bytes.
  **/
-
 #include "I_node.h"
 #include "block_func.h"
 
