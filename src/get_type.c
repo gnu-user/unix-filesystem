@@ -29,6 +29,7 @@ int sfs_gettype(char *pathname)
 	{
 		/**
 		 * Invalid path name
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return 0;
 	}
@@ -41,6 +42,7 @@ int sfs_gettype(char *pathname)
 	{
 		/**
 		 * Invalid path way or file or directory not found
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return -1;
 	}

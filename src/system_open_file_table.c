@@ -49,7 +49,6 @@ int add_to_swoft(uint32_t block_num)
 	/**
 	 * Store the Inode in the swoft
 	 */
-	//TODO de-reference...
 	system_open_tb.fd[index] = *test;
 
 	/**

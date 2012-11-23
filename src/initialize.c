@@ -4,7 +4,6 @@
  * Pre-defined bytes per block
  * Initialize the super block
  **/
-
 #include "initialize.h"
 #include "block_func.h"
 #include "super_block.h"
@@ -15,6 +14,7 @@
 
 int sfs_initialize(int erase)
 {
+	//TODO finish create
 	byte* buf = NULL;
 	int root_dir = 0;
 	int retval = 0;
@@ -33,6 +33,9 @@ int sfs_initialize(int erase)
 
 			if(retval != 0)
 			{
+				/**
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
 				return retval;
 			}
 		}
@@ -57,9 +60,13 @@ int sfs_initialize(int erase)
 		 */
 		buf = (byte *) copy_to_buf((byte *)&sb, (byte *)buf, sizeof(sb), BLKSIZE);
 		retval = write_block(SUPER_BLOCK, buf);
+		free(buf);
 
 		if(retval != 0)
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return retval;
 		}
 
@@ -78,43 +85,28 @@ int sfs_initialize(int erase)
 		 * Initialize the root directory. This will be the first block
 		 * initialized outside of the super block. The root_dir will contain an
 		 * Inode that points to a index block that is empty.
-		 *
 		 **/
 		retval = sfs_create(root_name, 1);
 
 		if(retval <= 0)
 		{
-			return retval;
-		}
-
-		buf = allocate_buf(buf, BLKSIZE);
-
-		retval = read_block(SUPER_BLOCK, buf);
-
-		if(retval != 0)
-		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return retval;
 		}
 
 		/**
-		 * Retrieve the super block
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
-		superblock* super = get_super_block();
-
-		/**
-		 * Display the super block
-		 */
-		printf("size of disk, %d\n", super->size_of_disk);
-		printf("block size, %d\n", super->block_size);
-		printf("free_block_list, %d\n", super->free_block_list);
-		printf("root dir, %d\n", super->root_dir);
-		printf("device id, %d\n", super->device_id);
-
 		return 1;
 	}
 	else
 	{
 		//perror("sfs_initialize only excepts values 0 or 1");
+		/**
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 */
 		return -1;
 	}
 
@@ -142,8 +134,16 @@ int free_block_init(void)
 	 */
 	if(update_fbl(used, NULL) == NULL)
 	{
+		/**
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 */
+		free(used);
 		return -1;
 	}
+	/**
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
+	free(used);
 	return 0;
 }
 
@@ -167,8 +167,15 @@ int wipe_disk(void)
 		retval = write_block(i, buffer);
 		if(retval != 0)
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return retval;
 		}
 	}
+	free(buffer);
+	/**
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
 	return 0;
 }

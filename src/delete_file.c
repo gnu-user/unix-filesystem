@@ -17,7 +17,7 @@
  */
 int sfs_delete(char *pathname)
 {
-	//TODO create delete_file
+	//TODO test delete
 	char** tokens;
 	uint32_t* parent_location = NULL;
 	locations index_block = {NULL};
@@ -30,6 +30,9 @@ int sfs_delete(char *pathname)
 	tokens = tokenize_path(pathname);
 	if(tokens == NULL)
 	{
+		/**
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 */
 		return 0;
 	}
 
@@ -43,6 +46,7 @@ int sfs_delete(char *pathname)
 	{
 		/**
 		 * Parent not found
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return -1;
 	}
@@ -50,6 +54,7 @@ int sfs_delete(char *pathname)
 	if(iterate_index(parent_location[0], index_block) == NULL){
 		/**
 		 * Empty or no index block
+		 *TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return 0;
 	}
@@ -64,6 +69,7 @@ int sfs_delete(char *pathname)
 	{
 		/**
 		 * Inode not found
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return 0;
 	}
@@ -83,6 +89,7 @@ int sfs_delete(char *pathname)
 	{
 		/**
 		 * Directory has children
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return 0;
 	}
@@ -107,15 +114,21 @@ int sfs_delete(char *pathname)
 
 	/**
 	 * Delete all swoft entries for the given file
+	 *
+	 * TODO change to use uuid to identify the file descriptor, not crc
 	 */
 	if(find_and_remove(get_name(inode_loc[0]), get_crc(inode_loc[0])))
 	{
 		/**
 		 * Failed to remove files from swoft
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return -2;
 	}
+
 	/**
+	 * TODO journal linking the newly updated fbl
+	 * TODO journal removing the index location from parent
 	 * Delete the index location from the index block of the parent directory
 	 */
 	//remove_location(get_index_block(parent_location[0]));
@@ -123,6 +136,7 @@ int sfs_delete(char *pathname)
 	/**
 	 * return value > 0 then the file was deleted successfully.
 	 * return value <= 0 then the file failed to be delete.
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 	 */
 	return 1;
 }

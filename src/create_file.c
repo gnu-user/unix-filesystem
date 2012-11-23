@@ -30,7 +30,7 @@
  */
 int sfs_create(char *pathname, int type)
 {
-	//TODO create create_file
+	//TODO test create
 	inode new_block = get_null_inode();
 	char** tokens;
 	uint32_t* inode_location = NULL;
@@ -52,6 +52,9 @@ int sfs_create(char *pathname, int type)
 		tokens = tokenize_path(pathname);
 		if(tokens == NULL)
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return 0;
 		}
 
@@ -68,6 +71,9 @@ int sfs_create(char *pathname, int type)
 			 */
 			if(inode_location == NULL)
 			{
+				/**
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
 				return 0;
 			}
 
@@ -81,6 +87,9 @@ int sfs_create(char *pathname, int type)
 			 * 	- If there is another file, there is an invalid file name error
 			 */
 			if(iterate_index(inode_location[0], index_block) == NULL){
+				/**
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
 				return 0;
 			}
 
@@ -106,6 +115,7 @@ int sfs_create(char *pathname, int type)
 		{
 			/**
 			 * Not enough space
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 			 */
 			return -1;
 		}
@@ -114,6 +124,14 @@ int sfs_create(char *pathname, int type)
 		 * Get a free block location for the Inode
 		 */
 		new_inode_location[0] = get_free_block();
+
+		if(new_inode_location[0] == 0)
+		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
+			return 0;
+		}
 
 		/**
 		 * Copy the name into the inode
@@ -173,8 +191,14 @@ int sfs_create(char *pathname, int type)
 
 			if(update_fbl(NULL, new_inode_location) == NULL)
 			{
+				/**
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
 				return -1;
 			}
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return 0;
 		}
 
@@ -190,11 +214,13 @@ int sfs_create(char *pathname, int type)
 		 * 	- If there is an error while writing, de-allocate the blocks
 		 * 	  return error
 		 */
+
 		buf = allocate_buf(buf, BLKSIZE);
 
 		buf = (byte *) copy_to_buf((byte *)&new_block, (byte *)buf, sizeof(new_block), BLKSIZE);
 		retval = write_block(new_inode_location[0], buf);
 
+		free(buf);
 		if(retval != 0)
 		{
 			/**
@@ -203,8 +229,14 @@ int sfs_create(char *pathname, int type)
 			new_inode_location[1] = index_location.index_location;
 			if(update_fbl(NULL, new_inode_location) == NULL)
 			{
+				/**
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
 				return -1;
 			}
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return 0;
 		}
 
@@ -226,14 +258,22 @@ int sfs_create(char *pathname, int type)
 		}*/
 
 		/**
+		 * TODO update size of parent
+		 */
+
+		/**
 		 * TODO journal fbl as well
 		 */
 
 		/**
 		 * return value > 0 the file create was a success
 		 * return value <= 0 the file create was unsuccessful
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return 1;
 	}
+	/**
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
 	return 0;
 }
