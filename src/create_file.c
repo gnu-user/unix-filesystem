@@ -114,6 +114,9 @@ int sfs_create(char *pathname, int type)
 		 */
 		new_inode_location[0] = get_free_block();
 
+		/**
+		 * Copy the name into the inode
+		 */
 		if(tokens[0] != NULL)
 		{
 			strcpy(new_block.name, tokens[inode_location[1]]);
@@ -123,9 +126,11 @@ int sfs_create(char *pathname, int type)
 			strncpy(new_block.name, "/", 1);
 		}
 
+		/**
+		 * Initialize values depending on the file type
+		 */
 		if(type == 0){
 			new_block.type = false;
-			new_block.file_size = CREATE_SIZE * BLKSIZE;
 		}
 		else
 		{
@@ -134,8 +139,24 @@ int sfs_create(char *pathname, int type)
 			 * Identify whether the file is encrypted
 			 */
 			new_block.encrypted = 0;
-			new_block.file_size = CREATE_SIZE * BLKSIZE;
+
 		}
+
+		new_block.file_size = CREATE_SIZE * BLKSIZE;
+
+		/**
+		 * Fill in the information to be stored in the Inode
+		 * TODO fill in times and user info
+		 */
+		//date_of_create = cur_date;
+		//date_last_accessed = cur_date;
+		//date_last_modified = cur_date;
+		//file_owner = cur_user;
+		//last_user_modified = cur_user;
+
+		/**
+		 * Generate CRC for inode for unique identifier
+		 */
 
 		/**
 		 * Create an index block empty index block
@@ -155,20 +176,6 @@ int sfs_create(char *pathname, int type)
 			}
 			return 0;
 		}
-
-		/**
-		 * Fill in the information to be stored in the Inode
-		 * TODO fill in times and user info
-		 */
-		//date_of_create = cur_date;
-		//date_last_accessed = cur_date;
-		//date_last_modified = cur_date;
-		//file_owner = cur_user;
-		//last_user_modified = cur_user;
-
-		/**
-		 * Generate CRC for inode for unique identifier
-		 */
 
 		/**
 		 * Assign locations
@@ -203,6 +210,7 @@ int sfs_create(char *pathname, int type)
 		/**
 		 * Add the inode's location to the parent's index list
 		 * If add location fails de-allocate Inode and index block
+		 *
 		 * TODO check for success addition to parent index block
 		 * TODO link the inode to the parent Inode
 		 */

@@ -35,6 +35,9 @@ int sfs_readdir(int fd, byte *mem_pointer)
 		 */
 		if(validate_fd(fd) > 0)
 		{
+			/**
+			 * file descriptor not found in swoft
+			 */
 			return -1;
 		}
 

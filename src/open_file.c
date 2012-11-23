@@ -25,6 +25,9 @@ int sfs_open(char *pathname)
 	tokens = tokenize_path(pathname);
 	if(tokens == NULL)
 	{
+		/**
+		 * Invalid path name
+		 */
 		return 0;
 	}
 
@@ -35,6 +38,9 @@ int sfs_open(char *pathname)
 
 	if(inode_location == NULL)
 	{
+		/**
+		 * Invalid path way or file or directory not found
+		 */
 		return -1;
 	}
 

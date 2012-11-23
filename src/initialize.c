@@ -9,6 +9,7 @@
 #include "super_block.h"
 #include "free_block_list.h"
 #include <math.h>
+#include <stdbool.h>
 
 /**
  * Initialize the superblock for the file system.
@@ -85,11 +86,7 @@ int sfs_initialize(int erase)
 		 * initialized outside of the super block. The root_dir will contain an
 		 * Inode that points to a index block that is empty.
 		 *
-		 * Have to make sure that this is writing to the block that we have
-		 * determined that it will write to (aka the first block after the last
-		 * block in the free block list blocks.
 		 **/
-
 		retval = sfs_create(root_name, 1);
 
 		if(retval <= 0)
@@ -124,7 +121,7 @@ int sfs_initialize(int erase)
 	}
 	else
 	{
-		perror("sfs_initialize only excepts values 0 or 1");
+		//perror("sfs_initialize only excepts values 0 or 1");
 		return -1;
 	}
 
@@ -146,13 +143,16 @@ int free_block_init(void)
 	 * Create a list of the blocks used
 	 * Create a list of blocks that are remaining
 	 */
-	uint32_t* used = (uint32_t *) calloc(num_free_block, sizeof(uint32_t));
+	bool* used = (bool *) calloc(num_free_block, sizeof(bool));
 
 	for(uint32_t i = 0; i < num_free_block; i++)
 	{
-		used[i] = i;
+		used[i] = true;
 	}
 
+	/**
+	 * Update the free block list and check if it succeeded
+	 */
 	if(update_fbl(used, NULL) == NULL)
 	{
 		return -1;
@@ -169,14 +169,18 @@ int free_block_init(void)
  */
 int wipe_disk(void)
 {
-	//Create the null block of data
+	/**
+	 * Create the null block of data
+	 */
 	byte* buffer = NULL;
 
 	buffer = allocate_buf(buffer, BLKSIZE);
 
 	int retval = 0;
 
-	//Go block to block setting them to null
+	/**
+	 * Go block to block setting them to null
+	 */
 	for(uint32_t i = 0; i < NUMBLKS; i++)
 	{
 		retval = write_block(i, buffer);

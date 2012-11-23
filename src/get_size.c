@@ -29,6 +29,9 @@ int sfs_getsize(char *pathname)
 	tokens = tokenize_path(pathname);
 	if(tokens == NULL)
 	{
+		/**
+		 * Invalid pathname
+		 */
 		return 0;
 	}
 
@@ -39,6 +42,9 @@ int sfs_getsize(char *pathname)
 
 	if(inode_location == NULL)
 	{
+		/**
+		 * Invalid path or file/directory not found
+		 */
 		return -1;
 	}
 

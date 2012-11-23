@@ -40,17 +40,30 @@ int sfs_delete(char *pathname)
 
 	if(parent_location == NULL)
 	{
+		/**
+		 * Parent not found
+		 */
 		return -1;
 	}
 
 	if(iterate_index(parent_location[0], index_block) == NULL){
+		/**
+		 * Empty or no index block
+		 */
 		return 0;
 	}
 
+	/**
+	 * Find the inode of the file or directory with the given file name in the
+	 * given index block list
+	 */
 	inode_loc[0] = find_inode(index_block, tokens[parent_location[1]]);
 
 	if(inode_loc[0] == NULL)
 	{
+		/**
+		 * Inode not found
+		 */
 		return 0;
 	}
 
@@ -63,9 +76,13 @@ int sfs_delete(char *pathname)
 	 */
 	type = get_type(inode_loc[0]);
 
-	if(iterate_index(parent_location[0], index_block) == NULL || (type == 1 &&
-			index_block != NULL))
+
+	if(iterate_index(get_index_block(inode_loc[0]), index_block) != NULL &&
+			type == 1)
 	{
+		/**
+		 * Directory has children
+		 */
 		return 0;
 	}
 
@@ -86,8 +103,6 @@ int sfs_delete(char *pathname)
 	 * Delete the Inode block (update the free_block list)
 	 */
 	update_fbl(NULL, inode_loc);
-
-
 
 	/**
 	 * Delete all swoft entries for the given file
