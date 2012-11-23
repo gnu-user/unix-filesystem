@@ -112,15 +112,6 @@ static free_block_list* read_fbl(uint32_t location);
 
 
 /**
- * Determine what blocks the FBL uses and return all of them as an array (used locations).
- *
- * TODO REMOVE THIS, IT IS ONLY IN THE NON-INDEXED VERSIONS OF FBLS, WE NOW CALL GENERATE
- * INDEX TO CREATE INDICES FOR A NEW INSTANCE OF AN FBL ON THE DISK
- */
-//static used_locations index_fbl_blocks(uint32_t index);
-
-
-/**
  *
  * TODO ADD A NOTE THAT THIS IS CALLED INTERNALLY BY READ_FBL WHEN READING THE FBL FROM DISK
  * TODO THIS IS LITERALLY A WRAPPER FOR ITERATE INDEX THAT CHANGES THE RETURN TYPE TO TYPE FREE_BLOCk_LIST

@@ -264,16 +264,6 @@ static free_block_list* read_fbl(uint32_t location)
 }
 
 
-/*
- * TODO REMOVE THIS, IT IS ONLY IN THE NON-INDEXED VERSIONS OF FBLS, WE NOW CALL GENERATE
- * INDEX TO CREATE INDICES FOR A NEW INSTANCE OF AN FBL ON THE DISK
-
-static used_locations index_fbl_blocks(uint32_t index)
-{
-
-}
-*/
-
 static free_block_list* iterate_fbl(uint32_t location)
 {
 
