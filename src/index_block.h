@@ -131,8 +131,11 @@ locations iterate_index(uint32_t location, locations data_blocks);
  * if return = 0 then the directory is empty
  * if return > 0 then the function was successful
  * if return = -1 then the function was unsuccessful
+ *
+ * TODO remove or replace with: bool isDirectoryEmpty()
  */
-int count_locations(uint32_t location);
+int count_files_in_dir(uint32_t location);
+
 
 /**
  * Locate the index block locations on disk. Used for deleting the index blocks once

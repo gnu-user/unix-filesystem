@@ -27,7 +27,7 @@ data_index generate_index(uint32_t num_blocks)
 	 * if data length == 0
 	 * {
 	 *		calloc(what, index length)
-	 *		write(where[j], what)
+	 *		write_block(where[j], what)
 	 * }
 	 *
 	 * while (data length > 0)
@@ -55,7 +55,7 @@ data_index generate_index(uint32_t num_blocks)
 	 *
 	 *
 	 * 			// Write the index to the block specified
-	 * 			write(where[j-1], &what)
+	 * 			write_block(where[j-1], &what)
 	 * }
 	 * 	//Return the location of the first index block.
 	 * 	return where[0];
@@ -111,7 +111,7 @@ uint32_t calc_index_blocks(uint32_t num_blocks)
 	return 0;
 }
 
-int count_locations(uint32_t location)
+int count_files_in_dir(uint32_t location)
 {
 	locations loc = NULL;
 
