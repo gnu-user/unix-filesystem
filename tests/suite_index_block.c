@@ -19,7 +19,6 @@ int test_generate_index(void) {
 	/* Test 1 -- generate an index for a single block */
 
 	//TODO initialize the file system here
-
 	data_index testindex = generate_index(1);
 
 	/**
@@ -33,15 +32,43 @@ int test_generate_index(void) {
 	 * There should be no more indexes afterward,
 	 * so the rest should be null
 	 */
-	if ((testindex.index_location != ROOT + 2) ||
-			(testindex.data_locations[0] != ROOT + 3) ||
-			(testindex.data_locations[1] != NULL)) {
+	if ((testindex.index_location != ROOT + 2)
+			|| (testindex.data_locations[0] != ROOT + 3)
+			|| (testindex.data_locations[1] != NULL )) {
 		test_fail("Unit Test Part 1");
 		return EXIT_FAILURE;
 	} else {
 		test_pass("Unit Test Part 1");
 	}
 
+	/* Test 2 -- generate an index for an amount
+	 * of blocks that require >1 index blocks (in this case, 2) */
+
+	//TODO reinitialize the file system here
+
+	//This should give us 2 locations in the 2nd index block.
+	data_index testindex2 = generate_index(
+			1 + ceil(BLKSIZE / sizeof(uint32_t)));
+
+	/**
+	 * The newly generated index should be in the block
+	 * after ROOT's index, which is empty because
+	 * we just initialized.
+	 *
+	 * There should be (BLKSIZE + 2) indexes in here, because we
+	 * generated an index for something which is huge, so the number of
+	 * locations indexed should span two index blocks.
+	 *
+	 * There should be no more indexes afterward,
+	 * so the rest should be null.
+	 */
+	for (int i = 0; i < (2 + floor(BLKSIZE / sizeof(uint32_t))); i++) {
+		if (testindex2.index_location[i] != ROOT + i + 1) {
+			test_fail("Unit Test Part 1");
+			return EXIT_FAILURE;
+		}
+	}
+	test_pass("Unit Test Part 1");
 	return EXIT_SUCCESS;
 }
 
