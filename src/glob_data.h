@@ -43,8 +43,8 @@
 #define SUPER_BLOCK	0
 uint32_t FBL_INDEX =		2;
 #define JOURNAL		1
-//TODO ROOT needs to be put at FBL_INDEX + number of FBL index blocks + number of FBL datablocks + 1
-//uint32_t ROOT = 2 +	calc_index_blocks(ceil(NUMBLOCKS/BLOCKSIZE)) +
+//TODO ROOT needs to be put at the initial FBL_INDEX + number of FBL index blocks + number of FBL datablocks + 1
+uint32_t ROOT = FBL_INDEX +	calc_index_blocks(ceil(NUMBLOCKS/BLOCKSIZE)) + get_num_datablocks(FBL_INDEX) + 1;
 
 typedef uint8_t byte;
 
