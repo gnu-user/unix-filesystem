@@ -46,6 +46,7 @@
 //TODO ROOT needs to be put at the initial FBL_INDEX + number of FBL index blocks + number of FBL datablocks + 1
 uint32_t FBL_INDEX = 2;
 
+//TODO JON FIX THIS!!! NOW MONKEY!
 uint32_t ROOT = FBL_INDEX +	calc_index_blocks(ceil(NUMBLKS/BLKSIZE)) + get_num_datablocks(FBL_INDEX) + 1;
 
 //uint32_t root_dir = FBL_INDEX + ceil(ceil(NUMBLKS/BLKSIZE)/ceil(BLKSIZE/sizeof(uint32_t) - 1)) + ceil(NUMBLKS/BLKSIZE);
