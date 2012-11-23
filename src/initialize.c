@@ -46,7 +46,7 @@ int sfs_initialize(int erase)
 		 **/
 
 		root_dir = (int)(ceil(NUMBLKS/BLKSIZE))+1;
-		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_INDEX, root_dir, 0, NULL, 0};
+		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FBL_INDEX, root_dir, 0, NULL, 0};
 
 		uuid_generate(sb.uuid);
 
