@@ -29,7 +29,7 @@
 #define INPUT_BUF_FORMAT  "%1024s"
 
 /* Define if we are doing unit testing instead of executing sfs_test */
-#define UNIT_TESTING
+//#define UNIT_TESTING
 
 /* size of blocks on simulated disk */
 #define BLKSIZE  128

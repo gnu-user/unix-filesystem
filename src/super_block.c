@@ -64,7 +64,6 @@ int display_super_block(void)
 
 /*int validate_uuid()
 {
-	//TODO make validate_uuid
 	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(SUPER_BLOCK, buf);
 

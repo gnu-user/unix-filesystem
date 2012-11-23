@@ -70,7 +70,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 		 */
 		iterate_index(directory.location, index_block);
 
-		num_locations = count_locations(directory.location);
+		num_locations = count_files_in_dir(directory.location);
 		mem_pointer = (char *) calloc(num_locations, sizeof(char *));
 		i = 0;
 		while(i < num_locations)

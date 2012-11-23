@@ -2,6 +2,7 @@
 #include "glob_func.h"
 #include "index_block.h"
 #include <stdbool.h>
+#include "../lib/uuid/uuid.h"
 
 #ifndef I_NODE_H_
 #define I_NODE_H_

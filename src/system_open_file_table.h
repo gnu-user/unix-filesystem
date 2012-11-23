@@ -1,4 +1,5 @@
 #include "I_node.h"
+#include "../lib/uuid/uuid.h"
 
 #ifndef SYSTEM_OPEN_FILE_TABLE_H_
 #define SYSTEM_OPEN_FILE_TABLE_H_
