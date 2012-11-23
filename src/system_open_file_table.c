@@ -89,7 +89,7 @@ void remove_fd(int fd)
 	system_open_tb.taken[fd] = false;
 }
 
-int find_and_remove(char* file_name, uint32_t crc)
+int find_and_remove(char* file_name, uuid_t uuid)
 {
 	for(int i = 0; i < NUMOFL; i++)
 	{
@@ -97,7 +97,7 @@ int find_and_remove(char* file_name, uint32_t crc)
 		{
 			if(strcmp(system_open_tb.fd[i].name, file_name))
 			{
-				if(crc == system_open_tb.fd[i].check_sum)
+				if(uuid_compare(uuid, system_open_tb.fd[i].uuid) == 0)
 				{
 					system_open_tb.taken[i] = false;
 					system_open_tb.fd[i] = get_null_inode();
