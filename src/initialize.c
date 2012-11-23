@@ -30,6 +30,8 @@ int sfs_initialize(int erase)
 	int root_dir = 0;
 	int retval = 0;
 	char root_name[] = "/";
+	int variant =0;
+	char str[100];
 
 	if (erase == 1 || erase == 0)
 	{
@@ -52,7 +54,9 @@ int sfs_initialize(int erase)
 		 **/
 
 		root_dir = (int)(ceil(NUMBLKS/BLKSIZE))+1;
-		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_INDEX, root_dir, 0, NULL};
+		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FREE_INDEX, root_dir, 0, NULL, 0};
+
+		uuid_generate(sb.uuid);
 
 		/**
 		 * Allocate a buffer to write to the block.
@@ -143,11 +147,11 @@ int free_block_init(void)
 	 * Create a list of the blocks used
 	 * Create a list of blocks that are remaining
 	 */
-	bool* used = (bool *) calloc(num_free_block, sizeof(bool));
+	uint32_t* used = (uint32_t *) calloc(num_free_block, sizeof(bool));
 
 	for(uint32_t i = 0; i < num_free_block; i++)
 	{
-		used[i] = true;
+		used[i] = i;
 	}
 
 	/**

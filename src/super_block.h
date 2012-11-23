@@ -18,7 +18,7 @@ typedef struct{
 	uint32_t free_block_list;	//Address to the first free block
 	uint32_t root_dir;			//Address to the root directory
 	uint32_t device_id;
-	byte uuid[16];
+	uuid_t uuid;
 } superblock;
 
 extern superblock* get_super_block(void);
