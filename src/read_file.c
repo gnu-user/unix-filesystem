@@ -27,6 +27,7 @@
  */
 int sfs_read(int fd, int start, int length, byte *mem_pointer)
 {
+	//TODO test read
 	//TODO create encryption
 	//TODO create decryption
 
@@ -47,6 +48,9 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 */
 		if (validate_fd(fd) < 0)
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return 0;
 		}
 
@@ -74,6 +78,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		{
 			/**
 			 * File is empty
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 			 */
 			return 0;
 		}
@@ -101,6 +106,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		{
 			/**
 			 * Read pass end of file
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 			 */
 			return 0;
 		}
@@ -137,9 +143,13 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		/**
 		 * return value > 0 if the file was read successfully
 		 * return value <= 0 if the file was read unsuccessfully
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
-
 		return 1;
 	}
+
+	/**
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
 	return 0;
 }

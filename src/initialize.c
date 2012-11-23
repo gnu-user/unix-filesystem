@@ -14,6 +14,7 @@
 
 int sfs_initialize(int erase)
 {
+	//TODO finish create
 	byte* buf = NULL;
 	int root_dir = 0;
 	int retval = 0;
@@ -32,6 +33,9 @@ int sfs_initialize(int erase)
 
 			if(retval != 0)
 			{
+				/**
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
 				return retval;
 			}
 		}
@@ -56,9 +60,13 @@ int sfs_initialize(int erase)
 		 */
 		buf = (byte *) copy_to_buf((byte *)&sb, (byte *)buf, sizeof(sb), BLKSIZE);
 		retval = write_block(SUPER_BLOCK, buf);
+		free(buf);
 
 		if(retval != 0)
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return retval;
 		}
 
@@ -82,14 +90,23 @@ int sfs_initialize(int erase)
 
 		if(retval <= 0)
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return retval;
 		}
 
+		/**
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 */
 		return 1;
 	}
 	else
 	{
 		//perror("sfs_initialize only excepts values 0 or 1");
+		/**
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 */
 		return -1;
 	}
 
@@ -117,8 +134,16 @@ int free_block_init(void)
 	 */
 	if(update_fbl(used, NULL) == NULL)
 	{
+		/**
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 */
+		free(used);
 		return -1;
 	}
+	/**
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
+	free(used);
 	return 0;
 }
 
@@ -142,8 +167,15 @@ int wipe_disk(void)
 		retval = write_block(i, buffer);
 		if(retval != 0)
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return retval;
 		}
 	}
+	free(buffer);
+	/**
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
 	return 0;
 }

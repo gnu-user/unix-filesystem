@@ -3,6 +3,7 @@
 
 superblock* get_super_block(void)
 {
+	//TODO FIX MEMORY LEAK
 	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(SUPER_BLOCK, buf);
 
@@ -15,6 +16,7 @@ superblock* get_super_block(void)
 
 uint32_t get_root(void)
 {
+	//TODO FIX MEMORY LEAK
 	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(SUPER_BLOCK, buf);
 
@@ -28,6 +30,7 @@ uint32_t get_root(void)
 
 uint32_t get_free_block_index(void)
 {
+	//TODO FIX MEMORY LEAK
 	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(SUPER_BLOCK, buf);
 

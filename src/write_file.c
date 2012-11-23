@@ -91,7 +91,7 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
  */
 int sfs_write(int fd, int start, int length, byte *mem_pointer)
 {
-	//TODO create write
+	//TODO test write
 	//TODO create encryption
 	//TODO create decryption
 	uint32_t blocks_needed = 0;
@@ -114,6 +114,9 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 */
 		if (validate_fd(fd) < 0)
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return 0;
 		}
 
@@ -162,6 +165,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			{
 				/**
 				 * Invalid override
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 				 */
 				return -1;
 			}
@@ -189,6 +193,9 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 */
 		if((calc_num_free_blocks(blocks_needed + calc_index_blocks(blocks_needed-1))) == NULL) //1 for the inode
 		{
+			/**
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return 0;
 		}
 
@@ -196,6 +203,10 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 * Create the new free block
 		 */
 		new_inode_loc = get_free_block();
+
+		/**
+		 * TODO Update file size
+		 */
 
 		/**
 		 * Generate the new list of indexes
@@ -225,9 +236,13 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		/**
 		 * return value > 0 if write was successful
 		 * return value <= 0 then the write was a fail
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return 1;
 	}
+	/**
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
 	return 0;
 }
 

@@ -17,7 +17,6 @@
  */
 int sfs_getsize(char *pathname)
 {
-	//TODO finish getsize
 	//TODO test getsize
 	int type = -1;
 	uint32_t index_block = 0;
@@ -32,6 +31,7 @@ int sfs_getsize(char *pathname)
 	{
 		/**
 		 * Invalid pathname
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return 0;
 	}
@@ -45,6 +45,7 @@ int sfs_getsize(char *pathname)
 	{
 		/**
 		 * Invalid path or file/directory not found
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
 		return -1;
 	}
@@ -77,5 +78,8 @@ int sfs_getsize(char *pathname)
 		 */
 		return count_locations(index_block);
 	}
+	/**
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
 	return -1;
 }
