@@ -33,7 +33,6 @@ static int remove_inode(uint32_t dest_index, uint32_t inode_location) {
 	return 0;
 }
 
-static bool is_journal_full(void)
-{
+static bool is_journal_full(void) {
 	return false;
 }
