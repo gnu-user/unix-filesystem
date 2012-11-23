@@ -45,7 +45,6 @@ uint32_t calc_index_blocks(uint32_t num_blocks);
  * and the locations of all the data blocks indexed by the all the indices (spanning the
  * entire index data structure).
  *
- *
  * @param num_blocks The number of blocks to generate indexes for
  * @return Returns a data_index struct which contains the location of the first
  * index block, and the locations of all data blocks indexed
@@ -103,25 +102,23 @@ data_index generate_index(uint32_t num_blocks);
 //int link_inode(uint32_t* index_block, uint32_t location);
 
 
-// TODO FIX THE VARIABLE NAMES THIS CAN ALSO BE USED TO RETURN THE
-// LOCATIONS OF INDODES IN THE CASE OF A DIRECTORY
-// TODO FIX THIS FUNCTION DESCRIPTION, ITS OUT OF DATE WITH THE CURRENT CODE
 /**
- * Get the first index block, and increase the length of the buffer by one for each index we get.
- * When we reach the value ceil(BLOCKSIZE/sizeof(uint32_t) = the last entry in the index block, recursively
- * call iterate_index on the index block at this index.
- * When we reach NULL inside the index block, we have reached the end of the indexes.
- * Add this NULL value as the last entry in the array of indices returned.
+ * Iterates recursively through the index blocks and returns a pointer to a NULL terminated
+ * array containing all of the data block locations stored in the indices. In the case of
+ * large files that require multiple indexes, when we reach the value
+ * ceil(BLOCKSIZE/sizeof(uint32_t), which is the last entry in the index block, recursively
+ * call iterate_index on the index block at this index. When we reach a NULL location inside
+ * the index block, we have reached the end of the indexes.
  *
- * @param cur_index The current index block called at each recursive iteration
- * @param array_indices Array of the indices for the index blocks on disk, updated
- * with each successive recursive call
+ * @param location The location of the first index block to iterate through
+ * @param data_blocks An argument used by the function when it recursively calls itself,
+ * the argument should be NULL when calling iterate_index for the first index location.
  *
- * @return The pointer to the array_indices containing an array of the indices for the
- * index blocks on disk, NULL if error occurred.
- *
+ * @return A pointer to a NULL terminated array containing all of the data block locations
+ * stored in the indices
  */
 locations iterate_index(uint32_t location, locations data_blocks);
+
 
 /**
  * Wrapper for iterate_index which simply gives you a count of the number of files in a directory.

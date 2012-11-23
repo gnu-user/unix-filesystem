@@ -74,6 +74,20 @@ int link_inode(uint32_t* index_block, uint32_t location)
 // LOCATIONS OF INDODES IN THE CASE OF A DIRECTORY
 locations iterate_index(uint32_t location, locations data_blocks)
 {
+	byte index__block[BLKSIZE + 1] = { 0 };
+	uint32_t i = 0;
+
+	/* Verify that the the index block location specified is valid */
+	if (location > 0 && location < NUMBLKS)
+	{
+		/* Invalid index block location */
+		return NULL;
+	}
+
+	if (read_block())
+
+
+
 /*
 	// Read the index block from the drive at location specified
 	index block = read_block(location)
