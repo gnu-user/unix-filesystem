@@ -24,4 +24,15 @@ extern int validate_fd(int fd);
 
 extern inode get_swoft_inode(fd);
 
+/**
+ * Find all entries in the swoft of the given file with the given checksum
+ * @param file_name the file name
+ * @param crc the checksum to validate unique inode
+ *
+ * @return an integer value
+ * if value = 1 success
+ * otherwise fail
+ */
+extern int find_and_remove(char* file_name, uint32_t crc);
+
 #endif /* SYSTEM_OPEN_FILE_TABLE_H_ */

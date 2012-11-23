@@ -36,6 +36,8 @@ extern int get_encrypted(int block_num);
 
 extern char* get_name(int block_num);
 
+extern uint32_t get_crc(uint32_t block_num);
+
 /*
  * Traverses the index of a directory and returns the location of the inode with
  * the name that matches the request. If the inode is found in the index then the

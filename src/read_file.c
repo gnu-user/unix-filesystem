@@ -33,8 +33,11 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	inode file_inode = get_null_inode();
 	uint32_t index_block = 0;
 	locations data_blocks = NULL;
-	byte* data_block = NULL;
+	byte* data_buf = NULL;
 	uint32_t start_block = NULL;
+	uint32_t i;
+	byte* temp = NULL;
+	mem_pointer = NULL;
 
 	if(fd >= 0 && start >= -1 && length > 0)
 	{
@@ -72,6 +75,8 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 			return 0;
 		}
 
+		data_buf = get_data(data_blocks);
+
 		/**
 		 * Since start is offset (number of bytes offset)
 		 * ceil(start/BLKSIZE)
@@ -95,8 +100,17 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 * copy the data block at start into memory
 		 * TODO figure out how to fix missing reference for ceil
 		 */
-		//start_block = (uint32_t)(ceil(start/BLKSIZE));
-		//data_block = data_blocks[start_block];
+		start_block = (uint32_t)(ceil(start/BLKSIZE));
+
+		i = 0;
+		while(data_blocks[i+start] != NULL && i < length)
+		{
+			temp = concat_len(mem_pointer, data_blocks[start_block+i], sizeof(byte), BLKSIZE);
+			free(mem_pointer);
+			mem_pointer = temp;
+			i++;
+		}
+
 
 		/**
 		 * data_buf = data_blocks parsed
@@ -106,21 +120,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 * mem_pointer = copy data_buf from start to index = start + length
 		 */
 
-
-		/**
-		 * Search for offset point in data blocks
-		 *  Given:
-		 *  - 128 bytes per block, 31 blocks per index block
-		 */
-
-		/**
-		 * Read for the required length
-		 *  Given:
-		 *  - 128 bytes per block, 31 blocks per index
-		 *  (since multiple blocks could be desired)
-		 *
-		 *  Stored in mem_pointer
-		 */
 
 		/**
 		 * Update last_accessed
