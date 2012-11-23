@@ -99,14 +99,28 @@ locations calc_num_free_blocks(uint32_t num_blocks)
 
 uint32_t get_free_block(void)
 {
-/*
-	free_block = calc_free_blocks(fbl, 1);
+	/* Get the location of the next available free block */
+	locations free_block = calc_num_free_blocks(1);
+	uint32_t free_block_loc = 0;
 
-	update_fbl(fbl, free_block);
+	/* If the free_block is NULL there are no more free blocks available */
+	if (free_block == NULL)
+	{
+		return 0;
+	}
 
-	return free_block;
-*/
-	return 9;
+	/* Mark the free_block location as used in the free block list and return the location */
+	if (update_fbl(free_block, NULL ) != NULL)
+	{
+		/* Copy the single free block location and free the dynamic memory */
+		free_block_loc = free_block[0];
+		free(free_block);
+
+		return free_block_loc;
+	}
+
+	/* Otherwise, an error occurred updating the free block list */
+	return 0;
 }
 
 
