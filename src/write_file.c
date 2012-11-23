@@ -64,36 +64,6 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 	return data_blocks;
 }
 
-/**
- * TODO add decrypt block
- */
-byte* get_data(uint32_t* location)
-{
-	int i = 0;
-	byte* databuf = NULL;
-	byte* temp = NULL;
-	byte* buf = NULL;
-	int retval = 0;
-
-	while(location[i] != NULL)
-	{
-		buf = allocate_buf(buf, BLKSIZE);
-
-		retval = read_block(location[i], buf);
-		if(retval != 0)
-		{
-			return NULL;
-		}
-		temp = (byte*) concat_len(databuf, buf, sizeof(byte), BLKSIZE);
-		free(databuf);
-		free(buf);
-		databuf = temp;
-
-		i++;
-	}
-	return databuf;
-}
-
 /** sfs_write
  * Write the length bytes of data specified from a memory location to the
  * specified file. The parameter start gives the offset of the first byte in

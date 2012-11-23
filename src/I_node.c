@@ -58,7 +58,7 @@ inode get_null_inode()
  * @return inode pointer of the Inode at the given location.
  * If Inode is null the Inode was not found.
  */
-inode* get_inode(int block_num)
+inode* get_inode(uint32_t block_num)
 {
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
@@ -79,7 +79,7 @@ inode* get_inode(int block_num)
  * If index >= 0 then the function was successful,
  * if index < 0 then the function was unsuccessful
  */
-uint32_t get_index_block(int block_num)
+uint32_t get_index_block(uint32_t block_num)
 {
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
@@ -101,7 +101,7 @@ uint32_t get_index_block(int block_num)
  * if type = 0 then the Inode is for a file,
  * otherwise the function has failed.
  */
-int get_type(int block_num)
+int get_type(uint32_t block_num)
 {
 	//type
 	char* buf = allocate_buf(buf, BLKSIZE);
@@ -123,7 +123,7 @@ int get_type(int block_num)
  * if the size >= 0 then the function was successful
  * if the size < 0 then the function was unsuccessful
  */
-int get_size(int block_num)
+uint32_t get_size(uint32_t block_num)
 {
 	/**
 	 * Check if the type is a file
@@ -152,7 +152,7 @@ int get_size(int block_num)
  * if encrypt is 1 then the file is encrypted
  * otherwise the function was unsuccessful
  */
-int get_encrypted(int block_num)
+int get_encrypted(uint32_t block_num)
 {
 	/**
 	 * Check if the type is a file
@@ -180,7 +180,7 @@ int get_encrypted(int block_num)
  * @return a char pointer to the file's name
  * if the file's name = NULL then the function was unsuccessful
  */
-char* get_name(int block_num)
+char* get_name(uint32_t block_num)
 {
 	//name[7]
 	char* buf = allocate_buf(buf, BLKSIZE);
@@ -191,6 +191,26 @@ char* get_name(int block_num)
 		return NULL;
 	}
 	return ((inode*) buf)->name;
+}
+
+/**
+ * Get the checksum of the data
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return the checksum, null if fail
+ */
+uint32_t get_crc(uint32_t block_num)
+{
+	//name[7]
+	char* buf = allocate_buf(buf, BLKSIZE);
+	int retval = read_block(block_num, buf);
+
+	if(retval != 0)
+	{
+		return NULL;
+	}
+	return ((inode*) buf)->check_sum;
 }
 
 uint32_t find_inode(locations index_blocks, char* name)

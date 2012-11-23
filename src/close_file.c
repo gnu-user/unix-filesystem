@@ -28,6 +28,7 @@ int sfs_close(int fd)
 		{
 			return 0;
 		}
+
 		/**
 		 * 	Remove the file descriptor from the System open file table
 		 */

@@ -93,6 +93,7 @@ locations calc_num_free_blocks(uint32_t num_blocks)
 		return locations_buf
 
 	 */
+	return 9;
 }
 
 
@@ -105,6 +106,7 @@ uint32_t get_free_block(void)
 
 	return free_block;
 */
+	return 9;
 }
 
 

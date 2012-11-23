@@ -100,3 +100,24 @@ void remove_fd(int fd)
 {
 	system_open_tb.taken[fd] = false;
 }
+
+int find_and_remove(char* file_name, uint32_t crc)
+{
+	for(int i = 0; i < NUMOFL; i++)
+	{
+		if(system_open_tb.taken[i] == true)
+		{
+			if(strcmp(system_open_tb.fd[i].name, file_name))
+			{
+				if(crc == system_open_tb.fd[i].check_sum)
+				{
+					system_open_tb.taken[i] = false;
+					system_open_tb.fd[i] = get_null_inode();
+					return 1;
+				}
+			}
+
+		}
+	}
+	return 0;
+}
