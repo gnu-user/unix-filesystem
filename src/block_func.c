@@ -13,7 +13,7 @@ int read_block(uint32_t location, byte* buf)
 /**
  * TODO add decrypt block
  */
-byte* get_data(uint32_t* location)
+byte* get_data(locations location)
 {
 	int i = 0;
 	byte* databuf = NULL;

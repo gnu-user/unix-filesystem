@@ -13,12 +13,31 @@
 #ifndef GLOB_FUNC_H_
 #define GLOB_FUNC_H_
 
-extern byte write_buffer[BLKSIZE];
+//extern byte write_buffer[BLKSIZE];
 
-extern byte read_buffer[BLKSIZE];
+//extern byte read_buffer[BLKSIZE];
 
+/**
+ * Get a buffer to write to memory of a given size
+ *
+ * @param the buffer to allocate the space for
+ * @param the size for the new buffer
+ *
+ * @return the new buffer
+ */
 extern byte* allocate_buf(byte* buf, uint32_t size);
 
+/**
+ * Copy the data from buf1 to buf2, given the size of both
+ *
+ * @param the from buffer
+ * @param the to buffer
+ * @param the size of the from buffer
+ * @param the size of the to buffer
+ *
+ * @return the second buffer with the contents of the first buffer stored into
+ * it
+ */
 extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2);
 
 /**

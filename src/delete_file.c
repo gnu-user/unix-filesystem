@@ -2,6 +2,7 @@
 #include "blockio.h"
 #include "traverse_tree.h"
 #include "free_block_list.h"
+#include "system_open_file_table.h"
 
 /** sfs_delete
  * Delete a file with the pathname specified.
@@ -40,7 +41,7 @@ int sfs_delete(char *pathname)
 	 * Traverse the file system to find the desired inode
 	 * get the inode above the one you desired
 	 */
-	parent_location = traverse_file_system(pathname, true);
+	parent_location = traverse_file_system(tokens, true);
 
 	if(parent_location == NULL)
 	{
@@ -117,7 +118,7 @@ int sfs_delete(char *pathname)
 	 *
 	 * TODO change to use uuid to identify the file descriptor, not crc
 	 */
-	if(find_and_remove(get_name(inode_loc[0]), get_crc(inode_loc[0])))
+	if(find_and_remove(get_name(inode_loc[0]), get_uuid(inode_loc[0])))
 	{
 		/**
 		 * Failed to remove files from swoft

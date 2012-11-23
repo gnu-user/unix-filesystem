@@ -2,13 +2,6 @@
 #include "traverse_tree.h"
 #include "super_block.h"
 
-/**
- * Change it to take a char**
- * create 2 other functions
- * 	1. traverse to the specified last Inode
- * 	2. traverse to the second last Inode and return the name of the last token
- * 	in the char**
- */
 uint32_t* traverse_file_system(char** tokens, bool create)
 {
 	int root_dir;

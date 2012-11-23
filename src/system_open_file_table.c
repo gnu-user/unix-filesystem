@@ -6,17 +6,6 @@
 
 swoft system_open_tb = {0};
 
-/**
- * Add the inode to the swoft
- *
- * @param block_num location, the Inode's location on disk
- *
- * @param an integer value,
- * if the value >= 0 then the inode was found and added to the swoft
- * if the value == -1 then the swoft was full
- * if the value == -2 then the inode was not found
- * otherwise the function was unsuccessful
- */
 int add_to_swoft(uint32_t block_num)
 {
 	inode* test = NULL;
@@ -100,7 +89,7 @@ void remove_fd(int fd)
 	system_open_tb.taken[fd] = false;
 }
 
-int find_and_remove(char* file_name, uint32_t crc)
+int find_and_remove(char* file_name, uuid_t uuid)
 {
 	for(int i = 0; i < NUMOFL; i++)
 	{
@@ -108,7 +97,7 @@ int find_and_remove(char* file_name, uint32_t crc)
 		{
 			if(strcmp(system_open_tb.fd[i].name, file_name))
 			{
-				if(crc == system_open_tb.fd[i].check_sum)
+				if(uuid_compare(uuid, system_open_tb.fd[i].uuid) == 0)
 				{
 					system_open_tb.taken[i] = false;
 					system_open_tb.fd[i] = get_null_inode();

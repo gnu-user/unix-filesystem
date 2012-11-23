@@ -62,15 +62,18 @@ int display_super_block(void)
 	return 1;
 }
 
-int calc_uuid()
-{
-	//TODO make calc_uuid
-	return 1;
-}
-
-int validate_uuid()
+/*int validate_uuid()
 {
 	//TODO make validate_uuid
+	byte* buf = allocate_buf(buf, BLKSIZE);
+	int retval = read_block(SUPER_BLOCK, buf);
+
+	if(retval != 0)
+	{
+		return retval;
+	}
+
+	((superblock*) buf)->uuid;
 	return 1;
-}
+}*/
 

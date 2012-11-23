@@ -23,11 +23,13 @@
  * @exception INVALID_FILE_DESCRIPTOR If the file descriptor specified does not
  * exist
  */
-int sfs_readdir(int fd, byte *mem_pointer)
+int sfs_readdir(int fd, char *mem_pointer)
 {
 	//TODO test readdir
 	inode directory = get_null_inode();
 	locations index_block = NULL;
+	uint32_t i = 0;
+	uint32_t num_locations = 0;
 	if(fd >= 0)
 	{
 
@@ -68,12 +70,13 @@ int sfs_readdir(int fd, byte *mem_pointer)
 		 */
 		iterate_index(directory.location, index_block);
 
-		/**
-		 * TODO decided if directory is access if a user reads it or if a
-		 * user reads any file below it
-		 * Update last_accessed
-		 */
-		mem_pointer = (char*) index_block;
+		num_locations = count_locations(directory.location);
+		mem_pointer = (char *) calloc(num_locations, sizeof(char *));
+		i = 0;
+		while(i < num_locations)
+		{
+			mem_pointer[i] = get_name(index_block[i]);
+		}
 
 		/**
 		 * return value > 0 for a successful read dir

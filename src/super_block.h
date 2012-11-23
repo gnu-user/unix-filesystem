@@ -21,14 +21,46 @@ typedef struct{
 	uuid_t uuid;
 } superblock;
 
+/**
+ * Get the super block
+ *
+ * @return a pointer to the superblock
+ */
 extern superblock* get_super_block(void);
 
+/**
+ * Get the location of the root directory
+ *
+ * @return the location of root directory
+ * 0 if failure
+ */
 extern uint32_t get_root(void);
 
+/**
+ * Get the location of the free block list's index block
+ *
+ * @return the location of the free block list's index block
+ */
 extern uint32_t get_free_block_index(void);
 
-extern int calc_uuid();
+/**
+ * Calculate the uuid for the super block
+ *
+ * @return if the uuid was successfully calculated:
+ * if return 1 for successful
+ * otherwise unsuccessful
+ * TODO remove, unnecessary
+ */
+//extern int calc_uuid();
 
-extern int validate_uuid();
+/**
+ * Validate the uuid
+ *
+ * @return an integer value
+ * if value >= 1
+ * otherwise unsuccessful
+ * TODO remove, Already in the mount.c
+ */
+//extern int validate_uuid();
 
 #endif /* SUPER_BLOCK_H_ */

@@ -6,7 +6,6 @@ static free_block_list fbl =
 	.free_blocks = { false }
 };
 
-
 free_block_list* get_free_block_list(void)
 {
 	uint32_t fbl_location = 0;
