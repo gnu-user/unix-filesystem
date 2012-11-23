@@ -1,5 +1,4 @@
 #include "index_block.h"
-#include "glob_data.h"
 #include "glob_func.h"
 #include "block_func.h"
 

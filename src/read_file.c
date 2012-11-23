@@ -1,3 +1,4 @@
+#include "glob_data.h"
 #include "block_func.h"
 #include "index_block.h"
 #include "system_open_file_table.h"
