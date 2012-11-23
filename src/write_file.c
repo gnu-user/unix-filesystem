@@ -154,7 +154,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		data_buf = get_data(data_block_locations);
 
-		blocks_needed += get_date_blocks(data_buf);
+		blocks_needed += get_num_datablocks(data_buf);
 
 		if(start >= 0)
 		{

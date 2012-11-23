@@ -40,11 +40,7 @@ byte* get_data(locations location)
 	return databuf;
 }
 
-/**
- * @param the data_buf, that is NULL terminated, containing all of the data
- * blocks
- */
-uint32_t get_date_blocks(byte* data_buf)
+uint32_t get_num_datablocks(byte* data_buf)
 {
 	int i = 0;
 	while(data_buf[i] != NULL)
