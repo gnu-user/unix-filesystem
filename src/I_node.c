@@ -45,8 +45,10 @@ inode get_null_inode()
 			.file_size = 0,
 			.location = 0,
 			.encrypted = false,
-			.check_sum = 0
+			.check_sum = 0,
+			.uuid = 0
 	};
+	uuid_generate(i.uuid);
 	return i;
 }
 
