@@ -73,6 +73,9 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 
 		if (iterate_index(index_block, data_blocks) == NULL)
 		{
+			/**
+			 * File is empty
+			 */
 			return 0;
 		}
 
@@ -89,11 +92,17 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		int count = 0;
 		while(data_blocks[count] != NULL)
 		{
+			/**
+			 * Calculate the size of the data blocks in bytes
+			 */
 			count++;
 		}
 
 		if(start+length > count*BLKSIZE)
 		{
+			/**
+			 * Read pass end of file
+			 */
 			return 0;
 		}
 
@@ -103,16 +112,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 */
 		start_block = (uint32_t)(ceil(start/BLKSIZE));
 
-		i = 0;
-		while(data_blocks[i+start] != NULL && i < length)
-		{
-			temp = concat_len(mem_pointer, data_blocks[start_block+i], sizeof(byte), BLKSIZE);
-			free(mem_pointer);
-			mem_pointer = temp;
-			i++;
-		}
-
-
 		/**
 		 * data_buf = data_blocks parsed
 		 * Search through data_buf for byte start where start >= 0
@@ -120,7 +119,17 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 * 	return invalid read past end of file.
 		 * mem_pointer = copy data_buf from start to index = start + length
 		 */
-
+		i = 0;
+		while(data_blocks[i+start] != NULL && i < length)
+		{
+			/**
+			 * concat the mem_pointer
+			 */
+			temp = concat_len(mem_pointer, data_blocks[start_block+i], sizeof(byte), BLKSIZE);
+			free(mem_pointer);
+			mem_pointer = temp;
+			i++;
+		}
 
 		/**
 		 * Update last_accessed

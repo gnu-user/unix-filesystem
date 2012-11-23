@@ -5,6 +5,7 @@
  *
  */
 #include "glob_data.h"
+#include "../lib/uuid/uuid.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>

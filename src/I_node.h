@@ -1,4 +1,5 @@
 #include "glob_data.h"
+#include "glob_func.h"
 #include "index_block.h"
 #include <stdbool.h>
 
@@ -17,14 +18,17 @@ typedef struct{
 	uint32_t file_owner;
 	uint32_t last_user_modified;
 	uint16_t file_size; 				//Might need to be unsigned
-	uint32_t location;					//Address of the index block
+	uint32_t location;					//Addreglob_datass of the index block
 	bool encrypted;
 	uint32_t check_sum;
+	uuid_t uuid;
 } inode;
 
 extern inode get_null_inode();
 
 extern inode* get_inode(uint32_t block_num);
+
+extern int get_uuid(uint32_t block_num);
 
 extern uint32_t get_index_block(uint32_t block_num);
 
