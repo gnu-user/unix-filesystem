@@ -17,7 +17,17 @@
  */
 int test_generate_index(void)
 {
-	/* Test 1 -- */
+	/* Test 1 -- generate an index for a single block*/
+
+
+
+	//TODO intialize the file system here
+
+	//TODO get the structure of the filesystem so we know what blocks should be empty
+
+	data_index testindex = generate_index (1);
+
+	testindex.index_location;
 
 	if (0)
 	{
