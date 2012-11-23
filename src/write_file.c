@@ -17,6 +17,7 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 	int k = 0;
 	byte * temp = NULL;
 	block* data_blocks = NULL;
+
 	if(start > 0)
 	{
 		for(int i = start; i < length+start; i++)
@@ -115,39 +116,6 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			return 0;
 		}
 
-		/**
-		 * Check if start+length-1 > file_size-(Inode(1) + index_block(n))
-		 * 	- return error if so
-		 */
-
-		/**
-		 * Check if the new write will fit onto the hard disk
-		 * 	- If the new write does not fit, through error
-		 * 	- If there is enough space allocate the space from the free block list
-		 *
-		 * 	Enough space involves re-writing the entire file, and if the file is
-		 * 	being appended it the given length /BLKSIZE
-		 */
-
-		/* Based off the codes
-		read_block inode (data++)
-		iterate index //now we have all data locations (Ibuf)
-		date+= length(databuf)
-		databuf[] = getData(IBuf)
-		modifydate(start, databuf, acutaldata)
-		if(calc_num_free_blocks(data + num_of_index_blocks(length(databuf))) == NULL)
-		{
-			return 0;
-		}
-		inode_location = get_free_block;
-		data_location = generate_index(length(databuf));
-
-		populate inode in Inode buf(index_location)
-		Update date modified, date accessed, and last user to access
-		write_block(inode_location, inode_buf)
-		journal link inode
-		*/
-
 		/** Based off a night of sleep and the codes
 		 *
 		 * blocks_needed = 1 //FOR INODE
@@ -211,23 +179,36 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		/**
 		 * Add the data to the data_buf
+		 * Break it back into blocks
 		 */
 		data_block = modify_data(start, length, data_buf, mem_pointer);
 
 		/**
-		 * Break it back into blocks
+		 * Check if the new write will fit onto the hard disk
 		 */
-
 		if((calc_num_free_blocks(blocks_needed + calc_index_blocks(blocks_needed-1))) == NULL) //1 for the inode
 		{
 			return 0;
 		}
 
+		/**
+		 * Create the new free block
+		 */
 		new_inode_loc = get_free_block();
 
+		/**
+		 * Generate the new list of indexes
+		 */
 		data_location = generate_index(blocks_needed-1);
 
 		i = 0;
+
+		/**
+		 * Write the data
+		 * Check if the file needs to be encrypted
+		 * 	- If it needs to be encrypted, encrypt the file
+		 * Store the file into the block(s)
+		 */
 		while(data_location.data_locations[i] != NULL)
 		{
 			write_block(data_location.data_locations[i], data_block[i]);
@@ -238,13 +219,6 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		/**
 		 * journal link parent's index to inode
-		 */
-
-		/**
-		 * Write the data
-		 * Check if the file needs to be encrypted
-		 * 	- If it needs to be encrypted, encrypt the file
-		 * Store the file into the block(s)
 		 */
 
 		/**
