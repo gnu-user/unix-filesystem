@@ -24,22 +24,95 @@ typedef struct{
 	uuid_t uuid;
 } inode;
 
+/**
+ * Get an inode set to null state
+ *
+ * @return the null inode
+ */
 extern inode get_null_inode();
 
+/**
+ * Get the I_node given the block index of the Inode
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return inode pointer of the Inode at the given location.
+ * If Inode is null the Inode was not found.
+ */
 extern inode* get_inode(uint32_t block_num);
 
+/**
+ * Get the inode's uuid
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return a pointer to the uuid
+ */
 extern unsigned char* get_uuid(uint32_t block_num);
 
+/**
+ * Get the index block from the Inode given the location of the Inode
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return index integer
+ * If index >= 0 then the function was successful,
+ * if index < 0 then the function was unsuccessful
+ */
 extern uint32_t get_index_block(uint32_t block_num);
 
+/**
+ * Get the type of the inode, whether it is a directory or a file
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return the type of the file
+ * If type = 1 then the Inode is for a directory,
+ * if type = 0 then the Inode is for a file,
+ * otherwise the function has failed.
+ */
 extern int get_type(uint32_t block_num);
 
+/**
+ * Get size of the file
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return the size of the file
+ * if the size >= 0 then the function was successful
+ * if the size < 0 then the function was unsuccessful
+ */
 extern uint32_t get_size(uint32_t block_num);
 
+/**
+ * Check if the file is encrypted
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return whether the file is encrypted
+ * if encrypt is 0 then the file is not encrypted
+ * if encrypt is 1 then the file is encrypted
+ * otherwise the function was unsuccessful
+ */
 extern int get_encrypted(uint32_t block_num);
 
+/**
+ * Get the name of the file
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return a char pointer to the file's name
+ * if the file's name = NULL then the function was unsuccessful
+ */
 extern char* get_name(uint32_t block_num);
 
+/**
+ * Get the checksum of the data
+ *
+ * @param block_num integer, the block index of the Inode
+ *
+ * @return the checksum, null if fail
+ */
 extern uint32_t get_crc(uint32_t block_num);
 
 /*

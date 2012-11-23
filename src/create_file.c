@@ -7,6 +7,7 @@
 #include <time.h>
 
 #define CREATE_SIZE 2
+
 /** sfs_create
  * Create a file with the pathname specified if there is not already a file with
  * the same pathname, the pathname must contain the full directory path. The

@@ -6,17 +6,6 @@
 
 swoft system_open_tb = {0};
 
-/**
- * Add the inode to the swoft
- *
- * @param block_num location, the Inode's location on disk
- *
- * @param an integer value,
- * if the value >= 0 then the inode was found and added to the swoft
- * if the value == -1 then the swoft was full
- * if the value == -2 then the inode was not found
- * otherwise the function was unsuccessful
- */
 int add_to_swoft(uint32_t block_num)
 {
 	inode* test = NULL;
