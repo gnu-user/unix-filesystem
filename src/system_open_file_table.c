@@ -39,6 +39,7 @@ int add_to_swoft(uint32_t block_num)
 	 * Store the Inode in the swoft
 	 */
 	system_open_tb.fd[index] = *test;
+	system_open_tb.taken[index] = true;
 
 	/**
 	 * return the file descriptor (index)

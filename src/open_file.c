@@ -16,6 +16,8 @@
 int sfs_open(char *pathname)
 {
 	//TODO test open
+
+	//TODO fix open error when file not found (it might be seg faulting, program just crashed)
 	uint32_t* inode_location = NULL;
 	char** tokens = NULL;
 

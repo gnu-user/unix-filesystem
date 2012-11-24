@@ -26,6 +26,7 @@
 int sfs_readdir(int fd, char *mem_pointer)
 {
 	//TODO test readdir
+	mem_pointer = NULL;
 	inode directory = get_null_inode();
 	locations index_block = NULL;
 	uint32_t i = 0;
@@ -36,7 +37,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 		/**
 		 * Validate the file descriptor
 		 */
-		if(validate_fd(fd) > 0)
+		if(validate_fd(fd) < 0)
 		{
 			/**
 			 * file descriptor not found in swoft
@@ -58,6 +59,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 		if(directory.type != 1)
 		{
 			/**
+			 * Invalid file error
 			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 			 */
 			return -1;
@@ -83,9 +85,10 @@ int sfs_readdir(int fd, char *mem_pointer)
 		 * return value = 0 if there is no contents in dir
 		 * return value < 0 for a unsuccessful read dir
 		 */
-		if(mem_pointer == NULL)
+		if(mem_pointer[0] == NULL)
 		{
 			/**
+			 * Empty Directory
 			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 			 */
 			return 0;

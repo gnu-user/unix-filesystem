@@ -18,8 +18,10 @@ file_owner = 0,
 last_user_modified = 0,
 There is some weird off set of 00 in between here
 file_size = 00 01 00, This should be 256
-location = 0,
-encrypted = false,
-check_sum = 0,
+There is some weird off set of 00 in between here
+location = 07 00 00 00,
+encrypted = 00,
+Instead of only 5 00s there is 8 00s so 3 of them are just randomly there
+check_sum = 00 00 00 00,
 uuid = NULL
 
