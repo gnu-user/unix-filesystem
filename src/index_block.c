@@ -15,53 +15,81 @@
  */
 data_index generate_index(uint32_t num_blocks)
 {
-	/*
-	 * PSEUDOCODE:
-	 *
-	 * i, j = 0
-	 * index_block length is BLKLENGTH / sizeof(uint32_t)
-	 *
-	 * where[j] = get_free_block(fbl, 1)
-	 *
-	 * // If the data length is 0, write an empty index
-	 * if data length == 0
-	 * {
-	 *		calloc(what, index length)
-	 *		write_block(where[j], what)
-	 * }
-	 *
-	 * while (data length > 0)
-	 * {
-	 * 		// calloc an index to write to the block
-	 * 		calloc(what, index length)
-	 * 		for (i = 0, i < index_block length, i++)
-	 * 		{
-	 * 			what[i] = get_free_block(fbl, 1)
-	 * 			data length --
-	 *
-	 * 			if data length == 0
-	 * 			{
-	 * 				break;
-	 * 				}
-	 * 			}
-	 *
-	 * 			j++
-	 *
-	 * 			if data length != 0
-	 * 			{
-	 * 				where[j] = get_free_block(fbl, 1)
-	 * 				what[i + 1] = where[j]
-	 * 			}
-	 *
-	 *
-	 * 			// Write the index to the block specified
-	 * 			write_block(where[j-1], &what)
-	 * }
-	 * 	//Return the location of the first index block.
-	 * 	return where[0];
-	 *
-	 */
+	/* Current instance of data_index struct */
+	data_index cur_data_index =
+	{
+		.index_location = 0;
+		.data_locations = NULL;
+	};
+
+	/* Array indexes and index_block length */
+	uint32_t i = 0, j = 0;
+	uint32_t index_len = floor(BLKSIZE / sizeof(uint32_t));
+	locations tmp_data_location = NULL;
+
+	/* Index location, and index block */
+	uint32_t index_location = 0;
+	index index_block = NULL;
+	//index index_block = calloc(index_len, sizeof(location));
+
+	/* Get a free block location to write the index */
+	index_location = get_free_block();
+
+	/* Set the location of the first index block in data_index struct */
+	cur_data_index.index_location = index_location;
+
+	/* If the number of blocks is 0, write an empty index and return */
+	if (num_blocks == 0)
+	{
+		index_block = (index) calloc(index_len, sizeof(uint32_t));
+		write_block(index_location, (byte *)index_block);
+		free(index_block);
+
+		return cur_data_index;
+	}
+
+	while (num_blocks > 0)
+	{
+		tmp_data_location = NULL;
+
+		/* Allocate an index to write to disk */
+		index_block = (index) calloc(index_len, sizeof(uint32_t));
+
+		for (i = 0; i < index_len - 1; ++i)
+		{
+			index_block[i] = get_free_block();
+
+			/* Add the data location to data_index struct, free dynamic memory */
+			tmp_data_locations = concat_len(cur_data_index.data_locations, &index_block[i], 1);
+			free(cur_data_index.data_locations);
+			cur_data_index.data_locations = tmp_data_locations;
+
+			--num_blocks;
+
+			if (num_blocks == 0)
+			{
+				break;
+			}
+		}
+
+		if (num_blocks != 0)
+		{
+			index_block[i + 1] = get_free_block();
+		}
+
+		/* Write the index to the block specified */
+		write_block(index_location, (byte *)index_block);
+
+		/* Update the index location to the next index block location at the end of the current index
+		 * and free the old index_block buffer in memory
+		 */
+		index_location = index_block[i + 1];
+		free(index_block);
+	}
+
+	return cur_data_index;
 }
+
 
 /*
 int link_inode(uint32_t* index_block, uint32_t location)
