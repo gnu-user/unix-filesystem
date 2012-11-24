@@ -184,3 +184,35 @@ uint32_t find_inode(locations index_blocks, char* name)
 	}
 	return 0;
 }
+
+int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
+{
+	locations idxbuf = NULL;
+	inode parent_inode = get_inode(parent_location);
+	idxbuf = iterate_index(parent_inode.location);
+	concat(idxbuf, inode_location);
+	data_index newidx = generate_index(get_num_blocks(idxbuf));
+	parent_inode.location = newidx.index_location;
+	write_block(parent_location, parent_inode);
+
+	return 0;
+}
+
+int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
+{
+	/**
+	 * locations idxbuf = NULL;
+	 * inode parent_inode = get_inode(parent_location);
+	 * idx = iterate_index(parent_inode.location);
+	 * search idx:
+	 *  if idx.index = parent_inode.location
+	 *  	idx = remove that index
+	 *  	idx = shift remain indices left
+	 *  	newidx = generate_index(how many blocks(idx))
+	 *  	parent_inode.location = newidx.first_indexlocation
+	 *  	write_block(parent_location, parent_inode)
+	 *  	return success
+	 * return failed // Couldn't find location to unlink in index
+	 */
+	return 0;
+}

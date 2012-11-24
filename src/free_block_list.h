@@ -139,8 +139,9 @@ static free_block_list* iterate_fbl(uint32_t location);
  * if it is NULL then no locations are marked as free
  *
  */
-free_block_list* update_fbl(locations used,
-							locations free);
+free_block_list* update_fbl(locations used, locations free);
 
+
+extern int sync_fbl(void);
 
 #endif /* FREE_BLOCK_LIST_H_ */
