@@ -149,7 +149,7 @@ int free_block_init(void)
 
 	while (idx.data_locations[i] != NULL)
 	{
-		write_block(idx.data_locations[i], data_blocks[i].data);
+		write_block(idx.data_locations[i], data_blocks[i]);
 		i++;
 	}
 

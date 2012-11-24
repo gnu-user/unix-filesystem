@@ -29,13 +29,30 @@ int sfs_open(char *pathname)
 		 * Invalid path name
 		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
-		return 0;
+		return -2;
 	}
+
+
 
 	/**
 	 * Traverse the file system to find the desired inode
 	 */
-	inode_location = traverse_file_system(pathname, false);
+	if(tokens[0] == NULL)
+	{
+		inode_location = calloc(2, sizeof(uint32_t));
+		inode_location[0] = get_root();
+		if(inode_location[0] < 0)
+		{
+			/**
+			 * Read Error
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
+			return -1;
+		}
+	}
+	else{
+		inode_location = traverse_file_system(tokens, false);
+	}
 
 	if(inode_location == NULL)
 	{
@@ -47,7 +64,7 @@ int sfs_open(char *pathname)
 	}
 
 	/**
-	 * TODO decided if open constitudes accessing a file
+	 * TODO decided if open constitutes accessing a file
 	 * if successful open
 	 * update last date accessed
 	 */
@@ -57,7 +74,7 @@ int sfs_open(char *pathname)
 	 * Create file descriptor.
 	 * Return file descriptor.
 	 */
-	return add_to_swoft(inode_location[0]);
+	return show_information(add_to_swoft(inode_location[0]));
 }
 
 /**
@@ -65,9 +82,10 @@ int sfs_open(char *pathname)
  *
  * @param fd integer, the file descriptor.
  *
- * @return an integer value,
- * if the value > 0 then the function is successful
- * if the value <= 0 then the function is unsuccessful
+ * @return an integer value, Adjusted to output the fd if success to allow for
+ * it to be used on the return line
+ * if the value >= 0 then the function is successful
+ * if the value < 0 then the function is unsuccessful
  */
 int show_information(fd)
 {
@@ -78,14 +96,14 @@ int show_information(fd)
 		 */
 		inode node = system_open_tb.fd[fd];
 
-		printf("Name: %s", node.name);
+		printf("Name: %s\n", node.name);
 		if(node.type == true)
 		{
-			printf("Type: directory");
+			printf("Type: directory\n");
 		}
 		else
 		{
-			printf("Type: directory");
+			printf("Type: file\n");
 		}
 		char read = '-';
 		char write = '-';
@@ -103,42 +121,43 @@ int show_information(fd)
 			execute ='X';
 		}
 
-		printf("Privileges: %c%c%c", read, write, execute);
+		printf("Privileges: %c%c%c\n", read, write, execute);
 
-		printf("Date created: %d", node.date_of_create);
+		printf("Date created: %d\n", node.date_of_create);
 
-		printf("Date last accessed: %d", node.date_last_accessed);
+		printf("Date last accessed: %d\n", node.date_last_accessed);
 
-		printf("Date last modified: %d", node.date_last_modified);
+		printf("Date last modified: %d\n", node.date_last_modified);
 
-		printf("File owner: %d", node.file_owner);
+		printf("File owner: %d\n", node.file_owner);
 
-		printf("Last user modified: %d", node.last_user_modified);
+		printf("Last user modified: %d\n", node.last_user_modified);
 
-		printf("File size: %d", node.file_size);
+		printf("File size: %d\n", node.file_size);
 
-		printf("Index Block Location: %d", node.location);
+		printf("Index Block Location: %d\n", node.location);
 
 		if(node.encrypted == true)
 		{
-			printf("Encrypted: True");
+			printf("Encrypted: True\n");
 		}
 		else
 		{
-			printf("Encrypted: False");
+			printf("Encrypted: False\n");
 		}
 
-		printf("Check sum: %d", node.check_sum);
+		printf("Check sum: %d\n", node.check_sum);
 
+		printf("Uuid: %s\n", node.uuid);
 
 		/**
 		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
-		return 1;
+		return fd;
 	}
 
 	/**
 	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 	 */
-	return 0;
+	return -1;
 }
