@@ -17,6 +17,7 @@
  */
 block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data)
 {
+/*
 	int j = 0;
 	int k = 0;
 	byte * temp = NULL;
@@ -55,7 +56,7 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 
 	/**
 	 * Divide up the byte arrays into block arrays
-	 */
+	 *
 	for(int i = 0; i < j; i++)
 	{
 		data_blocks[k][i] = temp[i];
@@ -66,13 +67,16 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 	}
 
 	return data_blocks;
+*/
+	return NULL;
 }
 
-
+// TODO THIS HAS A MEMORY ISSUE, FIX GARBAGE DATA WITH DATA[40,41,42] FOR SOME REASON
 block* segment_data_len(byte* data_buf, uint32_t length)
 {
 	uint32_t i = 0;
 	uint32_t blocks = ceil(length / BLKSIZE);
+	byte empty_block[BLKSIZE] = { NULL };
 
 	/* The offset in the data buffer to copy the data into the block */
 	uint32_t offset = 0;
@@ -82,17 +86,19 @@ block* segment_data_len(byte* data_buf, uint32_t length)
 	for (i = 0; i < blocks; ++i)
 	{
 		/* Increase the size of the data blocks array for one more block */
-		data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(byte*));
+		data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(block));
 
 		/* Copy the data_buf at the next offset into the array of data blocks */
-		data_blocks[i] = (byte*) calloc(BLKSIZE, sizeof(byte));
+		//data_blocks[i] = (byte*) calloc(BLKSIZE, sizeof(byte));
+		/* Set the realloc'd memory to NULL before copying the data from the buffer */
+		memcpy(data_blocks[i].data, empty_block, BLKSIZE);
+		memcpy(data_blocks[i].data, data_buf + offset, BLKSIZE);
 		offset += BLKSIZE;
-		memcpy(data_blocks[i], data_buf + offset, BLKSIZE);
 	}
 
 	/* Increase the data_blocks array for a final NULL termination block */
 	data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(byte*));
-	data_blocks[i] = NULL;
+	memcpy(data_blocks[i].data, empty_block, BLKSIZE);
 
 	return data_blocks;
 }
@@ -253,7 +259,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 */
 		while(data_location.data_locations[i] != NULL)
 		{
-			write_block(data_location.data_locations[i], data_block[i]);
+			write_block(data_location.data_locations[i], data_block[i].data);
 			i++;
 		}
 
