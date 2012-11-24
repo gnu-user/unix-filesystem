@@ -129,7 +129,7 @@ int free_block_init(void) {
 
 	//Segment the data blocks and write them at the locations set aside by the index.
 	uint32_t i = 0;
-	block* blocks_to_write = segment_data(fbl, NUMBLKS);
+	block* blocks_to_write = segment_data_len(fbl, NUMBLKS);
 
 	while (idx.data_locations[i] != NULL ) {
 		write_block(idx.data_locations[i], blocks_to_write[i]);
