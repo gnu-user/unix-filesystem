@@ -86,7 +86,7 @@ locations calc_total_free_blocks(void)
 
 	/* Null terminate the array of free blocks locations and return it */
 	free_blocks = (locations) realloc(free_blocks, ((blocks_found + 1) * sizeof(uint32_t)));
-	free_blocks[blocks_found +1] = NULL;
+	free_blocks[blocks_found] = NULL;
 
 	return free_blocks;
 }
@@ -155,7 +155,7 @@ locations calc_num_free_blocks(uint32_t num_blocks)
 
 	/* Null terminate the array of free blocks locations and return it */
 	free_blocks = (locations) realloc(free_blocks, ((blocks_found + 1) * sizeof(uint32_t)));
-	free_blocks[blocks_found +1] = NULL;
+	free_blocks[blocks_found] = NULL;
 
 	return free_blocks;
 }
