@@ -61,7 +61,7 @@ int sfs_getsize(char *pathname)
 	 */
 	type = get_type(inode_location[0]);
 
-	index_locations = index_block_locations(inode_location[0]);
+	index_locations = index_block_locations(inode_location[0], NULL);
 
 	if(index_locations == NULL)
 	{

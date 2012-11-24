@@ -40,7 +40,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	byte* temp = NULL;
 	mem_pointer = NULL;
 
-	if(fd >= 0 && start >= -1 && length > 0)
+	if(fd >= 0 && fd < NUMOFL && start >= -1 && length > 0)
 	{
 		/**
 		 * Validate the file descriptor on the system-wide-open file table

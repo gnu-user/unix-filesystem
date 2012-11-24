@@ -142,7 +142,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	block* data_block = NULL;
 	int i = 0;
 
-	if(fd >= 0 && length > 0 && start >= -1)
+	if(fd >= 0 && fd < NUMOFL && length > 0 && start >= -1)
 	{
 		/**
 		 * Validate the file descriptor on the system-wide-open file table
@@ -243,6 +243,8 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		/**
 		 * Create the new free block
+		 *
+		 * TODO OVER WRITE THE PREVIOUS INODES
 		 */
 		new_inode_loc = get_free_block();
 

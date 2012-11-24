@@ -16,7 +16,7 @@ int sfs_close(int fd)
 	/**
 	 * Check if a valid file descriptor is given
 	 */
-	if(fd >= 0)
+	if(fd >= 0 && fd < NUMOFL)
 	{
 
 		/**
