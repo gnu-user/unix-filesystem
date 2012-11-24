@@ -171,13 +171,13 @@ void* concat_len(void* src_1, void* src_2, uint32_t size, uint32_t len)
 	}
 
 	/* Create a new NULL terminated buffer to hold the concatenation results */
-	result = calloc(i+len+1, size);
+	result = calloc((i * size) + size + len, sizeof(byte));
 
 	/* Perform the concatenation, store the results in result, use pointer arithmetic for
 	 * the offset of the first item to concatenate the second item to
 	 */
 	memcpy(result, src_1, i * size);
-	memcpy((result + (i * size)), src_2, len * size);
+	memcpy((result + (i * size)), src_2, len);
 
 	return result;
 }
