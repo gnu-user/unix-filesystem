@@ -39,3 +39,13 @@ byte* get_data(locations location)
 	}
 	return databuf;
 }
+
+uint32_t get_num_datablocks(byte* data_buf)
+{
+	int i = 0;
+	while(data_buf[i] != NULL)
+	{
+		i++;
+	}
+	return (uint32_t)ceil(i/BLKSIZE);
+}
