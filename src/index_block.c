@@ -3,6 +3,16 @@
 #include "block_func.h"
 
 
+
+uint32_t rebuild_index(locations data_locations)
+{
+
+	/**
+	 * Needs to use index_block_locations
+	 */
+	return 0;
+}
+
 /*
  * TODO for get_free_block need to handle updating the fbl after calling get_free_block
  * otherwise get_free_block will keep returning the same free block location...
