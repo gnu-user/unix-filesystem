@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <string.h>
 
+uint32_t ROOT;
+uint32_t FBL_TOTAL_SIZE;
 /**
  * generate_index test case
  */

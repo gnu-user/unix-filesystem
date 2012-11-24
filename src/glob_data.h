@@ -42,9 +42,10 @@
 
 #define SUPER_BLOCK	 0
 
+//TODO remove
 #define JOURNAL		1
 //TODO ROOT needs to be put at the initial FBL_INDEX + number of FBL index blocks + number of FBL datablocks + 1
-#define FBL_INDEX 2
+#define FBL_INDEX 1
 
 //TODO JON FIX THIS!!! NOW MONKEY!
 //uint32_t ROOT = FBL_INDEX +	calc_index_blocks(ceil(NUMBLKS/BLKSIZE)) + get_num_datablocks(FBL_INDEX) + 1;
