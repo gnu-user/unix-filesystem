@@ -64,7 +64,7 @@ data_index generate_index(uint32_t num_blocks)
 		/* Allocate an index to write to disk */
 		index_block = (index) calloc(index_len, sizeof(uint32_t));
 
-		for (i = 0; i < index_len - 1; ++i)
+		for (i = 0; i < (index_len - 1); ++i)
 		{
 			index_block[i] = get_free_block();
 
@@ -83,9 +83,9 @@ data_index generate_index(uint32_t num_blocks)
 			}
 		}
 
-		if (num_blocks != 0)
+		if (num_blocks > 0)
 		{
-			index_block[i + 1] = get_free_block();
+			index_block[i] = get_free_block();
 		}
 
 		/* Write the index to the block specified */
@@ -94,7 +94,7 @@ data_index generate_index(uint32_t num_blocks)
 		/* Update the index location to the next index block location at the end of the current index
 		 * and free the old index_block buffer in memory
 		 */
-		index_location = index_block[i + 1];
+		index_location = index_block[i];
 		free(index_block);
 	}
 
