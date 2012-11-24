@@ -118,7 +118,7 @@ int sfs_delete(char *pathname)
 	/**
 	 * Delete the index blocks (each time update the free_block list)
 	 */
-	update_fbl(NULL, index_block_locations(get_index_block(inode_loc[0])));
+	update_fbl(NULL, index_block_locations(get_index_block(inode_loc[0]), NULL));
 
 	/**
 	 * Delete the Inode block (update the free_block list)
