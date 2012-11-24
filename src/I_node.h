@@ -130,10 +130,30 @@ extern uint32_t get_crc(uint32_t block_num);
  * not found
  *
  */
-uint32_t find_inode(locations index_blocks, char* name);
+extern uint32_t find_inode(locations index_blocks, char* name);
 
+/**
+ * Link the inode to the parent
+ *
+ * @param the parent's location
+ * @param the child inode's location
+ *
+ * @return the error message
+ * if value >= 0 success
+ * if value < 0 failure
+ */
 extern int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location);
 
+/**
+ * Unlink the child's inode from the parent's index block
+ *
+ * @param the parent's location
+ * @param the child inode's location
+ *
+ * @return the error message
+ * if value >= 0 success
+ * if value < 0 failure
+ */
 extern int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location);
 
 

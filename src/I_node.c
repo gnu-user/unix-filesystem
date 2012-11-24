@@ -189,11 +189,19 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 {
 	locations idxbuf = NULL;
 	inode parent_inode = get_inode(parent_location);
-	idxbuf = iterate_index(parent_inode.location);
-	concat(idxbuf, inode_location);
+	idxbuf = iterate_index(parent_inode.location, idxbuf);
+	if(idxbuf == NULL)
+	{
+		return -1;
+	}
+	//concat_len(idxbuf, inode_location, sizeof(uint32_t), 1);
 	data_index newidx = generate_index(get_num_blocks(idxbuf));
 	parent_inode.location = newidx.index_location;
-	write_block(parent_location, parent_inode);
+	if(write_block(parent_location, parent_inode) != 0)
+	{
+		return -1;
+	}
+
 
 	return 0;
 }
