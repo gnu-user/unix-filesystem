@@ -52,9 +52,9 @@
 /* The TOTAL size of the FBL, including the overhead of the size of each index block
  * needed to index the FBL data blocks
  */
-uint32_t FBL_TOTAL_SIZE;
+extern uint32_t FBL_TOTAL_SIZE;
 
-uint32_t ROOT_DIR;
+extern uint32_t ROOT;
 
 
 typedef uint8_t byte;

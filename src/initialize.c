@@ -15,7 +15,7 @@ int sfs_initialize(int erase)
 {
 	//TODO finish create
 	FBL_TOTAL_SIZE = (uint32_t) ceil(ceil(NUMBLKS/BLKSIZE) / (ceil(BLKSIZE/sizeof(uint32_t)) - 1)) + floor(NUMBLKS/BLKSIZE);
-	ROOT_DIR = (uint32_t) (FBL_INDEX + FBL_TOTAL_SIZE);
+	ROOT = (uint32_t) (FBL_INDEX + FBL_TOTAL_SIZE);
 	byte* buf = NULL;
 	int root_dir = 0;
 	int retval = 0;
