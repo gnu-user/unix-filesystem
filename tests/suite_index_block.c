@@ -8,6 +8,7 @@
 #include "suite_index_block.h"
 #include "unit_tests.h"
 #include "../src/glob_data.h"
+#include "../src/index_block.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -50,8 +51,7 @@ int test_generate_index(void) {
 	sfs_initialize(1);
 
 	//This should give us 2 locations in the 2nd index block.
-	data_index testindex2 = generate_index(
-			1 + ceil(BLKSIZE / sizeof(uint32_t)));
+	data_index testindex2 = generate_index(1 + ceil(BLKSIZE / sizeof(uint32_t)));
 
 	/**
 	 * The newly generated index should be in the block
@@ -67,14 +67,14 @@ int test_generate_index(void) {
 	 */
 	int i = 0;
 	for (i = 0; i < (2 + floor(BLKSIZE / sizeof(uint32_t))); i++) {
-		if (testindex2.index_location[i] != ROOT + i + 1) {
+		if (testindex2.data_locations[i] != ROOT + i + 1) {
 			test_fail("Unit Test Part 1");
 			return EXIT_FAILURE;
 		}
 	}
 	//Check null termination.
 	i++;
-	if (testindex2.index_location[i] != NULL ) {
+	if (testindex2.data_locations[i] != NULL ) {
 		test_fail("Unit Test Part 1");
 		return EXIT_FAILURE;
 	}
@@ -94,7 +94,7 @@ int test_iterate_index(void) {
 	sfs_initialize(1);
 
 	data_index testindex = generate_index(5);
-	locations test = iterate_index(testindex.index_location);
+	locations test = iterate_index(testindex.index_location, NULL );
 
 	int i = 0;
 	for (i = 0; i < 5; i++) {
@@ -105,7 +105,7 @@ int test_iterate_index(void) {
 	}
 	//Check null termination.
 	i++;
-	if (test[i] != NULL ) {
+	if (test[i] != NULL) {
 		test_fail("Unit Test Part 1");
 		return EXIT_FAILURE;
 	}
