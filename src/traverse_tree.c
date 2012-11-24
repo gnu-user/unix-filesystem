@@ -6,7 +6,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 {
 	int root_dir;
 	uint32_t inode_location[2] = {NULL, NULL};
-	locations index_block;
+	locations index_block = NULL;
 	int index;
 	int second_last = 0;
 	int i = 0;
@@ -27,8 +27,9 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	 * Iterate through the contents of the root directory and locate the
 	 * directory or file that is found at the first index of the path parsed.
 	 */
-
-	if(iterate_index(index, index_block) == NULL){
+	index_block = iterate_index(index, NULL);
+	if(index_block == NULL)
+	{
 		return NULL;
 	}
 
@@ -69,7 +70,10 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		/**
 		 * index block is empty
 		 */
-		if(iterate_index(index, index_block) == NULL){
+		index_block = iterate_index(index, NULL);
+
+		if(index_block == NULL)
+		{
 			return NULL;
 		}
 

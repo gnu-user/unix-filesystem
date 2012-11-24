@@ -174,21 +174,27 @@ locations iterate_index(uint32_t location, locations data_blocks)
 	return data_blocks;
 }
 
-
+//TODO test calculation
 uint32_t calc_index_blocks(uint32_t num_blocks)
 {
-	return 0;
+	uint32_t num_index_blocks = (uint32_t) ceil(
+				num_blocks / (ceil(BLKSIZE / sizeof(uint32_t)) - 1))
+				+ num_blocks;
+	return num_index_blocks;
 }
 
+//TODO implement count files in dir
 int count_files_in_dir(uint32_t location)
 {
 	locations loc = NULL;
+	int i = 0;
 
 	/**
 	 * Need to make sure that if there are not locations in the index block that
 	 * rather then null, 0 is returned.
 	 */
-	if(iterate_index(location, loc) == NULL)
+	loc = iterate_index(location, NULL);
+	if(loc == NULL)
 	{
 		return -1;
 	}
@@ -196,7 +202,12 @@ int count_files_in_dir(uint32_t location)
 	/**
 	 * iterate through the loc pointer and determine the number of locations
 	 */
-	return 0;
+	while(loc[i] != NULL)
+	{
+		i++;
+	}
+
+	return i;
 }
 
 /**

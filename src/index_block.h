@@ -147,7 +147,8 @@ locations iterate_index(uint32_t location, locations data_blocks);
  * if return > 0 then the function was successful
  * if return = -1 then the function was unsuccessful
  *
- * TODO remove or replace with: bool isDirectoryEmpty()
+ * TODO implement count files in dir
+ *
  */
 int count_files_in_dir(uint32_t location);
 

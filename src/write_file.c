@@ -189,7 +189,16 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 */
 		blocks_needed++; //Inode block space
 		inode_write = get_swoft_inode(fd);
-		data_block_locations = iterate_index(inode_write.location, data_block_locations);
+		data_block_locations = iterate_index(inode_write.location, NULL);
+
+		if(data_block_locations == NULL)
+		{
+			/**
+			 * Invalid Index Block
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
+			return -1;
+		}
 
 		data_buf = get_data(data_block_locations);
 

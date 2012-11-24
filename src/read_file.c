@@ -74,7 +74,9 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 */
 		index_block = file_inode.location;
 
-		if (iterate_index(index_block, data_blocks) == NULL)
+		data_blocks = iterate_index(index_block, NULL);
+
+		if (data_blocks == NULL)
 		{
 			/**
 			 * File is empty

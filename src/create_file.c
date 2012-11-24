@@ -34,7 +34,7 @@ int sfs_create(char *pathname, int type)
 	//TODO test create
 	inode new_block = get_null_inode();
 	char** tokens;
-	uint32_t* inode_location = NULL;
+	locations inode_location = NULL;
 	locations index_block = NULL;
 	data_index index_location = {0};
 	uint32_t data_location = NULL;
@@ -87,7 +87,8 @@ int sfs_create(char *pathname, int type)
 			 * Check if the there is another file with the given name
 			 * 	- If there is another file, there is an invalid file name error
 			 */
-			if(iterate_index(inode_location[0], index_block) == NULL){
+			index_block = iterate_index(inode_location[0], NULL);
+			if(index_block == NULL){
 				/**
 				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 				 */

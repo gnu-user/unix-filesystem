@@ -52,7 +52,8 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
-	if(iterate_index(parent_location[0], index_block) == NULL){
+	index_block = iterate_index(parent_location[0], NULL);
+	if(index_block == NULL){
 		/**
 		 * Empty or no index block
 		 *TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
@@ -85,17 +86,28 @@ int sfs_delete(char *pathname)
 	type = get_type(inode_loc[0]);
 
 
-	if(iterate_index(get_index_block(inode_loc[0]), index_block) != NULL &&
-			type == 1)
+	index_block = iterate_index(get_index_block(inode_loc[0]), NULL);
+	if(index_block == NULL)
 	{
 		/**
-		 * Directory has children
+		 * Invalid index block
 		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
-		return 0;
+		return -1;
 	}
 
-	if(type == 0)
+	if (type == 1)
+	{
+		if(index_block[0] != NULL)
+		{
+			/**
+			 * Directory has children
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
+			return 0;
+		}
+	}
+	else if(type == 0)
 	{
 		/**
 		 * Delete the data blocks (each time update the free_block list)

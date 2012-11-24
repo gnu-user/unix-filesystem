@@ -69,10 +69,30 @@ int sfs_readdir(int fd, char *mem_pointer)
 		 * Iterate through the index block
 		 * TODO ensure that iterate_index returns a null value for index_block
 		 * when the directory is empty
+		 *
 		 */
-		iterate_index(directory.location, index_block);
+		index_block = iterate_index(directory.location, NULL);
+
+		if(index_block == NULL)
+		{
+			/**
+			 * Invalid index block
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
+			return -1;
+		}
 
 		num_locations = count_files_in_dir(directory.location);
+
+		if(num_locations < 0)
+		{
+			/**
+			 * Invalid index block
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
+			return -1;
+		}
+
 		mem_pointer = (char *) calloc(num_locations, sizeof(char *));
 		i = 0;
 		while(i < num_locations)
