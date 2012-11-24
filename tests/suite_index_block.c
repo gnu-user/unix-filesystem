@@ -68,8 +68,12 @@ int test_generate_index(void) {
 	 * so the rest should be null.
 	 */
 	int i = 0;
-	for (i = 0; i < (2 + floor(BLKSIZE / sizeof(uint32_t))); i++) {
-		if (testindex2.data_locations[i] != ROOT + i + 1) {
+	for (i = 0; i < (1+floor(BLKSIZE / sizeof(uint32_t))); i++) {
+		if (i % (int)((floor(BLKSIZE/sizeof(uint32_t))) - 1 ))
+		{
+			i++;
+		}
+		if (testindex2.data_locations[i] != ROOT + i + 3) {
 			test_fail("Unit Test Part 1");
 			return EXIT_FAILURE;
 		}
@@ -80,6 +84,11 @@ int test_generate_index(void) {
 		test_fail("Unit Test Part 1");
 		return EXIT_FAILURE;
 	}
+
+	/**
+	 * Manually verify that Index block is written at location 8 and location 40
+	 * and check the contents.
+	 */
 
 	test_pass("Unit Test Part 1");
 	return EXIT_SUCCESS;
