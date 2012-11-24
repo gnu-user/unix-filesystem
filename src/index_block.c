@@ -18,14 +18,14 @@ data_index generate_index(uint32_t num_blocks)
 	/* Current instance of data_index struct */
 	data_index cur_data_index =
 	{
-		.index_location = 0;
-		.data_locations = NULL;
+		.index_location = 0,
+		.data_locations = NULL
 	};
 
 	/* Array indexes and index_block length */
 	uint32_t i = 0, j = 0;
 	uint32_t index_len = floor(BLKSIZE / sizeof(uint32_t));
-	locations tmp_data_location = NULL;
+	locations tmp_data_locations = NULL;
 
 	/* Index location, and index block */
 	uint32_t index_location = 0;
@@ -50,7 +50,7 @@ data_index generate_index(uint32_t num_blocks)
 
 	while (num_blocks > 0)
 	{
-		tmp_data_location = NULL;
+		tmp_data_locations = NULL;
 
 		/* Allocate an index to write to disk */
 		index_block = (index) calloc(index_len, sizeof(uint32_t));
@@ -60,7 +60,7 @@ data_index generate_index(uint32_t num_blocks)
 			index_block[i] = get_free_block();
 
 			/* Add the data location to data_index struct, free dynamic memory */
-			tmp_data_locations = concat_len(cur_data_index.data_locations, &index_block[i], 1);
+			tmp_data_locations = concat_len(cur_data_index.data_locations, &index_block[i], sizeof(uint32_t), 1);
 			free(cur_data_index.data_locations);
 			cur_data_index.data_locations = tmp_data_locations;
 
