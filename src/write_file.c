@@ -224,7 +224,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			/**
 			 * Add # of new blocks to blocks_needed
 			 */
-			blocks_needed += (int)ceil((start+length)/BLKSIZE);
+			blocks_needed += (int)ceil((double)(start+length)/BLKSIZE);
 		}
 
 		/**

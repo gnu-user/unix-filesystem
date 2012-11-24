@@ -47,5 +47,5 @@ uint32_t get_num_datablocks(byte* data_buf)
 	{
 		i++;
 	}
-	return (uint32_t)ceil(i/BLKSIZE);
+	return (uint32_t)ceil((double)(i/BLKSIZE));
 }
