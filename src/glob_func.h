@@ -41,6 +41,16 @@ extern byte* allocate_buf(byte* buf, uint32_t size);
 extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2);
 
 /**
+ * Calculate the number of bytes in a byte buffer
+ *
+ * @pre The buf parameter must be NULL terminated
+ * @param buf A NULL terminated buffer
+ *
+ * @return The number of blocks needed to store the data
+ */
+extern uint32_t calc_num_bytes(byte* buf);
+
+/**
  * Helper function which calculates the number of blocks needed to store the data,
  * if an error occurs 0 is returned. Reads up to MAX_IO_LENGTH + 1, if the buffer
  * is still not terminated then the IO buffer is larger than specified by the file

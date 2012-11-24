@@ -45,7 +45,7 @@ uint32_t calc_num_bytes(byte*buf)
 uint32_t calc_num_blocks(byte* buf)
 {
 	// Error occurred the buffer is larger than MAX_IO_LENGTH
-	return (ceil((calc_num_bytes) / BLKSIZE));
+	return (uint32_t) (ceil(((uint32_t)calc_num_bytes) / BLKSIZE));
 }
 
 

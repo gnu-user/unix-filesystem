@@ -50,7 +50,7 @@ uint32_t calc_index_blocks(uint32_t num_blocks);
 
 /**
  *
- * TODO NEED TO UPDATE THE GENERATE_INDEX PSEUDOCODE TO HANDLE RETURNING
+ * TODO NEED TO UPD	ATE THE GENERATE_INDEX PSEUDOCODE TO HANDLE RETURNING
  * THE DATA_INDEX STRUCT
  *
  * Generates the indexes for the data blocks and then writes the indexes
