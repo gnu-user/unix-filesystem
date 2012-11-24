@@ -305,3 +305,17 @@ free_block_list* update_fbl(locations used,
 
 	return &fbl;
 }
+
+int sync_fbl(void)
+{
+	/**
+	 * get fbl index from SB
+	 * blocks to free = iterate_index(fbl location)
+	 * concat(blocks to free, index block locations(fbl index))
+	 * update_fbl(blocks to free) //Updates fbl marks index and data block locations to used
+	 * idx = generate_index(how many blocks (fbl))
+	 * iterate through index.datablocks[i]
+	 * 		write_block(idx.datablocks[i], modify_data(fbl))
+	 */
+	return 0;
+}

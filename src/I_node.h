@@ -132,5 +132,9 @@ extern uint32_t get_crc(uint32_t block_num);
  */
 uint32_t find_inode(locations index_blocks, char* name);
 
+extern int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location);
+
+extern int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location);
+
 
 #endif /* I_NODE_H_ */
