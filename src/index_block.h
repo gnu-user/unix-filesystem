@@ -154,15 +154,18 @@ int count_files_in_dir(uint32_t location);
 
 
 /**
- * Locate the index block locations on disk. Used for deleting the index blocks once
- * the index datastructure has been traversed and all the data blocks have been freed.
+ * Iterates recursively through the index blocks and returns a pointer to a NULL terminated
+ * array containing all of the index block locations on disk. If an error occurs then NULL
+ * is returned.
  *
  * @param location The location of the first index block.
+ * @param index_blocks An argument used by the function when it recursively calls itself,
+ * the argument should be NULL when calling index_block_locations for the first index location.
  *
- * @return Returns a list of index block locations.
- * If there is an error the value returned will be NULL.
+ * @return Returns a list of index block locations. If there is an error the value returned
+ * will be NULL.
  */
-locations index_block_locations(uint32_t location);
+locations index_block_locations(uint32_t location, locations index_blocks);
 
 
 #endif /* INDEX_BLOCK_H_ */
