@@ -12,8 +12,10 @@
 *.a
 
 # Project Files
-.p*
-.c*
+*.p*
+*.c*
+*.data
+.settings
 Debug
 
 
