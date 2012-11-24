@@ -17,7 +17,22 @@ typedef struct {
 // A single location for a block on disk
 //typedef uint32_t location;
 
-// TODO add a linked list for storing the indices
+/**
+ * TODO make a function that takes a series of data
+ * locations and turns it into a new index structure,
+ * then writes it on disk and returns the location
+ * of the first index block
+ *
+ * operates similar to generate_index
+ * except you already have all the data locations
+ *
+ * 1. segment the buffer data_locations into index blocks
+ * 2. get another block and link it inside the first block
+ * 3. write the first block
+ * 4. write the second block
+ * 5. repeat until you hit null in the buffer
+ */
+uint32_t rebuild_index(locations data_locations);
 
 
 /**

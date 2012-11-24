@@ -187,8 +187,7 @@ uint32_t find_inode(locations index_blocks, char* name)
 
 int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 {
-	locations idxbuf = NULL;
-	locations temp = NULL;
+	/*locations idxbuf = NULL;
 	inode* parent_inode = get_inode(parent_location);
 	idxbuf = iterate_index(parent_inode->location, idxbuf);
 	if(idxbuf == NULL)
@@ -196,34 +195,21 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 		return -1;
 	}
 	//concat_len(idxbuf, inode_location, sizeof(uint32_t), 1);
-
-	int i = 0;
-	while (idxbuf[i] != NULL)
-	{
-		i++;
-	}
-	i++;
-	temp = (locations*) calloc(i, sizeof(uint32_t));
-	memcpy(temp, idxbuf);
-	temp[i-1] = inode_location;
-	temp[i] = NULL;
-
-	data_index newidx = generate_index(i);
+	 //TODO rebuild_index NEEDS TO TAKE A SERIES OF DATA BLOCK LOCATIONS AND MAKE AN INDEX OUT OF THEM
+	data_index newidx = rebuild_index(idxbuf);
 	parent_inode->location = newidx.index_location;
 	if(write_block(parent_location, parent_inode) != 0)
 	{
 		return -1;
-	}
+	}*/
 
-	/**
-	 * We did not actually write the
-	 */
 
 	return 0;
 }
 
 int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 {
+	//TODO rebuild_index NEEDS TO TAKE A SERIES OF DATA BLOCK LOCATIONS AND MAKE AN INDEX OUT OF THEM
 	/**
 	 * locations idxbuf = NULL;
 	 * inode parent_inode = get_inode(parent_location);
@@ -232,7 +218,7 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 	 *  if idx.index = parent_inode.location
 	 *  	idx = remove that index
 	 *  	idx = shift remain indices left
-	 *  	newidx = generate_index(how many blocks(idx))
+	 *  	newidx = rebuild_idx(idx)
 	 *  	parent_inode.location = newidx.first_indexlocation
 	 *  	write_block(parent_location, parent_inode)
 	 *  	return success
