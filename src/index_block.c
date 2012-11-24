@@ -3,7 +3,6 @@
 #include "block_func.h"
 
 
-
 uint32_t rebuild_index(locations data_locations)
 {
 
@@ -180,7 +179,7 @@ locations iterate_index(uint32_t location, locations data_blocks)
 		data_blocks = iterate_index(index_block[i+1], data_blocks);
 	}
 
-	// Index block doesn't link to another index, return the array of data locations
+	/* Index block doesn't link to another index, return the array of data locations */
 	return data_blocks;
 }
 
@@ -226,8 +225,71 @@ int add_location (uint32_t index_block, uint32_t location)
 
 }
 
-locations index_block_locations(uint32_t location)
+locations index_block_locations(uint32_t location, locations index_blocks)
 {
+	/* Index length, which is the number of data locations stored in an index block */
+	uint32_t index_len = floor(BLKSIZE / sizeof(location));
+	/* Index_block read from disk */
+	index index_block = calloc(index_len, sizeof(location));
 
-	return NULL;
+	locations tmp_index_blocks = NULL;
+	uint32_t i = 0;
+
+	/* Verify that the the index block location specified is valid */
+	if (location <= 0 || location >= NUMBLKS)
+	{
+		/* Invalid index block location */
+		free(index_block);
+		return NULL;
+	}
+
+	/* Error reading the block */
+	if (read_block(location, (byte *)index_block) < 0)
+	{
+		free(index_block);
+		return NULL;
+	}
+
+	/* Read the index block successfully, concatenate the index block location
+	 * to the array of index block locations */
+	tmp_index_blocks = (locations) concat_len(index_blocks, &location,
+											sizeof(location), sizeof(location));
+
+	/* If tmp_index_blocks NULL an error occurred concatenating the data */
+	if (tmp_index_blocks == NULL)
+	{
+		free(index_blocks);
+		free(index_block);
+		return NULL;
+	}
+
+	/* Free dynamic memory, assign index_blocks a pointer to the array of index block locations */
+	free(index_blocks);
+	index_blocks = tmp_index_blocks;
+
+	/*
+	 * Iterate through the index until we reach a NULL location
+	 */
+	for (i = 0; i < index_len - 1; ++i)
+	{
+		/* No more locations stored in the index block, return the index block locations */
+		if (index_block[i] == NULL)
+		{
+			/* Free dynamic memory and return the NULL terminated array of index blocks locations */
+			tmp_index_blocks = (locations) concat(index_blocks, NULL, sizeof(location));
+			free(index_blocks);
+			free(index_block);
+			return tmp_index_blocks;
+
+		}
+	}
+
+	/* If the index block links to another index, iterate over the index block recursively */
+	if (index_block[i+1] != NULL)
+	{
+		index_blocks = index_block_locations(index_block[i+1], index_blocks);
+	}
+
+	/* Index block doesn't link to another index, return the NULL terminated array of locations */
+	return index_blocks;
 }
