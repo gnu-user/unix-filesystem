@@ -60,7 +60,9 @@ data_index generate_index(uint32_t num_blocks)
 			index_block[i] = get_free_block();
 
 			/* Add the data location to data_index struct, free dynamic memory */
-			tmp_data_locations = concat_len(cur_data_index.data_locations, &index_block[i], sizeof(uint32_t), 1);
+			tmp_data_locations = concat_len(cur_data_index.data_locations,
+											&index_block[i], sizeof(uint32_t),
+											sizeof(uint32_t));
 			free(cur_data_index.data_locations);
 			cur_data_index.data_locations = tmp_data_locations;
 
@@ -146,7 +148,8 @@ locations iterate_index(uint32_t location, locations data_blocks)
 		}
 
 		/* Concatenate the data block location to the array of data block locations */
-		tmp_data_blocks = (locations) concat_len(data_blocks, &index_block[i], sizeof(location), 1);
+		tmp_data_blocks = (locations) concat_len(data_blocks, &index_block[i],
+												sizeof(location), sizeof(location));
 
 		/* If tmp_data_blocks NULL an error occurred concatenating the data */
 		if (tmp_data_blocks == NULL)
