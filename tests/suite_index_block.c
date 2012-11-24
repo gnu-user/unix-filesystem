@@ -18,7 +18,9 @@
 int test_generate_index(void) {
 	/* Test 1 -- generate an index for a single block */
 
-	//TODO initialize the file system here
+	//wipe the disk and reinitialize
+	sfs_initialize(1);
+
 	data_index testindex = generate_index(1);
 
 	/**
@@ -44,7 +46,8 @@ int test_generate_index(void) {
 	/* Test 2 -- generate an index for an amount
 	 * of blocks that require >1 index blocks (in this case, 2) */
 
-	//TODO reinitialize the file system here
+	//wipe the disk and reinitialize
+	sfs_initialize(1);
 
 	//This should give us 2 locations in the 2nd index block.
 	data_index testindex2 = generate_index(
@@ -76,13 +79,22 @@ int test_generate_index(void) {
  * iterate_index test case
  */
 int test_iterate_index(void) {
-	/* Test 1 -- */
-	if (0) {
-		test_fail("Unit Test Part 1");
-		return EXIT_FAILURE;
-	} else {
-		test_pass("Unit Test Part 1");
+	/* Test 1 -- generate a test index for 5 blocks and
+	 * iterate it into memory */
+
+	//wipe the disk and reinitialize
+	sfs_initialize(1);
+
+	data_index testindex = generate_index(5);
+	locations test = iterate_index(testindex.index_location);
+
+	for (int i = 0; i < 5; i++) {
+		if ((test[i] != ROOT + 2 + i)) {
+			test_fail("Unit Test Part 1");
+			return EXIT_FAILURE;
+		}
 	}
+	test_pass("Unit Test Part 1");
 
 	return EXIT_SUCCESS;
 }
