@@ -12,6 +12,7 @@
 #include "suite_blockio.h"
 #include "suite_glob_func.h"
 #include "suite_free_block_list.h"
+#include "suite_index_block.h"
 
 /* Displays output stating that it is starting a test suite
  */
