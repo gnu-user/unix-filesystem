@@ -199,6 +199,14 @@ int count_files_in_dir(uint32_t location)
 	return 0;
 }
 
+/**
+ * Need to be able to add a location onto the end of this list.
+ */
+int add_location (uint32_t index_block, uint32_t location)
+{
+
+}
+
 locations index_block_locations(uint32_t location)
 {
 
