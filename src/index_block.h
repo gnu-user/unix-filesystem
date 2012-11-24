@@ -7,7 +7,7 @@
 typedef uint32_t* index;
 
 /* Stuct containing the location of the first index and an array of the
- * data location
+ * data locations
  */
 typedef struct {
 	uint32_t index_location;
