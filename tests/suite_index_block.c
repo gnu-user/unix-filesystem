@@ -32,7 +32,7 @@ int test_generate_index(void) {
 	 * the block immediately afterward.
 	 *
 	 * There should be no more indexes afterward,
-	 * so the rest should be null
+	 * so the rest should be null terminated.
 	 */
 	if ((testindex.index_location != ROOT + 2)
 			|| (testindex.data_locations[0] != ROOT + 3)
@@ -65,12 +65,20 @@ int test_generate_index(void) {
 	 * There should be no more indexes afterward,
 	 * so the rest should be null.
 	 */
-	for (int i = 0; i < (2 + floor(BLKSIZE / sizeof(uint32_t))); i++) {
+	int i = 0;
+	for (i = 0; i < (2 + floor(BLKSIZE / sizeof(uint32_t))); i++) {
 		if (testindex2.index_location[i] != ROOT + i + 1) {
 			test_fail("Unit Test Part 1");
 			return EXIT_FAILURE;
 		}
 	}
+	//Check null termination.
+	i++;
+	if (testindex2.index_location[i] != NULL ) {
+		test_fail("Unit Test Part 1");
+		return EXIT_FAILURE;
+	}
+
 	test_pass("Unit Test Part 1");
 	return EXIT_SUCCESS;
 }
@@ -88,14 +96,21 @@ int test_iterate_index(void) {
 	data_index testindex = generate_index(5);
 	locations test = iterate_index(testindex.index_location);
 
-	for (int i = 0; i < 5; i++) {
+	int i = 0;
+	for (i = 0; i < 5; i++) {
 		if ((test[i] != ROOT + 2 + i)) {
 			test_fail("Unit Test Part 1");
 			return EXIT_FAILURE;
 		}
 	}
-	test_pass("Unit Test Part 1");
+	//Check null termination.
+	i++;
+	if (test[i] != NULL ) {
+		test_fail("Unit Test Part 1");
+		return EXIT_FAILURE;
+	}
 
+	test_pass("Unit Test Part 1");
 	return EXIT_SUCCESS;
 }
 
