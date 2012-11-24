@@ -12,12 +12,13 @@
 *.a
 
 # Project Files
-*.p*
-*.c*
-*.data
+.project
+.cproject
 .settings
 Debug
 
+# simulate disk images
+*.data
 
 # http://www.gnu.org/software/automake
 

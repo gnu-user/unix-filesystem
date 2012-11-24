@@ -84,6 +84,7 @@ extern uint32_t calc_num_blocks(byte* buf);
 extern void* concat(void* src_1, void* src_2, uint32_t size);
 
 
+// TODO len should be relative to the size, ie. copy 3 uints it should be len = 3
 /**
  * Concatenates a specified number of bytes from src_2 to src_1, into a
  * single NULL terminated array containing the contents of both arrays. The
