@@ -44,7 +44,7 @@
 
 #define JOURNAL		1
 //TODO ROOT needs to be put at the initial FBL_INDEX + number of FBL index blocks + number of FBL datablocks + 1
-#define FBL_INDEX = 2;
+#define FBL_INDEX 2
 
 //TODO JON FIX THIS!!! NOW MONKEY!
 //uint32_t ROOT = FBL_INDEX +	calc_index_blocks(ceil(NUMBLKS/BLKSIZE)) + get_num_datablocks(FBL_INDEX) + 1;
@@ -52,9 +52,9 @@
 /* The TOTAL size of the FBL, including the overhead of the size of each index block
  * needed to index the FBL data blocks
  */
-uint32_t FBL_TOTAL_SIZE;
+extern uint32_t FBL_TOTAL_SIZE;
 
-uint32_t ROOT_DIR;
+extern uint32_t ROOT;
 
 
 typedef uint8_t byte;
