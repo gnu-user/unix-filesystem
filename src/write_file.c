@@ -88,16 +88,16 @@ block* segment_data_len(byte* data_buf, uint32_t length)
 		/* Increase the size of the data blocks array for one more block */
 		data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(block));
 
-		/* Copy the data_buf at the next offset into the array of data blocks */
-		//data_blocks[i] = (byte*) calloc(BLKSIZE, sizeof(byte));
-		/* Set the realloc'd memory to NULL before copying the data from the buffer */
+		/* Copy the data_buf at the next offset into the array of data blocks
+		 * and set the realloc'd memory to NULL before copying the data from the buffer
+		 */
 		memcpy(data_blocks[i], empty_block, BLKSIZE);
 		memcpy(data_blocks[i], data_buf + offset, BLKSIZE);
 		offset += BLKSIZE;
 	}
 
 	/* Increase the data_blocks array for a final NULL termination block */
-	data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(byte*));
+	data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(block));
 	memcpy(data_blocks[i], empty_block, BLKSIZE);
 
 	return data_blocks;
