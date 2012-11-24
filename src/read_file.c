@@ -117,7 +117,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 * copy the data block at start into memory
 		 * TODO figure out how to fix missing reference for ceil
 		 */
-		start_block = (uint32_t)(ceil(start/BLKSIZE));
+		start_block = (uint32_t)(ceil((double)(start)/BLKSIZE));
 
 		/**
 		 * data_buf = data_blocks parsed

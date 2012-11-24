@@ -18,9 +18,9 @@ uint32_t ROOT;
 
 int sfs_initialize(int erase) {
 	//TODO finish create
-	FBL_DATA_SIZE = ceil(NUMBLKS / BLKSIZE);
+	FBL_DATA_SIZE = ceil((double)(NUMBLKS / BLKSIZE));
 	FBL_TOTAL_SIZE = (uint32_t) ceil(
-			FBL_DATA_SIZE / (ceil(BLKSIZE / sizeof(uint32_t)) - 1))
+			FBL_DATA_SIZE / (ceil(BLKSIZE / (double)(sizeof(uint32_t))) - 1))
 			+ FBL_DATA_SIZE;
 	ROOT = (uint32_t) (FBL_INDEX + FBL_TOTAL_SIZE);
 	byte* buf = NULL;
@@ -92,10 +92,37 @@ int sfs_initialize(int erase) {
 		 **/
 		retval = sfs_create(root_name, 1);
 
-		printf("Index size,1, %d\n", calc_index_blocks(1));
-		printf("Index size,31, %d\n", calc_index_blocks(31));
-		printf("Index size,33, %d\n", calc_index_blocks(33));
-		printf("Index size,64, %d\n", calc_index_blocks(64));
+		/*char databuf_1[50];
+
+		for(int i = 0; i < 49; i++)
+		{
+			databuf_1[i] = '1';
+		}
+		databuf_1[49] = NULL;
+		char data_buf_2[150] = {1};
+		for(int i = 0; i < 149; i++)
+		{
+			data_buf_2[i] = '2';
+		}
+		data_buf_2[149] = NULL;
+		char data_buf_3[300] = {1};
+		for(int i = 0; i < 299; i++)
+		{
+			data_buf_3[i] = '3';
+		}
+		data_buf_3[299] = NULL;
+
+		char data_buf_4[500] = {1};
+		for(int i = 0; i < 499; i++)
+		{
+			data_buf_4[i] = '4';
+		}
+		data_buf_4[499] = NULL;
+
+		printf("Number of Blocks 50, %d\n", calc_num_bytes(databuf_1));
+		printf("Number of Blocks 150, %d\n", calc_num_bytes(data_buf_2));
+		printf("Number of Blocks 300, %d\n", calc_num_bytes(data_buf_3));
+		printf("Number of Blocks 500, %d\n", calc_num_bytes(data_buf_4));*/
 
 		if (retval <= 0) {
 			/**

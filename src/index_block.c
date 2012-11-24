@@ -186,8 +186,8 @@ locations iterate_index(uint32_t location, locations data_blocks)
 //TODO test calculation
 uint32_t calc_index_blocks(uint32_t num_blocks)
 {
-	return (uint32_t) ceil(num_blocks / (ceil(BLKSIZE /
-			sizeof(uint32_t)) - 1));
+	return (uint32_t) ceil((double)(num_blocks) / (ceil(BLKSIZE /
+			(double)(sizeof(uint32_t))) - 1));
 }
 
 //TODO implement count files in dir
