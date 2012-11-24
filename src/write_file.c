@@ -6,11 +6,14 @@
 #include <math.h>
 
 /**
+ *
+ * TODO THIS NEEDS TO BE FIXED, FOR DYNAMICALLY ALLOCATING THE 2D ARRAY!!!!
+ *
  * if start >= then actual data is inserted (overrides) from start for the
  * length of actual data.
  * if start == -1 then actual data is appended to the end of the databuf
  *
- * @return databuf containing actual_dat
+ * @return databuf containing actual_data
  */
 block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data)
 {
@@ -64,6 +67,36 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 
 	return data_blocks;
 }
+
+
+block* segment_data_len(byte* data_buf, uint32_t length)
+{
+	uint32_t i = 0;
+	uint32_t blocks = ceil(length / BLKSIZE);
+
+	/* The offset in the data buffer to copy the data into the block */
+	uint32_t offset = 0;
+	block* data_blocks = NULL;
+
+	/* Copy each block into a 2D array containin the blocks */
+	for (i = 0; i < blocks; ++i)
+	{
+		/* Increase the size of the data blocks array for one more block */
+		data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(byte*));
+
+		/* Copy the data_buf at the next offset into the array of data blocks */
+		data_blocks[i] = (byte*) calloc(BLKSIZE, sizeof(byte));
+		offset += BLKSIZE;
+		memcpy(data_blocks[i], data_buf + offset, BLKSIZE);
+	}
+
+	/* Increase the data_blocks array for a final NULL termination block */
+	data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(byte*));
+	data_blocks[i] = NULL;
+
+	return data_blocks;
+}
+
 
 /** sfs_write
  * Write the length bytes of data specified from a memory location to the
