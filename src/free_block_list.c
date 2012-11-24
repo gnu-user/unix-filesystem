@@ -286,6 +286,7 @@ free_block_list* update_fbl(locations used,
 	{
 		while (used[i] != NULL)
 		{
+			printf("used location %d\n", used[i]);
 			/* Mark each of the fbl locations specifed as used */
 			fbl.free_blocks[used[i]] = true;
 			++i;
@@ -309,13 +310,20 @@ free_block_list* update_fbl(locations used,
 int sync_fbl(void)
 {
 	/**
-	 * get fbl index from SB
+	 * FIGURE OUT WHERE THE OLD FBL IS SO WE CAN DELETE IT
+	 * get fbl location from SB
 	 * blocks to free = iterate_index(fbl location)
 	 * concat(blocks to free, index block locations(fbl index))
+	 * DELETE THE OLD FBL
 	 * update_fbl(blocks to free) //Updates fbl marks index and data block locations to used
+	 *
+	 * WRITE A NEW FBL
 	 * idx = generate_index(how many blocks (fbl))
 	 * iterate through index.datablocks[i]
 	 * 		write_block(idx.datablocks[i], modify_data(fbl))
+	 *
+	 * LINK THE NEW FBL TO SUPERBLOCK
+	 * 	update the superblock to point to the mew index.firstindexblocklocation
 	 */
 	return 0;
 }
