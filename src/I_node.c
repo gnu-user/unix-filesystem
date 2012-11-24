@@ -187,7 +187,7 @@ uint32_t find_inode(locations index_blocks, char* name)
 
 int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 {
-	locations idxbuf = NULL;
+	/*locations idxbuf = NULL;
 	inode parent_inode = get_inode(parent_location);
 	idxbuf = iterate_index(parent_inode.location, idxbuf);
 	if(idxbuf == NULL)
@@ -200,7 +200,7 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 	if(write_block(parent_location, parent_inode) != 0)
 	{
 		return -1;
-	}
+	}*/
 
 
 	return 0;
