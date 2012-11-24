@@ -8,8 +8,13 @@
 #include "block_func.h"
 #include "super_block.h"
 #include "free_block_list.h"
+#include "index_block.h"
 #include <math.h>
 #include <stdbool.h>
+
+uint32_t FBL_DATA_SIZE;
+uint32_t FBL_TOTAL_SIZE;
+uint32_t ROOT;
 
 int sfs_initialize(int erase) {
 	//TODO finish create
@@ -108,14 +113,17 @@ int sfs_initialize(int erase) {
 
 }
 
-int free_block_init(void) {
+int free_block_init(void)
+{
 	data_index idx = { 0 };
 	free_block_list* fbl = NULL;
-	block* data_block = NULL;
+	block* data_blocks = NULL;
+	uint32_t i = 0;
 
 	/* Initialize the new FBL in memory, mark the superblock as used */
 	fbl = update_fbl(NULL, NULL );
-	if (fbl == NULL ) {
+	if (fbl == NULL )
+	{
 		//TODO return SUCCESS/FAIL enum
 		/* Error occurred updating the FBL in memory */
 		return -1;
@@ -128,11 +136,20 @@ int free_block_init(void) {
 	//Now write the data blocks.
 
 	//Segment the data blocks and write them at the locations set aside by the index.
-	uint32_t i = 0;
-	block* blocks_to_write = segment_data_len(fbl, NUMBLKS);
 
-	while (idx.data_locations[i] != NULL ) {
-		write_block(idx.data_locations[i], blocks_to_write[i]);
+	data_blocks = segment_data_len(fbl, NUMBLKS);
+
+	/* Check that the data_blocks were segmented properly */
+	if (data_blocks == NULL)
+	{
+		//TODO return SUCCESS/FAIL enum
+		/* Error occurred segmenting the data blocks */
+		return -1;
+	}
+
+	while (idx.data_locations[i] != NULL)
+	{
+		write_block(idx.data_locations[i], data_blocks[i].data);
 		i++;
 	}
 
@@ -141,7 +158,7 @@ int free_block_init(void) {
 	 */
 
 	//TODO return SUCCESS/FAIL enum
-	return -1;
+	return 0;
 }
 
 int wipe_disk(void) {
