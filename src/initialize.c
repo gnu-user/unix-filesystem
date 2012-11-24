@@ -14,7 +14,8 @@
 int sfs_initialize(int erase)
 {
 	//TODO finish create
-	FBL_TOTAL_SIZE = (uint32_t) ceil(ceil(NUMBLKS/BLKSIZE) / (ceil(BLKSIZE/sizeof(uint32_t)) - 1)) + floor(NUMBLKS/BLKSIZE);
+	FBL_DATA_SIZE = ceil(NUMBLKS/BLKSIZE);
+	FBL_TOTAL_SIZE = (uint32_t) ceil(FBL_DATA_SIZE / (ceil(BLKSIZE/sizeof(uint32_t)) - 1)) + FBL_DATA_SIZE;
 	ROOT = (uint32_t) (FBL_INDEX + FBL_TOTAL_SIZE);
 	byte* buf = NULL;
 	int root_dir = 0;
@@ -46,8 +47,8 @@ int sfs_initialize(int erase)
 		 * list block, a pointer to the root directory Inode block.
 		 **/
 
-		root_dir = (int)(ceil(NUMBLKS/BLKSIZE))+1;
-		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FBL_INDEX, root_dir, 0, NULL, 0};
+
+		superblock sb = { NUMBLKS*BLKSIZE, BLKSIZE, FBL_INDEX, ROOT, 0, NULL, 0};
 
 		uuid_generate(sb.uuid);
 
@@ -116,36 +117,51 @@ int sfs_initialize(int erase)
 
 int free_block_init(void)
 {
-	//Divide the blocks array up into multiple
-	uint32_t num_free_block = (uint32_t)(ceil(NUMBLKS/BLKSIZE));
+	data_index idx = { 0 };
+	free_block_list* fbl = NULL;
+	block* data_block = NULL;
 
-	/**
-	 * Create a list of the blocks used
-	 * Create a list of blocks that are remaining
-	 */
-	uint32_t* used = (uint32_t *) calloc(num_free_block, sizeof(bool));
-
-	for(uint32_t i = 0; i < num_free_block; i++)
+	/* Initialize the new FBL in memory, mark the superblock as used */
+	fbl = update_fbl(NULL,NULL);
+	if (fbl == NULL)
 	{
-		used[i] = i;
-	}
-
-	/**
-	 * Update the free block list and check if it succeeded
-	 */
-	if(update_fbl(used, NULL) == NULL)
-	{
-		/**
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
-		 */
-		free(used);
+		//TODO return SUCCESS/FAIL enum
+		/* Error occurred updating the FBL in memory */
 		return -1;
 	}
+
+	/* Write the new FBL to disk */
+	idx = generate_index(FBL_DATA_SIZE);
+
+	uint32_t i = 0;
+
+
 	/**
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * INITIALIZE THE NEW FBL
+	 * update_fbl(NULL,NULL) marks the superblock used in our formatted disk
+	 *
+	 * WRITE A NEW FBL TO DISK
+	 * idx = generate_index(how many blocks (fbl))
+
+		/**
+		 * Write the data
+		 * Check if the file needs to be encrypted
+		 * 	- If it needs to be encrypted, encrypt the file
+		 * Store the file into the block(s)
+		 */
+		while(idx.data_locations[i] != NULL)
+		{
+			write_block(idx.data_locations[i], fbl[i]);
+			i++;
+		}
+
+	 *
+	 * LINK THE NEW FBL TO SUPERBLOCK
+	 * 	update the superblock to point to idx.indexlocation
 	 */
-	free(used);
-	return 0;
+
+	//TODO return SUCCESS/FAIL enum
+	return -1;
 }
 
 

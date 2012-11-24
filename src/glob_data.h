@@ -29,7 +29,7 @@
 #define INPUT_BUF_FORMAT  "%1024s"
 
 /* Define if we are doing unit testing instead of executing sfs_test */
-//#define UNIT_TESTING
+#define UNIT_TESTING
 
 /* size of blocks on simulated disk */
 #define BLKSIZE  128
@@ -47,16 +47,14 @@
 //TODO ROOT needs to be put at the initial FBL_INDEX + number of FBL index blocks + number of FBL datablocks + 1
 #define FBL_INDEX 1
 
-//TODO JON FIX THIS!!! NOW MONKEY!
-//uint32_t ROOT = FBL_INDEX +	calc_index_blocks(ceil(NUMBLKS/BLKSIZE)) + get_num_datablocks(FBL_INDEX) + 1;
-
-/* The TOTAL size of the FBL, including the overhead of the size of each index block
+/* The size of the FBL and the TOTAL size of the FBL, including the overhead of the size of each index block
  * needed to index the FBL data blocks
  */
+extern uint32_t FBL_DATA_SIZE;
+
 extern uint32_t FBL_TOTAL_SIZE;
 
 extern uint32_t ROOT;
-
 
 typedef uint8_t byte;
 
