@@ -16,7 +16,7 @@
  */
 typedef enum
 {
-	LINK_FBL, LINK_BLOCK
+	LINK_FBL, LINK_BLOCK, UNLINK_BLOCK
 } entry_type;
 
 /**
@@ -45,35 +45,39 @@ typedef struct
  *
  * TODO malloc floor(BLKSIZE/sizeof(journal_entry) for the journal, since we can't do this dynamically at compile time
  */
-typedef journal_entry *journal;
+typedef struct
+{
+	journal_entry entry[BLKSIZE];
+} journal;
 
+static journal fs_journal;
 /**
  * Adds new entries to the journal
  * @param entry The journal_entry to add to the journal
  * @param buf A pointer to the buffer containing the journal to add the entry to
  */
-extern journal* add_entry(journal_entry* entry, journal* buf);
+int add_entry(journal_entry* entry);
 
 /**
  * Syncs the journal array in memory with the journal block on disk
  * @param buf A pointer to the buffer containing the journal to be synced
  * @return 0 if successful, EXCEPTION_CODE if an error occurred
  */
-static int sync_journal(journal *buf);
+static int sync_journal(void);
 
 /**
  * Reads all the entries in the journal, executes, and deletes them
  * @param buf A pointer to the buffer containing the journal to flush
  * @return 0 if successful, EXCEPTION_CODE if an error occurred
  */
-extern int flush_journal(journal *buf);
+extern int flush_journal(void);
 
 /**
  * Reads the journal from disk and copies it into the buffer specified
  *
  * TODO May be able to use an already built-in function to handle this
  */
-extern journal* read_journal(journal *buf);
+extern journal* read_journal(void);
 
 /**
  * Links the FBL update in the superblock. The function loads the superblock into
