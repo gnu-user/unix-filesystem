@@ -20,14 +20,15 @@ extern block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte*
 
 /**
  * Takes a data buffer and returns an array of blocks, it is similar to modify_data
- * except that no data is actually being modified.
+ * except that no data is actually being modified. Returns a 2D array where each index
+ * in the array points a block, the last index points to NULL.
  *
  * @param data_buf A buffer containing the data to be segmented into blocks
  * @param length The length of the buffer to be segmented into blocks
  *
- * @return A null terminated array of blocks.
+ * @return A null terminated 2D array of blocks, where the last index points to NULL
  */
-extern block* segment_data(byte* data_buf, uint32_t length);
+extern block* segment_data_len(byte* data_buf, uint32_t length);
 
 
 /** sfs_write
