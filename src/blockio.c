@@ -9,13 +9,14 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "blockio.h"
+#include "glob_data.h"
 
 /* file for storing simulated disk's data */
 #define DISKFILE "simdisk.data"
 /* size of blocks on simulated disk */
-#define BLKSIZE  128
+//#define BLKSIZE  128
 /* number of blocks on simulated disk */
-#define NUMBLKS  512
+//#define NUMBLKS  512
 /* mode used to create disk file */
 /* allows read and write by owner and by group */
 #define DISKFILEMODE  S_IRUSR|S_IWUSR|S_IRWXG

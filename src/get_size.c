@@ -71,12 +71,15 @@ int sfs_getsize(char *pathname)
 		/**
 		 * Get the index block's location
 		 */
-		index_block = get_index_block(inode_location[0]);
+		//index_block = get_index_block(inode_location[0]);
 
 		/**
 		 * Return the number of locations found in the index block(s)
+		 *
+		 *
 		 */
-		return count_files_in_dir(index_block);
+		//return count_files_in_dir(index_block);
+		return get_inode(inode_location[0])->file_size;
 	}
 	/**
 	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM

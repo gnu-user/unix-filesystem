@@ -31,20 +31,21 @@ byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
 	return buf2;
 }
 
+uint32_t calc_num_bytes(byte*buf)
+{
+	uint32_t i = 0;
+	while(buf[i] != NULL)
+	{
+		i++;
+	}
+
+	return i;
+}
 
 uint32_t calc_num_blocks(byte* buf)
 {
-	uint32_t i;
-	for (i = 0; i < MAX_IO_LENGTH + 1; ++i)
-	{
-		if (buf[i] == NULL)
-		{
-			return (ceil((i + 1) / BLKSIZE));
-		}
-	}
-
 	// Error occurred the buffer is larger than MAX_IO_LENGTH
-	return 0;
+	return (uint32_t) (ceil(((uint32_t)calc_num_bytes) / BLKSIZE));
 }
 
 

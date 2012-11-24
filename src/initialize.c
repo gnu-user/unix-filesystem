@@ -92,6 +92,11 @@ int sfs_initialize(int erase) {
 		 **/
 		retval = sfs_create(root_name, 1);
 
+		printf("Index size,1, %d\n", calc_index_blocks(1));
+		printf("Index size,31, %d\n", calc_index_blocks(31));
+		printf("Index size,33, %d\n", calc_index_blocks(33));
+		printf("Index size,64, %d\n", calc_index_blocks(64));
+
 		if (retval <= 0) {
 			/**
 			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
