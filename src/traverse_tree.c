@@ -33,6 +33,16 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		return NULL;
 	}
 
+	/*
+	 * IF index_block[0] == NULL, aka no children yet
+	 */
+	if(index_block[0] == NULL)
+	{
+		inode_location[0] = root_dir;
+		inode_location[1] = 0;
+		return inode_location;
+	}
+
 	/**
 	 * Create a function that will go through the locations from the index block
 	 * and check if a given file/directory is contained

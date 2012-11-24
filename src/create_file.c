@@ -87,7 +87,7 @@ int sfs_create(char *pathname, int type)
 			 * Check if the there is another file with the given name
 			 * 	- If there is another file, there is an invalid file name error
 			 */
-			index_block = iterate_index(inode_location[0], NULL);
+			index_block = iterate_index(get_index_block(inode_location[0]), NULL);
 			if(index_block == NULL){
 				/**
 				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
