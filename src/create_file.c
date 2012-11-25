@@ -34,7 +34,7 @@ int sfs_create(char *pathname, int type)
 	//TODO test create
 	inode new_block = get_null_inode();
 	char** tokens;
-	locations inode_location = NULL;
+	locations inode_loc = NULL;
 	locations index_block = NULL;
 	data_index index_location = {0};
 	uint32_t data_location = NULL;
@@ -67,12 +67,12 @@ int sfs_create(char *pathname, int type)
 		 */
 		if(tokens[0] != NULL)
 		{
-			inode_location = traverse_file_system(tokens, true);
+			inode_loc = traverse_file_system(tokens, true);
 
 			/**
 			 * Invalid path or path does not exist
 			 */
-			if(inode_location == NULL)
+			if(inode_loc == NULL)
 			{
 				/**
 				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
@@ -81,41 +81,38 @@ int sfs_create(char *pathname, int type)
 			}
 
 			/**
-			 * inode_location[0] = the location of the directory's inode,
-			 * inode_location[1] = the token index for the last element
+			 * inode_loc[0] = the location of the directory's inode,
+			 * inode_loc[1] = the token index for the last element
 			 */
 
 			/**
 			 * Check if the there is another file with the given name
 			 * 	- If there is another file, there is an invalid file name error
 			 */
-			index_block = iterate_index(get_index_block(inode_location[0]), NULL);
+			index_block = iterate_index(get_index_block(inode_loc[0]), NULL);
 
-			if(index_block == NULL){
+			if(index_block != NULL)
+			{
 				/**
-				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 * Check File/directory already exists
 				 */
-				return 0;
+				if(find_inode(index_block, tokens[inode_loc[1]]) != NULL)
+				{
+					return 0;
+				}
+
+				i = 0;
+				while(index_block[i] != NULL)
+				{
+					i++;
+				}
+
+				if(i%(int)(floor(BLKSIZE/sizeof(uint32_t)) - 1) == 0)
+				{
+					parent_offset++;
+				}
 			}
 
-			/**
-			 * Check File/directory already exists
-			 */
-			if(find_inode(index_block, tokens[inode_location[1]]) != NULL)
-			{
-				return 0;
-			}
-
-			i = 0;
-			while(index_block[i] != NULL)
-			{
-				i++;
-			}
-
-			if(i%(floor(BLKSIZE/sizeof(uint32_t)) - 1) == 0)
-			{
-				parent_offset++;
-			}
 			/**
 			 * Check if there is enough space on the disk for the new create
 			 * (2 blocks for directory or file)
@@ -123,7 +120,7 @@ int sfs_create(char *pathname, int type)
 		}
 		else
 		{
-			inode_location = SUPER_BLOCK;
+			inode_loc = SUPER_BLOCK;
 		}
 
 		if(calc_num_free_blocks(CREATE_SIZE + parent_offset) == NULL)
@@ -138,17 +135,17 @@ int sfs_create(char *pathname, int type)
 		/**
 		 * Check if the name is 7 chars
 		 */
-		if(tokens[0] != NULL)
+		/*if(tokens[0] != NULL)
 		{
-			if(strlen(tokens[inode_location[1]]) > 6)
+			if(strlen(tokens[inode_loc[1]]) > 6)
 			{
 				/**
 				 * Invalid path name component, File name to long
 				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 				 */
-				return -1;
+		/*		return -1;
 			}
-		}
+		}*/
 
 		/**
 		 * Get a free block location for the Inode
@@ -168,7 +165,7 @@ int sfs_create(char *pathname, int type)
 		 */
 		if(tokens[0] != NULL)
 		{
-			strcpy(new_block.name, tokens[inode_location[1]]);
+			strcpy(new_block.name, tokens[inode_loc[1]]);
 		}
 		else{
 
@@ -250,7 +247,7 @@ int sfs_create(char *pathname, int type)
 		buf = (byte *) copy_to_buf((byte *)&new_block, (byte *)buf, sizeof(new_block), BLKSIZE);
 		retval = write_block(new_inode_location[0], buf);
 
-		free(buf);
+
 		if(retval != 0)
 		{
 			/**
@@ -285,18 +282,23 @@ int sfs_create(char *pathname, int type)
 		 * TODO check for success addition to parent index block
 		 * TODO link the inode to the parent Inode
 		 */
-		if(link_inode(inode_location[0], new_inode_location) < 0)
+		if(tokens[0] != NULL)
 		{
-			new_inode_location[1] = index_location.index_location;
-			if(update_fbl(NULL, new_inode_location) == NULL)
+			uint32_t stupid_int = inode_loc[0];
+			if(link_inode_to_parent(stupid_int, new_inode_location) < 0)
 			{
-				return -1;
+				new_inode_location[1] = index_location.index_location;
+				if(update_fbl(NULL, new_inode_location) == NULL)
+				{
+					return -1;
+				}
+				return 0;
 			}
-			return 0;
 		}
+		free(buf);
 
 		/**
-		 * TODO update size of parent
+		 * TODO updfree(buf);ate size of parent
 		 */
 
 		/**

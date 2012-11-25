@@ -204,6 +204,7 @@ char** tokenize_path(char* pathname)
 	/* Copy the tokens into an array of tokens */
 	while (ptr_tkn != NULL)
 	{
+		//TODO CALLOC MANNNN!!!
 		/* Increase the tokens array size for an additional token */
 		tokens = (char**) realloc(tokens, ++num_tokens * sizeof(char*));
 

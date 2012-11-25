@@ -41,11 +41,17 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	{
 		if(tokens[0] != NULL)
 		{
-			return NULL;
+			if(create == false)
+			{
+				return NULL;
+			}
 		}
-		inode_location[0] = root_dir;
-		inode_location[1] = 0;
-		return inode_location;
+		else
+		{
+			inode_location[0] = root_dir;
+			inode_location[1] = 0;
+			return inode_location;
+		}
 	}
 
 	/**
@@ -56,6 +62,13 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	//tokens[0] cannot be null unless something messed up, since you cannot open
 	//up a file with a path that only contains '/'
 	inode_location[0] = find_inode(index_block, tokens[0]);
+
+	if(inode_location[0] == 0 && create == true)
+	{
+		inode_location[1] = 0;
+		inode_location[0] = root_dir;
+		return &inode_location;
+	}
 
 	if(create == true)
 	{
