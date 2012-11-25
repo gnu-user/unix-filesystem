@@ -9,7 +9,7 @@
 
 block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data)
 {
-	uint32_t j = 0, k = 0;
+	uint32_t j = 0;
 	block* data_blocks = NULL;
 	byte* tmp_data_buf = NULL;
 
@@ -18,8 +18,9 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 	{
 		for(uint32_t i = start; i < (start + length); ++i, ++j)
 		{
-			/* Error if the length is longer than the data buffer, buffer overrun */
-			if (data_buf[i] == NULL)
+			/* Error if the length is longer than the data buffer or
+			 * actual data , buffer overrun */
+			if (data_buf[i] == NULL || actual_data[j] == NULL)
 			{
 				return NULL;
 			}
@@ -28,16 +29,8 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 			memcpy(&data_buf[i], &actual_data[j], sizeof(byte));
 		}
 
-		/* Get the length of the data buffer in bytes so it can be segmented
-		 * into blocks
-		 */
-		while (data_buf[k] != NULL)
-		{
-			++k;
-		}
-
 		/* Segment the data into blocks */
-		data_blocks = segment_data_len(data_buf, k);
+		data_blocks = segment_data(data_buf);
 	}
 	/* If the starting point is -1 append the actual data to the data buffer */
 	else if (start == -1)
@@ -45,16 +38,8 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 		/* Append the actual data to the data buffer */
 		tmp_data_buf = (byte*) concat(data_buf, actual_data, sizeof(byte));
 
-		/* Get the length of the newly appended data buffer in bytes so it can be
-		 *  segmented into blocks
-		 */
-		while (tmp_data_buf[k] != NULL)
-		{
-			++k;
-		}
-
 		/* Segment the data into blocks and free the temporary buffer */
-		data_blocks = segment_data_len(tmp_data_buf, k);
+		data_blocks = segment_data(tmp_data_buf);
 		free(tmp_data_buf);
 	}
 
@@ -62,24 +47,50 @@ block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual
 }
 
 
-block* segment_data_len(byte* data_buf, uint32_t length)
+block* segment_data(byte* data_buf)
 {
 	uint32_t i = 0;
-	uint32_t blocks = ceil(length / BLKSIZE);
+	uint32_t length = 0;
+	uint32_t blocks = 0;
 	byte empty_block[BLKSIZE] = { NULL };
 
 	/* The offset in the data buffer to copy the data into the block */
 	uint32_t offset = 0;
 	block* data_blocks = NULL;
 
-	/* Copy each block into a 2D array containin the blocks */
+	/* Get the length of the data buffer in bytes and the number of blocks
+	 * to place the data into
+	 */
+	while (data_buf[i] != NULL)
+	{
+		++i;
+	}
+
+	/* Update the length and number of blocks */
+	length = i;
+	blocks = ceil(length / BLKSIZE);
+
+
+	/* Copy each block into a 2D array containing the blocks */
 	for (i = 0; i < blocks; ++i)
 	{
 		/* Increase the size of the data blocks array for one more block */
 		data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(block));
 
+		/* Initialize the data in the block to NULL before copying in the data buf */
+		memcpy(&data_blocks[i], empty_block, BLKSIZE);
+
 		/* Copy the data_buf at the next offset into the array of data blocks */
-		memcpy(&data_blocks[i], (data_buf + offset), BLKSIZE);
+		if (length >= BLKSIZE)
+		{
+			memcpy(&data_blocks[i], (data_buf + offset), BLKSIZE);
+		}
+		else
+		{
+			memcpy(&data_blocks[i], (data_buf + offset), length);
+		}
+
+		length -= BLKSIZE;
 		offset += BLKSIZE;
 	}
 
