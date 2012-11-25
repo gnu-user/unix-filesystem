@@ -6,6 +6,7 @@ static free_block_list fbl =
 	.free_blocks = { false }
 };
 
+// TODO THIS NEEDS TO BE CALLED
 free_block_list* get_free_block_list(void)
 {
 	uint32_t fbl_location = 0;
@@ -17,6 +18,16 @@ free_block_list* get_free_block_list(void)
 	if (fbl.free_blocks[0] == false)
 	{
 		/* Read the FBL from disk and update the instance in memory */
+
+		/*
+		 * fbl_location = get_free_block_index();
+		 *
+		 * fbl_data_locations = iterate_index(fbl_location, NULL);
+		 *
+		 *
+		 *
+		 */
+
 		fbl_location = get_free_block_index();
 		tmp_fbl = read_fbl(fbl_location);
 
@@ -188,88 +199,6 @@ uint32_t get_free_block(void)
 }
 
 
-/**
- * TODO Make the return type for this int and other functions returning int into the ERROR_CODES enumeration.
- */
-bool write_fbl(free_block_list* current_fbl)
-{
-	//TODO USE THE POINTER TO current_fbl FOR WHAT TO WRITE TO DISK!
-	/*
-	 //Check if the first journal entry contains a LINK_FBL entry:
-	 if (journal[0] == NULL)
-	 {
-	 //then use the the FBL index from the SB,
-	 //read from the superblock:extern used_indices*
-	 location_of_fbl = get_free_block_index();
-	 }
-
-	 else{
-	 //else use the FBL located at arg1 of the journal_entry at journal[0]
-	 //read from the journalled index:
-	 location_of_fbl = journal[0].arg1;
-	 }
-
-	 //update the current free block list by marking the existing FBL's blocks as unused.
-	 update_fbl(buf, index_fbl_blocks(location_of_fbl), calc_free_blocks(fbl, ));
-
-
-
-	 3> Call the update FBL method which updates the FBL entry in memory. It will
-	 take the FBL buffer in memory as the first argument, an array of all the
-	 locations to mark as used as the second argument, and an array of all the
-	 locations to mark as unused as the third argument.
-
-
-
-	 //The indices that need to be marked as freed are the ones we used for the old FBL.
-	 // freeBlocks = create a new free_indices: this requires that next_block is called sizeOfFBL times,
-	 // and the values returned are added into the free_indices array.
-
-	 //The indices that need to be marked as used are the ones we will be using to store the newly created FBL.
-	 //pick sizeOfFBL blocks calc_free_blocks(buf)
-	 //update_fbl(buf, freeBlocks, );
-
-	 TODO: replace 2nd and 3rd arguments with actual values, remember the FBL is several blocks so we need to give it
-	 or just code it in the .c file DURRR
-
-	 4> Write the FBL to the selected blocks on the hard drive.
-	 //loop this statement for all the locations in freeBlocks, using i as a location
-	 //{
-	 //    put_block(freeBlocks[i], );
-	 //}
-
-	 5> Journal the linking of the newly created FBL within the superblock.
-
-	 //add the journal entry:
-	 //add_entry_journal();
-
-	 //sync the journal:
-	 //sync_journal();
-
-	 //journal the linkage to the SB:
-	 //link_fbl();
-
-	 */
-}
-
-
-static free_block_list* read_fbl(uint32_t location)
-{
-	/*
-	 --> Calls the iterate_fbl which iterates through the nodes in the
-	 free_block_list linked list
-	 */
-	return NULL;
-}
-
-
-static free_block_list* iterate_fbl(uint32_t location)
-{
-
-	return NULL;
-}
-
-
 free_block_list* update_fbl(locations used,
 							locations free)
 {
@@ -309,21 +238,29 @@ free_block_list* update_fbl(locations used,
 
 int sync_fbl(void)
 {
-	/**
-	 * FIGURE OUT WHERE THE OLD FBL IS SO WE CAN DELETE IT
-	 * get fbl location from SB
-	 * blocks to free = iterate_index(fbl location)
-	 * concat(blocks to free, index block locations(fbl index))
-	 * DELETE THE OLD FBL
-	 * update_fbl(blocks to free) //Updates fbl marks index and data block locations to used
-	 *
-	 * WRITE A NEW FBL
-	 * idx = generate_index(how many blocks (fbl))
-	 * iterate through index.datablocks[i]
-	 * 		write_block(idx.datablocks[i], modify_data(fbl))
-	 *
-	 * LINK THE NEW FBL TO SUPERBLOCK
-	 * 	update the superblock to point to the mew index.firstindexblocklocation
-	 */
+	/*
+		 * Writes the FBL to the index locations pointed to by the
+		 *
+		 * fbl_location = get_free_block_index();
+		 *
+		 * fbl_data_locations = iterate_index(fbl_location, NULL);
+		 *
+		 * fbl_data_blocks = segment_data_len(fbl, NUMBLKS);
+		 *
+		// Check that the data_blocks were segmented properly
+		//	if (data_blocks == NULL)
+		//	{
+		//		//TODO return SUCCESS/FAIL enum
+		//		// Error occurred segmenting the data blocks
+		//		return -1;
+		//	}
+		//
+		//	while (idx.data_locations[i] != NULL)
+		//	{
+		//		write_block(idx.data_locations[i], data_blocks[i]);
+		//		i++;
+		//	}
+		*/
+	//TODO return the error enum type for this bullshit
 	return 0;
 }
