@@ -132,7 +132,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 			/**
 			 * concat the mem_pointer
 			 */
-			temp = concat_len(mem_pointer, data_blocks[start_block+i], sizeof(byte), BLKSIZE);
+			temp = (byte*) concat_len(mem_pointer, data_blocks[start_block+i], sizeof(byte), BLKSIZE);
 			free(mem_pointer);
 			mem_pointer = temp;
 			i++;
