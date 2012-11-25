@@ -31,7 +31,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 	locations index_block = NULL;
 	uint32_t i = 0;
 	uint32_t num_locations = 0;
-	if(fd >= 0)
+	if(fd >= 0 && fd < NUMOFL)
 	{
 
 		/**
