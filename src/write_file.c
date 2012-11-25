@@ -172,7 +172,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 * 	write_block(data_location.data_blocks[i], databuf[i])
 		 * 	i++;
 		 * populate_inode (data_location.index_block)
-		 * journal link parent's index to inode
+		 * link parent's index block to inode
 		 */
 		blocks_needed++; //Inode block space
 		inode_write = get_swoft_inode(fd);
@@ -264,7 +264,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		inode_write.location = data_location.index_location;
 
 		/**
-		 * journal link parent's index to inode
+		 * link parent's index to inode
 		 */
 
 		/**

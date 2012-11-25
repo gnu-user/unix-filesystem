@@ -76,8 +76,8 @@ int sfs_initialize(int erase) {
 		}
 
 		/**
-		 * Initialize the free_block list starting at the third index after the
-		 * super block and the journal
+		 * Initialize the free_block list starting at the next index after the
+		 * super block
 		 **/
 		retval = free_block_init();
 

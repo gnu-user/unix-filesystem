@@ -13,8 +13,6 @@ int mount(void)
 		return -1;
 	}
 
-	//journal stuff
-
 	//status = validate_root_dir();
 
 	if(status == -1)

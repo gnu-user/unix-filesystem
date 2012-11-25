@@ -1,4 +1,5 @@
 #include "blockio.h"
+#include "close_file.h"
 
 /** sfs_close
  * Closes the file, which indicates that the file is no longer needed

@@ -42,8 +42,6 @@
 
 #define SUPER_BLOCK	 0
 
-//TODO remove
-//#define JOURNAL		1
 //TODO ROOT needs to be put at the initial FBL_INDEX + number of FBL index blocks + number of FBL datablocks + 1
 #define FBL_INDEX 1
 

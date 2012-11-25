@@ -2,7 +2,7 @@
 #include "super_block.h"
 #include "traverse_tree.h"
 #include "block_func.h"
-#include "journal.h"
+#include "create_file.h"
 #include <string.h>
 #include <time.h>
 
@@ -300,7 +300,7 @@ int sfs_create(char *pathname, int type)
 		 */
 
 		/**
-		 * TODO journal fbl as well
+		 * TODO update fbl as well
 		 */
 
 		/**
