@@ -301,6 +301,8 @@ int get_index_entry(inode directory)
 		cur_dir.cur_index = 0;
 		cur_dir.directory = directory;
 	}
+	uint32_t next = cur_dir.cur_index;
+	cur_dir.cur_index++;
 
-	return cur_dir.cur_index;
+	return next;
 }

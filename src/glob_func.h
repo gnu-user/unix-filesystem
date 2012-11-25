@@ -189,7 +189,7 @@ static bool validate_tokens(char** tokens);
 extern bool free_tokens(char **tokens);
 
 /**
- * Get the entry for the current directory
+ * Get the entry for the current directory and increment the index value
  *
  * @param the inode of the current directory
  *

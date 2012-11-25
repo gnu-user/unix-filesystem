@@ -243,7 +243,12 @@ int sfs_create(char *pathname, int type)
 		}
 
 		/**
-		 * Before you can link an inode
+		 *
+		 * get parents indicies, cause its a directory
+		 * add index onto it (concat)
+		 * Ensure that the number of indexes in the index block is NOT empty at
+		 * this point or else it is invalid
+		 * rebuild index
 		 */
 
 		/**
