@@ -184,7 +184,7 @@ void* concat_len(void* src_1, void* src_2, uint32_t size, uint32_t len)
 	return result;
 }
 
-
+//TODO Check if there is a '/' leading the path name, if not return tokens = NULL
 char** tokenize_path(char* pathname)
 {
 	/*  NULL initialize the tokenizer pointer and 2D array of tokens */
@@ -242,6 +242,11 @@ static bool validate_path(char* pathname)
 
 	/* Error if the pathname contains multiple path delimiters */
 	if (strstr(pathname, "//") != NULL)
+	{
+		return false;
+	}
+
+	if(strncmp(pathname, "/", 1) != 0)
 	{
 		return false;
 	}

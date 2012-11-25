@@ -36,13 +36,13 @@ int sfs_getsize(char *pathname)
 		 * Invalid pathname
 		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
-		return 0;
+		return -1;
 	}
 
 	/**
 	 * Traverse the file system to find the desired inode
 	 */
-	inode_location = traverse_file_system(pathname, false);
+	inode_location = traverse_file_system(tokens, false);
 
 	if(inode_location == NULL)
 	{

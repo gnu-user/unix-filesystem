@@ -123,6 +123,21 @@ int sfs_create(char *pathname, int type)
 		}
 
 		/**
+		 * Check if the name is 7 chars
+		 */
+		if(tokens[0] != NULL)
+		{
+			if(strlen(tokens[inode_location[1]]) > 6)
+			{
+				/**
+				 * Invalid path name component, File name to long
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
+				return -1;
+			}
+		}
+
+		/**
 		 * Get a free block location for the Inode
 		 */
 		new_inode_location[0] = get_free_block();
