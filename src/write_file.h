@@ -5,6 +5,8 @@
  *      Author: jon
  */
 
+#include "error.h"
+
 #ifndef WRITE_FILE_H_
 #define WRITE_FILE_H_
 

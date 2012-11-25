@@ -3,6 +3,7 @@
 #define TRAVERSE_TREE_H_
 
 #include "I_node.h"
+#include "error.h"
 
 /**
  * Given the tokens for the path traverse the file system to either the last

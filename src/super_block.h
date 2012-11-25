@@ -8,6 +8,7 @@
  * (Integer) A Device id, which will take up 4 bytes.
 */
 #include "glob_func.h"
+#include "error.h"
 
 #ifndef SUPER_BLOCK_H_
 #define SUPER_BLOCK_H_

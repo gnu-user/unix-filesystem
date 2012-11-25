@@ -1,4 +1,5 @@
 #include "glob_data.h"
+#include "error.h"
 
 #ifndef BLOCKIO_H_
 #define BLOCKIO_H_

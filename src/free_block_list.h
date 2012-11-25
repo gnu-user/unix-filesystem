@@ -5,6 +5,7 @@
  *      Author: jon
  */
 #include "glob_data.h"
+#include "error.h"
 #include <stdio.h>
 #include <stdbool.h>
 

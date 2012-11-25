@@ -1,5 +1,6 @@
 #include "blockio.h"
 #include "glob_data.h"
+#include "error.h"
 
 #ifndef BLOCK_FUNC_H_
 #define BLOCK_FUNC_H_

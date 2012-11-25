@@ -4,6 +4,7 @@
  *  Created on: Nov 24, 2012
  *      Author: ubuntu
  */
+#include "error.h"
 
 #ifndef CLOSE_FILE_H_
 #define CLOSE_FILE_H_
