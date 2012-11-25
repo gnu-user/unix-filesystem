@@ -226,3 +226,21 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 	 */
 	return 0;
 }
+
+int get_index_entry(inode directory)
+{
+	if(uuid_compare(cur_dir.directory.uuid, directory.uuid) != 0)
+	{
+		cur_dir.cur_index = 0;
+		cur_dir.directory = directory;
+	}
+	uint32_t next = cur_dir.cur_index;
+	cur_dir.cur_index++;
+
+	return next;
+}
+
+void reset_index_entry()
+{
+	cur_dir.cur_index = 0;
+}

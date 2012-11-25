@@ -273,8 +273,6 @@ static bool validate_tokens(char** tokens)
 	return true;
 }
 
-
-
 bool free_tokens(char **tokens)
 {
 	uint32_t i = 0;

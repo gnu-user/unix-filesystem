@@ -243,6 +243,14 @@ int sfs_create(char *pathname, int type)
 		}
 
 		/**
+		 * get parents indicies, cause its a directory
+		 * add index onto it (concat)
+		 * Ensure that the number of indexes in the index block is NOT empty at
+		 * this point or else it is invalid
+		 * rebuild index
+		 */
+
+		/**
 		 * Add the inode's location to the parent's index list
 		 * If add location fails de-allocate Inode and index block
 		 *

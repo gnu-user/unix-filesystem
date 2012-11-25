@@ -181,5 +181,4 @@ static bool validate_tokens(char** tokens);
  */
 extern bool free_tokens(char **tokens);
 
-
 #endif /* GLOB_FUNC_H_ */

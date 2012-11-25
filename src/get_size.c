@@ -24,6 +24,7 @@ int sfs_getsize(char *pathname)
 	locations inode_location = NULL;
 	locations index_locations = NULL;
 	char** tokens = NULL;
+	int size = 0;
 
 	/**
 	 * Parse the pathname
@@ -88,7 +89,7 @@ int sfs_getsize(char *pathname)
 	/**
 	 * print out the number of index blocks + the inode block
 	 */
-	printf("Overhead Size %d", i);
+	printf("Overhead Size =  %d\n", i*BLKSIZE);
 
 	if(type == 0)
 	{
@@ -96,8 +97,9 @@ int sfs_getsize(char *pathname)
 		 * Get the size of the file from the Inode
 		 * return the size of the file
 		 */
-
-		return get_size(inode_location[0]);
+		size =  get_size(inode_location[0]);
+		printf("Size = %d\n", size);
+		return size;
 	}
 	else if(type == 1)
 	{
@@ -109,7 +111,9 @@ int sfs_getsize(char *pathname)
 		/**
 		 * Return the number of locations found in the index block(s)
 		 */
-		return count_files_in_dir(index_block);
+		size = count_files_in_dir(index_block);
+		printf("Size = %d\n", size);
+		return size;
 	}
 	/**
 	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
