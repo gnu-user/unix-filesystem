@@ -85,8 +85,19 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 
 	if(create == true)
 	{
+		inode parent = *get_inode(inode_location[0]);
+		if(parent.type == 0)
+		{
+			/**
+			 * Invalid Path, cannot use file as a directory
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
+			return NULL;
+		}
 		second_last = 1;
 	}
+
+
 
 	/**
 	 * General structure of the traversal:
@@ -105,16 +116,8 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		/**
 		 * get the list of locations from the index block
 		 */
-		inode parent = *get_inode(inode_location[0]);
-		index = parent.location;
-		if(parent.type == 1)
-		{
-			/**
-			 * Invalid Path, cannot use file as a directory
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
-			 */
-			return -1;
-		}
+
+		index = get_index_block(inode_location[0]);
 
 		/**
 		 * index block is empty
