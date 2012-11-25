@@ -102,6 +102,38 @@ block* segment_data(byte* data_buf)
 }
 
 
+block* segment_data_len(byte* data_buf, uint32_t length)
+{
+	uint32_t i = 0;
+	uint32_t blocks = ceil(length / BLKSIZE);
+	byte empty_block[BLKSIZE] = { NULL };
+
+	/* The offset in the data buffer to copy the data into the block */
+	uint32_t offset = 0;
+	block* data_blocks = NULL;
+
+	/* Copy each block into a 2D array containin the blocks */
+	for (i = 0; i < blocks; ++i)
+	{
+		/* Increase the size of the data blocks array for one more block */
+		data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(block));
+
+		/* Initialize the data in the block to NULL before copying in the data buf */
+		memcpy(&data_blocks[i], empty_block, BLKSIZE);
+
+		/* Copy the data_buf at the next offset into the array of data blocks */
+		memcpy(&data_blocks[i], (data_buf + offset), BLKSIZE);
+		offset += BLKSIZE;
+	}
+
+	/* Increase the data_blocks array for a final NULL termination block */
+	data_blocks = (block*) realloc(data_blocks, (i + 1) * sizeof(block));
+	memcpy(&data_blocks[i], empty_block, BLKSIZE);
+
+	return data_blocks;
+}
+
+
 /** sfs_write
  * Write the length bytes of data specified from a memory location to the
  * specified file. The parameter start gives the offset of the first byte in

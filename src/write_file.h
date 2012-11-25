@@ -43,6 +43,26 @@ extern block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte*
 extern block* segment_data(byte* data_buf);
 
 
+/**
+ * Takes a data buffer that in a multiple of BLKSIZE and returns an array of blocks,
+ * it is similar to modify_data except that no data is actually being modified.
+ * Returns a 2D array where each index in the array points a block, the last index
+ * points to NULL.
+ *
+ * If an error occurs NULL is returned
+ *
+ * @pre data_buf MUST be a buffer that is EXACTLY a multiple of BLKSIZE, it does not
+ * necessarily need to be NULL terminated
+ *
+ * @param data_buf A buffer containing the data to be segmented into blocks
+ * @param length The length of the buffer in bytes to be segmented into blocks
+ *
+ * @return A null terminated array of blocks, where the last index is NULL,
+ * if an error occurs then NULL is returned
+ */
+extern block* segment_data_len(byte* data_buf, uint32_t length);
+
+
 /** sfs_write
  * Write the length bytes of data specified from a memory location to the
  * specified file. The parameter start gives the offset of the first byte in
