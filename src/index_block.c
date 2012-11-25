@@ -243,7 +243,7 @@ locations iterate_index(uint32_t location, locations data_blocks)
 uint32_t calc_index_blocks(uint32_t num_blocks)
 {
 	return (uint32_t) ceil((double)(num_blocks) /
-			(ceil(BLKSIZE / (double)(sizeof(uint32_t))) - 1));
+			(floor(BLKSIZE / (double)(sizeof(uint32_t))) - 1));
 }
 
 

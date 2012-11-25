@@ -40,6 +40,8 @@ int sfs_create(char *pathname, int type)
 	uint32_t data_location = NULL;
 	uint32_t new_inode_location[3] = {NULL, NULL, NULL};
 	byte* buf = NULL;
+	uint32_t i = 0;
+	int parent_offset = 0;
 	int retval = 0;
 
 	/**
@@ -88,6 +90,7 @@ int sfs_create(char *pathname, int type)
 			 * 	- If there is another file, there is an invalid file name error
 			 */
 			index_block = iterate_index(get_index_block(inode_location[0]), NULL);
+
 			if(index_block == NULL){
 				/**
 				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
@@ -103,6 +106,16 @@ int sfs_create(char *pathname, int type)
 				return 0;
 			}
 
+			i = 0;
+			while(index_block[i] != NULL)
+			{
+				i++;
+			}
+
+			if(i%(floor(BLKSIZE/sizeof(uint32_t)) - 1) == 0)
+			{
+				parent_offset++;
+			}
 			/**
 			 * Check if there is enough space on the disk for the new create
 			 * (2 blocks for directory or file)
@@ -113,7 +126,7 @@ int sfs_create(char *pathname, int type)
 			inode_location = SUPER_BLOCK;
 		}
 
-		if(calc_num_free_blocks(CREATE_SIZE) == NULL)
+		if(calc_num_free_blocks(CREATE_SIZE + parent_offset) == NULL)
 		{
 			/**
 			 * Not enough space
@@ -272,7 +285,7 @@ int sfs_create(char *pathname, int type)
 		 * TODO check for success addition to parent index block
 		 * TODO link the inode to the parent Inode
 		 */
-		/*if(link_inode(inode_location[0], new_inode_location) < 0)
+		if(link_inode(inode_location[0], new_inode_location) < 0)
 		{
 			new_inode_location[1] = index_location.index_location;
 			if(update_fbl(NULL, new_inode_location) == NULL)
@@ -280,7 +293,7 @@ int sfs_create(char *pathname, int type)
 				return -1;
 			}
 			return 0;
-		}*/
+		}
 
 		/**
 		 * TODO update size of parent
