@@ -21,6 +21,6 @@
  *
  * @exception FILE_NOT_FOUND If the pathname does not already exist
  */
-int sfs_getsize(char *pathname);
+extern int sfs_getsize(char *pathname);
 
 #endif /* GET_SIZE_H_ */

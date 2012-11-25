@@ -21,6 +21,6 @@
  *
  * @exception FILE_NOT_FOUND If the pathname does not already exist
  */
-int sfs_gettype(char *pathname);
+extern int sfs_gettype(char *pathname);
 
 #endif /* GET_TYPE_H_ */

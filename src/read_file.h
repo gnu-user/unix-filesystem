@@ -29,6 +29,6 @@
  * @exception INVALID_FILE_DESCRIPTOR If the file descriptor specified does not
  * exist
  */
-int sfs_read(int fd, int start, int length, byte *mem_pointer);
+extern int sfs_read(int fd, int start, int length, byte *mem_pointer);
 
 #endif /* READ_FILE_H_ */

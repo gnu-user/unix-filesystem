@@ -20,7 +20,7 @@
  *
  * @exception FILE_NOT_FOUND If the file specified in pathname does not exist
  */
-int sfs_open(char *pathname);
+extern int sfs_open(char *pathname);
 
 /**
  * The all of the information stored in the given file descriptor's Inode.
@@ -32,6 +32,6 @@ int sfs_open(char *pathname);
  * if the value >= 0 then the function is successful
  * if the value < 0 then the function is unsuccessful
  */
-int show_information(int fd);
+extern int show_information(int fd);
 
 #endif /* OPEN_FILE_H_ */

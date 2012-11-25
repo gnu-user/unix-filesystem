@@ -28,6 +28,6 @@
  * @exception INVALID_FILE_DESCRIPTOR If the file descriptor specified does not
  * exist
  */
-int sfs_readdir(int fd, char *mem_pointer);
+extern int sfs_readdir(int fd, char *mem_pointer);
 
 #endif /* READ_DIR_H_ */

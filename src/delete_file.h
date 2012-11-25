@@ -20,6 +20,6 @@
  * @exception FILE_NOT_FOUND If the file at the specified path does
  * not already exist
  */
-int sfs_delete(char *pathname);
+extern int sfs_delete(char *pathname);
 
 #endif /* DELETE_FILE_H_ */

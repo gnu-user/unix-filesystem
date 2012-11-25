@@ -29,6 +29,6 @@
  * @exception INSUFFICIENT_DISK_SPACE If the length of the blocks to be written
  * is greater than the amount of available blocks on disk
  */
-int sfs_create(char *pathname, int type);
+extern int sfs_create(char *pathname, int type);
 
 #endif /* CREATE_FILE_H_ */

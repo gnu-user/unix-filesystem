@@ -17,6 +17,6 @@
  * If the value > 0 the file close was a success
  * If the value <= 0 the file close was unsuccessful
  */
-int sfs_close(int fd);
+extern int sfs_close(int fd);
 
 #endif /* CLOSE_FILE_H_ */
