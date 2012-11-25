@@ -7,7 +7,7 @@
 #include <math.h>
 
 
-block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data)
+block* modify_data(int32_t start, uint32_t length, byte* data_buf, byte* actual_data)
 {
 	uint32_t j = 0;
 	block* data_blocks = NULL;

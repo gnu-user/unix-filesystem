@@ -13,6 +13,9 @@
  * and length of data specified. If the starting value is -1 then the data is appended
  * to the buffer for the length specified.
  *
+ * @note In order to provide support for appending data using start = -1, the parameter
+ * type MUST be signed, which is int32_t.
+ *
  * @param start The starting offset to alter the data at or if -1 it's appending data
  * if start >= 0 then actual data is inserted (overrides) from start for the
  * length of actual data.
@@ -25,7 +28,7 @@
  * @return A null terminated array of blocks, where the last index is NULL,
  * if an error occurs then NULL is returned
  */
-extern block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data);
+extern block* modify_data(int32_t start, uint32_t length, byte* data_buf, byte* actual_data);
 
 
 /**
