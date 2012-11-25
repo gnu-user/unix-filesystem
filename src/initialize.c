@@ -20,7 +20,7 @@ int sfs_initialize(int erase) {
 	//TODO finish create
 	FBL_DATA_SIZE = ceil((double)(NUMBLKS / BLKSIZE));
 	FBL_TOTAL_SIZE = (uint32_t) ceil(
-			FBL_DATA_SIZE / (ceil(BLKSIZE / (double)(sizeof(uint32_t))) - 1))
+			FBL_DATA_SIZE / (floor(BLKSIZE / (double)(sizeof(uint32_t))) - 1))
 			+ FBL_DATA_SIZE;
 	ROOT = (uint32_t) (FBL_INDEX + FBL_TOTAL_SIZE);
 	byte* buf = NULL;

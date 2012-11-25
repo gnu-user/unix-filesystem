@@ -187,24 +187,32 @@ uint32_t find_inode(locations index_blocks, char* name)
 
 int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 {
-	/*locations idxbuf = NULL;
-	inode* parent_inode = get_inode(parent_location);
-	idxbuf = iterate_index(parent_inode->location, idxbuf);
-	if(idxbuf == NULL)
-	{
-		return -1;
-	}
-	//concat_len(idxbuf, inode_location, sizeof(uint32_t), 1);
-	 //TODO rebuild_index NEEDS TO TAKE A SERIES OF DATA BLOCK LOCATIONS AND MAKE AN INDEX OUT OF THEM
-	data_index newidx = rebuild_index(idxbuf);
-	parent_inode->location = newidx.index_location;
-	if(write_block(parent_location, parent_inode) != 0)
-	{
-		return -1;
-	}*/
+	/**
+	 * Gets the parent's index
+	 * locations_buf = iterate the index (parent_index)
+	 * //add's the inode location of the child to the end of the buffer
+	 * locations_buf += child's inode
+	 * rebuilds_index(locations_buf)
+	 * link the new index block's location to the parent inode
+	 */
+	uint32_t first_index = NULL;
+	byte* buf = NULL;
+	inode* parent = get_inode(parent_location);
+	locations loc_buf = iterate_index(parent->location);
+	loc_buf = (locations) concat_len(loc_buf, &inode_location, sizeof(uint32_t), sizeof(uint32_t));
 
+	first_index = rebuild_index(loc_buf);
 
-	return 0;
+	parent->location = first_index;
+
+	buf = allocate_buf(buf, BLKSIZE);
+
+	/**
+	 * Copy the parent into to buffer
+	 */
+	buf = (byte *) copy_to_buf((byte *) &parent, (byte *) buf, sizeof(parent),
+			BLKSIZE);
+	return write_block(SUPER_BLOCK, buf);
 }
 
 int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)

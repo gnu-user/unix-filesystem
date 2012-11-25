@@ -254,7 +254,6 @@ static bool validate_path(char* pathname)
 	return true;
 }
 
-
 static bool validate_tokens(char** tokens)
 {
 	/* Validate the path by checking each token against a set of conditions */
