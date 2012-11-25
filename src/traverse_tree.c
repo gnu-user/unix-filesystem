@@ -39,9 +39,9 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	 */
 	if(index_block[0] == NULL)
 	{
-		if(tokens[0] == NULL)
+		if(tokens[0] != NULL)
 		{
-			return -1;
+			return NULL;
 		}
 		inode_location[0] = root_dir;
 		inode_location[1] = 0;

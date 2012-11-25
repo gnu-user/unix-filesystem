@@ -42,7 +42,7 @@ int sfs_getsize(char *pathname)
 	/**
 	 * Traverse the file system to find the desired inode
 	 */
-	inode_location = traverse_file_system(pathname, false);
+	inode_location = traverse_file_system(tokens, false);
 
 	if(inode_location == NULL)
 	{

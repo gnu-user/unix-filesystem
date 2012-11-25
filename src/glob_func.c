@@ -246,6 +246,11 @@ static bool validate_path(char* pathname)
 		return false;
 	}
 
+	if(strncmp(pathname, "/", 1) != 0)
+	{
+		return false;
+	}
+
 	return true;
 }
 
