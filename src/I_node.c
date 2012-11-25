@@ -198,7 +198,7 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 	uint32_t first_index = NULL;
 	byte* buf = NULL;
 	inode* parent = get_inode(parent_location);
-	locations loc_buf = iterate_index(parent->location);
+	locations loc_buf = iterate_index(parent->location, NULL);
 	loc_buf = (locations) concat_len(loc_buf, &inode_location, sizeof(uint32_t), sizeof(uint32_t));
 
 	first_index = rebuild_index(loc_buf);
