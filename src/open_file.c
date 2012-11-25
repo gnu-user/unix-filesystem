@@ -97,7 +97,7 @@ int show_information(int fd)
 		/**
 		 * Get the Inode from the swoft given the fd
 		 */
-		inode node = system_open_tb.fd[fd];
+		inode node = get_swoft_inode(fd);
 
 		printf("Name: %s\n", node.name);
 		if(node.type == true)
