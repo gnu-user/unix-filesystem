@@ -29,7 +29,7 @@ free_block_list* get_free_block_list(void)
 		 */
 
 		fbl_location = get_free_block_index();
-		tmp_fbl = read_fbl(fbl_location);
+		//tmp_fbl = read_fbl(fbl_location);
 
 		if (tmp_fbl != NULL)
 		{

@@ -210,9 +210,9 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 	/**
 	 * Copy the parent into to buffer
 	 */
-	buf = (byte *) copy_to_buf((byte *) &parent, (byte *) buf, sizeof(parent),
+	buf = (byte *) copy_to_buf((byte *) parent, (byte *) buf, sizeof(inode),
 			BLKSIZE);
-	return write_block(SUPER_BLOCK, buf);
+	return write_block(parent_location, buf);
 }
 
 int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)

@@ -5,7 +5,7 @@
 uint32_t* traverse_file_system(char** tokens, bool create)
 {
 	int root_dir;
-	uint32_t inode_location[2] = {NULL, NULL};
+	locations inode_location = (uint32_t *) calloc(2, sizeof(uint32_t));
 	locations index_block = NULL;
 	int index;
 	int second_last = 0;
@@ -67,7 +67,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	{
 		inode_location[1] = 0;
 		inode_location[0] = root_dir;
-		return &inode_location;
+		return inode_location;
 	}
 
 	if(create == true)

@@ -244,7 +244,7 @@ int sfs_create(char *pathname, int type)
 
 		buf = allocate_buf(buf, BLKSIZE);
 
-		buf = (byte *) copy_to_buf((byte *)&new_block, (byte *)buf, sizeof(new_block), BLKSIZE);
+		buf = (byte *) copy_to_buf((byte *) &new_block, (byte *)buf, sizeof(new_block), BLKSIZE);
 		retval = write_block(new_inode_location[0], buf);
 
 
@@ -285,7 +285,7 @@ int sfs_create(char *pathname, int type)
 		if(tokens[0] != NULL)
 		{
 			uint32_t stupid_int = inode_loc[0];
-			if(link_inode_to_parent(stupid_int, new_inode_location) < 0)
+			if(link_inode_to_parent(stupid_int, new_inode_location[0]) < 0)
 			{
 				new_inode_location[1] = index_location.index_location;
 				if(update_fbl(NULL, new_inode_location) == NULL)

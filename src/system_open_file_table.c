@@ -58,14 +58,10 @@ int find_opening(void)
 {
 	for(int i = 0; i < NUMOFL; i++)
 	{
-		//TODO fix comparison
 		if(system_open_tb.taken[i] == false)
 		{
 			return i;
 		}
-
-		//Temp
-		return 0;
 	}
 
 	return -1;
