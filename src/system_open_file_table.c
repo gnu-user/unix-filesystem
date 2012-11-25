@@ -38,7 +38,7 @@ int add_to_swoft(uint32_t block_num)
 	/**
 	 * Store the Inode in the swoft
 	 */
-	system_open_tb.fd[index] = *test;
+	system_open_tb.fd[index] = block_num;
 	system_open_tb.taken[index] = true;
 
 	/**
@@ -78,7 +78,7 @@ int validate_fd(int fd)
 
 inode get_swoft_inode(int fd)
 {
-	return system_open_tb.fd[fd];
+	return (inode) *get_inode(system_open_tb.fd[fd]);
 }
 
 void remove_fd(int fd)
@@ -92,16 +92,16 @@ int find_and_remove(char* file_name, uuid_t uuid)
 	{
 		if(system_open_tb.taken[i] == true)
 		{
-			if(strcmp(system_open_tb.fd[i].name, file_name))
+			inode* cur = get_inode(system_open_tb.fd[i]);
+			if(strcmp(cur->name, file_name))
 			{
-				if(uuid_compare(uuid, system_open_tb.fd[i].uuid) == 0)
+				if(uuid_compare(uuid, cur->uuid) == 0)
 				{
 					system_open_tb.taken[i] = false;
-					system_open_tb.fd[i] = get_null_inode();
+					system_open_tb.fd[i] = 0;
 					return 1;
 				}
 			}
-
 		}
 	}
 	return 0;

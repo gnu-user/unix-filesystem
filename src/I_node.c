@@ -198,7 +198,9 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 	uint32_t first_index = NULL;
 	byte* buf = NULL;
 	inode* parent = get_inode(parent_location);
-	locations loc_buf = iterate_index(parent->location, NULL);
+	uint32_t pre_index = parent->location;
+	locations free_blocks = NULL;
+	locations loc_buf = iterate_index(pre_index, NULL);
 	loc_buf = (locations) concat_len(loc_buf, &inode_location, sizeof(uint32_t), sizeof(uint32_t));
 
 	first_index = rebuild_index(loc_buf);
@@ -212,7 +214,20 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 	 */
 	buf = (byte *) copy_to_buf((byte *) parent, (byte *) buf, sizeof(inode),
 			BLKSIZE);
-	return write_block(parent_location, buf);
+	if(write_block(parent_location, buf) < 0)
+	{
+		return -1;
+	}
+
+	free_blocks = index_block_locations(pre_index, NULL);
+
+	if(free_blocks == NULL)
+	{
+		return -1;
+	}
+
+	update_fbl(NULL, free_blocks);
+	return 0;
 }
 
 int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)

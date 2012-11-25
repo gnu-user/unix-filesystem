@@ -1,4 +1,5 @@
 #include "I_node.h"
+#include <string.h>
 #include "../lib/uuid/uuid.h"
 
 #ifndef SYSTEM_OPEN_FILE_TABLE_H_
@@ -11,7 +12,7 @@
  * Needs to have at least 5 instances (to have 5 files open at once)
  */
 typedef struct{
-	inode fd[NUMOFL];
+	uint32_t fd[NUMOFL];
 	bool taken[NUMOFL];
 } swoft;
 
