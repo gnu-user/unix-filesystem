@@ -284,7 +284,6 @@ int sfs_create(char *pathname, int type)
 		 */
 		if(tokens[0] != NULL)
 		{
-			get_inode_location(inode_loc[0]);
 			if(link_inode_to_parent(inode_loc[0], new_inode_location[0]) < 0)
 			{
 				new_inode_location[1] = index_location.index_location;
