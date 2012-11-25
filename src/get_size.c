@@ -36,7 +36,7 @@ int sfs_getsize(char *pathname)
 		 * Invalid pathname
 		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 		 */
-		return 0;
+		return -1;
 	}
 
 	/**
