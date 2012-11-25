@@ -3,6 +3,7 @@
 #include "index_block.h"
 #include "system_open_file_table.h"
 #include <math.h>
+#include "read_file.h"
 
 /** sfs_read
  * Copy the length of bytes of data specified from a regular file to memory
@@ -53,10 +54,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 			 */
 			return 0;
 		}
-
-		/**
-		 * Check the journal for entries (if needs to flush)
-		 */
 
 		/**
 		 * Use the offset to find the start of where to read in the block
@@ -132,7 +129,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 			/**
 			 * concat the mem_pointer
 			 */
-			temp = concat_len(mem_pointer, data_blocks[start_block+i], sizeof(byte), BLKSIZE);
+			temp = (byte*) concat_len(mem_pointer, data_blocks[start_block+i], sizeof(byte), BLKSIZE);
 			free(mem_pointer);
 			mem_pointer = temp;
 			i++;

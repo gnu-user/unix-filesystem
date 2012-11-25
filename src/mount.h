@@ -5,7 +5,8 @@
 #define MOUNT_H_
 
 /**
- * Call validate and check journal methods to ensure that the mount is possible
+ * Call validate methods to ensure that the mount is possible,
+ * and filesystem isn't corrupted.
  *
  * @return an integer value,
  * if value = 1 pass

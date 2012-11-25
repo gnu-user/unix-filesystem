@@ -3,75 +3,65 @@
 #include "I_node.h"
 #include "system_open_file_table.h"
 #include "index_block.h"
+#include "write_file.h"
 #include <math.h>
 
-/**
- *
- * TODO THIS NEEDS TO BE FIXED, FOR DYNAMICALLY ALLOCATING THE 2D ARRAY!!!!
- *
- * if start >= then actual data is inserted (overrides) from start for the
- * length of actual data.
- * if start == -1 then actual data is appended to the end of the databuf
- *
- * @return databuf containing actual_data
- */
+
 block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data)
 {
-
-	int j = 0;
-	int k = 0;
-	byte * temp = NULL;
+	uint32_t j = 0, k = 0;
 	block* data_blocks = NULL;
+	byte* tmp_data_buf = NULL;
 
-	if(start > 0)
+	/* If the starting point is provided alter the data buffer starting at that point */
+	if (start >= 0)
 	{
-		for(int i = start; i < length+start; i++)
+		for(uint32_t i = start; i < (start + length); ++i, ++j)
 		{
-			memcpy(data_buf[i], actual_data[j], BLKSIZE);
-			j++;
-		}
-		temp = data_buf;
-	}
-	else if(start ==-1)
-	{
-		while(data_buf[j] != NULL)
-		{
-			j++;
-		}
-		//does adding 1 to the end make it null terminated
-		j += length;
-		temp = (byte*) calloc(j+1, sizeof(byte));
-		for(int i = 0; i < j; i++)
-		{
-			if(i < j)
+			/* Error if the length is longer than the data buffer, buffer overrun */
+			if (data_buf[i] == NULL)
 			{
-				memcpy(temp, data_buf, BLKSIZE);
+				return NULL;
 			}
-			else
-			{
-				memcpy(temp, actual_data, BLKSIZE);
-			}
-		}
-	}
 
-	/**
-	 * Divide up the byte arrays into block arrays
-	 *
-	for(int i = 0; i < j; i++)
-	{
-		data_blocks[k][i] = temp[i];
-		if(i%BLKSIZE == 0 && i > 0)
-		{
-			k++;
+			/* Copy the actual data into the data buffer at the offset, i */
+			memcpy(&data_buf[i], &actual_data[j], sizeof(byte));
 		}
+
+		/* Get the length of the data buffer in bytes so it can be segmented
+		 * into blocks
+		 */
+		while (data_buf[k] != NULL)
+		{
+			++k;
+		}
+
+		/* Segment the data into blocks */
+		data_blocks = segment_data_len(data_buf, k);
+	}
+	/* If the starting point is -1 append the actual data to the data buffer */
+	else if (start == -1)
+	{
+		/* Append the actual data to the data buffer */
+		tmp_data_buf = (byte*) concat(data_buf, actual_data, sizeof(byte));
+
+		/* Get the length of the newly appended data buffer in bytes so it can be
+		 *  segmented into blocks
+		 */
+		while (tmp_data_buf[k] != NULL)
+		{
+			++k;
+		}
+
+		/* Segment the data into blocks and free the temporary buffer */
+		data_blocks = segment_data_len(tmp_data_buf, k);
+		free(tmp_data_buf);
 	}
 
 	return data_blocks;
-*/
-	return NULL;
 }
 
-// TODO THIS HAS A MEMORY ISSUE, FIX GARBAGE DATA WITH DATA[40,41,42] FOR SOME REASON
+
 block* segment_data_len(byte* data_buf, uint32_t length)
 {
 	uint32_t i = 0;
@@ -182,7 +172,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 * 	write_block(data_location.data_blocks[i], databuf[i])
 		 * 	i++;
 		 * populate_inode (data_location.index_block)
-		 * journal link parent's index to inode
+		 * link parent's index block to inode
 		 */
 		blocks_needed++; //Inode block space
 		inode_write = get_swoft_inode(fd);
@@ -274,7 +264,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		inode_write.location = data_location.index_location;
 
 		/**
-		 * journal link parent's index to inode
+		 * link parent's index to inode
 		 */
 
 		/**

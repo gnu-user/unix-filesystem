@@ -80,7 +80,7 @@ int validate_fd(int fd)
 	return -1;
 }
 
-inode get_swoft_inode(fd)
+inode get_swoft_inode(int fd)
 {
 	return system_open_tb.fd[fd];
 }

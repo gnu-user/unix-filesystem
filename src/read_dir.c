@@ -2,6 +2,7 @@
 #include "blockio.h"
 #include "index_block.h"
 #include "system_open_file_table.h"
+#include "read_dir.h"
 
 /** sfs_readdir
  * Reads the file name components from a directory file. The first time

@@ -3,6 +3,7 @@
 #include "traverse_tree.h"
 #include "free_block_list.h"
 #include "system_open_file_table.h"
+#include "delete_file.h"
 
 /** sfs_delete
  * Delete a file with the pathname specified.

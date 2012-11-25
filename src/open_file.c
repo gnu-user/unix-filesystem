@@ -1,5 +1,6 @@
 #include "system_open_file_table.h"
 #include "traverse_tree.h"
+#include "open_file.h"
 
 /** sfs_open
  * Opens the file specified by the pathname, if the file is successfully opened
@@ -89,7 +90,7 @@ int sfs_open(char *pathname)
  * if the value >= 0 then the function is successful
  * if the value < 0 then the function is unsuccessful
  */
-int show_information(fd)
+int show_information(int fd)
 {
 	if(fd >= 0)
 	{

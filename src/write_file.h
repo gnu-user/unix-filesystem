@@ -9,13 +9,21 @@
 #define WRITE_FILE_H_
 
 /**
- * TODO THIS NEEDS TO BE FIXED, FOR DYNAMICALLY ALLOCATING THE 2D ARRAY!!!!
+ * Modifies the data in the buffer with the actual data provided at the starting point
+ * and length of data specified. If the starting value is -1 then the data is appended
+ * to the buffer for the length specified.
  *
- * if start >= then actual data is inserted (overrides) from start for the
+ * @param start The starting offset to alter the data at or if -1 it's appending data
+ * if start >= 0 then actual data is inserted (overrides) from start for the
  * length of actual data.
  * if start == -1 then actual data is appended to the end of the databuf
  *
- * @return databuf containing actual_data
+ * @param length The length of data to overwrite in the buffer, or to append to the buffer
+ * @param data_buf A pointer to the data buffer to be altered or appended to
+ * @param actual_data The data to overwrite the data buffer with or append to
+ *
+ * @return A null terminated array of blocks, where the last index is NULL,
+ * if an error occurs then NULL is returned
  */
 extern block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte* actual_data);
 
@@ -28,9 +36,9 @@ extern block* modify_data(uint32_t start, uint32_t length, byte* data_buf, byte*
  * If an error occurs NULL is returned
  *
  * @param data_buf A buffer containing the data to be segmented into blocks
- * @param length The length of the buffer to be segmented into blocks
+ * @param length The length of the buffer in bytes to be segmented into blocks
  *
- * @return A null terminated 2D array of blocks, where the last index points to NULL,
+ * @return A null terminated array of blocks, where the last index is NULL,
  * if an error occurs then NULL is returned
  */
 extern block* segment_data_len(byte* data_buf, uint32_t length);

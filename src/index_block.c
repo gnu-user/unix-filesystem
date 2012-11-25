@@ -50,7 +50,7 @@ data_index generate_index(uint32_t num_blocks)
 			index_block[i] = get_free_block();
 
 			/* Add the data location to data_index struct, free dynamic memory */
-			tmp_data_locations = concat_len(cur_data_index.data_locations,
+			tmp_data_locations = (locations) concat_len(cur_data_index.data_locations,
 											&index_block[i], sizeof(uint32_t),
 											sizeof(uint32_t));
 			free(cur_data_index.data_locations);
