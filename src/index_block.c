@@ -3,25 +3,6 @@
 #include "block_func.h"
 
 
-uint32_t rebuild_index(locations data_locations)
-{
-
-	/**
-	 * Needs to use index_block_locations
-	 */
-	return 0;
-}
-
-/*
- * TODO for get_free_block need to handle updating the fbl after calling get_free_block
- * otherwise get_free_block will keep returning the same free block location...
- *
- * TODO Need to handle what to return from generate_index
- *
- * Every call to generate_index should be followed by two commands:
- * 1) Journal: Link the newly created FBL.
- * 2) Journal: Link the newly created index block to it's inode.
- */
 data_index generate_index(uint32_t num_blocks)
 {
 	/* Current instance of data_index struct */
@@ -99,6 +80,81 @@ data_index generate_index(uint32_t num_blocks)
 	}
 
 	return cur_data_index;
+}
+
+
+uint32_t rebuild_index(locations data_locations)
+{
+	/* Array indexes and index_block length */
+	uint32_t i = 0, j = 0;
+	uint32_t index_len = floor(BLKSIZE / sizeof(uint32_t));
+
+	/* Index location, and index block */
+	uint32_t index_location = 0;
+	uint32_t first_index_location = 0;
+	index index_block = NULL;
+
+	/* Get a free block location to write the index */
+	index_location = get_free_block();
+
+	/* Set the location of the first index block */
+	first_index_location = index_location;
+
+	/* If data locations is NULL or the number of data locations is 0,
+	 * write an empty index and return
+	 */
+	if (data_locations == NULL || data_locations[0] == NULL)
+	{
+		index_block = (index) calloc(index_len, sizeof(uint32_t));
+		write_block(first_index_location, (byte *)index_block);
+		free(index_block);
+
+		return first_index_location;
+	}
+
+	while (data_locations[j] != NULL)
+	{
+		/* Allocate an index to write to disk */
+		index_block = (index) calloc(index_len, sizeof(uint32_t));
+
+		for (i = 0; i < (index_len - 1); ++i)
+		{
+
+			/* Check before we access the data_location array that it is not NULL
+			 * before we write the data location to the index
+			 */
+			if (data_locations[j] != NULL)
+			{
+				index_block[i] = data_locations[j];
+			}
+			/* All of the data locations have been written to the index in memory */
+			else
+			{
+				break;
+			}
+
+			/* Increment the index in the data locations array */
+			++j;
+		}
+
+		/* If there are more data locations to write, link another index */
+		if (data_locations[j] != NULL)
+		{
+			index_block[i] = get_free_block();
+		}
+
+		/* Write the index to the block specified */
+		write_block(index_location, (byte *)index_block);
+
+		/* Update the index location to the next index block location at the end of the current index
+		 * and free the old index_block buffer in memory
+		 */
+		index_location = index_block[i];
+		free(index_block);
+	}
+
+	/* Return the location of the first index block */
+	return first_index_location;
 }
 
 
@@ -183,12 +239,13 @@ locations iterate_index(uint32_t location, locations data_blocks)
 	return data_blocks;
 }
 
-//TODO test calculation
+
 uint32_t calc_index_blocks(uint32_t num_blocks)
 {
-	return (uint32_t) ceil((double)(num_blocks) / (ceil(BLKSIZE /
-			(double)(sizeof(uint32_t))) - 1));
+	return (uint32_t) ceil((double)(num_blocks) /
+			(ceil(BLKSIZE / (double)(sizeof(uint32_t))) - 1));
 }
+
 
 //TODO implement count files in dir
 int count_files_in_dir(uint32_t location)
@@ -224,6 +281,7 @@ int add_location (uint32_t index_block, uint32_t location)
 {
 
 }
+
 
 locations index_block_locations(uint32_t location, locations index_blocks)
 {
