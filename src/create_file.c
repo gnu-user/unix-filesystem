@@ -243,6 +243,10 @@ int sfs_create(char *pathname, int type)
 		}
 
 		/**
+		 * Before you can link an inode
+		 */
+
+		/**
 		 * Add the inode's location to the parent's index list
 		 * If add location fails de-allocate Inode and index block
 		 *

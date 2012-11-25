@@ -273,8 +273,6 @@ static bool validate_tokens(char** tokens)
 	return true;
 }
 
-
-
 bool free_tokens(char **tokens)
 {
 	uint32_t i = 0;
@@ -294,4 +292,15 @@ bool free_tokens(char **tokens)
 		return false;
 	}
 	return true;
+}
+
+int get_index_entry(inode directory)
+{
+	if(uuid_compare(cur_dir.directory.uuid, directory.uuid) != 0)
+	{
+		cur_dir.cur_index = 0;
+		cur_dir.directory = directory;
+	}
+
+	return cur_dir.cur_index;
 }

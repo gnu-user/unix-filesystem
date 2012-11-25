@@ -244,7 +244,6 @@ main()
 			retval = sfs_getsize(data_buffer_1);
 			if (retval >= 0) {
 				printf("sfs_getsize succeeded.\n");
-				printf("size = %d\n", retval);
 			} else {
 				printf("Error.  Return value was %d\n", retval);
 			}
@@ -286,7 +285,10 @@ main()
 			break;
 		}
 		if (command_buffer[0] == 'q')
+		{	printf("Goodbye");
 			break;
+		}
+
 		/* cleanup the newline that remains after reading command parameter(s) */
 		gets(command_buffer);
 	}
