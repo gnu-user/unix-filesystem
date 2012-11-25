@@ -1,6 +1,23 @@
 TESTS
 =====
 
+index_block_locations test
+--------------------------
+
+/* TEST FOR index_block_locations, call index_block_locations given the
+ * first index location, it should return a NULL terminated locations array
+ * with the index location
+ */
+locations test_idx_locations = NULL;
+
+test_idx_locations = index_block_locations(idx.index_location, NULL);
+
+if (test_idx_locations == NULL)
+{
+	return NULL;
+}
+	
+
 rebuild_index test
 ------------------
 
@@ -158,8 +175,6 @@ modify_data Test 2 -- Append multiple blocks of data
 
 byte test_buf[355] = { NULL };
 byte input_buf[355] = { NULL };
-
-
 
 
 

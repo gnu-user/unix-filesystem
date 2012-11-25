@@ -30,6 +30,7 @@ typedef struct
 
 static free_block_list fbl;
 
+
 /**
  * Gets the free block list independently from where it is located. If the free
  * block list does not already exist in memory (file system has just started) it
@@ -86,6 +87,7 @@ extern locations calc_num_free_blocks(uint32_t num_blocks);
  */
 extern uint32_t get_free_block(void);
 
+
 /**
  * The update FBL method updates the static FBL entry in memory. It will take
  * an array of all the locations to mark as used as the first argument, and an
@@ -102,13 +104,14 @@ extern uint32_t get_free_block(void);
  */
 free_block_list* update_fbl(locations used, locations free);
 
+
 /**
  * Writes the static free block list in memory to disk. This synchronizes the
  * static free block list in memory with the contents on disk, making the
  * current state of the free blocks on disk permanent.
  *
- * @return Returns an error code if an error occurred
- * writing the free block list to disk.
+ * @return Returns an error code if an error occurred writing the free block
+ * list to disk.
  */
 extern int sync_fbl(void);
 
