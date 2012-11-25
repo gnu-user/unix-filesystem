@@ -9,7 +9,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	locations index_block = NULL;
 	int index;
 	int second_last = 0;
-	int i = 0;
+	int i = 1;
 
 	/**
 	 * Retrieve the Superblock.
@@ -85,7 +85,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	 * 	- File not found
 	 * 	- Invalid pathway (directory not found)
 	 */
-	while(tokens[i+1+second_last] != NULL)
+	while(tokens[i+second_last] != NULL)
 	{
 		index_block = 0;
 
@@ -119,6 +119,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		}
 		i++;
 	}
-	inode_location[1] = i+1;
+	inode_location[1] = i;
 	return inode_location;
 }

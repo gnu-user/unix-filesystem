@@ -1,0 +1,12 @@
+/foo
+    /bar
+        /sfs
+        /derp
+    /abc
+    /def
+    /ghi
+        /xyz
+            /derp
+        /derp
+    /derp
+/derp
