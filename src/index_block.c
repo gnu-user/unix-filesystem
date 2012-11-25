@@ -141,7 +141,7 @@ locations iterate_index(uint32_t location, locations data_blocks)
 	 * Add each data location in the index block to the array of data locations
 	 * only iterate up to the 2nd last item as the index block may have a linked index
 	 */
-	for (i = 0; i < index_len - 1; ++i)
+	for (i = 0; i < (index_len - 1); ++i)
 	{
 		tmp_data_blocks = NULL;
 
@@ -174,9 +174,9 @@ locations iterate_index(uint32_t location, locations data_blocks)
 	}
 
 	/* If the index block links to another index, iterate over the index block recursively */
-	if (index_block[i+1] != NULL)
+	if (index_block[i] != NULL)
 	{
-		data_blocks = iterate_index(index_block[i+1], data_blocks);
+		data_blocks = iterate_index(index_block[i], data_blocks);
 	}
 
 	/* Index block doesn't link to another index, return the array of data locations */
@@ -270,7 +270,7 @@ locations index_block_locations(uint32_t location, locations index_blocks)
 	/*
 	 * Iterate through the index until we reach a NULL location
 	 */
-	for (i = 0; i < index_len - 1; ++i)
+	for (i = 0; i < (index_len - 1); ++i)
 	{
 		/* No more locations stored in the index block, return the index block locations */
 		if (index_block[i] == NULL)
@@ -285,9 +285,9 @@ locations index_block_locations(uint32_t location, locations index_blocks)
 	}
 
 	/* If the index block links to another index, iterate over the index block recursively */
-	if (index_block[i+1] != NULL)
+	if (index_block[i] != NULL)
 	{
-		index_blocks = index_block_locations(index_block[i+1], index_blocks);
+		index_blocks = index_block_locations(index_block[i], index_blocks);
 	}
 
 	/* Index block doesn't link to another index, return the NULL terminated array of locations */
