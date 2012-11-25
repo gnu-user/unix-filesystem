@@ -17,13 +17,6 @@
 
 //extern byte read_buffer[BLKSIZE];
 
-typedef struct
-{
-	inode directory;
-	uint32_t cur_index;
-} cwd;
-
-static cwd cur_dir;
 /**
  * Get a buffer to write to memory of a given size
  *
@@ -187,14 +180,5 @@ static bool validate_tokens(char** tokens);
  * @return True if the memory was freed, false if an error occured
  */
 extern bool free_tokens(char **tokens);
-
-/**
- * Get the entry for the current directory and increment the index value
- *
- * @param the inode of the current directory
- *
- * @return the current index of the directory
- */
-extern int get_index_entry(inode directory);
 
 #endif /* GLOB_FUNC_H_ */

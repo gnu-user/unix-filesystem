@@ -140,6 +140,13 @@ int sfs_delete(char *pathname)
 	}
 
 	/**
+	 * get parents indicies, cause its a directory
+	 * delete index onto it (concat)
+	 * Ensure that the number of indexes in the index block is NOT empty at
+	 * this point or else it is invalid
+	 * rebuild index
+	 */
+	/**
 	 * TODO journal linking the newly updated fbl
 	 * TODO journal removing the index location from parent
 	 * Delete the index location from the index block of the parent directory

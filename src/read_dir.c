@@ -92,23 +92,28 @@ int sfs_readdir(int fd, char *mem_pointer)
 			 */
 			return -1;
 		}
+		int cur_index = get_index_entry(*get_inode(directory.location));
 
-		mem_pointer = (char *) calloc(num_locations, sizeof(char *));
-		i = 0;
-		while(i < num_locations)
+		if(num_locations == cur_index)
 		{
-			mem_pointer[i] = get_name(index_block[i]);
+			reset_index_entry();
+			return 0;
 		}
+
+		mem_pointer = (char *) calloc(MAX_NAME_LEN, sizeof(char));
+		i = 0;
+
+		memcpy(mem_pointer[cur_index], get_name(index_block[i]), MAX_NAME_LEN);
 
 		/**
 		 * return value > 0 for a successful read dir
 		 * return value = 0 if there is no contents in dir
 		 * return value < 0 for a unsuccessful read dir
 		 */
-		if(mem_pointer[0] == NULL)
+		if(mem_pointer == NULL)
 		{
 			/**
-			 * Empty Directory
+			 * Invalid Directory Read
 			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 			 */
 			return 0;

@@ -25,6 +25,14 @@ typedef struct{
 	uuid_t uuid;
 } inode;
 
+typedef struct
+{
+	inode directory;
+	uint32_t cur_index;
+} cwd;
+
+static cwd cur_dir;
+
 /**
  * Get an inode set to null state
  *
@@ -155,6 +163,20 @@ extern int link_inode_to_parent(uint32_t parent_location, uint32_t inode_locatio
  * if value < 0 failure
  */
 extern int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location);
+
+/**
+ * Get the entry for the current directory and increment the index value
+ *
+ * @param the inode of the current directory
+ *
+ * @return the current index of the directory
+ */
+extern int get_index_entry(inode directory);
+
+/**
+ * Reset the index entry count
+ */
+extern void reset_index_entry();
 
 
 #endif /* I_NODE_H_ */

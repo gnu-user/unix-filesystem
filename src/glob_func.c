@@ -293,16 +293,3 @@ bool free_tokens(char **tokens)
 	}
 	return true;
 }
-
-int get_index_entry(inode directory)
-{
-	if(uuid_compare(cur_dir.directory.uuid, directory.uuid) != 0)
-	{
-		cur_dir.cur_index = 0;
-		cur_dir.directory = directory;
-	}
-	uint32_t next = cur_dir.cur_index;
-	cur_dir.cur_index++;
-
-	return next;
-}
