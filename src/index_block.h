@@ -17,36 +17,6 @@ typedef struct {
 // A single location for a block on disk
 //typedef uint32_t location;
 
-/**
- * TODO make a function that takes a series of data
- * locations and turns it into a new index structure,
- * then writes it on disk and returns the location
- * of the first index block
- *
- * operates similar to generate_index
- * except you already have all the data locations
- *
- * 1. segment the buffer data_locations into index blocks
- * 2. get another block and link it inside the first block
- * 3. write the first block
- * 4. write the second block
- * 5. repeat until you hit null in the buffer
- */
-uint32_t rebuild_index(locations data_locations);
-
-
-/**
- * TODO do IT
- * Calculates the number of index blocks that are needed in order to write
- * the number of data blocks specified to the filesystem
- *
- * @param num_blocks The number of data blocks
- *
- * @return The number of index blocks needed to write the data blocks to the
- * file system
- */
-uint32_t calc_index_blocks(uint32_t num_blocks);
-
 
 /**
  *
@@ -66,6 +36,30 @@ uint32_t calc_index_blocks(uint32_t num_blocks);
  *
  */
 data_index generate_index(uint32_t num_blocks);
+
+
+/**
+ * Takes a NULL terminated array series of data locations and turns it into
+ * a new index structure, then writes it on disk and returns the location of
+ * the first index block. The function operates similar to generate_index
+ * except you already have all the data locations.
+ *
+ * If NO data_locations are specified an empty index is created and the location
+ * is returned
+ *
+ * @param data_locations A NULL terminated array of data locations, if NO data
+ * locations are provided an empty index is created and the location is returned
+ *
+ * @return The location of the FIRST index block
+ *
+ * 1. For each data locations
+ * 2. get another block and link it inside the first block
+ * 3. write the first block
+ * 4. write the second block
+ * 5. repeat until you hit null in the buffer
+ */
+uint32_t rebuild_index(locations data_locations);
+
 
 /**
  * Wrapper for block_read() which returns the block
@@ -135,6 +129,18 @@ data_index generate_index(uint32_t num_blocks);
  * stored in the indices, the pointer is NULL if an error occurred
  */
 locations iterate_index(uint32_t location, locations data_blocks);
+
+
+/**
+ * Calculates the number of index blocks that are needed in order to write
+ * the number of data blocks specified to the filesystem
+ *
+ * @param num_blocks The number of data blocks
+ *
+ * @return The number of index blocks needed to write the data blocks to the
+ * file system
+ */
+uint32_t calc_index_blocks(uint32_t num_blocks);
 
 
 /**
