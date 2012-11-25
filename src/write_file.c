@@ -68,7 +68,7 @@ block* segment_data(byte* data_buf)
 
 	/* Update the length and number of blocks */
 	length = i;
-	blocks = ceil(length / BLKSIZE);
+	blocks = (uint32_t) ceil((double)length / BLKSIZE);
 
 
 	/* Copy each block into a 2D array containing the blocks */
@@ -105,7 +105,7 @@ block* segment_data(byte* data_buf)
 block* segment_data_len(byte* data_buf, uint32_t length)
 {
 	uint32_t i = 0;
-	uint32_t blocks = ceil(length / BLKSIZE);
+	uint32_t blocks = (uint32_t) ceil((double)length / BLKSIZE);
 	byte empty_block[BLKSIZE] = { NULL };
 
 	/* The offset in the data buffer to copy the data into the block */
