@@ -48,7 +48,7 @@ extern int validate_fd(int fd);
  *
  * @return the inode from the swoft given the file descriptor
  */
-extern inode get_swoft_inode(fd);
+extern inode get_swoft_inode(int fd);
 
 /**
  * remove the fd from the swoft
