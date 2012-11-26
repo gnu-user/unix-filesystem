@@ -42,7 +42,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	 * IF index_block[0] == NULL, aka no children yet
 	 *
 	 */
-	if(index_block[0] == NULL)
+	if(index_block[0] == NULL || tokens[0] == NULL)
 	{
 		if(tokens[0] != NULL)
 		{

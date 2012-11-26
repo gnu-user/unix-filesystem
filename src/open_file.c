@@ -165,6 +165,6 @@ int show_information(int fd)
 	 * Invalid file descriptor.
 	 * TODO validate this error code
 	 */
-	print_error(INVALID_FILE_DESCRIPTOR)
+	print_error(INVALID_FILE_DESCRIPTOR);
 	return -1;
 }
