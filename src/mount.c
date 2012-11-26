@@ -10,6 +10,7 @@ int mount(void)
 	status = validate_super_block();
 	if(status == -1)
 	{
+		// TODO add error code and message
 		printf("Failed to mount disk: superblock uninitialized or corrupted.\n");
 		return -1;
 	}
@@ -19,7 +20,16 @@ int mount(void)
 
 	if(status == -1)
 	{
+		// TODO add error code and message
 		printf("Failed to mount disk: root directory uninitialized or corrupted.\n");
+		return -1;
+	}
+
+	/* Initialize the free block list in memory with the fbl from disk */
+	if (get_free_block_list() == NULL)
+	{
+		// TODO add error code and message
+		printf("Failed to read and/or update the free block list.\n");
 		return -1;
 	}
 
@@ -33,6 +43,7 @@ int validate_super_block(void)
 	superblock* sb = get_super_block();
 	int variant = uuid_variant(sb->uuid);
 	if (variant != UUID_VARIANT_DCE) {
+		// TODO add error code and message
 		printf(INVALID_UUID);
 		return -1;
 	}
@@ -45,6 +56,7 @@ int validate_root_dir(void)
 
 	int variant = uuid_variant(uuid_root);
 	if (variant != UUID_VARIANT_DCE) {
+		// TODO add error code and message
 		printf(INVALID_UUID);
 		return -1;
 	}
