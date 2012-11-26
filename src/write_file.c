@@ -241,7 +241,15 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		if(start >= 0)
 		{
-			if((start + length) >= calc_num_bytes(data_buf))
+			if(data_block_locations[0] == NULL)
+			{
+				/**
+				 * Invalid override
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
+				return -1;
+			}
+			if((start + length) > calc_num_bytes(data_buf))
 			{
 				/**
 				 * Invalid override
@@ -272,6 +280,11 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 				blocks_needed += (int)ceil((double)(length)/BLKSIZE);
 			}
 		}
+
+		/**
+		 * TODO Ensure that the FBL is being updated with the locations of the
+		 * previous index and data blocks
+		 */
 
 		/**
 		 * Add the data to the data_buf
