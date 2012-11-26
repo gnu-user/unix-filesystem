@@ -225,6 +225,7 @@ free_block_list* sync_fbl(void)
 		 *
 		 * fbl_data_blocks = segment_data_len(fbl, NUMBLKS);
 		 *
+		 *
 		// Check that the data_blocks were segmented properly
 		//	if (data_blocks == NULL)
 		//	{
@@ -238,7 +239,54 @@ free_block_list* sync_fbl(void)
 		//		i++;
 		//	}
 		*/
-	return 0;
+	uint32_t i = 0;
+	uint32_t fbl_location = 0;
+	locations fbl_data_locations = NULL;
+	block* data_blocks = NULL;
+
+
+	/* Get the FBL index location from the superblock */
+	fbl_location = get_free_block_index();
+
+	/* Get the FBL data locations */
+	fbl_data_locations = iterate_index(fbl_location, NULL);
+
+	/* Check if an error occurred getting the FBL data locations */
+	if (fbl_data_locations == NULL)
+	{
+		free(fbl_data_locations);
+		return NULL;
+	}
+
+	/* Segment the free block list into data blocks */
+	data_blocks = segment_data_len(&fbl, NUMBLKS);
+
+	/* Error occurred segmenting the free block list */
+	if (data_blocks == NULL)
+	{
+		free(fbl_data_locations);
+		free(data_blocks);
+		return NULL;
+	}
+
+	/* Write the free block list in memory to disk */
+	while (fbl_data_locations[i] != NULL)
+	{
+		/* Write each fbl data block to disk, verify blocks were written correctly */
+		if (write_block(fbl_data_locations[i], data_blocks[i]) < 0)
+		{
+			/* Error occurred writing the block */
+			free(fbl_data_locations);
+			free(data_blocks);
+			return NULL;
+		}
+		++i;
+	}
+
+	/* Successfully sync'd fbl to disk, free memory and return pointer to fbl */
+	free(fbl_data_locations);
+	free(data_blocks);
+	return &fbl;
 }
 
 
