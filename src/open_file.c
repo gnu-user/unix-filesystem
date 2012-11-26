@@ -38,19 +38,18 @@
  */
 int sfs_open(char *pathname)
 {
-	//TODO test open
 
 	//TODO fix open error when file not found (it might be seg faulting, program just crashed)
 	uint32_t* inode_location = NULL;
 	char** tokens = NULL;
 
-	/**
+	/*
 	 * Parse the pathname
 	 */
 	tokens = tokenize_path(pathname);
 	if(tokens == NULL)
 	{
-		/**
+		/*
 		 * Invalid path name
 		 * TODO validate this error code
 		 */
@@ -58,7 +57,7 @@ int sfs_open(char *pathname)
 		return -2;
 	}
 
-	/**
+	/*
 	 * Traverse the file system to find the desired inode
 	 */
 	if(tokens[0] == NULL)
@@ -67,7 +66,7 @@ int sfs_open(char *pathname)
 		inode_location[0] = get_root();
 		if(inode_location[0] < 0)
 		{
-			/**
+			/*
 			 * Read Error
 			 * TODO validate this error code
 			 */
@@ -81,7 +80,7 @@ int sfs_open(char *pathname)
 
 	if(inode_location == NULL)
 	{
-		/**
+		/*
 		 * Invalid path or file/directory not found
 		 * TODO validate this error code
 		 */
@@ -89,11 +88,11 @@ int sfs_open(char *pathname)
 		return -1;
 	}
 
-	/**
+	/*
 	 * TODO update last date accessed
 	 */
 
-	/**
+	/*
 	 * Retrieve the Inode of the desired file.
 	 * Create file descriptor.
 	 * Return file descriptor.
@@ -116,7 +115,7 @@ int show_information(int fd)
 	char str[100];
 	if(fd >= 0)
 	{
-		/**
+		/*
 		 * Get the Inode from the swoft given the fd
 		 */
 		inode node = get_swoft_inode(fd);
@@ -179,14 +178,14 @@ int show_information(int fd)
 		uuid_unparse(node.uuid, str);
 		printf("Uuid: %s\n", str);
 
-		/**
-		 * TODO validate that this is the correct return (fd) ?
+		/*
+		 * TODO validate that this is the correct return (fd)
 		 */
 		print_error(SUCCESS);
 		return fd;
 	}
 
-	/**
+	/*
 	 * Invalid file descriptor.
 	 * TODO validate this error code
 	 */
