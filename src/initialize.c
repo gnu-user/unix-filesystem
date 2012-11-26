@@ -86,6 +86,12 @@ int sfs_initialize(int erase) {
 		}
 
 		/**
+		 * Delete the Root directory so it can be re-written
+		 */
+		buf = allocate_buf(buf, BLKSIZE);
+		retval = write_block(ROOT, buf);
+
+		/**
 		 * Initialize the root directory. This will be the first block
 		 * initialized outside of the super block. The root_dir will contain an
 		 * Inode that points to a index block that is empty.

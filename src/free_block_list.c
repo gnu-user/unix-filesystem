@@ -1,46 +1,81 @@
 #include "free_block_list.h"
 #include <stdbool.h>
 
+
 static free_block_list fbl =
 {
 	.free_blocks = { false }
 };
 
+
 // TODO THIS NEEDS TO BE CALLED
 free_block_list* get_free_block_list(void)
 {
+	uint32_t i = 0;
+	/* Temporary fbl buffer, bool* is used instead of free_block_list* as the
+	 * blocks read from disk may be > than length of free_block_list struct
+	 */
+	bool* tmp_fbl = NULL;
+	uint32_t offset = 0;
 	uint32_t fbl_location = 0;
-	free_block_list* tmp_fbl = NULL;
+	locations fbl_data_locations = NULL;
+	/* Buffers containing a single fbl data block read from disk */
+	bool fbl_buf[BLKSIZE] = { false };
+	bool empty_block[BLKSIZE] = { false };
 
 	/* If the current free block list in memory has not been set (the
-	 * superblock at index 0 is marked as 0) read the FBL from disk
+	 * superblock at index 0 is marked as free) read the FBL from disk
 	 */
 	if (fbl.free_blocks[0] == false)
 	{
-		/* Read the FBL from disk and update the instance in memory */
-
-		/*
-		 * fbl_location = get_free_block_index();
-		 *
-		 * fbl_data_locations = iterate_index(fbl_location, NULL);
-		 *
-		 *
-		 *
-		 */
-
+		/* Get the FBL index location from the superblock */
 		fbl_location = get_free_block_index();
-		//tmp_fbl = read_fbl(fbl_location);
 
+		/* Get the FBL data locations */
+		fbl_data_locations = iterate_index(fbl_location, NULL);
+
+		/* Check if an error occurred getting the FBL data locations */
+		if (fbl_data_locations == NULL)
+		{
+			free(fbl_data_locations);
+			return NULL;
+		}
+
+		/* Read the fbl from disk into memory */
+		while (fbl_data_locations[i] != NULL)
+		{
+			/* Check if an error occurred reading the block */
+			if (read_block(fbl_data_locations[i], (byte *)fbl_buf) < 0)
+			{
+				free(fbl_data_locations);
+				return NULL;
+			}
+
+			/* Increase the size of the tmp free block list array for one more block */
+			tmp_fbl = (bool*) realloc(tmp_fbl, (i + 1) * BLKSIZE);
+
+			/* Initialize the data in the tmp fbl to false before copying in the fbl buf */
+			memcpy(tmp_fbl + offset, empty_block, BLKSIZE);
+
+			/* Copy the fbl buf at the next offset in the tmp free block list */
+			memcpy(tmp_fbl + offset, fbl_buf, BLKSIZE);
+
+			offset += BLKSIZE;
+		}
+
+		/* Update the static instance of fbl in memory with the fbl read from disk */
 		if (tmp_fbl != NULL)
 		{
 			/* Overwrite the current fbl with the fbl from disk */
 			memcpy(&fbl, tmp_fbl, sizeof(free_block_list));
 
-			/* Free the temp fbl buffer */
+			/* Free the buffers */
+			free(fbl_data_locations);
 			free(tmp_fbl);
 		}
 		else
 		{
+			free(fbl_data_locations);
 			return NULL;
 		}
 	}
@@ -202,15 +237,13 @@ uint32_t get_free_block(void)
 free_block_list* update_fbl(locations used,
 							locations free)
 {
+	/* Always ensure that the  first fbl location is marked as used by the superblock */
+	fbl.free_blocks[0] = true;
+	uint32_t i = 0;
+
  	/* Iterate through each item in the used and free locations array,
  	 * for each item in the array update the free block list
 	 */
-
-	// TODO need to handle properly setting the first fbl index as used by the superblock
-	fbl.free_blocks[0] = true;
-
-	uint32_t i = 0;
-
 	if (used != NULL)
 	{
 		while (used[i] != NULL)
@@ -235,6 +268,7 @@ free_block_list* update_fbl(locations used,
 
 	return &fbl;
 }
+
 
 int sync_fbl(void)
 {

@@ -30,6 +30,10 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	index_block = iterate_index(index, NULL);
 	if(index_block == NULL)
 	{
+		/**
+		 * Failed to iterate root directory
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 */
 		return NULL;
 	}
 
@@ -43,6 +47,10 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		{
 			if(create == false)
 			{
+				/**
+				 * Invalid directory
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
 				return NULL;
 			}
 		}
@@ -63,17 +71,33 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	//up a file with a path that only contains '/'
 	inode_location[0] = find_inode(index_block, tokens[0]);
 
-	if(inode_location[0] == 0 && create == true)
+	if(inode_location[0] == 0 && create == true || tokens[1] == NULL && create == true)
 	{
 		inode_location[1] = 0;
 		inode_location[0] = root_dir;
+
+		/**
+		 * Inode is root
+		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 */
 		return inode_location;
 	}
 
 	if(create == true)
 	{
+		inode parent = *get_inode(inode_location[0]);
+		if(parent.type == 0)
+		{
+			/**
+			 * Invalid Path, cannot use file as a directory
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
+			return NULL;
+		}
 		second_last = 1;
 	}
+
+
 
 	/**
 	 * General structure of the traversal:
@@ -92,8 +116,8 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		/**
 		 * get the list of locations from the index block
 		 */
-		index = get_index_block(inode_location[0]);
 
+		index = get_index_block(inode_location[0]);
 
 		/**
 		 * index block is empty
@@ -102,6 +126,10 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 
 		if(index_block == NULL)
 		{
+			/**
+			 * No Children found
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return NULL;
 		}
 
@@ -115,10 +143,19 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		 */
 		if (inode_location[0] == NULL)
 		{
+			/**
+			 * Child not found
+			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 */
 			return NULL;
 		}
 		i++;
 	}
 	inode_location[1] = i;
+
+	/**
+	 * Success
+	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 */
 	return inode_location;
 }

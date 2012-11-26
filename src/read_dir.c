@@ -27,11 +27,12 @@
 int sfs_readdir(int fd, char *mem_pointer)
 {
 	//TODO test readdir
-	mem_pointer = NULL;
 	inode directory = get_null_inode();
 	locations index_block = NULL;
 	uint32_t i = 0;
 	uint32_t num_locations = 0;
+	int count = 0;
+
 	if(fd >= 0 && fd < NUMOFL)
 	{
 
@@ -101,10 +102,18 @@ int sfs_readdir(int fd, char *mem_pointer)
 			return 0;
 		}
 
-		mem_pointer = (char *) calloc(MAX_NAME_LEN, sizeof(char));
-		i = 0;
+		//mem_pointer = (char *) calloc(MAX_NAME_LEN, sizeof(char));
 
-		memcpy(mem_pointer[cur_index], get_name(index_block[i]), MAX_NAME_LEN);
+
+		char* test_name = get_name(index_block[cur_index]);
+
+		// Prob segfaulting because you are trying to copy past the length of test_name
+		/*count = 0;
+		while(test_name[count] != NULL && count < MAX_NAME_LEN)
+		{
+			count++;
+		}*/
+		strcpy(mem_pointer, test_name);
 
 		/**
 		 * return value > 0 for a successful read dir

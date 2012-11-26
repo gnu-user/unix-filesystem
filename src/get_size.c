@@ -27,6 +27,7 @@ int sfs_getsize(char *pathname)
 	char** tokens = NULL;
 	int size = 0;
 
+	//TODO make large if for type check
 	/**
 	 * Parse the pathname
 	 */
