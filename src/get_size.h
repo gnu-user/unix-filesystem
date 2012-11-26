@@ -5,6 +5,8 @@
  *      Author: ubuntu
  */
 
+#include "error.h"
+
 #ifndef GET_SIZE_H_
 #define GET_SIZE_H_
 

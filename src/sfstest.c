@@ -104,6 +104,7 @@ main()
 
 	mount();
 	int i;
+	int index = 0;
 	int retval; /* used to hold return values of file system calls */
 
 	/* do forever:
@@ -114,6 +115,26 @@ main()
 	 5) display the results of the operation
 	 */
 	while (1) {
+
+		/*index = 0;
+		while(index < MAX_INPUT_LENGTH+1)
+		{
+			command_buffer[i] = "";
+			index++;
+		}
+		index = 0;
+		while(index < MAX_IO_LENGTH + 1)
+		{
+			io_buffer[i] = "";
+			index++;
+		}
+		index = 0;
+		while(index < MAX_INPUT_LENGTH)
+		{
+			data_buffer_1[i] = "";
+			index++;
+		}*
+
 		/* print a list of available commands */
 		printf("\n");
 		printf("o: open a file\n");

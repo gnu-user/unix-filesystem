@@ -4,6 +4,7 @@
  *  Created on: Nov 20, 2012
  *      Author: dsmullen
  */
+#include "../src/error.h"
 
 #ifndef SUITE_GLOB_FUNC_H_
 #define SUITE_GLOB_FUNC_H_

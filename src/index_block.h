@@ -1,4 +1,5 @@
 #include "glob_data.h"
+#include "error.h"
 
 #ifndef INDEX_BLOCK_H_
 #define INDEX_BLOCK_H_

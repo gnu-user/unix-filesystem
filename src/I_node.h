@@ -1,6 +1,7 @@
 #include "glob_data.h"
 #include "glob_func.h"
 #include "index_block.h"
+#include "error.h"
 #include <stdbool.h>
 #include "../lib/uuid/uuid.h"
 

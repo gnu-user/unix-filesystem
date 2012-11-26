@@ -22,12 +22,7 @@ int test_get_free_block_list(void)
 	{ .free_blocks =
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0 } };
 
-	//TODO initialize the filesystem here
 
-	//TODO this is cheating - change this so that it copies the FBL from the static instance into our local scope
-	// Use the pointer returned by get_free_block_list to copy the values of the fbl into a test fbl to compare with
-	// the expected results in fbl_test_data
-	//memcpy(&fbl, &fbl_test_data, sizeof(free_block_list));
 
 	/**
 	 * Test 1 - test whether we can retrieve the fbl from our local static instance

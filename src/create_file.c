@@ -5,6 +5,7 @@
 #include "create_file.h"
 #include <string.h>
 #include <time.h>
+#include "mount.h"
 
 #define CREATE_SIZE 2
 
@@ -65,6 +66,7 @@ int sfs_create(char *pathname, int type)
 		 * Traverse the file system to find the directory containing the desired
 		 * inode
 		 */
+
 		if(tokens[0] != NULL)
 		{
 			inode_loc = traverse_file_system(tokens, true);
@@ -120,7 +122,20 @@ int sfs_create(char *pathname, int type)
 		}
 		else
 		{
-			inode_loc = SUPER_BLOCK;
+			//TODO make so if ROOT dir is already created it wont be created again.
+			//If ROOT EXISTS  RETURN ERROR
+			if(validate_root_dir() == -1)
+			{
+				inode_loc = SUPER_BLOCK;
+			}
+			else
+			{
+				/**
+				 * Cannot override root
+				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 */
+				return -1;
+			}
 		}
 
 		if(calc_num_free_blocks(CREATE_SIZE + parent_offset) == NULL)

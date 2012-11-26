@@ -68,14 +68,20 @@ inode* get_inode(uint32_t block_num)
 unsigned char* get_uuid(uint32_t block_num)
 {
 	//TODO FIX MEMORY LEAK
-	char* buf = allocate_buf(buf, BLKSIZE);
+	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
+	//inode* cur_inode = NULL;
+	//unsigned char* uuid = NULL;
 
 	if(retval != 0)
 	{
 		return retval;
 	}
-	return *((inode*) buf)->uuid;
+
+	//cur_inode = (inode*) buf;
+	//uuid = cur_inode->uuid;
+
+	return &((inode*) buf)->uuid;
 }
 
 uint32_t get_index_block(uint32_t block_num)

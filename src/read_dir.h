@@ -5,6 +5,8 @@
  *      Author: ubuntu
  */
 
+#include "error.h"
+
 #ifndef READ_DIR_H_
 #define READ_DIR_H_
 
