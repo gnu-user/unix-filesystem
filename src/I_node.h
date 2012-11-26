@@ -2,13 +2,15 @@
 #include "glob_func.h"
 #include "index_block.h"
 #include "error.h"
-#include <stdbool.h>
 #include "../lib/uuid/uuid.h"
+#include <stdbool.h>
+#include <time.h>
 
 #ifndef I_NODE_H_
 #define I_NODE_H_
 
 
+//TODO Update the struct documentation, we are using the UNIX POSIX time type, time_t
 /**
  * @struct inode
  *
@@ -34,9 +36,9 @@ typedef struct{
 	bool read;							/** This flags whether the file is marked as readable or not. */
 	bool write;							/** This flags whether the file is marked as writable or not. */
 	bool execute;						/** This flags whether the file is marked as executable or not. */
-	uint32_t date_of_create;			/** This stores what the date of creation is for the file. */
-	uint32_t date_last_accessed;		/** This stores the date that the file was last accessed by the file system. */
-	uint32_t date_last_modified;		/** This stores the date that the file was last modified by the file system. */
+	time_t date_of_create;				/** This stores what the date of creation is for the file. */
+	time_t date_last_accessed;			/** This stores the date that the file was last accessed by the file system. */
+	time_t date_last_modified;			/** This stores the date that the file was last modified by the file system. */
 	uint32_t file_owner;				/** This stores the name of the owner of the file. */
 	uint32_t last_user_modified;		/** This stores the name of the last user who modified the file. */
 	uint32_t file_size; 				/** This stores the size of the file in bytes. */
