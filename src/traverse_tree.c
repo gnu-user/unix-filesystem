@@ -108,6 +108,17 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		return inode_location;
 	}
 
+	/* Invalid file/directory name given, file/directory does not exist */
+	if (inode_location[0] == 0 && create == false)
+	{
+		/**
+		 * Invalid directory
+		 * TODO validate this error code
+		 */
+		print_error(INVALID_PATH);
+		return NULL;
+	}
+
 	if(create == true)
 	{
 		inode parent = *get_inode(inode_location[0]);
