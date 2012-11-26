@@ -91,23 +91,21 @@ void remove_fd(int fd)
 	system_open_tb.taken[fd] = false;
 }
 
-int find_and_remove(char* file_name, uuid_t uuid)
+uint32_t find_and_remove(uint32_t inode_location)
 {
+	uint32_t count = 0;
+
 	for(int i = 0; i < NUMOFL; i++)
 	{
 		if(system_open_tb.taken[i] == true)
 		{
-			inode* cur = get_inode(system_open_tb.fd[i]);
-			if(strcmp(cur->name, file_name))
+			if(system_open_tb.fd[i] == inode_location)
 			{
-				if(uuid_compare(uuid, cur->uuid) == 0)
-				{
-					system_open_tb.taken[i] = false;
-					system_open_tb.fd[i] = 0;
-					return 1;
-				}
+				system_open_tb.taken[i] = false;
+				system_open_tb.fd[i] = 0;
+				count++;
 			}
 		}
 	}
-	return 0;
+	return count;
 }

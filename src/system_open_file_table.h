@@ -69,14 +69,13 @@ extern uint32_t get_inode_loc(int fd);
 extern void remove_fd(int fd);
 
 /**
- * Find all entries in the swoft of the given file with the given checksum
- * @param file_name the file name
- * @param uuid the uuid to validate unique inode
+ * Find all the swoft entries that have the same entry as the given location and
+ * remove it from the swoft
+ * @param inode_location the location of the inode
  *
- * @return an integer value
- * if value = 1 success
- * otherwise fail
+ * @return an integer value indicating the number of entries deleted from the
+ * swoft
  */
-extern int find_and_remove(char* file_name, uuid_t uuid);
+extern uint32_t find_and_remove(uint32_t inode_location);
 
 #endif /* SYSTEM_OPEN_FILE_TABLE_H_ */
