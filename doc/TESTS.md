@@ -177,6 +177,25 @@ byte test_buf[355] = { NULL };
 byte input_buf[355] = { NULL };
 
 
+get_free_block_list
+--------------------
+
+* Mark specific points in the FBL on disk as true, execute
+  get_free_block_list and verify that the fbl in memory has been
+  updated
+
+0 - 5 = true
+120 = true
+154 = true
+255 = true
+390 = true
+499 = true
+511 = true
+
+
+/* TEST -- get_free_block_list */
+free_block_list* test_fbl = NULL;
+test_fbl = get_free_block_list();
 
 
 
