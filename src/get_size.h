@@ -29,6 +29,14 @@
  *
  * @exception INVALID_PATH If if the path specified is invalid, incomplete,
  * or does not exist.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int sfs_getsize(char *pathname);
 
