@@ -41,27 +41,26 @@
  */
 int sfs_delete(char *pathname)
 {
-	//TODO test delete
 	char** tokens;
 	uint32_t* parent_location = NULL;
 	locations index_block = {NULL};
 	locations inode_loc = (locations) calloc(2, sizeof(uint32_t));
 	int type = -1;
 
-	/**
+	/*
 	 * Parse the pathname
 	 */
 	tokens = tokenize_path(pathname);
 	if(tokens == NULL)
 	{
-		/**
+		/*
 		 * TODO validate this error code
 		 */
 		print_error(INVALID_PATH);
 		return 0;
 	}
 
-	/**
+	/*
 	 * Traverse the file system to find the desired inode
 	 * get the inode above the one you desired
 	 */
@@ -69,7 +68,7 @@ int sfs_delete(char *pathname)
 
 	if(parent_location == NULL)
 	{
-		/**
+		/*
 		 * Parent not found
 		 * TODO validate this error code
 		 */
@@ -79,7 +78,7 @@ int sfs_delete(char *pathname)
 
 	index_block = iterate_index(get_index_block(parent_location[0]), NULL);
 	if(index_block == NULL){
-		/**
+		/*
 		 * Empty or no index block
 		 *TODO validate this error code
 		 */
@@ -87,7 +86,7 @@ int sfs_delete(char *pathname)
 		return 0;
 	}
 
-	/**
+	/*
 	 * Find the inode of the file or directory with the given file name in the
 	 * given index block list
 	 */
@@ -95,7 +94,7 @@ int sfs_delete(char *pathname)
 
 	if(inode_loc[0] == NULL)
 	{
-		/**
+		/*
 		 * Inode not found
 		 * TODO validate this error code
 		 */
@@ -103,7 +102,7 @@ int sfs_delete(char *pathname)
 		return 0;
 	}
 
-	/**
+	/*
 	 * Check if it is a directory
 	 * 	- If so:
 	 * 		Check if the directory is empty
@@ -116,7 +115,7 @@ int sfs_delete(char *pathname)
 	index_block = iterate_index(get_index_block(inode_loc[0]), NULL);
 	if(index_block == NULL)
 	{
-		/**
+		/*
 		 * Invalid index block
 		 * TODO validate this error code
 		 */
@@ -128,7 +127,7 @@ int sfs_delete(char *pathname)
 	{
 		if(index_block[0] != NULL)
 		{
-			/**
+			/*
 			 * Directory has children
 			 * TODO validate this error code
 			 */
@@ -138,7 +137,7 @@ int sfs_delete(char *pathname)
 	}
 	else if(type == 0)
 	{
-		/**
+		/*
 		 * Delete the data blocks (each time update the free_block list)
 		 */
 		if(update_fbl(NULL, index_block) == NULL)
@@ -149,7 +148,7 @@ int sfs_delete(char *pathname)
 		}
 	}
 
-	/**
+	/*
 	 * Delete the index blocks (each time update the free_block list)
 	 */
 	if(update_fbl(NULL, index_block_locations(get_index_block(inode_loc[0]), NULL)) == NULL)
@@ -159,7 +158,7 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
-	/**
+	/*
 	 * Delete the Inode block (update the free_block list)
 	 */
 	if(update_fbl(NULL, inode_loc) == NULL)
@@ -169,7 +168,7 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
-	/**
+	/*
 	 * Delete all swoft entries for the given file
 	 *
 	 * TODO debug this to make sure that it works
@@ -190,7 +189,7 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
-	/**
+	/*
 	 * Sync FBL
 	 */
 	if(sync_fbl() == NULL)
@@ -199,7 +198,7 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
-	/**
+	/*
 	 * return value > 0 then the file was deleted successfully.
 	 * return value <= 0 then the file failed to be delete.
 	 * TODO validate this error code

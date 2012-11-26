@@ -38,20 +38,19 @@
  */
 int sfs_open(char *pathname)
 {
-	//TODO test open
 	//TODO fix open error when file not found (it might be seg faulting, program just crashed)
 	uint32_t* inode_location = NULL;
 	char** tokens = NULL;
 	inode* node = NULL;
 	byte* buf = NULL;
 
-	/**
+	/*
 	 * Parse the pathname
 	 */
 	tokens = tokenize_path(pathname);
 	if(tokens == NULL)
 	{
-		/**
+		/*
 		 * Invalid path name
 		 * TODO validate this error code
 		 */
@@ -59,7 +58,7 @@ int sfs_open(char *pathname)
 		return -2;
 	}
 
-	/**
+	/*
 	 * Traverse the file system to find the desired inode
 	 */
 	if(tokens[0] == NULL)
@@ -68,7 +67,7 @@ int sfs_open(char *pathname)
 		inode_location[0] = get_root();
 		if(inode_location[0] < 0)
 		{
-			/**
+			/*
 			 * Read Error
 			 * TODO validate this error code
 			 */
@@ -83,7 +82,7 @@ int sfs_open(char *pathname)
 
 	if(inode_location == NULL)
 	{
-		/**
+		/*
 		 * Invalid path or file/directory not found
 		 * TODO validate this error code
 		 */
@@ -96,7 +95,7 @@ int sfs_open(char *pathname)
 
 	if (node == NULL)
 	{
-		/**
+		/*
 		 * Read Error
 		 * TODO validate this error code
 		 */
@@ -112,14 +111,14 @@ int sfs_open(char *pathname)
 
 	if(write_block(inode_location[0], buf) < 0)
 	{
-		/**
+		/*
 		 * TODO validate this error code
 		 */
 		print_error(DISK_WRITE_ERROR);
 		return -1;
 	}
 
-	/**
+	/*
 	 * Retrieve the Inode of the desired file.
 	 * Create file descriptor.
 	 * Return file descriptor.
@@ -144,7 +143,7 @@ int show_information(int fd)
 
 	if(fd >= 0)
 	{
-		/**
+		/*
 		 * Get the Inode from the swoft given the fd
 		 */
 		inode node = get_swoft_inode(fd);
@@ -186,7 +185,10 @@ int show_information(int fd)
 		local_time = localtime(&node.date_last_modified);
 		printf("Date last modified: %s", asctime(local_time));
 
-		printf("File owner: %d\n", node.file_owner);
+		if(node.type == false)
+		{
+			printf("File owner: %d\n", node.file_owner);
+		}
 
 		printf("Last user modified: %d\n", node.last_user_modified);
 
@@ -208,14 +210,14 @@ int show_information(int fd)
 		uuid_unparse(node.uuid, str);
 		printf("Uuid: %s\n", str);
 
-		/**
-		 * TODO validate that this is the correct return (fd) ?
+		/*
+		 * TODO validate that this is the correct return (fd)
 		 */
 		print_error(SUCCESS);
 		return fd;
 	}
 
-	/**
+	/*
 	 * Invalid file descriptor.
 	 * TODO validate this error code
 	 */
