@@ -5,6 +5,8 @@
  *      Author: ubuntu
  */
 
+#include "error.h"
+
 #ifndef DELETE_FILE_H_
 #define DELETE_FILE_H_
 

@@ -5,6 +5,8 @@
  *      Author: ubuntu
  */
 
+#include "error.h"
+
 #ifndef GET_TYPE_H_
 #define GET_TYPE_H_
 

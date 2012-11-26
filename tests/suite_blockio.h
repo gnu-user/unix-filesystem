@@ -4,6 +4,7 @@
  *  Created on: Nov 20, 2012
  *      Author: jon
  */
+#include "../src/error.h"
 
 #ifndef SUITE_BLOCKIO_H_
 #define SUITE_BLOCKIO_H_

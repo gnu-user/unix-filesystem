@@ -5,6 +5,8 @@
  *      Author: ubuntu
  */
 
+#include "error.h"
+
 #ifndef OPEN_FILE_H_
 #define OPEN_FILE_H_
 

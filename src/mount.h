@@ -1,5 +1,6 @@
 #include "glob_data.h"
 #include "super_block.h"
+#include "error.h"
 
 #ifndef MOUNT_H_
 #define MOUNT_H_
