@@ -174,11 +174,18 @@ uint32_t get_crc(uint32_t block_num)
 uint32_t find_inode(locations index_blocks, char* name)
 {
 	int i = 0;
+	uint32_t inode_name_len = 0;
+
 	while(index_blocks[i] != NULL)
 	{
-		if(strcmp(get_name(index_blocks[i]),name)==0)
+		/* Do not perform a string comparison unless both names are the same length */
+		inode_name_len = strlen(get_name(index_blocks[i]));
+		if (inode_name_len == strlen(name))
 		{
-			return index_blocks[i];
+			if(strncmp(get_name(index_blocks[i]), name, inode_name_len) == 0)
+			{
+				return index_blocks[i];
+			}
 		}
 		i++;
 	}
