@@ -5,36 +5,63 @@
 #ifndef BLOCK_FUNC_H_
 #define BLOCK_FUNC_H_
 
+
 /**
- * A wrapper for put_block
+ * @brief A wrapper for the put_block function.
  *
- * @param location the location on disk for the buf to be written to
- * @param the buffer to store on disk
+ * @param location The location on disk for the buffer to be written to.
  *
- * @return an integer value
- * if value >= 0 success
- * otherwise failure
+ * @param The buffer to store on disk.
+ *
+ * @return Returns an integer value. If the value >= 0, the function
+ * was successful. Otherwise, the function was unsuccessful.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int write_block(uint32_t location, byte* buf);
 
+
 /**
- * A wrapper for get_block
+ * @brief A wrapper for the get_block function.
  *
- * @param location the location on disk for the buf to be written to
- * @param the buffer to store on disk
+ * @param location The location on disk for the buffer to be written to.
  *
- * @return an integer value
- * if value >= 0 success
- * otherwise failure
+ * @param The buffer to store on disk.
+ *
+ * @return Returns an integer value. If the value >= 0 the function
+ * was successful. Otherwise, the function was unsuccessful.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int read_block(uint32_t location, byte* buf);
 
+
 /**
- * Get the data blocks and concat them into a large byte buffer
+ * @brief Get the data blocks and concatenate them into a large byte buffer.
  *
- * @param the locations of the data blocks on disk
+ * @param location The locations of the data blocks on disk.
  *
- * @return the data_buffer containing all of the bytes of data.
+ * @return Returns the data_buffer containing all of the bytes of data.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern byte* get_data(locations location);
 
