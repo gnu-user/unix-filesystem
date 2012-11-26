@@ -286,36 +286,6 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		}
 
 		/**
-		 * TODO Ensure that the FBL is being updated with the locations of the
-		 * previous index and data blocks
-		 */
-		if(update_fbl(NULL, data_block_locations) == NULL)
-		{
-			/**
-			 * TODO validate this error code
-			 */
-			print_error(ERROR_UPDATING_FBL);
-			return -1;
-		}
-		old_index_block = index_block_locations(inode_write.location, NULL);
-		if(old_index_block == NULL)
-		{
-			/**
-			 * TODO get error code
-			 * Error old index blocks not found
-			 */
-			return -1;
-		}
-		if(update_fbl(NULL, old_index_block) == NULL)
-		{
-			/**
-			 * TODO validate this error code
-			 */
-			print_error(ERROR_UPDATING_FBL);
-			return -1;
-		}
-
-		/**
 		 * Add the data to the data_buf
 		 * Break it back into blocks
 		 */
@@ -426,6 +396,35 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			}
 		}
 
+		/**
+		 * TODO Ensure that the FBL is being updated with the locations of the
+		 * previous index and data blocks
+		 */
+		if(update_fbl(NULL, data_block_locations) == NULL)
+		{
+			/**
+			 * TODO validate this error code
+			 */
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
+		old_index_block = index_block_locations(inode_write.location, NULL);
+		if(old_index_block == NULL)
+		{
+			/**
+			 * TODO get error code
+			 * Error old index blocks not found
+			 */
+			return -1;
+		}
+		if(update_fbl(NULL, old_index_block) == NULL)
+		{
+			/**
+			 * TODO validate this error code
+			 */
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
 
 		/**
 		 * Sync FBL

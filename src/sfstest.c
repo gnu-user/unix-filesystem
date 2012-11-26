@@ -306,7 +306,7 @@ main()
 			break;
 		}
 		if (command_buffer[0] == 'q')
-		{	printf("Goodbye");
+		{	printf("Goodbye\n");
 			break;
 		}
 
