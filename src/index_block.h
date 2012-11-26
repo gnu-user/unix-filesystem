@@ -4,7 +4,7 @@
 #ifndef INDEX_BLOCK_H_
 #define INDEX_BLOCK_H_
 
-// TODO use malloc for this; it should be size: ceil(BLOCKSIZE/sizeof(uint32_t))
+
 typedef uint32_t* index;
 
 /* Stuct containing the location of the first index and an array of the
@@ -14,9 +14,6 @@ typedef struct {
 	uint32_t index_location;
 	locations data_locations;
 } data_index;
-
-// A single location for a block on disk
-//typedef uint32_t location;
 
 
 /**
@@ -64,56 +61,6 @@ uint32_t rebuild_index(locations data_locations);
 
 
 /**
- * Wrapper for block_read() which returns the block
- *TODO remove unless we really need this for something we haven't thought of yet (JUST FUCKIN' REMOVE IT)
- */
-//index read_index(uint32_t index_location);
-
-/*
- * Adds a location to the next available entry in the index block, if the index block is
- * full then calls a helper function, link_index_block(), which creates another block and links
- * it to the end of the index_block.
- *
- * TODO remove this too, you fuckin' retard
- */
-//add_location(uint32_t* index_block, uint32_t location);
-
-
-
-/**
- * This should take the location of the location to be removed.
- *
- * @param the list of locations TODO see if this is really needed
- * @param the location to be removed
- *
- * @return if > 0 success
- * if <= 0 failure
- * TODO REMOVE THIS BULLSHIT YOU STUPID IDIOT, WE REBUILD THE INDEX EVERY TIME WE MODIFY A FILE
- */
-//int remove_location(uint32_t* index_block, uint32_t location);
-
-
-/**
- * TODO REMOVE THIS, THIS IS SUPPOSED TO BE A JOURNALLED OPERATION! WHAT THE FUCK!??!
- */
-//void link_index();
-
-/**
- * link inode links the inode to the index block of the parent (directory)
- *
- * @param the index block list
- * @param the location to be added to the index block
- *
- * @return an integer value
- * if value > 0 then function was successful
- * otherwise the function has failed
- *
- * TODO REMOVE THIS, IT ALREADY EXISTS IN THE JOURNAL (THIS IS A JOURNALLED OPERATION REGARDLESS YOU TARD)
- */
-//int link_inode(uint32_t* index_block, uint32_t location);
-
-
-/**
  * Iterates recursively through the index blocks and returns a pointer to a NULL terminated
  * array containing all of the data block locations stored in the indices. In the case of
  * large files that require multiple indexes, when we reach the value
@@ -154,9 +101,6 @@ uint32_t calc_index_blocks(uint32_t num_blocks);
  * if return = 0 then the directory is empty
  * if return > 0 then the function was successful
  * if return = -1 then the function was unsuccessful
- *
- * TODO implement count files in dir
- *
  */
 int count_files_in_dir(uint32_t location);
 
