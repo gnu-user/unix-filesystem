@@ -119,8 +119,6 @@ int sfs_delete(char *pathname)
 		/**
 		 * Delete the data blocks (each time update the free_block list)
 		 */
-		//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
-		//print_error(ERROR_UPDATING_FBL);
 		if(update_fbl(NULL, index_block) == NULL)
 		{
 			//TODO validate this error code
@@ -132,8 +130,6 @@ int sfs_delete(char *pathname)
 	/**
 	 * Delete the index blocks (each time update the free_block list)
 	 */
-	//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
-	//print_error(ERROR_UPDATING_FBL);
 	if(update_fbl(NULL, index_block_locations(get_index_block(inode_loc[0]), NULL)) == NULL)
 	{
 		//TODO validate this error code
@@ -144,8 +140,6 @@ int sfs_delete(char *pathname)
 	/**
 	 * Delete the Inode block (update the free_block list)
 	 */
-	//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
-	//print_error(ERROR_UPDATING_FBL);
 	if(update_fbl(NULL, inode_loc) == NULL)
 	{
 		//TODO validate this error code
@@ -156,7 +150,7 @@ int sfs_delete(char *pathname)
 	/**
 	 * Delete all swoft entries for the given file
 	 *
-	 * TODO change to use uuid to identify the file descriptor, not crc
+	 * TODO debug this to make sure that it works
 	 */
 	if(find_and_remove(get_name(inode_loc[0]), get_uuid(inode_loc[0])))
 	{
@@ -167,16 +161,6 @@ int sfs_delete(char *pathname)
 		print_error(ERROR_UPDATING_SWOFT);
 		return -2;
 	}
-
-	/**
-	 * TODO REVIEW BELOW:
-	 *
-	 * get parents indicies, cause its a directory
-	 * delete index onto it (concat)
-	 * Ensure that the number of indexes in the index block is NOT empty at
-	 * this point or else it is invalid
-	 * rebuild index
-	 */
 
 	if(unlink_inode_from_parent(parent_location[0], inode_loc[0]) < 0)
 	{
@@ -193,8 +177,13 @@ int sfs_delete(char *pathname)
 	}
 
 	/**
-	 * TODO Sync FBL
+	 * Sync FBL
 	 */
+	if(sync_fbl() == NULL)
+	{
+		print_error(ERROR_UPDATING_FBL);
+		return -1;
+	}
 
 	/**
 	 * return value > 0 then the file was deleted successfully.
