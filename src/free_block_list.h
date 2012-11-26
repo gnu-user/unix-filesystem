@@ -40,7 +40,7 @@ static free_block_list fbl;
  * pointer to the static instance in memory. If an error occurs,
  * a NULL pointer is returned.
  *
- * @return The pointer to the static instance of free block list in memory, NULL
+ * @return A pointer to the static instance of free block list in memory, NULL
  * if an error occurred.
  */
 extern free_block_list* get_free_block_list(void);
@@ -102,8 +102,10 @@ extern uint32_t get_free_block(void);
  * @param free A NULL terminated array of locations to mark as free in the fbl,
  * if it is NULL then no locations are marked as free
  *
+ * @return A pointer to the static instance of free block list in memory, NULL
+ * if an error occurred
  */
-free_block_list* update_fbl(locations used, locations free);
+extern free_block_list* update_fbl(locations used, locations free);
 
 
 /**
@@ -111,9 +113,21 @@ free_block_list* update_fbl(locations used, locations free);
  * static free block list in memory with the contents on disk, making the
  * current state of the free blocks on disk permanent.
  *
- * @return Returns an error code if an error occurred writing the free block
- * list to disk.
+ * @return A pointer to the static instance of free block list in memory, NULL
+ * if an error occurred synchronizing the free block list to disk.
  */
-extern int sync_fbl(void);
+extern free_block_list* sync_fbl(void);
+
+
+/**
+ * Resets the free block list in memory by loading the free blocks list from
+ * disk and overwriting the static instance of the free block list in memory.
+ * This function is used to refresh the state of the free block list in memory
+ * if an error occurs.
+ *
+ * @return A pointer to the static instance of free block list in memory, NULL
+ * if an error occurred
+ */
+extern free_block_list* reset_fbl(void);
 
 #endif /* FREE_BLOCK_LIST_H_ */
