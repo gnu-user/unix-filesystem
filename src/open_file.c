@@ -93,6 +93,7 @@ int sfs_open(char *pathname)
  */
 int show_information(int fd)
 {
+	char str[100];
 	if(fd >= 0)
 	{
 		/**
@@ -152,8 +153,8 @@ int show_information(int fd)
 
 		printf("Check sum: %d\n", node.check_sum);
 
-		//TODO properly write out the uuid
-		printf("Uuid: %s\n", node.uuid);
+		uuid_unparse(node.uuid, str);
+		printf("Uuid: %s\n", str);
 
 		/**
 		 * TODO validate that this is the correct return (fd) ?
