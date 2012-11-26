@@ -5,37 +5,76 @@
 #ifndef MOUNT_H_
 #define MOUNT_H_
 
+
 /**
- * Call validate methods to ensure that the mount is possible,
- * and filesystem isn't corrupted.
+ * @brief Attempt to mount the filesystem on disk.
  *
- * @return an integer value,
- * if value = 1 pass
- * if value = -1 fail
+ * @details This funcion calls validation methods to
+ * ensure that the mount is possible, and file system
+ * isn't corrupted. It verifies that the unique
+ * identifiers and checksums associated with the various
+ * structures on disk are valid and in working order.
+ *
+ * @return Returns an integer value, if value = 1 the
+ * file system has passed validation. If value = -1
+ * the file system has failed to validate and should
+ * be reinitialized.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int mount(void);
 
+
 /**
- * Validate the superblock is on the hard drive
+ * @brief Validate the super block on the disk.
  *
- * @return an integer value,
- * if value = 1 pass
- * if value = -1 fail
+ * @details This function determines the integrity of
+ * the super block data by validating its unique
+ * identifier and checksum.
+ *
+ * @return Returns an integer value. If value = 1 the
+ * super block has passed validation. If the value = -1,
+ * the super block has failed validation and should be
+ * reinitialized.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int validate_super_block(void);
 
-//Use check_journal()
-//To validate_free_block_list
 
+/* TODO fix seg fault error if the root directory was not written/was overwritten*/
 /**
- * Validate that there is a root directory on the hard drive
- * TODO fix seg fault error if the root directory was not written/was over
- * written
+ * @brief Validate that there is a root directory on the disk.
  *
- * @return an integer value,
- * if value = 1 pass
- * if value = -1 fail
+ * @details This function checks the location for the root directory
+ * on disk specified by the super block, and determines if the file
+ * at that location is valid.
+ *
+ * @return Returns an integer value, if value = 1 the root directory
+ * structure which exists on disk passed validation. If value = -1,
+ * the structure failed validation.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int validate_root_dir(void);
+
 
 #endif /* MOUNT_H_ */

@@ -8,6 +8,7 @@
 #ifndef I_NODE_H_
 #define I_NODE_H_
 
+
 /**
  * @struct inode
  *
@@ -68,6 +69,7 @@ typedef struct
 	inode directory;					/** This contains the inode for the current working directory. */
 	uint32_t cur_index;					/** This tracks the amount of times the directory contents have been returned, in order to iterate through the entire directory contents. */
 } cwd;
+
 
 /**
  * @var cur_dir
