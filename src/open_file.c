@@ -154,7 +154,10 @@ int show_information(int fd)
 
 		printf("Date last modified: %d\n", node.date_last_modified);
 
-		printf("File owner: %d\n", node.file_owner);
+		if(node.type == false)
+		{
+			printf("File owner: %d\n", node.file_owner);
+		}
 
 		printf("Last user modified: %d\n", node.last_user_modified);
 
