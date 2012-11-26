@@ -13,13 +13,24 @@
 #ifndef SUPER_BLOCK_H_
 #define SUPER_BLOCK_H_
 
+
 /**
  * @struct Superblock
  *
- * This struct defines the data which will be stored inside the
+ * @brief The superblock contains information pertainent to the disk.
+ *
+ * @details This struct defines the data which will be stored inside the
  * super block. In particular, the super block contains information
  * pertaining to disk attributes, and links to critical file system
  * data structures.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 typedef struct
 {
@@ -31,44 +42,97 @@ typedef struct
 	uuid_t uuid;				/** Universal unique identifier for the disk. */
 } superblock;
 
+
 /**
- * Get a handle to the super block.
+ * @brief Get a handle to the super block.
+ *
+ * @details This function implements a pseudo-object oriented
+ * method for accessing the super block data. It returns
+ * the super block as a pointer to a struct, whose individual
+ * members can be accessed.
  *
  * @return Returns a pointer to the super block data.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern superblock* get_super_block(void);
 
+
 /**
- * Get the location of the root directory.
+ * @brief Get the location of the root directory.
  *
- * @return Returns the location of root directory on disk. If a failure occurs, return 0.
+ * @details This function is an accessor method for the
+ * pseudo-object attribute inside the super block which
+ * contains the location of the root directory's inode
+ * on disk.
+ *
+ * @return Returns the location of root directory on disk.
+ * If a failure occurs, return 0.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern uint32_t get_root(void);
 
+
 /**
- * Get the location of the free block list's first index block.
+ * @brief Get the location of the free block list's first index block.
  *
- * @return The location of the free block list's index block.
+ * @details This function is an accessor method for the
+ * pseudo-object attribute inside the super block which
+ * contains the location of the free block list structure's
+ * first index block on disk.
+ *
+ * @return Returns the location of the free block list's index block.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern uint32_t get_free_block_index(void);
 
+
 /**
- * Calculate the uuid for the super block.
+ * @brief Calculate the unique identifier for the super block.
  *
  * @return if the uuid was successfully calculated:
  * if return 1 for successful
  * otherwise unsuccessful
- * TODO remove, unnecessary
+ *
+ * @deprecated This function is no longer used, as an external
+ * library for unique identifiers has been implemented and used
+ * instead. This function was moved to mount.c also, to
+ * provide better encapsulation for the function.
  */
 //extern int calc_uuid();
 
+
 /**
- * Validate the uuid
+ * @brief Validate the unique identifier for the super block.
  *
  * @return an integer value
  * if value >= 1
  * otherwise unsuccessful
- * TODO remove, Already in the mount.c
+ *
+ * @deprecated This function is no londer used, as an external
+ * library for unique identifiers has been implemented and used
+ * instead. This function was moved to mount.c also, to
+ * provide better encapsulation for the function.
  */
 //extern int validate_uuid();
 
