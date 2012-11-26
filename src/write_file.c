@@ -227,6 +227,16 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		inode_loc = get_inode_loc(fd);
 		data_block_locations = iterate_index(inode_write.location, NULL);
 
+		old_index_block = index_block_locations(inode_write.location, NULL);
+
+		if(old_index_block == NULL)
+				{
+					/**
+					 * TODO get error code
+					 * Error old index blocks not found
+					 */
+					return -1;
+				}
 		if(data_block_locations == NULL)
 		{
 			/**
@@ -400,15 +410,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			print_error(ERROR_UPDATING_FBL);
 			return -1;
 		}
-		old_index_block = index_block_locations(inode_write.location, NULL);
-		if(old_index_block == NULL)
-		{
-			/**
-			 * TODO get error code
-			 * Error old index blocks not found
-			 */
-			return -1;
-		}
+
 		if(update_fbl(NULL, old_index_block) == NULL)
 		{
 			/**

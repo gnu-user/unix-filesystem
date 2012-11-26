@@ -5,21 +5,34 @@
 #include "I_node.h"
 #include "error.h"
 
+
 /**
- * Given the tokens for the path traverse the file system to either the last
- * token or the second last base on the create flag
+ * @brief Traverse the file system structure.
  *
- * @param tokens the parsed pathname
- * @param whether to get the parent directory or the child
- * if create == true get the parent
- * otherwise get the child
+ * @details Given the tokens for the path, traverse the file
+ * system to either the last token or the second last
+ * based on the value in the create flag.
  *
- * @return
- * if create == true, the location of the parent and the last token in the
- * tokens array
- * if create == false, the location of the inode and the second element will be
- * null
+ * @param tokens The pre-parsed pathname tokens.
+ *
+ * @param create Flags whether to get the parent directory
+ * or the child entity if create is true, get the parent. Otherwise,
+ * get the child.
+ *
+ * @return Returns a location on disk. If create is true,
+ * the location of the parent is returned and the last token in the
+ * tokens array. If create is false, the location of the inode is
+ * returned and the second element will be null.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern uint32_t* traverse_file_system(char** tokens, bool create);
+
 
 #endif /* TRAVERSE_TREE_H_ */

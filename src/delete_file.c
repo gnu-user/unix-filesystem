@@ -152,15 +152,7 @@ int sfs_delete(char *pathname)
 	 *
 	 * TODO debug this to make sure that it works
 	 */
-	if(find_and_remove(get_name(inode_loc[0]), get_uuid(inode_loc[0])))
-	{
-		/**
-		 * Failed to remove files from swoft
-		 * TODO validate this error code
-		 */
-		print_error(ERROR_UPDATING_SWOFT);
-		return -2;
-	}
+	printf("Number swoft entries remove: %d\n",find_and_remove(inode_loc[0]));
 
 	if(unlink_inode_from_parent(parent_location[0], inode_loc[0]) < 0)
 	{
