@@ -10,18 +10,19 @@
 #ifndef DELETE_FILE_H_
 #define DELETE_FILE_H_
 
-/** sfs_delete
- * Delete a file with the pathname specified.
+
+/**
+ * @brief Delete a file with the pathname specified.
  *
  * @param pathname The pathname of file to create, must be full directory path
  *
- * @return an integer value,
- * If the value > 0 then the file was deleted successfully.
- * If the value <= 0 then the file failed to be delete.
+ * @return Returns an integer value, if the value is > 0 then the file was
+ * deleted successfully. If the value is <= 0 then the file failed to delete.
  *
  * @exception FILE_NOT_FOUND If the file at the specified path does
- * not already exist
+ * not already exist.
  */
 extern int sfs_delete(char *pathname);
+
 
 #endif /* DELETE_FILE_H_ */
