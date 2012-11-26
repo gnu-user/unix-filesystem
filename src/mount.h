@@ -19,6 +19,14 @@
  * file system has passed validation. If value = -1
  * the file system has failed to validate and should
  * be reinitialized.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int mount(void);
 
@@ -34,6 +42,14 @@ extern int mount(void);
  * super block has passed validation. If the value = -1,
  * the super block has failed validation and should be
  * reinitialized.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int validate_super_block(void);
 
@@ -49,6 +65,14 @@ extern int validate_super_block(void);
  * @return Returns an integer value, if value = 1 the root directory
  * structure which exists on disk passed validation. If value = -1,
  * the structure failed validation.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int validate_root_dir(void);
 
