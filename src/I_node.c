@@ -253,6 +253,81 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 	 *  	return success
 	 * return failed // Couldn't find location to unlink in index
 	 */
+	inode* parent_inode = get_inode(parent_location);
+	inode* child_inode = get_inode(inode_location);
+	locations index_block = interate_index(parent_inode->location);
+	locations new_index_block = NULL;
+	uint32_t new_index_loc = NULL;
+	locations free_blocks = NULL;
+	byte* buf = NULL;
+	uint32_t i = 0;
+
+	if(index_block == NULL || index_block[0] == NULL)
+	{
+		/**
+		 * Empty Index block
+		 */
+		return -1;
+	}
+
+	free_blocks = index_block_locations(parent_inode->location, NULL);
+	if(free_blocks == NULL)
+	{
+		/**
+		 * Index blocks not found
+		 */
+		return -1;
+	}
+
+	new_index_block = (locations) calloc(calc_num_blocks(index_block), sizeof(uint32_t));
+	while(index_block[i] != NULL)
+	{
+		if(strcmp(get_name(index_block[i]),child_inode->name) !=0)
+		{
+			/**
+			 * Child not found
+			 */
+			memcpy(&new_index_block[i], &index_block[i], 1);
+		}
+		i++;
+	}
+
+	if(index_block[i] == NULL)
+	{
+		/**
+		 * Child not found
+		 */
+		return -1;
+	}
+
+	new_index_loc = rebuild_index(new_index_block);
+
+	if(new_index_loc == NULL)
+	{
+		/**
+		 * Rebuild failed
+		 */
+		return -1;
+	}
+
+	parent_inode->location = new_index_loc;
+
+	buf = allocate_buf(buf, BLKSIZE);
+
+	/**
+	 * Copy the parent into to buffer
+	 */
+	buf = (byte *) copy_to_buf((byte *) parent_inode, (byte *) buf, sizeof(inode),
+			BLKSIZE);
+	if(write_block(parent_location, buf) < 0)
+	{
+		/**
+		 * Invalid write
+		 */
+		return -1;
+	}
+
+	update_fbl(NULL, free_blocks);
 	return 0;
 }
 
