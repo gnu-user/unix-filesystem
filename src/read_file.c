@@ -41,6 +41,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	byte* temp = NULL;
 	mem_pointer = NULL;
 
+	//TODO split this into two error codes!!!
 	if(fd >= 0 && fd < NUMOFL && start >= -1 && length > 0)
 	{
 		/**
@@ -50,8 +51,9 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		if (validate_fd(fd) < 0)
 		{
 			/**
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INVALID_FILE_DESCRIPTOR);
 			return 0;
 		}
 
@@ -77,8 +79,9 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		{
 			/**
 			 * File is empty
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(FILE_EMPTY);
 			return 0;
 		}
 
@@ -104,9 +107,10 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		if(start+length > count*BLKSIZE)
 		{
 			/**
-			 * Read pass end of file
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * Read past end of file
+			 * TODO validate this error code
 			 */
+			print_error(FILE_PAST_EOF);
 			return 0;
 		}
 
@@ -142,13 +146,16 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		/**
 		 * return value > 0 if the file was read successfully
 		 * return value <= 0 if the file was read unsuccessfully
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(SUCCESS);
 		return 1;
 	}
 
 	/**
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * Invalid file descriptor OR file_past_eof
+	 * TODO validate this error code
+	 * TODO split this into a 2 different returns
 	 */
 	return 0;
 }

@@ -175,6 +175,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	block* data_block = NULL;
 	int i = 0;
 
+	//TODO split this into two different error codes/returns
 	if(fd >= 0 && fd < NUMOFL && length > 0 && start >= -1)
 	{
 		/**
@@ -184,12 +185,14 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		if (validate_fd(fd) < 0)
 		{
 			/**
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * Invalid file descriptor.
+			 * TODO validate this error code
 			 */
+			print_error(INVALID_FILE_DESCRIPTOR);
 			return 0;
 		}
 
-		/** Based off a night of sleep and the codes
+		/** Based off a night of sleep and ze cudes
 		 *
 		 * blocks_needed = 1 //FOR INODE
 		 * data_blocks = iterate_index(inode.location)
@@ -225,8 +228,9 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		{
 			/**
 			 * Invalid Index Block
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INDEX_ALLOCATION_ERROR);
 			return -1;
 		}
 
@@ -239,15 +243,15 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			if((start + length) >= i)
 			{
 				/**
-				 * Invalid override
-				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 * Write past EOF
+				 * TODO validate this error code
 				 */
+				print_error(FILE_PAST_EOF);
 				return -1;
 			}
 			/**
 			 * No new data blocks will be needed
 			 */
-
 		}
 		else if(start == -1)
 		{
@@ -266,11 +270,13 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		/**
 		 * Check if the new write will fit onto the hard disk
 		 */
-		if((calc_num_free_blocks(blocks_needed + calc_index_blocks(blocks_needed-1))) == NULL) //1 for the inode
+		if((calc_num_free_blocks(blocks_needed + calc_index_blocks(blocks_needed-1))) == NULL)
 		{
 			/**
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * Insufficient space
+			 * TODO validate this error code
 			 */
+			print_error(INSUFFICIENT_DISK_SPACE);
 			return 0;
 		}
 
@@ -313,13 +319,18 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		/**
 		 * return value > 0 if write was successful
 		 * return value <= 0 then the write was a fail
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(SUCCESS);
 		return 1;
 	}
 	/**
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * Invalid file descriptor OR write past EOF
+	 * TODO split this into two different returns/error codes
+	 * TODO validate this error code
 	 */
+	//print_error(INVALID_FILE_DESCRIPTOR);
+	//print_error(FILE_PAST_EOF);
 	return 0;
 }
 

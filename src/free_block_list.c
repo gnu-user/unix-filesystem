@@ -284,7 +284,6 @@ int sync_fbl(void)
 		// Check that the data_blocks were segmented properly
 		//	if (data_blocks == NULL)
 		//	{
-		//		//TODO return SUCCESS/FAIL enum
 		//		// Error occurred segmenting the data blocks
 		//		return -1;
 		//	}
@@ -295,6 +294,5 @@ int sync_fbl(void)
 		//		i++;
 		//	}
 		*/
-	//TODO return the error enum type for this bullshit
 	return 0;
 }

@@ -56,8 +56,9 @@ int sfs_create(char *pathname, int type)
 		if(tokens == NULL)
 		{
 			/**
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INVALID_PATH);
 			return 0;
 		}
 
@@ -76,8 +77,9 @@ int sfs_create(char *pathname, int type)
 			if(inode_loc == NULL)
 			{
 				/**
-				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 * TODO validate this error code
 				 */
+				print_error(INVALID_PATH);
 				return 0;
 			}
 
@@ -99,6 +101,7 @@ int sfs_create(char *pathname, int type)
 				 */
 				if(find_inode(index_block, tokens[inode_loc[1]]) != NULL)
 				{
+					print_error(INVALID_FILE_NAME);
 					return 0;
 				}
 
@@ -131,8 +134,9 @@ int sfs_create(char *pathname, int type)
 			{
 				/**
 				 * Cannot override root
-				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 * TODO validate this error code
 				 */
+				print_error(INVALID_PATH);
 				return -1;
 			}
 		}
@@ -141,8 +145,9 @@ int sfs_create(char *pathname, int type)
 		{
 			/**
 			 * Not enough space
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INSUFFICIENT_DISK_SPACE);
 			return -1;
 		}
 
@@ -155,9 +160,11 @@ int sfs_create(char *pathname, int type)
 			{
 				/**
 				 * Invalid path name component, File name to long
-				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 * TODO validate this error code
 				 */
-		/*		return -1;
+		/*
+				print_error(INVALID_PATH_LENGTH);
+				return -1;
 			}
 		}*/
 
@@ -169,8 +176,9 @@ int sfs_create(char *pathname, int type)
 		if(new_inode_location[0] == 0)
 		{
 			/**
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INSUFFICIENT_DISK_SPACE);
 			return 0;
 		}
 
@@ -233,13 +241,15 @@ int sfs_create(char *pathname, int type)
 			if(update_fbl(NULL, new_inode_location) == NULL)
 			{
 				/**
-				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 * TODO validate this error code
 				 */
+				print_error(ERROR_UPDATING_FBL);
 				return -1;
 			}
 			/**
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INDEX_ALLOCATION_ERROR);
 			return 0;
 		}
 
@@ -271,13 +281,15 @@ int sfs_create(char *pathname, int type)
 			if(update_fbl(NULL, new_inode_location) == NULL)
 			{
 				/**
-				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 * TODO validate this error code
 				 */
+				print_error(ERROR_UPDATING_FBL);
 				return -1;
 			}
 			/**
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(DISK_WRITE_ERROR);
 			return 0;
 		}
 
@@ -303,8 +315,12 @@ int sfs_create(char *pathname, int type)
 				new_inode_location[1] = index_location.index_location;
 				if(update_fbl(NULL, new_inode_location) == NULL)
 				{
+					//TODO validate this error code
+					print_error(ERROR_UPDATING_FBL);
 					return -1;
 				}
+				//TODO validate this error code
+				print_error(ERROR_BLOCK_LINKAGE);
 				return 0;
 			}
 		}
@@ -321,12 +337,14 @@ int sfs_create(char *pathname, int type)
 		/**
 		 * return value > 0 the file create was a success
 		 * return value <= 0 the file create was unsuccessful
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(SUCCESS);
 		return 1;
 	}
 	/**
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * TODO validate this error code
 	 */
+	print_error(INVALID_FILE_TYPE);
 	return 0;
 }
