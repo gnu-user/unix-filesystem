@@ -61,6 +61,7 @@ free_block_list* get_free_block_list(void)
 			memcpy(tmp_fbl + offset, fbl_buf, BLKSIZE);
 
 			offset += BLKSIZE;
+			++i;
 		}
 
 		/* Update the static instance of fbl in memory with the fbl read from disk */
