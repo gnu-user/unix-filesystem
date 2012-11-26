@@ -7,7 +7,7 @@
 
 #include "error.h"
 
-int printerror(error_code errorno) {
+void print_error(error_code errorno) {
 	switch (errorno) {
 	case SUCCESS:
 		///No need to print anything if successful.
@@ -85,6 +85,4 @@ int printerror(error_code errorno) {
 		printf("Unknown error occurred.");
 		break;
 	}
-
-	return 0;
 }
