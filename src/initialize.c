@@ -16,7 +16,8 @@ uint32_t FBL_DATA_SIZE;
 uint32_t FBL_TOTAL_SIZE;
 uint32_t ROOT;
 
-int sfs_initialize(int erase) {
+int sfs_initialize(int erase)
+{
 	//TODO finish create
 	FBL_DATA_SIZE = ceil((double) (NUMBLKS / BLKSIZE));
 	FBL_TOTAL_SIZE = (uint32_t) ceil(
@@ -30,14 +31,17 @@ int sfs_initialize(int erase) {
 	int variant = 0;
 	char str[100];
 
-	if (erase == 1 || erase == 0) {
-		if (erase == 1) {
+	if (erase == 1 || erase == 0)
+	{
+		if (erase == 1)
+		{
 			/**
 			 * Erase Disk and reallocate to free block list
 			 */
 			retval = wipe_disk();
 
-			if (retval != 0) {
+			if (retval != 0)
+			{
 				/**
 				 * TODO validate this error code
 				 */
@@ -50,9 +54,7 @@ int sfs_initialize(int erase) {
 		 * Initialize the Superblock struct with a pointer to the free block
 		 * list block, a pointer to the root directory Inode block.
 		 **/
-
-		superblock sb = { NUMBLKS * BLKSIZE, BLKSIZE, FBL_INDEX, ROOT, 0, NULL,
-				0 };
+		superblock sb = { NUMBLKS * BLKSIZE, BLKSIZE, FBL_INDEX, ROOT, 0, NULL, 0 };
 
 		uuid_generate(sb.uuid);
 
@@ -69,7 +71,8 @@ int sfs_initialize(int erase) {
 		retval = write_block(SUPER_BLOCK, buf);
 		free(buf);
 
-		if (retval != 0) {
+		if (retval != 0)
+		{
 			/**
 			 * Failed to write SB.
 			 * TODO validate this error code
@@ -84,7 +87,8 @@ int sfs_initialize(int erase) {
 		 **/
 		retval = free_block_init();
 
-		if (retval != 0) {
+		if (retval != 0)
+		{
 			/**
 			 * Failed to write FBL.
 			 * TODO validate this error code
@@ -112,39 +116,8 @@ int sfs_initialize(int erase) {
 		 **/
 		retval = sfs_create(root_name, 1);
 
-		/*char databuf_1[50];
-
-		 for(int i = 0; i < 49; i++)
-		 {
-		 databuf_1[i] = '1';
-		 }
-		 databuf_1[49] = NULL;
-		 char data_buf_2[150] = {1};
-		 for(int i = 0; i < 149; i++)
-		 {
-		 data_buf_2[i] = '2';
-		 }
-		 data_buf_2[149] = NULL;
-		 char data_buf_3[300] = {1};
-		 for(int i = 0; i < 299; i++)
-		 {
-		 data_buf_3[i] = '3';
-		 }
-		 data_buf_3[299] = NULL;
-
-		 char data_buf_4[500] = {1};
-		 for(int i = 0; i < 499; i++)
-		 {
-		 data_buf_4[i] = '4';
-		 }
-		 data_buf_4[499] = NULL;
-
-		 printf("Number of Blocks 50, %d\n", calc_num_bytes(databuf_1));
-		 printf("Number of Blocks 150, %d\n", calc_num_bytes(data_buf_2));
-		 printf("Number of Blocks 300, %d\n", calc_num_bytes(data_buf_3));
-		 printf("Number of Blocks 500, %d\n", calc_num_bytes(data_buf_4));*/
-
-		if (retval <= 0) {
+		if (retval <= 0)
+		{
 			/**
 			 * Failed to write root directory.
 			 * TODO validate this error code
@@ -158,7 +131,9 @@ int sfs_initialize(int erase) {
 		 */
 		print_error(SUCCESS);
 		return 1;
-	} else {
+	}
+	else
+	{
 		/**
 		 * TODO validate this error code
 		 */
@@ -174,8 +149,19 @@ int free_block_init(void)
 	block* data_blocks = NULL;
 	uint32_t i = 0;
 
+	/* Wipe the entire FBL in memory, everything is marked as free */
+	if (wipe_fbl() == NULL)
+	{
+		/**
+		 * Error occurred updating the FBL in memory
+		 * TODO validate this error code
+		 */
+		print_error(ERROR_UPDATING_FBL);
+		return -1;
+	}
+
 	/* Initialize the new FBL in memory, mark the superblock as used */
-	fbl = update_fbl(NULL, NULL );
+	fbl = update_fbl(NULL, NULL);
 	if (fbl == NULL )
 	{
 		/**
@@ -187,8 +173,6 @@ int free_block_init(void)
 	}
 
 	/* Write the new FBL to disk */
-	//First write the index.
-
 	idx = generate_index(FBL_DATA_SIZE);
 	//TODO update this to use proper error handling
 	/**
@@ -198,8 +182,7 @@ int free_block_init(void)
 	//print_error(INDEX_ALLOCATION_ERROR);
 	//return -1;
 
-	//Now write the data blocks.
-	//Segment the data blocks and write them at the locations set aside by the index.
+	/* Segment the data blocks and write them at the locations set aside by the index */
 	data_blocks = segment_data_len(fbl, NUMBLKS);
 	if (data_blocks == NULL)
 	{
@@ -207,6 +190,7 @@ int free_block_init(void)
 		 * Error occurred segmenting the output data.
 		 * TODO validate this error code
 		 */
+		free(data_blocks);
 		print_error(ERROR_BUFFER_SEGMENTATION);
 		return -1;
 	}
@@ -224,14 +208,12 @@ int free_block_init(void)
 		i++;
 	}
 
-	/* LINKING THE NEW FBL TO SUPERBLOCK ALREADY HAPPENED
-	 * 	VERIFY idx.indexlocation = the superblock's fbl location
-	 */
-
 	//TODO validate this error code
+	free(data_blocks);
 	print_error(SUCCESS);
 	return 0;
 }
+
 
 int wipe_disk(void)
 {

@@ -30,26 +30,6 @@ free_block_list* get_free_block_list(void)
 
 locations calc_total_free_blocks(void)
 {
-	//1. Get the free block list.
-	//2. Traverse it and add any blocks marked as empty to an array of type free_indices.
-	//3. Return the array.
-
-/*
-	locations_buf = calloc(NUMBLKS, sizeof(free_location))
-	count = 0
-
-	for (i = 0, i < NUMBLKS, i++)
-	{
-		if (! fbl[i])
-		{
-			locations_buf[count] = i
-			count++
-		}
-	}
-
-	return locations_buf
-
- */
 	locations free_blocks = NULL;
 	uint32_t blocks_found = 0;
 
@@ -84,33 +64,6 @@ locations calc_total_free_blocks(void)
 
 locations calc_num_free_blocks(uint32_t num_blocks)
 {
-	//1. Get the free block list.
-	//2. Traverse it and add num_blocks specified marked as empty to an array of type free_indices.
-	//3. Return the array.
-
-	/*
-	    // num_blocks + 1 items in order to null terminate
-		locations_buf = calloc(num_blocks +1, sizeof(free_location))
-		count = 0
-
-		for (i = 0, i < NUMBLKS, i++)
-		{
-			// If found the num_blocks specified break
-			if (count == num_blocks)
-			{
-				break;
-			}
-			if (! fbl[i])
-			{
-				locations_buf[count] = i
-				count++
-			}
-		}
-
-		return locations_buf
-
-	 */
-
 	locations free_blocks = NULL;
 	uint32_t blocks_found = 0;
 
@@ -216,29 +169,6 @@ free_block_list* update_fbl(locations used,
 
 free_block_list* sync_fbl(void)
 {
-	/*
-		 * Writes the FBL to the index locations pointed to by the
-		 *
-		 * fbl_location = get_free_block_index();
-		 *
-		 * fbl_data_locations = iterate_index(fbl_location, NULL);
-		 *
-		 * fbl_data_blocks = segment_data_len(fbl, NUMBLKS);
-		 *
-		 *
-		// Check that the data_blocks were segmented properly
-		//	if (data_blocks == NULL)
-		//	{
-		//		// Error occurred segmenting the data blocks
-		//		return -1;
-		//	}
-		//
-		//	while (idx.data_locations[i] != NULL)
-		//	{
-		//		write_block(idx.data_locations[i], data_blocks[i]);
-		//		i++;
-		//	}
-		*/
 	uint32_t i = 0;
 	uint32_t fbl_location = 0;
 	locations fbl_data_locations = NULL;
@@ -356,6 +286,18 @@ free_block_list* reset_fbl(void)
 	{
 		free(fbl_data_locations);
 		return NULL;
+	}
+
+	return &fbl;
+}
+
+
+free_block_list* wipe_fbl(void)
+{
+	/* Mark each location in the free block list as free */
+	for (uint32_t i = 0; i < sizeof(free_block_list); ++i)
+	{
+		fbl.free_blocks[i] = false;
 	}
 
 	return &fbl;
