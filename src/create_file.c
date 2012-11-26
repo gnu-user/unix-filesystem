@@ -69,7 +69,6 @@ int sfs_create(char *pathname, int type)
 		 * Traverse the file system to find the directory containing the desired
 		 * inode
 		 */
-
 		if(tokens[0] != NULL)
 		{
 			inode_loc = traverse_file_system(tokens, true);
@@ -214,7 +213,7 @@ int sfs_create(char *pathname, int type)
 
 		}
 
-		new_block.file_size = CREATE_SIZE * BLKSIZE;
+		new_block.file_size = 0;
 
 		/**
 		 * Fill in the information to be stored in the Inode
