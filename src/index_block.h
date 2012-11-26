@@ -40,18 +40,19 @@ data_index generate_index(uint32_t num_blocks);
 
 
 /**
- * Takes a NULL terminated array series of data locations and turns it into
- * a new index structure, then writes it on disk and returns the location of
+ * Takes a NULL terminated array of data locations and turns it into a new
+ * index structure, then writes it on disk and returns the location of
  * the first index block. The function operates similar to generate_index
- * except you already have all the data locations.
+ * except you already have all the data locations. If an error occurs 0 is
+ * returned.
  *
  * If NO data_locations are specified an empty index is created and the location
- * is returned
+ * is returned.
  *
  * @param data_locations A NULL terminated array of data locations, if NO data
  * locations are provided an empty index is created and the location is returned
  *
- * @return The location of the FIRST index block
+ * @return The location of the FIRST index block, if an error occurs 0 is returned
  *
  * 1. For each data locations
  * 2. get another block and link it inside the first block
