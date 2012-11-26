@@ -38,15 +38,4 @@ extern int read_block(uint32_t location, byte* buf);
  */
 extern byte* get_data(locations location);
 
-
-/**
- * Calculate the number of data blocks in the byte pointer
- *
- * @param the data_buf, that is NULL terminated, containing all of the data
- * blocks
- *
- * @return the number of data blocks in the data_buf
- */
-extern uint32_t get_num_datablocks(byte* data_buf);
-
 #endif /* BLOCK_FUNC_H_ */

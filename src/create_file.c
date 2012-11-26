@@ -122,8 +122,9 @@ int sfs_create(char *pathname, int type)
 		}
 		else
 		{
-			//TODO make so if ROOT dir is already created it wont be created again.
-			//If ROOT EXISTS  RETURN ERROR
+			/**
+			 * Validate that root has not been written
+			 */
 			if(validate_root_dir() == -1)
 			{
 				inode_loc = SUPER_BLOCK;

@@ -164,15 +164,16 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	//TODO create encryption
 	//TODO create decryption
 	uint32_t blocks_needed = 0;
+	byte* buf = NULL;
 	inode inode_write = get_null_inode();
 	uint32_t* new_inode_loc = NULL;
 	uint32_t* data_block_locations = NULL;
 	byte* temp = NULL;
 	byte* data_buf = NULL;
-	data_index data_location = {
-			.index_location = NULL,
-			.data_locations = NULL};
+	locations data_location = NULL;
+	uint32_t first_index = NULL;
 	block* data_block = NULL;
+	int retval = 0;
 	int i = 0;
 
 	if(fd >= 0 && fd < NUMOFL && length > 0 && start >= -1)
@@ -230,9 +231,11 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			return -1;
 		}
 
-		data_buf = get_data(data_block_locations);
-
-		blocks_needed += get_num_datablocks(data_buf);
+		if(data_block_locations[0] != NULL)
+		{
+			data_buf = get_data(data_block_locations);
+			blocks_needed += calc_num_blocks(data_buf);
+		}
 
 		if(start >= 0)
 		{
@@ -252,9 +255,20 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		else if(start == -1)
 		{
 			/**
-			 * Add # of new blocks to blocks_needed
+			 * Need to figure out how many more blocks are needed to given the
+			 * size of the data_buf + length
 			 */
-			blocks_needed += (int)ceil((double)(start+length)/BLKSIZE);
+			if(data_block_locations[0] != NULL)
+			{
+				/**
+				 * Add # of new blocks to blocks_needed
+				 */
+				blocks_needed += (int)ceil((double)(calc_num_bytes(data_buf)+length)/BLKSIZE);
+			}
+			else
+			{
+				blocks_needed += (int)ceil((double)(length)/BLKSIZE);
+			}
 		}
 
 		/**
@@ -275,39 +289,90 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		}
 
 		/**
-		 * Create the new free block
-		 *
-		 * TODO OVER WRITE THE PREVIOUS INODES
-		 */
-		new_inode_loc = get_free_block();
-
-		/**
 		 * TODO Update file size
 		 */
 
 		/**
 		 * Generate the new list of indexes
 		 */
-		data_location = generate_index(blocks_needed-1);
+		//data_location = generate_index(blocks_needed-1);
 
 		i = 0;
 
+		data_location = (uint32_t*) calloc(blocks_needed-1, sizeof(uint32_t))
 		/**
 		 * Write the data
 		 * Check if the file needs to be encrypted
 		 * 	- If it needs to be encrypted, encrypt the file
 		 * Store the file into the block(s)
 		 */
-		while(data_location.data_locations[i] != NULL)
+		while(i < blocks_needed -1)
 		{
-			write_block(data_location.data_locations[i], data_block[i]);
+			/**
+			 * Get data_blocks
+			 */
+			data_location[i] = get_free_block();
+			retval = write_block(data_location[i], data_block[i]);
+
+			if(retval != 0)
+			{
+				/**
+				 * De-allocate the blocks written
+				 */
+				/**
+				 * Copy the FBL disk from disk to memory
+				 */
+				//if(reset_fbl())
+				{
+					//Blow up
+					return -2;
+				}
+				return -1;
+			}
 			i++;
 		}
 
-		inode_write.location = data_location.index_location;
+		/**
+		 * Rebuild the Index block
+		 */
+		first_index = rebuild_index(data_location);
+
+		if(first_index == NULL)
+		{
+			/**
+			 * rebuild index failed
+			 */
+			/**
+			 * reset_fbl()
+			 */
+			return -1;
+		}
 
 		/**
-		 * link parent's index to inode
+		 * Override the Inode with the new index location
+		 */
+		inode_write.location = first_index;
+
+		buf = allocate_buf(buf, BLKSIZE);
+
+		buf = (byte *) copy_to_buf((byte *) &inode_write, (byte *)buf, sizeof(inode_write), BLKSIZE);
+		retval = write_block(inode_write.location, buf);
+
+		if(retval != 0)
+		{
+			/**
+			 * De-allocate the blocks written
+			 */
+			/**
+			 * Copy the FBL disk from disk to memory
+			 */
+			//reset_fbl();
+			return -1;
+		}
+
+
+		/**
+		 * Sync FBL
 		 */
 
 		/**
