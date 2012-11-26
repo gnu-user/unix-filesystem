@@ -36,8 +36,9 @@ int sfs_getsize(char *pathname)
 	{
 		/**
 		 * Invalid pathname
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(INVALID_PATH);
 		return -1;
 	}
 
@@ -50,8 +51,9 @@ int sfs_getsize(char *pathname)
 	{
 		/**
 		 * Invalid path or file/directory not found
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(FILE_NOT_FOUND);
 		return -1;
 	}
 
@@ -69,9 +71,10 @@ int sfs_getsize(char *pathname)
 	if(index_locations == NULL)
 	{
 		/**
-		 * Invalid invalid index block
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * Invalid index block
+		 * TODO validate this error code
 		 */
+		print_error(INDEX_ALLOCATION_ERROR);
 		return -1;
 	}
 
@@ -100,7 +103,7 @@ int sfs_getsize(char *pathname)
 		 * return the size of the file
 		 */
 		size =  get_size(inode_location[0]);
-		printf("Size = %d\n", size);
+		printf("Data Size = %d\n", size);
 		return size;
 	}
 	else if(type == 1)
@@ -115,10 +118,13 @@ int sfs_getsize(char *pathname)
 		 */
 		size = count_files_in_dir(index_block);
 		printf("Size = %d\n", size);
+
+		print_error(SUCCESS);
 		return size;
 	}
 	/**
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * TODO validate this error code
 	 */
+	print_error(INVALID_FILE_TYPE);
 	return -1;
 }

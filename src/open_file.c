@@ -30,12 +30,11 @@ int sfs_open(char *pathname)
 	{
 		/**
 		 * Invalid path name
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(INVALID_PATH);
 		return -2;
 	}
-
-
 
 	/**
 	 * Traverse the file system to find the desired inode
@@ -48,8 +47,9 @@ int sfs_open(char *pathname)
 		{
 			/**
 			 * Read Error
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(DISK_READ_ERROR);
 			return -1;
 		}
 	}
@@ -60,14 +60,15 @@ int sfs_open(char *pathname)
 	if(inode_location == NULL)
 	{
 		/**
-		 * Invalid path way or file or directory not found
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * Invalid path or file/directory not found
+		 * TODO validate this error code
 		 */
+		print_error(FILE_NOT_FOUND);
 		return -1;
 	}
 
 	/**
-	 * TODO decided if open constitutes accessing a file
+	 * TODO decide if open constitutes accessing a file
 	 * if successful open
 	 * update last date accessed
 	 */
@@ -154,13 +155,16 @@ int show_information(int fd)
 		printf("Uuid: %s\n", node.uuid);
 
 		/**
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate that this is the correct return (fd) ?
 		 */
+		print_error(SUCCESS);
 		return fd;
 	}
 
 	/**
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * Invalid file descriptor.
+	 * TODO validate this error code
 	 */
+	print_error(INVALID_FILE_DESCRIPTOR)
 	return -1;
 }

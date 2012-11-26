@@ -27,8 +27,9 @@ int sfs_close(int fd)
 		if (validate_fd(fd) < 0)
 		{
 			/**
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error message
 			 */
+			print_error(ERROR_UPDATING_SWOFT);
 			return 0;
 		}
 
@@ -40,12 +41,14 @@ int sfs_close(int fd)
 		/**
 		 * 	return value > 0 the file close was a success
 		 * 	return value <= 0 the file close was unsuccessful
-		 * 	TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * 	TODO validate this error message
 		 */
+		print_error(SUCCESS);
 		return 1;
 	}
 	/**
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * TODO validate this error message
 	 */
+	print_error(UNKNOWN);
 	return 0;
 }

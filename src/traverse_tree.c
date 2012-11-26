@@ -32,8 +32,9 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	{
 		/**
 		 * Failed to iterate root directory
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(INDEX_ALLOCATION_ERROR);
 		return NULL;
 	}
 
@@ -49,8 +50,9 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 			{
 				/**
 				 * Invalid directory
-				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+				 * TODO validate this error code
 				 */
+				print_error(INVALID_PATH);
 				return NULL;
 			}
 		}
@@ -78,8 +80,9 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 
 		/**
 		 * Inode is root
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(SUCCESS);
 		return inode_location;
 	}
 
@@ -90,14 +93,13 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		{
 			/**
 			 * Invalid Path, cannot use file as a directory
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INVALID_FILE_TYPE);
 			return NULL;
 		}
 		second_last = 1;
 	}
-
-
 
 	/**
 	 * General structure of the traversal:
@@ -128,8 +130,9 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		{
 			/**
 			 * No Children found
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INDEX_ALLOCATION_ERROR);
 			return NULL;
 		}
 
@@ -145,8 +148,9 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		{
 			/**
 			 * Child not found
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(FILE_NOT_FOUND);
 			return NULL;
 		}
 		i++;
@@ -155,7 +159,8 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 
 	/**
 	 * Success
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * TODO validate this error code
 	 */
+	print_error(SUCCESS);
 	return inode_location;
 }

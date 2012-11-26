@@ -33,8 +33,9 @@ int sfs_delete(char *pathname)
 	if(tokens == NULL)
 	{
 		/**
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(INVALID_PATH);
 		return 0;
 	}
 
@@ -48,8 +49,9 @@ int sfs_delete(char *pathname)
 	{
 		/**
 		 * Parent not found
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(PARENT_NOT_FOUND);
 		return -1;
 	}
 
@@ -57,8 +59,9 @@ int sfs_delete(char *pathname)
 	if(index_block == NULL){
 		/**
 		 * Empty or no index block
-		 *TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 *TODO validate this error code
 		 */
+		print_error(INDEX_ALLOCATION_ERROR);
 		return 0;
 	}
 
@@ -72,8 +75,9 @@ int sfs_delete(char *pathname)
 	{
 		/**
 		 * Inode not found
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(FILE_NOT_FOUND);
 		return 0;
 	}
 
@@ -92,8 +96,9 @@ int sfs_delete(char *pathname)
 	{
 		/**
 		 * Invalid index block
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(INDEX_ALLOCATION_ERROR);
 		return -1;
 	}
 
@@ -103,8 +108,9 @@ int sfs_delete(char *pathname)
 		{
 			/**
 			 * Directory has children
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(DIRECTORY_HAS_CHILDREN);
 			return 0;
 		}
 	}
@@ -113,17 +119,23 @@ int sfs_delete(char *pathname)
 		/**
 		 * Delete the data blocks (each time update the free_block list)
 		 */
+		//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
+		//print_error(ERROR_UPDATING_FBL);
 		update_fbl(NULL, index_block);
 	}
 
 	/**
 	 * Delete the index blocks (each time update the free_block list)
 	 */
+	//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
+	//print_error(ERROR_UPDATING_FBL);
 	update_fbl(NULL, index_block_locations(get_index_block(inode_loc[0]), NULL));
 
 	/**
 	 * Delete the Inode block (update the free_block list)
 	 */
+	//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
+	//print_error(ERROR_UPDATING_FBL);
 	update_fbl(NULL, inode_loc);
 
 	/**
@@ -135,12 +147,16 @@ int sfs_delete(char *pathname)
 	{
 		/**
 		 * Failed to remove files from swoft
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(ERROR_UPDATING_SWOFT);
 		return -2;
 	}
 
 	/**
+	 * TODO REVIEW BELOW:
+	 *
+	 *
 	 * get parents indicies, cause its a directory
 	 * delete index onto it (concat)
 	 * Ensure that the number of indexes in the index block is NOT empty at
@@ -148,8 +164,8 @@ int sfs_delete(char *pathname)
 	 * rebuild index
 	 */
 	/**
-	 * TODO journal linking the newly updated fbl
-	 * TODO journal removing the index location from parent
+	 * journal linking the newly updated fbl
+	 * journal removing the index location from parent
 	 * Delete the index location from the index block of the parent directory
 	 */
 	//remove_location(get_index_block(parent_location[0]));
@@ -157,7 +173,8 @@ int sfs_delete(char *pathname)
 	/**
 	 * return value > 0 then the file was deleted successfully.
 	 * return value <= 0 then the file failed to be delete.
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * TODO validate this error code
 	 */
+	print_error(SUCCESS);
 	return 1;
 }

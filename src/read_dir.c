@@ -43,8 +43,9 @@ int sfs_readdir(int fd, char *mem_pointer)
 		{
 			/**
 			 * file descriptor not found in swoft
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INVALID_FILE_DESCRIPTOR);
 			return -1;
 		}
 
@@ -61,9 +62,10 @@ int sfs_readdir(int fd, char *mem_pointer)
 		if(directory.type != 1)
 		{
 			/**
-			 * Invalid file error
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * Invalid file type error
+			 * TODO validate this error code
 			 */
+			print_error(INVALID_FILE_TYPE);
 			return -1;
 		}
 
@@ -74,13 +76,13 @@ int sfs_readdir(int fd, char *mem_pointer)
 		 *
 		 */
 		index_block = iterate_index(directory.location, NULL);
-
 		if(index_block == NULL)
 		{
 			/**
 			 * Invalid index block
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INDEX_ALLOCATION_ERROR);
 			return -1;
 		}
 
@@ -90,8 +92,9 @@ int sfs_readdir(int fd, char *mem_pointer)
 		{
 			/**
 			 * Invalid index block
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * TODO validate this error code
 			 */
+			print_error(INDEX_ALLOCATION_ERROR);
 			return -1;
 		}
 		int cur_index = get_index_entry(*get_inode(directory.location));
@@ -123,19 +126,22 @@ int sfs_readdir(int fd, char *mem_pointer)
 		if(mem_pointer == NULL)
 		{
 			/**
-			 * Invalid Directory Read
-			 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+			 * Empty Directory Read
+			 * TODO validate this error code
 			 */
+			print_error(DIRECTORY_EMPTY);
 			return 0;
 		}
 		/**
-		 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+		 * TODO validate this error code
 		 */
+		print_error(SUCCESS);
 		return 1;
 	}
 
 	/**
-	 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
+	 * TODO validate and update this error code, why does it return -1?
 	 */
+	print_error(UNKNOWN);
 	return -1;
 }
