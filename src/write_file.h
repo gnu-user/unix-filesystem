@@ -37,7 +37,7 @@
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -61,7 +61,7 @@ extern block* modify_data(int32_t start, uint32_t length, byte* data_buf, byte* 
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -122,7 +122,7 @@ extern block* segment_data_len(byte* data_buf, uint32_t length);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
