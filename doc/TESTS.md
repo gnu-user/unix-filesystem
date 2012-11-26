@@ -177,8 +177,8 @@ byte test_buf[355] = { NULL };
 byte input_buf[355] = { NULL };
 
 
-get_free_block_list
---------------------
+get_free_block_list / reset_fbl
+--------------------------------
 
 * Mark specific points in the FBL on disk as true, execute
   get_free_block_list and verify that the fbl in memory has been
@@ -196,6 +196,40 @@ get_free_block_list
 /* TEST -- get_free_block_list */
 free_block_list* test_fbl = NULL;
 test_fbl = get_free_block_list();
+
+
+sync_fbl
+---------
+
+* Similarly to get_free_block_list, mark specific locations in the disk as
+  used and then read them into memory, then alter the FBL in memory
+  significantly and execute sync_fbl, then call reset_fbl, the contents of
+  memory should be the same as what was just sync'd to disk
+
+0 - 9 = true
+120 - 129 = true
+255 - 264 = true
+500 - 511 = true
+
+/* TEST -- get_free_block_list */
+free_block_list* test_fbl = NULL;
+free_block_list* test_fbl2 = NULL;
+free_block_list* test_sync_fbl = NULL;
+test_fbl = get_free_block_list();
+
+/* Update the fbl in memory */
+uint32_t free[35] = { 1, 2, 3, 4, 5, 6, 7 , 8, 9, 10,
+					120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130,
+					500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, NULL };
+
+uint32_t used[11] = {401, 402, 403, 404, 405, 406, 407, 408, 409, 410, NULL };
+
+test_fbl2 = update_fbl(used, free);
+
+/* Now sync the new FBL in memory to disk */
+test_sync_fbl = sync_fbl();
+
+
 
 
 
