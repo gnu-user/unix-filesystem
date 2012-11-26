@@ -31,6 +31,25 @@ typedef struct{
 	bool taken[NUMOFL];
 } swoft;
 
+
+/**
+ * @var system_open_tb
+ *
+ * @brief The static instance of the system wide open file table.
+ *
+ * @details This variable holds the singleton instance of the
+ * system wide open file table. It represents an instance of a
+ * pseudo-object which can only be accessed and modified through
+ * the accessor and mutator methods provided.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
+ */
 extern swoft system_open_tb;
 
 
