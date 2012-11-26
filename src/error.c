@@ -11,78 +11,78 @@ void print_error(error_code errorno) {
 	switch (errorno) {
 	case SUCCESS:
 		///No need to print anything if successful.
-		//printf("Success!");
+		//printf("Success!\n");
 		break;
 	case INVALID_PARAMETER:
-		printf("Invalid parameter specified.");
+		printf("Invalid parameter specified.\n");
 		break;
 	case DISK_READ_ERROR:
-		printf("Disk read i/o error.");
+		printf("Disk read i/o error.\n");
 		break;
 	case DISK_WRITE_ERROR:
-		printf("Disk write i/o error.");
+		printf("Disk write i/o error.\n");
 		break;
 	case FILE_NOT_FOUND:
-		printf("File not found at path specified.");
+		printf("File not found at path specified.\n");
 		break;
 	case INVALID_FILE_TYPE:
-		printf("Invalid file type specified.");
+		printf("Invalid file type specified.\n");
 		break;
 	case INVALID_FILE_NAME:
-		printf("Invalid file name specified.");
+		printf("Invalid file name specified.\n");
 		break;
 	case INVALID_FILE_DESCRIPTOR:
-		printf("Invalid file descriptor.");
+		printf("Invalid file descriptor.\n");
 		break;
 	case INVALID_PATH:
-		printf("Invalid path specified.");
+		printf("Invalid path specified.\n");
 		break;
 	case INVALID_PATH_LENGTH:
-		printf("Invalid path length specified. (>6 characters)");
+		printf("Invalid path length specified. (>6 characters)\n");
 		break;
 	case INSUFFICIENT_DISK_SPACE:
-		printf("Insufficient disk space to complete operation.");
+		printf("Insufficient disk space to complete operation.\n");
 		break;
 	case ERROR_UPDATING_SB:
-		printf("Fatal error updating super block.");
+		printf("Fatal error updating super block.\n");
 		exit(ERROR_UPDATING_SB);
 		break;
 	case ERROR_UPDATING_FBL:
-		printf("Fatal error updating free block list.");
+		printf("Fatal error updating free block list.\n");
 		exit(ERROR_UPDATING_FBL);
 		break;
 	case ERROR_UPDATING_SWOFT:
-		printf("Error updating system wide open file table.");
+		printf("Error updating system wide open file table.\n");
 		break;
 	case INDEX_ALLOCATION_ERROR:
-		printf("Corrupted index block, or index/link allocation error.");
+		printf("Corrupted index block, or index/link allocation error.\n");
 		break;
 	case ERROR_BLOCK_LINKAGE:
-		printf("Corrupted block linkage, or block linkage error.");
+		printf("Corrupted block linkage, or block linkage error.\n");
 		break;
 	case ERROR_BUFFER_SEGMENTATION:
-		printf("Buffer segmentation error. (This is not a segmentation fault!)");
+		printf("Buffer segmentation error. (This is not a segmentation fault!)\n");
 		break;
 	case PARENT_NOT_FOUND:
-		printf("Node parent not found.");
+		printf("Node parent not found.\n");
 		break;
 	case DIRECTORY_HAS_CHILDREN:
-		printf("Directory has children.");
+		printf("Directory has children.\n");
 		break;
 	case DIRECTORY_TRAVERSED:
-		printf("Directory content traversal completed.");
+		printf("Directory content traversal completed.\n");
 		break;
 	case DIRECTORY_EMPTY:
-		printf("Directory contents empty.");
+		printf("Directory contents empty.\n");
 		break;
 	case FILE_EMPTY:
-		printf("File contents empty.");
+		printf("File contents empty.\n");
 		break;
 	case FILE_PAST_EOF:
-		printf("Attempted read/write past end of file.");
+		printf("Attempted read/write past end of file.\n");
 		break;
 	default:
-		printf("Unknown error occurred.");
+		printf("Unknown error occurred.\n");
 		break;
 	}
 }
