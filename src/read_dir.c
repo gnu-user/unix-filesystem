@@ -118,6 +118,17 @@ int sfs_readdir(int fd, char *mem_pointer)
 			print_error(INDEX_ALLOCATION_ERROR);
 			return -1;
 		}
+
+		if(num_locations == 0)
+		{
+			/**
+			 * Empty Directory Read
+			 * TODO validate this error code
+			 */
+			print_error(DIRECTORY_EMPTY);
+			return 0;
+		}
+
 		int cur_index = get_index_entry(*get_inode(directory.location));
 
 		if(num_locations == cur_index)
@@ -126,24 +137,8 @@ int sfs_readdir(int fd, char *mem_pointer)
 			return 0;
 		}
 
-
-		char* test_name = get_name(index_block[cur_index]);
-		strcpy(mem_pointer, test_name);
-
-		/*
-		 * return value > 0 for a successful read dir
-		 * return value = 0 if there is no contents in dir
-		 * return value < 0 for a unsuccessful read dir
-		 */
-		if(mem_pointer == NULL)
-		{
-			/*
-			 * Empty Directory Read
-			 * TODO validate this error code
-			 */
-			print_error(DIRECTORY_EMPTY);
-			return 0;
-		}
+		char* name = get_name(index_block[cur_index]);
+		strcpy(mem_pointer, name);
 
 		/* Update the directory inode date last accessed and write the inode back to disk */
 		directory.date_last_accessed = time(NULL);
@@ -165,6 +160,11 @@ int sfs_readdir(int fd, char *mem_pointer)
 		}
 		free(buf);
 
+		/*
+		 * return value > 0 for a successful read dir
+		 * return value = 0 if there is no contents in dir
+		 * return value < 0 for a unsuccessful read dir
+		 */
 		/*
 		 * TODO validate this error code
 		 */
