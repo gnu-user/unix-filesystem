@@ -19,7 +19,7 @@
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -41,7 +41,7 @@ typedef uint32_t* index;
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -69,7 +69,7 @@ typedef struct {
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -97,7 +97,7 @@ data_index generate_index(uint32_t num_blocks);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -133,7 +133,7 @@ uint32_t rebuild_index(locations data_locations);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -160,7 +160,7 @@ locations iterate_index(uint32_t location, locations data_blocks);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -182,7 +182,7 @@ uint32_t calc_index_blocks(uint32_t num_blocks);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -210,7 +210,7 @@ int count_files_in_dir(uint32_t location);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *

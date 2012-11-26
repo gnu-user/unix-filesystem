@@ -26,7 +26,7 @@
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -50,7 +50,7 @@ extern int sfs_initialize(int erase);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -76,7 +76,7 @@ extern int free_block_init(void);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *

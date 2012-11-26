@@ -38,7 +38,7 @@
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -65,7 +65,7 @@ extern int sfs_open(char *pathname);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *

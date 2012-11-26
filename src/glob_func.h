@@ -30,7 +30,7 @@
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -55,7 +55,7 @@ extern byte* allocate_buf(byte* buf, uint32_t size);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -76,7 +76,7 @@ extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -101,7 +101,7 @@ extern uint32_t calc_num_bytes(byte* buf);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -135,7 +135,7 @@ extern uint32_t calc_num_blocks(byte* buf);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -176,7 +176,7 @@ extern void* concat(void* src_1, void* src_2, uint32_t size);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -209,7 +209,7 @@ extern void* concat_len(void* src_1, void* src_2, uint32_t size, uint32_t len);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -231,7 +231,7 @@ extern char** tokenize_path(char* pathname);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *

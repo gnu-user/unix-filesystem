@@ -18,7 +18,7 @@
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -39,7 +39,7 @@ extern int write_block(uint32_t location, byte* buf);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
@@ -57,7 +57,7 @@ extern int read_block(uint32_t location, byte* buf);
  *
  * @author Daniel Smullen
  *
- * @author Jon Gillett
+ * @author Jonathan Gillett
  *
  * @author Joseph Heron
  *
