@@ -38,10 +38,11 @@
  */
 int sfs_open(char *pathname)
 {
-
 	//TODO fix open error when file not found (it might be seg faulting, program just crashed)
 	uint32_t* inode_location = NULL;
 	char** tokens = NULL;
+	inode* node = NULL;
+	byte* buf = NULL;
 
 	/*
 	 * Parse the pathname
@@ -74,7 +75,8 @@ int sfs_open(char *pathname)
 			return -1;
 		}
 	}
-	else{
+	else
+	{
 		inode_location = traverse_file_system(tokens, false);
 	}
 
@@ -88,9 +90,35 @@ int sfs_open(char *pathname)
 		return -1;
 	}
 
-	/*
-	 * TODO update last date accessed
-	 */
+	/* Get the inode from disk and update the last_accessed date in the inode */
+	node = get_inode(inode_location[0]);
+
+	if (node == NULL)
+	{
+		/*
+		 * Read Error
+		 * TODO validate this error code
+		 */
+		print_error(DISK_READ_ERROR);
+		return -1;
+	}
+
+	/* Update the date last accessed and write the inode back to disk */
+	node->date_last_accessed = time(NULL);
+
+	buf = allocate_buf(buf, BLKSIZE);
+	buf = (byte *) copy_to_buf((byte *) node, (byte *) buf, sizeof(inode), BLKSIZE);
+
+	if(write_block(inode_location[0], buf) < 0)
+	{
+		/*
+		 * TODO validate this error code
+		 */
+		free(buf);
+		print_error(DISK_WRITE_ERROR);
+		return -1;
+	}
+	free(buf);
 
 	/*
 	 * Retrieve the Inode of the desired file.
@@ -113,6 +141,8 @@ int sfs_open(char *pathname)
 int show_information(int fd)
 {
 	char str[100];
+	struct tm * local_time;
+
 	if(fd >= 0)
 	{
 		/*
@@ -147,11 +177,15 @@ int show_information(int fd)
 
 		printf("Privileges: %c%c%c\n", read, write, execute);
 
-		printf("Date created: %d\n", node.date_of_create);
+		/* Convert the POSIX times into the local time and print the ASCII version */
+		local_time = localtime(&node.date_of_create);
+		printf("Date created: %s", asctime(local_time));
 
-		printf("Date last accessed: %d\n", node.date_last_accessed);
+		local_time = localtime(&node.date_last_accessed);
+		printf("Date last accessed: %s", asctime(local_time));
 
-		printf("Date last modified: %d\n", node.date_last_modified);
+		local_time = localtime(&node.date_last_modified);
+		printf("Date last modified: %s", asctime(local_time));
 
 		if(node.type == false)
 		{
