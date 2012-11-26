@@ -165,13 +165,6 @@ uint32_t rebuild_index(locations data_locations)
 }
 
 
-/*
-int link_inode(uint32_t* index_block, uint32_t location)
-{
-	return 1;
-} */
-
-
 locations iterate_index(uint32_t location, locations data_blocks)
 {
 	/* Index_block read from disk */
@@ -254,23 +247,23 @@ uint32_t calc_index_blocks(uint32_t num_blocks)
 }
 
 
-//TODO implement count files in dir
 int count_files_in_dir(uint32_t location)
 {
 	locations loc = NULL;
 	int i = 0;
 
-	/**
+	/*
 	 * Need to make sure that if there are not locations in the index block that
 	 * rather then null, 0 is returned.
 	 */
 	loc = iterate_index(location, NULL);
 	if(loc == NULL)
 	{
+		print_error(INDEX_ALLOCATION_ERROR);
 		return -1;
 	}
 
-	/**
+	/*
 	 * iterate through the loc pointer and determine the number of locations
 	 */
 	while(loc[i] != NULL)
@@ -279,16 +272,6 @@ int count_files_in_dir(uint32_t location)
 	}
 
 	return i;
-}
-
-/**
- * TODO REMOVE THIS
- *
- * Need to be able to add a location onto the end of this list.
- */
-int add_location (uint32_t index_block, uint32_t location)
-{
-
 }
 
 
