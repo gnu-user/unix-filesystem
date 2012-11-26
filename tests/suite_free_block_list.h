@@ -4,6 +4,7 @@
  *  Created on: Nov 21, 2012
  *      Author: ubuntu
  */
+#include "../src/error.h"
 #include <stdbool.h>
 
 #ifndef SUITE_FREE_BLOCK_LIST_H_

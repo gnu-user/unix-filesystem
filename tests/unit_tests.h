@@ -5,6 +5,8 @@
  *      Author: jon
  */
 
+#include "../src/error.h"
+
 #ifndef UNIT_TESTS_H_
 #define UNIT_TESTS_H_
 
@@ -29,14 +31,10 @@
 
 
 /* Displays output stating that it is starting a test suite
- * TODO MAKE A NICE WRAPPER THAT IS MORE HIGH LEVEL, ACTUALLY
- * STARTS A TEST SUITE
  */
 extern start_suite(char* tsuite);
 
 /* Displays output stating that it is starting a test case
- * TODO MAKE A NICE WRAPPER THAT IS MORE HIGH LEVEL, ACTUALLY
- * STARTS A TEST CASE
  */
 extern start_test(char* name, void* tcase());
 

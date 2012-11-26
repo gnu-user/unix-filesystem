@@ -4,6 +4,7 @@
  *  Created on: Nov 23, 2012
  *      Author: ubuntu
  */
+#include "../src/error.h"
 
 #ifndef SUITE_INDEX_BLOCK_H_
 #define SUITE_INDEX_BLOCK_H_
