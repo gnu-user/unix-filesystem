@@ -1,31 +1,25 @@
-/**
- * The structures used for the Inode component of the file system:
+/*
+ * SneakyFS - A Secure UNIX File System
  *
- * (Char [7]) The file name contains the user name given to the file
- * or directory, it will take up 6 bytes and limited to 6 characters
- * (Boolean) File type identifies whether the index file points to
- * file (0) or a directory (1) which will take up 1 byte.
- * (Boolean) File permissions is whether the file has read, write
- * executable which will take up 4 bytes.
- * (Integer) File created date stores the date the file was created
- * on, and will take up 4 bytes.
- * (Integer) File last accessed date stores the date the file was
- * last accessed on, and will take up 4 bytes.
- * (Integer) File last modified date stores the date the file was
- * last modified on, and will take up 4 bytes.
- * (Integer) File owner stores the user's unique identifier, taking
- * up 4 bytes.
- * (Integer) Last modified stores the unique identifier of the user
- * to last modify the file, and it will take up 4 bytes.
- * (Short Integer) File size stores size of the file, and will take
- * up 2 bytes.
- * (Pointer) Location stores the address of the block on disk, and
- * will take up 4 bytes.
- * (Boolean) The encrypted identifier will identities whether the
- * file is encrypted and will take up 1 byte.
- * (Integer) The check sum of the data (taken before it is
- * encrypted) will take up 4 bytes.
- **/
+ * Copyright (C) 2012, Jonathan Gillett, Joseph Heron, and Daniel Smullen
+ * All rights reserved.
+ *
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
 #include "I_node.h"
 #include "block_func.h"
 
