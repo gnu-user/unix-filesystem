@@ -36,7 +36,7 @@ block* modify_data(int32_t start, uint32_t length, byte* data_buf, byte* actual_
 	else if (start == -1)
 	{
 		/* Append the actual data to the data buffer */
-		tmp_data_buf = (byte*) concat(data_buf, actual_data, sizeof(byte));
+		tmp_data_buf = (byte*) concat_len(data_buf, actual_data, sizeof(byte), length);
 
 		/* Segment the data into blocks and free the temporary buffer */
 		data_blocks = segment_data(tmp_data_buf);
