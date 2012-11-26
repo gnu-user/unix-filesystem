@@ -81,13 +81,13 @@ sfs_initialize(int erase);
  ******************************************************/
 
 /* buffer to hold commands read from standard input */
-char command_buffer[MAX_INPUT_LENGTH + 1];
+char command_buffer[MAX_INPUT_LENGTH + 1] = {NULL};
 
 /* buffer to hold data going to/from the disk */
-char io_buffer[MAX_IO_LENGTH + 1];
+char io_buffer[MAX_IO_LENGTH + 1] = {NULL};
 
 /* the following is used to hold string input parameters, such as file names */
-char data_buffer_1[MAX_INPUT_LENGTH];
+char data_buffer_1[MAX_INPUT_LENGTH] = {NULL};
 /* the following are used to hold integer input parameters */
 int p1, p2, p3;
 
@@ -103,7 +103,7 @@ main()
 {
 
 	mount();
-	int i;
+	int i = 0;
 	int index = 0;
 	int retval; /* used to hold return values of file system calls */
 
@@ -116,24 +116,24 @@ main()
 	 */
 	while (1) {
 
-		/*index = 0;
+		index = 0;
 		while(index < MAX_INPUT_LENGTH+1)
 		{
-			command_buffer[i] = "";
+			command_buffer[index] = NULL;
 			index++;
 		}
 		index = 0;
 		while(index < MAX_IO_LENGTH + 1)
 		{
-			io_buffer[i] = "";
+			io_buffer[index] = NULL;
 			index++;
 		}
 		index = 0;
 		while(index < MAX_INPUT_LENGTH)
 		{
-			data_buffer_1[i] = "";
+			data_buffer_1[index] = NULL;
 			index++;
-		}*
+		}
 
 		/* print a list of available commands */
 		printf("\n");

@@ -31,15 +31,13 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	//TODO test read
 	//TODO create encryption
 	//TODO create decryption
-
 	inode file_inode = get_null_inode();
 	uint32_t index_block = 0;
 	locations data_blocks = NULL;
 	byte* data_buf = NULL;
 	uint32_t start_block = NULL;
-	uint32_t i;
+	uint32_t i = 0;
 	byte* temp = NULL;
-	mem_pointer = NULL;
 
 	//TODO split this into two error codes!!!
 	if(fd >= 0 && fd < NUMOFL && start >= 0 && length > 0)
@@ -75,7 +73,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 
 		data_blocks = iterate_index(index_block, NULL);
 
-		if (data_blocks == NULL)
+		if (data_blocks == NULL || data_blocks[0] == NULL)
 		{
 			/**
 			 * File is empty
@@ -119,14 +117,15 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 * mem_pointer = copy data_buf from start to index = start + length
 		 */
 		i = 0;
-		while(data_buf[i+start] != NULL && i < length)
+		while(data_buf[start+i] != NULL && i < length)
 		{
 			/**
 			 * concat the mem_pointer
 			 */
-			temp = (byte*) concat_len(mem_pointer, data_buf[start+i], sizeof(byte), 1);
-			free(mem_pointer);
-			mem_pointer = temp;
+			temp = (byte*) concat_len(mem_pointer, &data_buf[start+i], sizeof(byte), sizeof(byte));
+			memcpy(mem_pointer, temp, (i+1)*sizeof(byte));
+			free(temp);
+			//mem_pointer = temp;
 			i++;
 		}
 
