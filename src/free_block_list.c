@@ -145,7 +145,7 @@ free_block_list* update_fbl(locations used,
 	{
 		while (used[i] != NULL)
 		{
-			printf("used location %d\n", used[i]);
+			printf("used location: %d\n", used[i]);
 			/* Mark each of the fbl locations specifed as used */
 			fbl.free_blocks[used[i]] = true;
 			++i;
@@ -157,6 +157,7 @@ free_block_list* update_fbl(locations used,
 
 		while (free[i] != NULL)
 		{
+			printf("free location: %d\n", free[i]);
 			/* Mark each of the fbl locations specifed as free */
 			fbl.free_blocks[free[i]] = false;
 			++i;
