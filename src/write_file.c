@@ -170,9 +170,8 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	uint32_t* data_block_locations = NULL;
 	byte* temp = NULL;
 	byte* data_buf = NULL;
-	data_index data_location = {
-			.index_location = NULL,
-			.data_locations = NULL};
+	locations data_location = NULL;
+	uint32_t first_index = NULL;
 	block* data_block = NULL;
 	int retval = 0;
 	int i = 0;
@@ -298,21 +297,23 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 */
 		//data_location = generate_index(blocks_needed-1);
 
-		/**
-		 * Get data_blocks
-		 */
-
 		i = 0;
 
+		data_location = (uint32_t*) calloc(blocks_needed-1, sizeof(uint32_t))
 		/**
 		 * Write the data
 		 * Check if the file needs to be encrypted
 		 * 	- If it needs to be encrypted, encrypt the file
 		 * Store the file into the block(s)
 		 */
-		while(data_location.data_locations[i] != NULL)
+		while(i < blocks_needed -1)
 		{
-			retval = write_block(data_location.data_locations[i], data_block[i]);
+			/**
+			 * Get data_blocks
+			 */
+			data_location[i] = get_free_block();
+			retval = write_block(data_location[i], data_block[i]);
+
 			if(retval != 0)
 			{
 				/**
@@ -321,6 +322,12 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 				/**
 				 * Copy the FBL disk from disk to memory
 				 */
+				//if(reset_fbl())
+				{
+					//Blow up
+					return -2;
+				}
+				return -1;
 			}
 			i++;
 		}
@@ -328,11 +335,23 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		/**
 		 * Rebuild the Index block
 		 */
+		first_index = rebuild_index(data_location);
+
+		if(first_index == NULL)
+		{
+			/**
+			 * rebuild index failed
+			 */
+			/**
+			 * reset_fbl()
+			 */
+			return -1;
+		}
 
 		/**
 		 * Override the Inode with the new index location
 		 */
-		inode_write.location = data_location.index_location;
+		inode_write.location = first_index;
 
 		buf = allocate_buf(buf, BLKSIZE);
 
@@ -347,6 +366,8 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			/**
 			 * Copy the FBL disk from disk to memory
 			 */
+			//reset_fbl();
+			return -1;
 		}
 
 
