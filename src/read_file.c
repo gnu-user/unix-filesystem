@@ -146,7 +146,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 			temp = (byte*) concat_len(mem_pointer, &data_buf[start+i], sizeof(byte), sizeof(byte));
 			memcpy(mem_pointer, temp, (i+1)*sizeof(byte));
 			free(temp);
-			//mem_pointer = temp;
 			i++;
 		}
 

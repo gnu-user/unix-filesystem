@@ -195,6 +195,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	uint32_t first_index = NULL;
 	block* data_block = NULL;
 	locations old_index_block = NULL;
+	time_t cur_date;
 	int retval = 0;
 	int i = 0;
 
@@ -400,11 +401,18 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		/* Override the Inode with the new index location */
 		inode_write.location = first_index;
 
+		/* Update the Inode date last accessed and modified, then write the inode back to disk */
+		cur_date = time(NULL);
+		inode_write.date_last_accessed = cur_date;
+		inode_write.date_last_modified = cur_date;
+
 		buf = allocate_buf(buf, BLKSIZE);
+		buf = (byte *) copy_to_buf((byte *) &inode_write, (byte *) buf, sizeof(inode_write), BLKSIZE);
 
-		buf = (byte *) copy_to_buf((byte *) &inode_write, (byte *)buf, sizeof(inode_write), BLKSIZE);
 		retval = write_block(inode_loc, buf);
+		free(buf);
 
+		/* Check if an error occurred writing the Inode to disk */
 		if(retval != 0)
 		{
 			/* Error occurred, reset the FBL in memory with FBL from disk */
@@ -435,10 +443,6 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			print_error(ERROR_UPDATING_FBL);
 			return -1;
 		}
-
-		/*
-		 * TODO update last date accessed, last date modified, last user to modify
-		 */
 
 		/* Synchronize the FBL, write the FBL in memory to disk */
 		if (sync_fbl() == NULL)

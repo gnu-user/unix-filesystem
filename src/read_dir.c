@@ -51,14 +51,16 @@ int sfs_readdir(int fd, char *mem_pointer)
 	//TODO test readdir
 	inode directory = get_null_inode();
 	locations index_block = NULL;
+	uint32_t inode_location = 0;
 	uint32_t i = 0;
 	uint32_t num_locations = 0;
 	int count = 0;
+	byte* buf = NULL;
 
 	if(fd >= 0 && fd < NUMOFL)
 	{
 
-		/**
+		/*
 		 * Validate the file descriptor
 		 */
 		if(validate_fd(fd) < 0)
@@ -71,19 +73,17 @@ int sfs_readdir(int fd, char *mem_pointer)
 			return -1;
 		}
 
-		/**
+		/*
 		 * Retrieve the contents of the directory's index block. Use the Inode
 		 * to retrieve the names of the contents. Store the values into
 		 * mem_pointer.
 		 */
 		directory = get_swoft_inode(fd);
 
-		/**
-		 * If the inode is not a directory return an error
-		 */
+		/* If the inode is not a directory return an error */
 		if(directory.type != 1)
 		{
-			/**
+			/*
 			 * Invalid file type error
 			 * TODO validate this error code
 			 */
@@ -91,16 +91,15 @@ int sfs_readdir(int fd, char *mem_pointer)
 			return -1;
 		}
 
-		/**
+		/*
 		 * Iterate through the index block
 		 * TODO ensure that iterate_index returns a null value for index_block
 		 * when the directory is empty
-		 *
 		 */
 		index_block = iterate_index(directory.location, NULL);
 		if(index_block == NULL)
 		{
-			/**
+			/*
 			 * Invalid index block
 			 * TODO validate this error code
 			 */
@@ -112,7 +111,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 
 		if(num_locations < 0)
 		{
-			/**
+			/*
 			 * Invalid index block
 			 * TODO validate this error code
 			 */
@@ -138,37 +137,42 @@ int sfs_readdir(int fd, char *mem_pointer)
 			return 0;
 		}
 
-		//mem_pointer = (char *) calloc(MAX_NAME_LEN, sizeof(char));
-
-
 		char* name = get_name(index_block[cur_index]);
-
-		// Prob segfaulting because you are trying to copy past the length of test_name
-		/*count = 0;
-		while(test_name[count] != NULL && count < MAX_NAME_LEN)
-		{
-			count++;
-		}*/
 		strcpy(mem_pointer, name);
 
-		/**
-		 * TODO update last date accessed
-		 */
+		/* Update the directory inode date last accessed and write the inode back to disk */
+		directory.date_last_accessed = time(NULL);
 
+		/* Get the inode location */
+		inode_location = get_inode_loc(fd);
 
-		/**
+		buf = allocate_buf(buf, BLKSIZE);
+		buf = (byte *) copy_to_buf((byte *) &directory, (byte *) buf, sizeof(inode), BLKSIZE);
+
+		if(write_block(inode_location, buf) < 0)
+		{
+			/*
+			 * TODO validate this error code
+			 */
+			free(buf);
+			print_error(DISK_WRITE_ERROR);
+			return -1;
+		}
+		free(buf);
+
+		/*
 		 * return value > 0 for a successful read dir
 		 * return value = 0 if there is no contents in dir
 		 * return value < 0 for a unsuccessful read dir
 		 */
-		/**
+		/*
 		 * TODO validate this error code
 		 */
 		print_error(SUCCESS);
 		return 1;
 	}
 
-	/**
+	/*
 	 * TODO validate and update this error code, why does it return -1?
 	 */
 	print_error(UNKNOWN);
