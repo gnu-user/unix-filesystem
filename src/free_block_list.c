@@ -131,6 +131,8 @@ uint32_t get_free_block(void)
 	/* Get the location of the next available free block */
 	locations free_block = calc_num_free_blocks(1);
 	uint32_t free_block_loc = 0;
+	/* Empty block to write to disk before returning the location as free */
+	byte empty_block[BLKSIZE] = { NULL };
 
 	/* If the free_block is NULL there are no more free blocks available */
 	if (free_block == NULL)
@@ -138,13 +140,22 @@ uint32_t get_free_block(void)
 		return 0;
 	}
 
+	/* Copy the single free block location */
+	free_block_loc = free_block[0];
+
+	/* Wipe the block on disk as empty before returning the location */
+	if (write_block(free_block_loc, empty_block) < 0)
+	{
+		/* Error occurred writing the block */
+		free(free_block);
+		return 0;
+	}
+
 	/* Mark the free_block location as used in the free block list and return the location */
 	if (update_fbl(free_block, NULL ) != NULL)
 	{
-		/* Copy the single free block location and free the dynamic memory */
-		free_block_loc = free_block[0];
+		/* Free the dynamic memory, return the free block location */
 		free(free_block);
-
 		return free_block_loc;
 	}
 

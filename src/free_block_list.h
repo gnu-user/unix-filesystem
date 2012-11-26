@@ -127,11 +127,12 @@ extern locations calc_num_free_blocks(uint32_t num_blocks);
  * marks it as used and returns the location of the block.
  *
  * @details This function finds a single free block and then marks
- * that block as used in the free block list, it essentially operates
- * as a facade for the calc_free_blocks function and the update_fbl function
- * when you only want to get one block at a time. If there are no free
- * blocks available, it will return 0 (the superblock's location),
- * which is always used by the superblock.
+ * that block as used in the free block list, it ensures that the block
+ * on disk is empty (all NULL) before returning the block location. It
+ * essentially operates as a facade for the calc_free_blocks function and
+ * the update_fbl function when you only want to get one block at a time.
+ * If there are no free blocks available, it will return 0 (the superblock's
+ * location), which is always used by the superblock.
  *
  * @return The location of a free block. Return 0 if no free blocks available.
  *

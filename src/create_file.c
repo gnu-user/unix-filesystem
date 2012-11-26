@@ -25,9 +25,10 @@
 #include "traverse_tree.h"
 #include "block_func.h"
 #include "create_file.h"
+#include "mount.h"
 #include <string.h>
 #include <time.h>
-#include "mount.h"
+
 
 #define CREATE_SIZE 2
 
@@ -66,6 +67,7 @@ int sfs_create(char *pathname, int type)
 	uint32_t i = 0;
 	int parent_offset = 0;
 	int retval = 0;
+	time_t cur_date;
 
 	/**
 	 * Check for valid type = 0 or = 1
@@ -240,9 +242,13 @@ int sfs_create(char *pathname, int type)
 		 * Fill in the information to be stored in the Inode
 		 * TODO fill in times and user info
 		 */
-		//date_of_create = cur_date;
-		//date_last_accessed = cur_date;
-		//date_last_modified = cur_date;
+		/* Get the current date & time in POSIX time format and set the
+		 * Inode date parameters
+		 */
+		cur_date = time(NULL);
+		new_block.date_of_create = cur_date;
+		new_block.date_last_accessed = cur_date;
+		new_block.date_last_modified = cur_date;
 		//file_owner = cur_user;
 		//last_user_modified = cur_user;
 
