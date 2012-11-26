@@ -13,39 +13,47 @@
 #ifndef SUPER_BLOCK_H_
 #define SUPER_BLOCK_H_
 
-typedef struct{
-	uint32_t size_of_disk;
-	uint32_t block_size;
-	uint32_t free_block_list;	//Address to the first free block
-	uint32_t root_dir;			//Address to the root directory
-	uint32_t device_id;
-	uuid_t uuid;
+/**
+ * @struct Superblock
+ *
+ * This struct defines the data which will be stored inside the
+ * super block. In particular, the super block contains information
+ * pertaining to disk attributes, and links to critical file system
+ * data structures.
+ */
+typedef struct
+{
+	uint32_t size_of_disk;		/** Total number of blocks on the disk. */
+	uint32_t block_size;		/** Block size of the disk, in bytes per block.  */
+	uint32_t free_block_list;	/** Location of the free block list data structure on disk. */
+	uint32_t root_dir;			/** Location of the root directory's inode on disk. */
+	uint32_t device_id;			/** @deprecated Device identifier for the disk. No longer required since UUID was implemented. */
+	uuid_t uuid;				/** Universal unique identifier for the disk. */
 } superblock;
 
 /**
- * Get the super block
+ * Get a handle to the super block.
  *
- * @return a pointer to the superblock
+ * @return Returns a pointer to the super block data.
  */
 extern superblock* get_super_block(void);
 
 /**
- * Get the location of the root directory
+ * Get the location of the root directory.
  *
- * @return the location of root directory
- * 0 if failure
+ * @return Returns the location of root directory on disk. If a failure occurs, return 0.
  */
 extern uint32_t get_root(void);
 
 /**
- * Get the location of the free block list's index block
+ * Get the location of the free block list's first index block.
  *
- * @return the location of the free block list's index block
+ * @return The location of the free block list's index block.
  */
 extern uint32_t get_free_block_index(void);
 
 /**
- * Calculate the uuid for the super block
+ * Calculate the uuid for the super block.
  *
  * @return if the uuid was successfully calculated:
  * if return 1 for successful

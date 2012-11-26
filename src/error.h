@@ -9,37 +9,45 @@
 #define ERROR_H_
 
 /**
- * \enum Error_code enumeration
- * Provides a list of constant integers used as error codes
- * with a human-readable name definition.
+ * @enum error_code enumeration
+ *
+ * Contains a list of constant integers used as error codes
+ * with a human-readable name definitions.
  */
-typedef enum {
-	SUCCESS,
-	UNKNOWN,
-	INVALID_PARAMETER,
-	DISK_READ_ERROR,
-	DISK_WRITE_ERROR,
-	FILE_NOT_FOUND,
-	INVALID_FILE_TYPE,
-	INVALID_FILE_NAME,
-	INVALID_FILE_DESCRIPTOR,
-	INVALID_PATH,
-	INVALID_PATH_LENGTH,
-	INSUFFICIENT_DISK_SPACE,
-	ERROR_UPDATING_SB, 			///FATAL ERROR
-	ERROR_UPDATING_FBL, 		///FATAL ERROR
-	ERROR_UPDATING_SWOFT,
-	INDEX_ALLOCATION_ERROR,
-	ERROR_BLOCK_LINKAGE,
-	ERROR_BUFFER_SEGMENTATION,
-	PARENT_NOT_FOUND,
-	DIRECTORY_HAS_CHILDREN,
-	DIRECTORY_TRAVERSED,
-	DIRECTORY_EMPTY,
-	FILE_EMPTY,
-	FILE_PAST_EOF
+typedef enum
+{
+	SUCCESS, 					/** No error occurred, execution was successful. */
+	INVALID_PARAMETER, 			/** An invalid parameter was given to the function. */
+	DISK_READ_ERROR,			/** A block of data could not be read from disk. */
+	DISK_WRITE_ERROR, 			/** A block of data could not be written to disk. */
+	FILE_NOT_FOUND,				/** The specified file could not be found on disk. */
+	INVALID_FILE_TYPE,			/** The file type specified is invalid. */
+	INVALID_FILE_NAME,			/** The file name specified is invalid. */
+	INVALID_FILE_DESCRIPTOR,	/** The file descriptor specified is invalid or does not exist. */
+	INVALID_PATH,				/** The path specified is invalid. */
+	INVALID_PATH_LENGTH,		/** The path length given is too long, path tokens cannot be longer than 6 characters. */
+	INSUFFICIENT_DISK_SPACE,	/** The requested operation does not have sufficient blocks available on disk to complete execution. */
+	ERROR_UPDATING_SB, 			/** Fatal error: The super block could not be updated. The file system or disk are corrupted. */
+	ERROR_UPDATING_FBL, 		/** Fatal error: The free block list could not be updated. The file system or disk may be corrupted. */
+	ERROR_UPDATING_SWOFT,		/** The system-wide open file table cannot be updated. This may be indicative of memory corruption. */
+	INDEX_ALLOCATION_ERROR,		/** The given index block data structure is corrupted, invalid, or empty. */
+	ERROR_BLOCK_LINKAGE,		/** An error occurred concerning the linkage of an inode to an index block structure. */
+	ERROR_BUFFER_SEGMENTATION,	/** An error occurred segmenting a buffer into block-sized chunks. */
+	PARENT_NOT_FOUND,			/** An inode has become loose, and its parent cannot be found. */
+	DIRECTORY_HAS_CHILDREN,		/** An attempt was made to delete a directory which has children. Directories must be empty to be deleted. */
+	DIRECTORY_TRAVERSED,		/** A directory was fully traversed. Further attempts to read the contents of the directory will begin from the top of the structure. */
+	DIRECTORY_EMPTY,			/** An attempt was made to read the contents of an empty directory. */
+	FILE_EMPTY,					/** An attempt was made to perform operations on a file which contains no data. */
+	FILE_PAST_EOF,				/** An attempt was made to write to a file past the current length of the file, without appending. Appending is the only allowed way to increase the length of a file.*/
+	UNKNOWN 					/** An unknown error occurred. */
 } error_code;
 
+/**
+ * Outputs the specified error code to the console. Fatal errors will cause the application
+ * to terminate immediately to prevent file system or disk corruption.
+ *
+ * @param The specified error to output.
+ */
 extern void print_error(error_code errorno);
 
 #endif /* ERROR_H_ */
