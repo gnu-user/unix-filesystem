@@ -175,7 +175,7 @@ int free_block_init(void)
 	uint32_t i = 0;
 
 	/* Initialize the new FBL in memory, mark the superblock as used */
-	fbl = update_fbl(NULL, NULL );
+	fbl = update_fbl(NULL, NULL);
 	if (fbl == NULL )
 	{
 		/**

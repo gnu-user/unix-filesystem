@@ -255,7 +255,7 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 	 */
 	inode* parent_inode = get_inode(parent_location);
 	inode* child_inode = get_inode(inode_location);
-	locations index_block = interate_index(parent_inode->location);
+	locations index_block = iterate_index(parent_inode->location, NULL);
 	locations new_index_block = NULL;
 	uint32_t new_index_loc = NULL;
 	locations free_blocks = NULL;
