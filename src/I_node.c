@@ -262,6 +262,7 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 	locations free_blocks = NULL;
 	byte* buf = NULL;
 	uint32_t i = 0;
+	uint32_t j = 0;
 
 	if(index_block == NULL || index_block[0] == NULL)
 	{
@@ -281,19 +282,22 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 	}
 
 	new_index_block = (locations) calloc(calc_num_blocks(index_block), sizeof(uint32_t));
+
 	while(index_block[i] != NULL)
 	{
-		if(strcmp(get_name(index_block[i]),child_inode->name) !=0)
+		//if(strcmp(get_name(index_block[i]),child_inode->name) !=0)
+		if(index_block[i] != inode_location)
 		{
 			/**
 			 * Child not found
 			 */
-			memcpy(&new_index_block[i], &index_block[i], 1);
+			memcpy(&new_index_block[j], &index_block[i], 1);
+			j++;
 		}
 		i++;
 	}
 
-	if(new_index_block[i] == NULL)
+	if(new_index_block[0] == NULL)
 	{
 		new_index_loc = get_free_block();
 	}

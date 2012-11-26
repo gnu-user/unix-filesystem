@@ -44,6 +44,7 @@ PASS
 
 15. Invalid command (anything that doesnt start with the given magical letters)
 PASS
+AGEMENT SYSTEMS, 18 Dec 7:00 - 10:00pm
 
 16. Read Dir on root (with content) -- Read dir when dir has contents
 PASS
@@ -54,5 +55,25 @@ PASS
 18. Read Dir on root (with content) -- Repeat once more to ensure the next output will be the first directory again (aka it repeats)
 PASS
 
-19. Read Dir \bar (empty) -- Read \bar which is empty
+19. Read Dir /bar (empty) -- Read /bar which is empty
 PASS
+
+20. Make file /bar/sfs (file) -- create a file at /bar/sfs
+PASS
+
+21. Open /bar/sfs -- Open /bar/sfs
+PASS
+
+22. Create dir /sneak
+PASS
+
+23. Create file /sneaky 
+PASS
+
+24. Create file /superawesome -- file name to big
+PASS
+
+25. Delete /sneaky -- delete the empty directory
+PASS
+
+26. 

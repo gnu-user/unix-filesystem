@@ -123,6 +123,27 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
+	/*
+	 * Delete all swoft entries for the given file
+	 *
+	 * TODO debug this to make sure that it works
+	 */
+	printf("Number swoft entries remove: %d\n",find_and_remove(inode_loc[0]));
+
+	if(unlink_inode_from_parent(parent_location[0], inode_loc[0]) < 0)
+	{
+		if(reset_fbl() == NULL)
+		{
+			//TODO validate this error code
+			print_error(ERROR_UPDATING_FBL);
+			return -2;
+		}
+
+		//TODO validate this error code
+		print_error(ERROR_BLOCK_LINKAGE);
+		return -1;
+	}
+
 	if (type == 1)
 	{
 		if(index_block[0] != NULL)
@@ -165,27 +186,6 @@ int sfs_delete(char *pathname)
 	{
 		//TODO validate this error code
 		print_error(ERROR_UPDATING_FBL);
-		return -1;
-	}
-
-	/*
-	 * Delete all swoft entries for the given file
-	 *
-	 * TODO debug this to make sure that it works
-	 */
-	printf("Number swoft entries remove: %d\n",find_and_remove(inode_loc[0]));
-
-	if(unlink_inode_from_parent(parent_location[0], inode_loc[0]) < 0)
-	{
-		if(reset_fbl() == NULL)
-		{
-			//TODO validate this error code
-			print_error(ERROR_UPDATING_FBL);
-			return -2;
-		}
-
-		//TODO validate this error code
-		print_error(ERROR_BLOCK_LINKAGE);
 		return -1;
 	}
 
