@@ -81,6 +81,11 @@ inode get_swoft_inode(int fd)
 	return (inode) *get_inode(system_open_tb.fd[fd]);
 }
 
+uint32_t get_inode_loc(int fd)
+{
+	return system_open_tb.fd[fd];
+}
+
 void remove_fd(int fd)
 {
 	system_open_tb.taken[fd] = false;

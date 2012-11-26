@@ -53,6 +53,15 @@ extern int validate_fd(int fd);
 extern inode get_swoft_inode(int fd);
 
 /**
+ * Get the location of the inode on disk
+ *
+ * @parem the file descriptor
+ *
+ * @return the location of the inode on disk
+ */
+extern uint32_t get_inode_loc(int fd);
+
+/**
  * remove the fd from the swoft
  *
  * @param the file descriptor to remove

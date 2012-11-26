@@ -171,6 +171,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	byte* temp = NULL;
 	byte* data_buf = NULL;
 	locations data_location = NULL;
+	uint32_t inode_loc = NULL;
 	uint32_t first_index = NULL;
 	block* data_block = NULL;
 	int retval = 0;
@@ -220,6 +221,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 */
 		blocks_needed++; //Inode block space
 		inode_write = get_swoft_inode(fd);
+		inode_loc = get_inode_loc(fd);
 		data_block_locations = iterate_index(inode_write.location, NULL);
 
 		if(data_block_locations == NULL)
@@ -239,7 +241,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		if(start >= 0)
 		{
-			if((start + length) >= i)
+			if((start + length) >= calc_num_bytes(data_buf))
 			{
 				/**
 				 * Invalid override
@@ -299,7 +301,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		i = 0;
 
-		data_location = (uint32_t*) calloc(blocks_needed-1, sizeof(uint32_t))
+		data_location = (uint32_t*) calloc(blocks_needed-1, sizeof(uint32_t));
 		/**
 		 * Write the data
 		 * Check if the file needs to be encrypted
@@ -356,7 +358,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		buf = allocate_buf(buf, BLKSIZE);
 
 		buf = (byte *) copy_to_buf((byte *) &inode_write, (byte *)buf, sizeof(inode_write), BLKSIZE);
-		retval = write_block(inode_write.location, buf);
+		retval = write_block(inode_loc, buf);
 
 		if(retval != 0)
 		{
