@@ -25,6 +25,14 @@
  * @exception FILE_NOT_FOUND If the file at the specified path does not exist.
  *
  * @exception INVALID_PATH If the specified path is invalid.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int sfs_gettype(char *pathname);
 
