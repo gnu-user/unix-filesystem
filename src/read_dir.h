@@ -35,6 +35,14 @@
  *
  * @exception INVALID_FILE_DESCRIPTOR If the file descriptor specified does not
  * exist.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int sfs_readdir(int fd, char *mem_pointer);
 
