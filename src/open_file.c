@@ -152,6 +152,7 @@ int show_information(int fd)
 
 		printf("Check sum: %d\n", node.check_sum);
 
+		//TODO properly write out the uuid
 		printf("Uuid: %s\n", node.uuid);
 
 		/**

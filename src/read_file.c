@@ -42,7 +42,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	mem_pointer = NULL;
 
 	//TODO split this into two error codes!!!
-	if(fd >= 0 && fd < NUMOFL && start >= -1 && length > 0)
+	if(fd >= 0 && fd < NUMOFL && start >= 0 && length > 0)
 	{
 		/**
 		 * Validate the file descriptor on the system-wide-open file table
@@ -95,16 +95,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		/**
 		 * Count the number of data blocks
 		 */
-		int count = 0;
-		while(data_blocks[count] != NULL)
-		{
-			/**
-			 * Calculate the size of the data blocks in bytes
-			 */
-			count++;
-		}
-
-		if(start+length > count*BLKSIZE)
+		if(start+length > calc_num_bytes(data_buf))
 		{
 			/**
 			 * Read past end of file
@@ -118,7 +109,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 * copy the data block at start into memory
 		 * TODO figure out how to fix missing reference for ceil
 		 */
-		start_block = (uint32_t)(ceil((double)(start)/BLKSIZE));
+		//start_block = (uint32_t)(ceil((double)(start)/BLKSIZE));
 
 		/**
 		 * data_buf = data_blocks parsed
@@ -128,19 +119,19 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 * mem_pointer = copy data_buf from start to index = start + length
 		 */
 		i = 0;
-		while(data_blocks[i+start] != NULL && i < length)
+		while(data_buf[i+start] != NULL && i < length)
 		{
 			/**
 			 * concat the mem_pointer
 			 */
-			temp = (byte*) concat_len(mem_pointer, data_blocks[start_block+i], sizeof(byte), BLKSIZE);
+			temp = (byte*) concat_len(mem_pointer, data_buf[start+i], sizeof(byte), 1);
 			free(mem_pointer);
 			mem_pointer = temp;
 			i++;
 		}
 
 		/**
-		 * Update last_accessed
+		 * TODO Update last_accessed
 		 */
 
 		/**
