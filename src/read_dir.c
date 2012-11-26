@@ -119,6 +119,17 @@ int sfs_readdir(int fd, char *mem_pointer)
 			print_error(INDEX_ALLOCATION_ERROR);
 			return -1;
 		}
+
+		if(num_locations == 0)
+		{
+			/**
+			 * Empty Directory Read
+			 * TODO validate this error code
+			 */
+			print_error(DIRECTORY_EMPTY);
+			return 0;
+		}
+
 		int cur_index = get_index_entry(*get_inode(directory.location));
 
 		if(num_locations == cur_index)
@@ -130,7 +141,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 		//mem_pointer = (char *) calloc(MAX_NAME_LEN, sizeof(char));
 
 
-		char* test_name = get_name(index_block[cur_index]);
+		char* name = get_name(index_block[cur_index]);
 
 		// Prob segfaulting because you are trying to copy past the length of test_name
 		/*count = 0;
@@ -138,28 +149,18 @@ int sfs_readdir(int fd, char *mem_pointer)
 		{
 			count++;
 		}*/
-		strcpy(mem_pointer, test_name);
-
-		/**
-		 * return value > 0 for a successful read dir
-		 * return value = 0 if there is no contents in dir
-		 * return value < 0 for a unsuccessful read dir
-		 */
-		if(mem_pointer == NULL)
-		{
-			/**
-			 * Empty Directory Read
-			 * TODO validate this error code
-			 */
-			print_error(DIRECTORY_EMPTY);
-			return 0;
-		}
+		strcpy(mem_pointer, name);
 
 		/**
 		 * TODO update last date accessed
 		 */
 
 
+		/**
+		 * return value > 0 for a successful read dir
+		 * return value = 0 if there is no contents in dir
+		 * return value < 0 for a unsuccessful read dir
+		 */
 		/**
 		 * TODO validate this error code
 		 */

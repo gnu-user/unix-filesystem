@@ -1,0 +1,58 @@
+Tests:
+
+1. Initalize, quit, launch again to check if mount is successful
+PASS
+
+2. Read dir with a invalid file descriptor -- Read a invalid fd
+PASS
+
+3. Open root dir -- Open root
+PASS
+
+4. Read root dir (no contents) -- Read root with no contents within it
+PASS
+
+5. Make a file (/foo) -- make a file at /foo
+PASS
+
+6. Make file (with an invalid FD) -- write to an invalid fd, o
+PASS 
+
+7. Open a file (/foo) -- open /foo
+PASS
+
+8. Open a file (invalid file path) -- open /barman
+PASS
+
+9. Write to a file (/foo, append, 130) -- append 130 bytes to /foo
+PASS
+
+10. Read from a file (/foo, 0, 128) -- read 128 bytes (1 block) from 1 block
+PASS
+
+11. Read from a file (invalid fd, e, ) -- read from fd = 2, start location e
+PASS
+
+12. Read from a file (/foo, 2, 128) -- read 128 bytes (1 block) from 2 blocks
+PASS
+
+13. Read from a file (/foo, 0, 130) -- read more than 1 block
+PASS
+
+14. Read from a file (/foo, 1, 130) -- read past EOF
+PASS
+
+15. Invalid command (anything that doesnt start with the given magical letters)
+PASS
+
+16. Read Dir on root (with content) -- Read dir when dir has contents
+PASS
+
+17. Read Dir on root (with content) -- Repeat until 'no more entries' and ensure that each direcotry is found in the Read dir cycle 
+PASS
+
+18. Read Dir on root (with content) -- Repeat once more to ensure the next output will be the first directory again (aka it repeats)
+PASS
+
+19. Read Dir \bar (empty) -- Read \bar which is empty
+PASS
