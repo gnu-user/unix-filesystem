@@ -46,7 +46,6 @@ block* modify_data(int32_t start, uint32_t length, byte* data_buf, byte* actual_
 	return data_blocks;
 }
 
-
 block* segment_data(byte* data_buf)
 {
 	uint32_t i = 0;
@@ -166,14 +165,15 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	uint32_t blocks_needed = 0;
 	byte* buf = NULL;
 	inode inode_write = get_null_inode();
-	uint32_t* new_inode_loc = NULL;
-	uint32_t* data_block_locations = NULL;
+	locations new_inode_loc = NULL;
+	locations data_block_locations = NULL;
 	byte* temp = NULL;
 	byte* data_buf = NULL;
 	locations data_location = NULL;
 	uint32_t inode_loc = NULL;
 	uint32_t first_index = NULL;
 	block* data_block = NULL;
+	locations old_index_block = NULL;
 	int retval = 0;
 	int i = 0;
 
@@ -289,6 +289,31 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 * TODO Ensure that the FBL is being updated with the locations of the
 		 * previous index and data blocks
 		 */
+		if(update_fbl(NULL, data_block_locations) == NULL)
+		{
+			/**
+			 * TODO validate this error code
+			 */
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
+		old_index_block = index_block_locations(inode_write.location, NULL);
+		if(old_index_block == NULL)
+		{
+			/**
+			 * TODO get error code
+			 * Error old index blocks not found
+			 */
+			return -1;
+		}
+		if(update_fbl(NULL, old_index_block) == NULL)
+		{
+			/**
+			 * TODO validate this error code
+			 */
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
 
 		/**
 		 * Add the data to the data_buf
@@ -310,17 +335,15 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		}
 
 		/**
-		 * TODO Update file size
+		 * TODO test the update file size
+		 *
 		 */
-
-		/**
-		 * Generate the new list of indexes
-		 */
-		//data_location = generate_index(blocks_needed-1);
+		inode_write.file_size = blocks_needed-1;
 
 		i = 0;
 
 		data_location = (uint32_t*) calloc(blocks_needed-1, sizeof(uint32_t));
+
 		/**
 		 * Write the data
 		 * Check if the file needs to be encrypted
@@ -338,16 +361,21 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			if(retval != 0)
 			{
 				/**
-				 * De-allocate the blocks written
-				 */
-				/**
 				 * Copy the FBL disk from disk to memory
 				 */
-				//if(reset_fbl())
+				if(reset_fbl() == NULL)
 				{
-					//Blow up
-					return -2;
+					/**
+					 * TODO validate this error code
+					 */
+					print_error(ERROR_UPDATING_FBL);
+					return -1;
 				}
+
+				/**
+				 * TODO validate this error code
+				 */
+				print_error(DISK_WRITE_ERROR);
 				return -1;
 			}
 			i++;
@@ -361,12 +389,16 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		if(first_index == NULL)
 		{
 			/**
-			 * rebuild index failed
+			 * Copy the FBL disk from disk to memory
 			 */
-			/**
-			 * reset_fbl()
-			 */
-			return -1;
+			if(reset_fbl() == NULL)
+			{
+				/**
+				 * TODO validate this error code
+				 */
+				print_error(ERROR_UPDATING_FBL);
+				return -1;
+			}
 		}
 
 		/**
@@ -382,13 +414,16 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		if(retval != 0)
 		{
 			/**
-			 * De-allocate the blocks written
-			 */
-			/**
 			 * Copy the FBL disk from disk to memory
 			 */
-			//reset_fbl();
-			return -1;
+			if(reset_fbl() == NULL)
+			{
+				/**
+				 * TODO validate this error code
+				 */
+				print_error(ERROR_UPDATING_FBL);
+				return -1;
+			}
 		}
 
 
