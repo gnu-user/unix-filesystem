@@ -427,7 +427,11 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		}
 
 		/**
-		 * Sync FBL
+		 * TODO update last date accessed, last date modified, last user to modify
+		 */
+
+		/**
+		 * TODO Sync FBL
 		 */
 
 		/**
