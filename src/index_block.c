@@ -100,8 +100,15 @@ uint32_t rebuild_index(locations data_locations)
 	/* Set the location of the first index block */
 	first_index_location = index_location;
 
+	/* If there are no more free blocks available (location = 0) return error */
+	if (first_index_location == 0)
+	{
+		return 0;
+	}
+
 	/* If data locations is NULL or the number of data locations is 0,
 	 * write an empty index and return
+	 * TODO add error handling for write_block/etc.. functions
 	 */
 	if (data_locations == NULL || data_locations[0] == NULL)
 	{
@@ -275,6 +282,8 @@ int count_files_in_dir(uint32_t location)
 }
 
 /**
+ * TODO REMOVE THIS
+ *
  * Need to be able to add a location onto the end of this list.
  */
 int add_location (uint32_t index_block, uint32_t location)
