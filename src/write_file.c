@@ -181,7 +181,6 @@ block* segment_data_len(byte* data_buf, uint32_t length)
  */
 int sfs_write(int fd, int start, int length, byte *mem_pointer)
 {
-	//TODO test write
 	//TODO create encryption
 	//TODO create decryption
 	uint32_t blocks_needed = 0;
@@ -202,13 +201,13 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	//TODO split this into two different error codes/returns
 	if(fd >= 0 && fd < NUMOFL && length > 0 && start >= -1)
 	{
-		/**
+		/*
 		 * Validate the file descriptor on the system-wide-open file table
 		 *  - If the file descriptor is not found return error
 		 */
 		if (validate_fd(fd) < 0)
 		{
-			/**
+			/*
 			 * Invalid file descriptor.
 			 * TODO validate this error code
 			 */
@@ -216,7 +215,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			return 0;
 		}
 
-		/** Based off a night of sleep and ze cudes
+		/* Based off a night of sleep and ze cudes
 		 *
 		 * blocks_needed = 1 //FOR INODE
 		 * data_blocks = iterate_index(inode.location)
@@ -252,16 +251,16 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		old_index_block = index_block_locations(inode_write.location, NULL);
 
 		if(old_index_block == NULL)
-				{
-					/**
-					 * TODO get error code
-					 * Error old index blocks not found
-					 */
-					return -1;
-				}
+		{
+			/*
+			 * TODO get error code
+			 * Error old index blocks not found
+			 */
+			return -1;
+		}
 		if(data_block_locations == NULL)
 		{
-			/**
+			/*
 			 * Invalid Index Block
 			 * TODO validate this error code
 			 */
@@ -279,7 +278,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		{
 			if(data_block_locations[0] == NULL)
 			{
-				/**
+				/*
 				 * Invalid override
 				 * TODO REPLACE THIS ERROR VALUE WITH A GENERIC ERROR ENUM
 				 */
@@ -287,26 +286,26 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			}
 			if((start + length) > calc_num_bytes(data_buf))
 			{
-				/**
+				/*
 				 * Write past EOF
 				 * TODO validate this error code
 				 */
 				print_error(FILE_PAST_EOF);
 				return -1;
 			}
-			/**
+			/*
 			 * No new data blocks will be needed
 			 */
 		}
 		else if(start == -1)
 		{
-			/**
+			/*
 			 * Need to figure out how many more blocks are needed to given the
 			 * size of the data_buf + length
 			 */
 			if(data_block_locations[0] != NULL)
 			{
-				/**
+				/*
 				 * Add # of new blocks to blocks_needed
 				 */
 				blocks_needed = (int)ceil((double)(calc_num_bytes(data_buf)+length)/BLKSIZE) + 1;
@@ -317,18 +316,18 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			}
 		}
 
-		/**
+		/*
 		 * Add the data to the data_buf
 		 * Break it back into blocks
 		 */
 		data_block = modify_data(start, length, data_buf, mem_pointer);
 
-		/**
+		/*
 		 * Check if the new write will fit onto the hard disk
 		 */
 		if((calc_num_free_blocks(blocks_needed + calc_index_blocks(blocks_needed-1))) == NULL)
 		{
-			/**
+			/*
 			 * Insufficient space
 			 * TODO validate this error code
 			 */
@@ -336,9 +335,8 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			return 0;
 		}
 
-		/**
-		 * TODO test the update file size
-		 *
+		/*
+		 * Update the file size
 		 */
 		inode_write.file_size = blocks_needed-1;
 
@@ -346,7 +344,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		data_location = (uint32_t*) calloc(blocks_needed-1, sizeof(uint32_t));
 
-		/**
+		/*
 		 * Write the data
 		 * Check if the file needs to be encrypted
 		 * 	- If it needs to be encrypted, encrypt the file
@@ -354,7 +352,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 */
 		while(i < blocks_needed -1)
 		{
-			/**
+			/*
 			 * Get data_blocks
 			 */
 			data_location[i] = get_free_block();
@@ -365,14 +363,14 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 				/* Error occurred, reset the FBL in memory with FBL from disk */
 				if(reset_fbl() == NULL)
 				{
-					/**
+					/*
 					 * TODO validate this error code
 					 */
 					print_error(ERROR_UPDATING_FBL);
 					return -1;
 				}
 
-				/**
+				/*
 				 * TODO validate this error code
 				 */
 				print_error(DISK_WRITE_ERROR);
@@ -381,7 +379,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			i++;
 		}
 
-		/**
+		/*
 		 * Rebuild the Index block
 		 */
 		first_index = rebuild_index(data_location);
@@ -391,7 +389,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			/* Error occurred, reset the FBL in memory with FBL from disk */
 			if(reset_fbl() == NULL)
 			{
-				/**
+				/*
 				 * TODO validate this error code
 				 */
 				print_error(ERROR_UPDATING_FBL);
@@ -412,7 +410,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			/* Error occurred, reset the FBL in memory with FBL from disk */
 			if(reset_fbl() == NULL)
 			{
-				/**
+				/*
 				 * TODO validate this error code
 				 */
 				print_error(ERROR_UPDATING_FBL);
@@ -420,13 +418,9 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			}
 		}
 
-		/**
-		 * TODO Ensure that the FBL is being updated with the locations of the
-		 * previous index and data blocks
-		 */
 		if(update_fbl(NULL, data_block_locations) == NULL)
 		{
-			/**
+			/*
 			 * TODO validate this error code
 			 */
 			print_error(ERROR_UPDATING_FBL);
@@ -435,28 +429,28 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		if(update_fbl(NULL, old_index_block) == NULL)
 		{
-			/**
+			/*
 			 * TODO validate this error code
 			 */
 			print_error(ERROR_UPDATING_FBL);
 			return -1;
 		}
 
-		/**
+		/*
 		 * TODO update last date accessed, last date modified, last user to modify
 		 */
 
 		/* Synchronize the FBL, write the FBL in memory to disk */
 		if (sync_fbl() == NULL)
 		{
-			/**
+			/*
 			 * TODO validate this error code
 			 */
 			print_error(ERROR_UPDATING_FBL);
 			return -1;
 		}
 
-		/**
+		/*
 		 * return value > 0 if write was successful
 		 * return value <= 0 then the write was a fail
 		 * TODO validate this error code
@@ -464,7 +458,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		print_error(SUCCESS);
 		return 1;
 	}
-	/**
+	/*
 	 * Invalid file descriptor OR write past EOF
 	 * TODO split this into two different returns/error codes
 	 * TODO validate this error code
