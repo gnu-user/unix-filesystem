@@ -114,9 +114,11 @@ int sfs_open(char *pathname)
 		/*
 		 * TODO validate this error code
 		 */
+		free(buf);
 		print_error(DISK_WRITE_ERROR);
 		return -1;
 	}
+	free(buf);
 
 	/*
 	 * Retrieve the Inode of the desired file.

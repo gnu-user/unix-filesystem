@@ -55,6 +55,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	//TODO create decryption
 	inode file_inode = get_null_inode();
 	uint32_t index_block = 0;
+	uint32_t inode_location = 0;
 	locations data_blocks = NULL;
 	byte* data_buf = NULL;
 	uint32_t start_block = NULL;
@@ -64,31 +65,31 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	//TODO split this into two error codes!!!
 	if(fd >= 0 && fd < NUMOFL && start >= 0 && length > 0)
 	{
-		/**
+		/*
 		 * Validate the file descriptor on the system-wide-open file table
 		 *  - If the file descriptor is not found return error
 		 */
 		if (validate_fd(fd) < 0)
 		{
-			/**
+			/*
 			 * TODO validate this error code
 			 */
 			print_error(INVALID_FILE_DESCRIPTOR);
 			return 0;
 		}
 
-		/**
+		/*
 		 * Use the offset to find the start of where to read in the block
 		 * Read the specified bytes of the given length into the buffer
 		 */
 
-		/**
+		/*
 		 * Get Inode
 		 * 	- check that it is a file
 		 */
 		file_inode = get_swoft_inode(fd);
 
-		/**
+		/*
 		 * Get index block
 		 */
 		index_block = file_inode.location;
@@ -97,7 +98,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 
 		if (data_blocks == NULL || data_blocks[0] == NULL)
 		{
-			/**
+			/*
 			 * File is empty
 			 * TODO validate this error code
 			 */
@@ -107,12 +108,12 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 
 		data_buf = get_data(data_blocks);
 
-		/**
+		/*
 		 * Since start is offset (number of bytes offset)
 		 * ceil(start/BLKSIZE)
 		 */
 
-		/**
+		/*
 		 * Count the number of data blocks
 		 */
 		if(start+length > calc_num_bytes(data_buf))
@@ -125,13 +126,13 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 			return 0;
 		}
 
-		/**
+		/*
 		 * copy the data block at start into memory
 		 * TODO figure out how to fix missing reference for ceil
 		 */
 		//start_block = (uint32_t)(ceil((double)(start)/BLKSIZE));
 
-		/**
+		/*
 		 * data_buf = data_blocks parsed
 		 * Search through data_buf for byte start where start >= 0
 		 * if start+length > length(data_buf)
@@ -141,9 +142,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		i = 0;
 		while(data_buf[start+i] != NULL && i < length)
 		{
-			/**
-			 * concat the mem_pointer
-			 */
+			/* concat the mem_pointer */
 			temp = (byte*) concat_len(mem_pointer, &data_buf[start+i], sizeof(byte), sizeof(byte));
 			memcpy(mem_pointer, temp, (i+1)*sizeof(byte));
 			free(temp);
@@ -151,12 +150,27 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 			i++;
 		}
 
-		/**
-		 * TODO update last date accessed
-		 */
+		/* Update the inode date last accessed and write the inode back to disk */
+		file_inode.date_last_accessed = time(NULL);
 
+		/* Get the inode location */
+		inode_location = get_inode_loc(fd);
 
-		/**
+		temp = allocate_buf(temp, BLKSIZE);
+		temp = (byte *) copy_to_buf((byte *) &file_inode, (byte *) temp, sizeof(inode), BLKSIZE);
+
+		if(write_block(inode_location, temp) < 0)
+		{
+			/*
+			 * TODO validate this error code
+			 */
+			free(temp);
+			print_error(DISK_WRITE_ERROR);
+			return 0;
+		}
+		free(temp);
+
+		/*
 		 * return value > 0 if the file was read successfully
 		 * return value <= 0 if the file was read unsuccessfully
 		 * TODO validate this error code
@@ -165,7 +179,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		return 1;
 	}
 
-	/**
+	/*
 	 * Invalid file descriptor OR file_past_eof
 	 * TODO validate this error code
 	 * TODO split this into a 2 different returns
