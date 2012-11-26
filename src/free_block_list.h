@@ -130,4 +130,14 @@ extern free_block_list* sync_fbl(void);
  */
 extern free_block_list* reset_fbl(void);
 
+
+/**
+ * Wipes the contents of the free block list in memory, which sets all of the locations
+ * in the free block list in memory as free. This function is used to reset the free
+ * block list in memory after initializing a new disk.
+ *
+ * @return A pointer to the free block list, NULL if an error occurred
+ */
+extern free_block_list* wipe_fbl(void);
+
 #endif /* FREE_BLOCK_LIST_H_ */

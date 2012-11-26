@@ -290,3 +290,15 @@ free_block_list* reset_fbl(void)
 
 	return &fbl;
 }
+
+
+free_block_list* wipe_fbl(void)
+{
+	/* Mark each location in the free block list as free */
+	for (uint32_t i = 0; i < sizeof(free_block_list); ++i)
+	{
+		fbl.free_blocks[i] = false;
+	}
+
+	return &fbl;
+}
