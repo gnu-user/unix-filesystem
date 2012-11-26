@@ -121,7 +121,12 @@ int sfs_delete(char *pathname)
 		 */
 		//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
 		//print_error(ERROR_UPDATING_FBL);
-		update_fbl(NULL, index_block);
+		if(update_fbl(NULL, index_block) == NULL)
+		{
+			//TODO validate this error code
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
 	}
 
 	/**
@@ -129,14 +134,24 @@ int sfs_delete(char *pathname)
 	 */
 	//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
 	//print_error(ERROR_UPDATING_FBL);
-	update_fbl(NULL, index_block_locations(get_index_block(inode_loc[0]), NULL));
+	if(update_fbl(NULL, index_block_locations(get_index_block(inode_loc[0]), NULL)) == NULL)
+	{
+		//TODO validate this error code
+		print_error(ERROR_UPDATING_FBL);
+		return -1;
+	}
 
 	/**
 	 * Delete the Inode block (update the free_block list)
 	 */
 	//TODO MODIFY THIS TO USE PROPER ERROR HANDLING
 	//print_error(ERROR_UPDATING_FBL);
-	update_fbl(NULL, inode_loc);
+	if(update_fbl(NULL, inode_loc) == NULL)
+	{
+		//TODO validate this error code
+		print_error(ERROR_UPDATING_FBL);
+		return -1;
+	}
 
 	/**
 	 * Delete all swoft entries for the given file
@@ -156,18 +171,26 @@ int sfs_delete(char *pathname)
 	/**
 	 * TODO REVIEW BELOW:
 	 *
-	 *
 	 * get parents indicies, cause its a directory
 	 * delete index onto it (concat)
 	 * Ensure that the number of indexes in the index block is NOT empty at
 	 * this point or else it is invalid
 	 * rebuild index
 	 */
-	/**
-	 * journal linking the newly updated fbl
-	 * journal removing the index location from parent
-	 * Delete the index location from the index block of the parent directory
-	 */
+
+	if(unlink_inode_from_parent(parent_location[0], inode_loc[0]) < 0)
+	{
+		if(reset_fbl() == NULL)
+		{
+			//TODO validate this error code
+			print_error(ERROR_UPDATING_FBL);
+			return -2;
+		}
+
+		//TODO validate this error code
+		print_error(ERROR_BLOCK_LINKAGE);
+		return -1;
+	}
 	//remove_location(get_index_block(parent_location[0]));
 
 	/**
