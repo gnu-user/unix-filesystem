@@ -9,10 +9,20 @@
 #define ERROR_H_
 
 /**
- * @enum error_code enumeration
+ * @enum error_code
  *
- * Contains a list of constant integers used as error codes
+ * @brief List of error codes with name definitions.
+ *
+ * @details Contains a list of constant integers used as error codes
  * with a human-readable name definitions.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 typedef enum
 {
@@ -43,10 +53,20 @@ typedef enum
 } error_code;
 
 /**
- * Outputs the specified error code to the console. Fatal errors will cause the application
+ * @brief Prints an error code.
+ *
+ * @details Outputs the specified error code to the console. Fatal errors will cause the application
  * to terminate immediately to prevent file system or disk corruption.
  *
  * @param The specified error to output.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern void print_error(error_code errorno);
 
