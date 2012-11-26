@@ -329,11 +329,11 @@ int sfs_create(char *pathname, int type)
 		free(buf);
 
 		/**
-		 * TODO updfree(buf);ate size of parent
+		 * TODO update size of parent
 		 */
 
 		/**
-		 * TODO update fbl as well
+		 * TODO Sync FBL
 		 */
 
 		/**

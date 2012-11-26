@@ -292,15 +292,14 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 		i++;
 	}
 
-	if(index_block[i] == NULL)
+	if(new_index_block[i] == NULL)
 	{
-		/**
-		 * Child not found
-		 */
-		return -1;
+		new_index_loc = get_free_block();
 	}
-
-	new_index_loc = rebuild_index(new_index_block);
+	else
+	{
+		new_index_loc = rebuild_index(new_index_block);
+	}
 
 	if(new_index_loc == NULL)
 	{

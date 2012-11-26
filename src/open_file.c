@@ -68,9 +68,7 @@ int sfs_open(char *pathname)
 	}
 
 	/**
-	 * TODO decide if open constitutes accessing a file
-	 * if successful open
-	 * update last date accessed
+	 * TODO update last date accessed
 	 */
 
 	/**
