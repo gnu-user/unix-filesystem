@@ -20,7 +20,9 @@
 
 
 /**
- * The free_block_list is an array containing the free blocks on disk.
+ * @struct free_block_list
+ *
+ * @brief The free_block_list is an array containing the free blocks on disk.
  * Elements are marked as free (false), or used (true).
  * The superblock always points to the index node of the free_block_list.
  */

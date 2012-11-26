@@ -39,6 +39,14 @@
  *
  * @exception INSUFFICIENT_DISK_SPACE If the length of the blocks to be written
  * is greater than the amount of available blocks on disk.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int sfs_create(char *pathname, int type);
 
