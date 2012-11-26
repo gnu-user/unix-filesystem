@@ -73,6 +73,14 @@ extern int free_block_init(void);
  *
  * @return Returns an integer value. If the wipe fails the value
  * will be -1, otherwise it will be 0.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int wipe_disk(void);
 
