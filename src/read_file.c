@@ -130,8 +130,9 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		}
 
 		/**
-		 * TODO Update last_accessed
+		 * TODO update last date accessed
 		 */
+
 
 		/**
 		 * return value > 0 if the file was read successfully

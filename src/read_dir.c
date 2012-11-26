@@ -132,6 +132,12 @@ int sfs_readdir(int fd, char *mem_pointer)
 			print_error(DIRECTORY_EMPTY);
 			return 0;
 		}
+
+		/**
+		 * TODO update last date accessed
+		 */
+
+
 		/**
 		 * TODO validate this error code
 		 */

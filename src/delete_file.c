@@ -23,7 +23,7 @@ int sfs_delete(char *pathname)
 	char** tokens;
 	uint32_t* parent_location = NULL;
 	locations index_block = {NULL};
-	uint32_t* inode_loc = {NULL, NULL};
+	locations inode_loc = (locations) calloc(2, sizeof(uint32_t));
 	int type = -1;
 
 	/**
@@ -55,7 +55,7 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
-	index_block = iterate_index(parent_location[0], NULL);
+	index_block = iterate_index(get_index_block(parent_location[0]), NULL);
 	if(index_block == NULL){
 		/**
 		 * Empty or no index block
@@ -191,7 +191,10 @@ int sfs_delete(char *pathname)
 		print_error(ERROR_BLOCK_LINKAGE);
 		return -1;
 	}
-	//remove_location(get_index_block(parent_location[0]));
+
+	/**
+	 * TODO Sync FBL
+	 */
 
 	/**
 	 * return value > 0 then the file was deleted successfully.
