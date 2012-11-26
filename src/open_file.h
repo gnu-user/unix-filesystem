@@ -35,6 +35,14 @@
  * does not exist.
  *
  * @exception INVALID_PATH If the specified path is invalid.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int sfs_open(char *pathname);
 
@@ -54,6 +62,14 @@ extern int sfs_open(char *pathname);
  * If the value returned is >= 0 then the function successfully
  * retrieved a file descriptor. If the value < 0 then the
  * function was unsuccessful.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jon Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
  */
 extern int show_information(int fd);
 
