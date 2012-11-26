@@ -332,9 +332,15 @@ int sfs_create(char *pathname, int type)
 		 * TODO update size of parent
 		 */
 
-		/**
-		 * TODO Sync FBL
-		 */
+		/* Synchronize the FBL, write the FBL in memory to disk */
+		if (sync_fbl() == NULL)
+		{
+			/**
+			 * TODO validate this error code
+			 */
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
 
 		/**
 		 * return value > 0 the file create was a success

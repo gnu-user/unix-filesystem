@@ -330,9 +330,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 			if(retval != 0)
 			{
-				/**
-				 * Copy the FBL disk from disk to memory
-				 */
+				/* Error occurred, reset the FBL in memory with FBL from disk */
 				if(reset_fbl() == NULL)
 				{
 					/**
@@ -358,9 +356,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		if(first_index == NULL)
 		{
-			/**
-			 * Copy the FBL disk from disk to memory
-			 */
+			/* Error occurred, reset the FBL in memory with FBL from disk */
 			if(reset_fbl() == NULL)
 			{
 				/**
@@ -371,9 +367,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			}
 		}
 
-		/**
-		 * Override the Inode with the new index location
-		 */
+		/* Override the Inode with the new index location */
 		inode_write.location = first_index;
 
 		buf = allocate_buf(buf, BLKSIZE);
@@ -383,9 +377,7 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 
 		if(retval != 0)
 		{
-			/**
-			 * Copy the FBL disk from disk to memory
-			 */
+			/* Error occurred, reset the FBL in memory with FBL from disk */
 			if(reset_fbl() == NULL)
 			{
 				/**
@@ -430,9 +422,15 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		 * TODO update last date accessed, last date modified, last user to modify
 		 */
 
-		/**
-		 * TODO Sync FBL
-		 */
+		/* Synchronize the FBL, write the FBL in memory to disk */
+		if (sync_fbl() == NULL)
+		{
+			/**
+			 * TODO validate this error code
+			 */
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
 
 		/**
 		 * return value > 0 if write was successful
@@ -451,5 +449,3 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	//print_error(FILE_PAST_EOF);
 	return 0;
 }
-
-
