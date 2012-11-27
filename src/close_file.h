@@ -25,7 +25,6 @@
 #ifndef CLOSE_FILE_H_
 #define CLOSE_FILE_H_
 
-
 /**
  * @brief Closes the file, which indicates that the file is no longer needed.
  *
