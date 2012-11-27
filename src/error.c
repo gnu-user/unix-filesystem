@@ -25,8 +25,7 @@
 void print_error(error_code errorno) {
 	switch (errorno) {
 	case SUCCESS:
-		///No need to print anything if successful.
-		//printf("Success!\n");
+		/* Do not print anything if successful. */
 		break;
 	case INVALID_PARAMETER:
 		printf("Invalid parameter specified.\n");
