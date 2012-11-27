@@ -63,6 +63,13 @@ clean:
 install:
 	@cp $(EXEC_NAME) $(INSTALL_DIR)
 
+# Make the documentation
+doc:
+	@echo 'Building documentation'
+	doxygen Doxyfile
+	cd doc/latex/ & pdflatex refman.tex
+	@echo ' '
+
 .PHONY: all clean dependents
 .SECONDARY:
 
