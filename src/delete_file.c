@@ -27,18 +27,7 @@
 #include "system_open_file_table.h"
 #include "delete_file.h"
 
-/** sfs_delete
- * Delete a file with the pathname specified.
- *
- * @param pathname The pathname of file to create, must be full directory path
- *
- * @return an integer value,
- * If the value > 0 then the file was deleted successfully.
- * If the value <= 0 then the file failed to be delete.
- *
- * @exception FILE_NOT_FOUND If the file at the specified path does
- * not already exist
- */
+
 int sfs_delete(char *pathname)
 {
 	char** tokens;
@@ -77,7 +66,8 @@ int sfs_delete(char *pathname)
 	}
 
 	index_block = iterate_index(get_index_block(parent_location[0]), NULL);
-	if(index_block == NULL){
+	if(index_block == NULL)
+	{
 		/*
 		 * Empty or no index block
 		 *TODO validate this error code
@@ -113,6 +103,7 @@ int sfs_delete(char *pathname)
 
 
 	index_block = iterate_index(get_index_block(inode_loc[0]), NULL);
+
 	if(index_block == NULL)
 	{
 		/*
@@ -190,7 +181,7 @@ int sfs_delete(char *pathname)
 	}
 
 	/*
-	 * Sync FBL
+	 * Sync FBL, write FBL in memory to disk
 	 */
 	if(sync_fbl() == NULL)
 	{
