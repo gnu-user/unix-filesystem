@@ -1,79 +1,154 @@
 Tests:
 
 1. Initalize, quit, launch again to check if mount is successful
+Key strokes: i, 1
+Simple
 PASS
 
 2. Read dir with a invalid file descriptor -- Read a invalid fd
+Key strokes: R, 0
+Simple
 PASS
 
 3. Open root dir -- Open root
+Key strokes: o, /
+Simple
 PASS
 
 4. Read root dir (no contents) -- Read root with no contents within it
+Key strokes: R, 0
+Simple
 PASS
 
 5. Make a file (/foo) -- make a file at /foo
+Key strokes: m, /foo, 0
+Simple
 PASS
 
-6. Make file (with an invalid FD) -- write to an invalid fd, o
+6. Write file (with an invalid FD) -- write to an invalid fd, o
+Key strokes: w, o
+Simple
 PASS 
 
 7. Open a file (/foo) -- open /foo
+Key strokes: o, /foo
+Simple
 PASS
 
-8. Open a file (invalid file path) -- open /barman
+8. Open a file (invalid file path) -- /barman does not exist
+Key strokes: o, /barman
+Simple
 PASS
 
 9. Write to a file (/foo, append, 130) -- append 130 bytes to /foo
+Key strokes: w, 1, -1, 130
+Simple
 PASS
 
 10. Read from a file (/foo, 0, 128) -- read 128 bytes (1 block) from 1 block
+Key strokes: r, 1, 0, 128
+Simple
 PASS
 
 11. Read from a file (invalid fd, e, ) -- read from fd = 2, start location e
+Key strokes: r, e
+Simple
 PASS
 
 12. Read from a file (/foo, 2, 128) -- read 128 bytes (1 block) from 2 blocks
+Key strokes: r, 1, 2, 128
+Simple
 PASS
 
 13. Read from a file (/foo, 0, 130) -- read more than 1 block
+Key strokes: r, 1, 0, 130
+Simple
 PASS
 
 14. Read from a file (/foo, 1, 130) -- read past EOF
+Key strokes: r, 1, 1, 130
+Simple
 PASS
 
 15. Invalid command (anything that doesnt start with the given magical letters)
+Key strokes: z
+Simple
 PASS
 AGEMENT SYSTEMS, 18 Dec 7:00 - 10:00pm
 
 16. Read Dir on root (with content) -- Read dir when dir has contents
+Key strokes: R, 0
+Simple
 PASS
 
 17. Read Dir on root (with content) -- Repeat until 'no more entries' and ensure that each direcotry is found in the Read dir cycle 
+Key strokes: R, 0
+Simple
 PASS
 
 18. Read Dir on root (with content) -- Repeat once more to ensure the next output will be the first directory again (aka it repeats)
+Key strokes: R, 0
+Simple
 PASS
 
-19. Read Dir /bar (empty) -- Read /bar which is empty
+19. Make dir /bar -- create dir /bar
+Key strokes: m, /bar, 1
+Simple
+
+20. Open /bar
+Key strokes: o, /bar
+Simple
+
+21. Read Dir /bar (empty) -- Read /bar which is empty
+Key strokes: R, 2
+Simple
 PASS
 
-20. Make file /bar/sfs (file) -- create a file at /bar/sfs
+22. Make file /bar/sfs (file) -- create a file at /bar/sfs
+Key strokes: m, /bar/sfs, 0
+Simple
 PASS
 
-21. Open /bar/sfs -- Open /bar/sfs
+23. Open /bar/sfs -- Open /bar/sfs
+Key strokes: o, /bar/sfs
+Simple
 PASS
 
-22. Create dir /sneak
+24. Create dir /sneak
+Key strokes: m, /sneak, 1
+Simple
 PASS
 
-23. Create file /sneaky 
+25. Create file /sneaky 
+Key strokes: m, /sneaky, 0
+Simple
 PASS
 
-24. Create file /superawesome -- file name to big
+26. Create file /superawesome -- file name to big
+Key strokes: m, /superawesome, 0
+Simple
 PASS
 
-25. Delete /sneaky -- delete the empty directory
+27. Delete /sneaky -- delete the empty directory
+Key strokes: d, /sneaky
+Simple
 PASS
 
-26. 
+28. Get size of root -- get the number of files/directories in root
+Key strokes: s, /d
+Simple
+PASS
+
+29 Get type of root -- get the root's type
+Key strokes: t, /
+Simple
+PASS
+
+30. Close /foo -- close foo
+Key strokes: c, 1
+Simple
+PASS
+
+Sequence of test:
+ A. 1 - 14 Complex read and write
+ B. 1, 5, 7, 19 - 30
