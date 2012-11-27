@@ -63,6 +63,6 @@ int sfs_gettype(char *pathname)
 	 * TODO validate this error code
 	 * TODO make this use proper error handling
 	 */
-	print_error(UNKNOWN);
+	print_error(SUCCESS);
 	return get_type(inode_location[0]);
 }
