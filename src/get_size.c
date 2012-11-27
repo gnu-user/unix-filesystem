@@ -25,22 +25,9 @@
 #include "traverse_tree.h"
 #include "get_size.h"
 
-/* sfs_getsize
- * Get the size (in blocks) of the file with the pathname specified.
- *
- * @param pathname The pathname of the file or directory, must be full directory
- * path
- * If it is a file then the size of the file will be returned
- * If it is a directory the number of entries will be returned
- *
- * @return the size of the given file
- * If the value < 0 then an error has occurred.
- *
- * @exception FILE_NOT_FOUND If the pathname does not already exist
- */
+
 int sfs_getsize(char *pathname)
 {
-	//TODO test getsize
 	int type = -1;
 	int i = 1;
 	uint32_t index_block = 0;
@@ -49,37 +36,31 @@ int sfs_getsize(char *pathname)
 	char** tokens = NULL;
 	int size = 0;
 
-	//TODO make large if for type check
-	/**
-	 * Parse the pathname
-	 */
+	/* TODO make large if for type check */
+	/* Parse the pathname */
 	tokens = tokenize_path(pathname);
 	if(tokens == NULL)
 	{
-		/**
-		 * Invalid pathname
+		/* Invalid pathname
 		 * TODO validate this error code
 		 */
 		print_error(INVALID_PATH);
 		return -1;
 	}
 
-	/**
-	 * Traverse the file system to find the desired inode
-	 */
+	/* Traverse the file system to find the desired inode */
 	inode_location = traverse_file_system(tokens, false);
 
 	if(inode_location == NULL)
 	{
-		/**
-		 * Invalid path or file/directory not found
+		/* Invalid path or file/directory not found
 		 * TODO validate this error code
 		 */
 		print_error(FILE_NOT_FOUND);
 		return -1;
 	}
 
-	/**
+	/*
 	 * Check if it is a file or directory
 	 * 	- If directory:
 	 * 		Count entries
@@ -92,7 +73,7 @@ int sfs_getsize(char *pathname)
 
 	if(index_locations == NULL)
 	{
-		/**
+		/*
 		 * Invalid index block
 		 * TODO validate this error code
 		 */
@@ -100,7 +81,7 @@ int sfs_getsize(char *pathname)
 		return -1;
 	}
 
-	/**
+	/*
 	 * Count the number of index blocks
 	 */
 	while(index_locations[i+1] != NULL)
@@ -108,21 +89,16 @@ int sfs_getsize(char *pathname)
 		i++;
 	}
 
-	/**
-	 * Add the inode
-	 */
-	i+=1;
+	/* Add the inode */
+	i++;
 
-	/**
-	 * print out the number of index blocks + the inode block
-	 */
+	/* print out the number of index blocks + the inode block */
 	printf("Overhead Size =  %d\n", i*BLKSIZE);
 
 	if(type == 0)
 	{
-		/**
-		 * Get the size of the file from the Inode
-		 * return the size of the file
+		/* Get the size of the file from the Inode return the
+		 * size of the file
 		 */
 		size =  get_size(inode_location[0]);
 		printf("Data Size = %d\n", size);
@@ -130,21 +106,17 @@ int sfs_getsize(char *pathname)
 	}
 	else if(type == 1)
 	{
-		/**
-		 * Get the index block's location
-		 */
+		/* Get the index block's location */
 		index_block = get_index_block(inode_location[0]);
 
-		/**
-		 * Return the number of locations found in the index block(s)
-		 */
+		/* Return the number of locations found in the index block(s) */
 		size = count_files_in_dir(index_block);
 		printf("Size = %d\n", size);
 
 		print_error(SUCCESS);
 		return size;
 	}
-	/**
+	/*
 	 * TODO validate this error code
 	 */
 	print_error(INVALID_FILE_TYPE);
