@@ -44,7 +44,7 @@ int sfs_create(char *pathname, int type)
 	int parent_offset = 0;
 	int retval = 0;
 	time_t cur_date;
-	uint32_t i = 0;
+
 	locations fbl = NULL;
 
 	/* Check for valid type = 0 or = 1 */
@@ -311,6 +311,7 @@ int sfs_create(char *pathname, int type)
 			print_error(ERROR_UPDATING_FBL);
 			return -1;
 		}
+		i = 0;
 		while(fbl[i] != NULL)
 		{
 			i++;

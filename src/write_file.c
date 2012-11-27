@@ -35,7 +35,6 @@ block* modify_data(int32_t start, uint32_t length, byte* data_buf, byte* actual_
 	block* data_blocks = NULL;
 	byte* tmp_data_buf = NULL;
 	uint32_t i = 0;
-	locations fbl = NULL;
 
 	/* If the starting point is provided alter the data buffer starting at that point */
 	if (start >= 0)
@@ -207,6 +206,8 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 	time_t cur_date;
 	int retval = 0;
 	int i = 0;
+	locations fbl = NULL;
+	uint32_t k = 0;
 
 	/* TODO split this into two different error codes/returns */
 	if(fd >= 0 && fd < NUMOFL && length > 0 && start >= -1)
@@ -436,14 +437,15 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			print_error(ERROR_UPDATING_FBL);
 			return -1;
 		}
-		while(fbl[i] != NULL)
+		k = 0;
+		while(fbl[k] != NULL)
 		{
-			i++;
+			k++;
 		}
 		/**
 		 * Display the number of free blocks
 		 */
-		printf("Total Free Blocks = %d\n", i);
+		printf("Total Free Blocks = %d\n", k);
 		/*
 		 * return value > 0 if write was successful
 		 * return value <= 0 then the write was a fail
