@@ -30,10 +30,6 @@
 #ifndef GLOB_FUNC_H_
 #define GLOB_FUNC_H_
 
-//TODO Remove if no longer needed.
-//extern byte write_buffer[BLKSIZE];
-//extern byte read_buffer[BLKSIZE];
-
 
 /**
  * @brief Allocate a buffer to write to memory of a given size.
@@ -99,6 +95,7 @@ extern byte* copy_to_buf(byte* buf1, byte* buf2, uint32_t size1, uint32_t size2)
  * @copyright GNU General Public License V3
  */
 extern uint32_t calc_num_bytes(byte* buf);
+
 
 /**
  * @brief Calculates the number of blocks needed to store data.
