@@ -104,6 +104,28 @@ extern int add_to_swoft(uint32_t block_num);
 
 
 /**
+ * @brief Finds an open location in the swoft
+ *
+ * @details This function finds the next open location in the system wide
+ * open file table and returns the first location in the swoft that is
+ * available.
+ *
+ * @return Returns the first location in the swoft that is available, if
+ * the value >= 0 then it is the first available location found. Otherwise
+ * if the value < 0 then the swoft is full.
+ *
+ * @author Daniel Smullen
+ *
+ * @author Jonathan Gillett
+ *
+ * @author Joseph Heron
+ *
+ * @copyright GNU General Public License V3
+ */
+extern int find_opening(void);
+
+
+/**
  * @brief Validate whether the given file descriptor is
  * a valid file descriptor in the system wide open file
  * table.
