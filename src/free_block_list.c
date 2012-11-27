@@ -30,7 +30,6 @@ static free_block_list fbl =
 };
 
 
-// TODO THIS NEEDS TO BE CALLED ON MOUNT
 free_block_list* get_free_block_list(void)
 {
 	/* If the current free block list in memory has not been set (the
@@ -164,10 +163,9 @@ uint32_t get_free_block(void)
 }
 
 
-free_block_list* update_fbl(locations used,
-							locations free)
+free_block_list* update_fbl(locations used, locations free)
 {
-	/* Always ensure that the  first fbl location is marked as used by the superblock */
+	/* Ensure that the first fbl location is marked as used by the superblock */
 	fbl.free_blocks[0] = true;
 	uint32_t i = 0;
 
