@@ -24,6 +24,7 @@
 
 char* INVALID_UUID = "Invalid UUID.\n";
 
+
 int mount(void)
 {
 	int status = 0;
@@ -60,6 +61,7 @@ int mount(void)
 	return 0;
 }
 
+
 int validate_super_block(void)
 {
 	superblock* sb = get_super_block();
@@ -71,6 +73,7 @@ int validate_super_block(void)
 	}
 	return 1;
 }
+
 
 int validate_root_dir(void)
 {

@@ -76,7 +76,6 @@ extern int mount(void);
 extern int validate_super_block(void);
 
 
-/* TODO fix seg fault error if the root directory was not written/was overwritten*/
 /**
  * @brief Validate that there is a root directory on the disk.
  *
