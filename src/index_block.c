@@ -42,7 +42,6 @@ data_index generate_index(uint32_t num_blocks)
 	/* Index location, and index block */
 	uint32_t index_location = 0;
 	index index_block = NULL;
-	//index index_block = calloc(index_len, sizeof(location));
 
 	/* Get a free block location to write the index */
 	index_location = get_free_block();
@@ -94,8 +93,8 @@ data_index generate_index(uint32_t num_blocks)
 		/* Write the index to the block specified */
 		write_block(index_location, (byte *)index_block);
 
-		/* Update the index location to the next index block location at the end of the current index
-		 * and free the old index_block buffer in memory
+		/* Update the index location to the next index block location at the end
+		 * of the current index and free the old index_block buffer in memory
 		 */
 		index_location = index_block[i];
 		free(index_block);
@@ -189,16 +188,15 @@ uint32_t rebuild_index(locations data_locations)
 
 locations iterate_index(uint32_t location, locations data_blocks)
 {
-	/* Index_block read from disk */
-	//uint32_t index_block[index_len] = { 0 };
-	//index index_block = NULL;
-	//index_block = (index) calloc(ceil(BLKSIZE / sizeof(location)), sizeof(location));
 	/* Index length, which is the number of data locations stored in an index block */
 	uint32_t index_len = floor(BLKSIZE / sizeof(location));
+
+	/* Index_block read from disk */
 	index index_block = calloc(index_len, sizeof(location));
 
 	locations tmp_data_blocks = NULL;
 	uint32_t i = 0;
+
 
 	/* Verify that the the index block location specified is valid */
 	if (location <= 0 || location >= NUMBLKS)
@@ -285,9 +283,7 @@ int count_files_in_dir(uint32_t location)
 		return -1;
 	}
 
-	/*
-	 * iterate through the loc pointer and determine the number of locations
-	 */
+	/* Iterate through the loc pointer and determine the number of locations */
 	while(loc[i] != NULL)
 	{
 		i++;
@@ -301,11 +297,13 @@ locations index_block_locations(uint32_t location, locations index_blocks)
 {
 	/* Index length, which is the number of data locations stored in an index block */
 	uint32_t index_len = floor(BLKSIZE / sizeof(location));
+
 	/* Index_block read from disk */
 	index index_block = calloc(index_len, sizeof(location));
 
 	locations tmp_index_blocks = NULL;
 	uint32_t i = 0;
+
 
 	/* Verify that the the index block location specified is valid */
 	if (location <= 0 || location >= NUMBLKS)
@@ -323,7 +321,8 @@ locations index_block_locations(uint32_t location, locations index_blocks)
 	}
 
 	/* Read the index block successfully, concatenate the index block location
-	 * to the array of index block locations */
+	 * to the array of index block locations
+	 */
 	tmp_index_blocks = (locations) concat_len(index_blocks, &location,
 											sizeof(location), sizeof(location));
 
@@ -339,9 +338,7 @@ locations index_block_locations(uint32_t location, locations index_blocks)
 	free(index_blocks);
 	index_blocks = tmp_index_blocks;
 
-	/*
-	 * Iterate through the index until we reach a NULL location
-	 */
+	/* Iterate through the index until we reach a NULL location */
 	for (i = 0; i < (index_len - 1); ++i)
 	{
 		/* No more locations stored in the index block, return the index block locations */
