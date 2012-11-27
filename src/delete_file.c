@@ -114,6 +114,19 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
+	if (type == 1)
+	{
+		if(index_block[0] != NULL)
+		{
+			/*
+			 * Directory has children
+			 * TODO validate this error code
+			 */
+			print_error(DIRECTORY_HAS_CHILDREN);
+			return 0;
+		}
+	}
+
 	/*
 	 * Delete all swoft entries for the given file
 	 *
@@ -135,18 +148,6 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
-	if (type == 1)
-	{
-		if(index_block[0] != NULL)
-		{
-			/*
-			 * Directory has children
-			 * TODO validate this error code
-			 */
-			print_error(DIRECTORY_HAS_CHILDREN);
-			return 0;
-		}
-	}
 	else if(type == 0)
 	{
 		/*
