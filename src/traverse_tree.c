@@ -24,6 +24,7 @@
 #include "traverse_tree.h"
 #include "super_block.h"
 
+
 uint32_t* traverse_file_system(char** tokens, bool create)
 {
 	int root_dir;
@@ -33,18 +34,16 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	int second_last = 0;
 	int i = 1;
 
-	/**
+	/*
 	 * Retrieve the Superblock.
 	 * 	- Retrieve the root's Inode location
 	 */
 	root_dir = get_root();
 
-	/**
-	 * Get the root's index block location
-	 */
+	/* Get the root's index block location */
 	index = get_index_block(root_dir);
 
-	/**
+	/*
 	 * Retrieve list of contents in the root directory
 	 * Iterate through the contents of the root directory and locate the
 	 * directory or file that is found at the first index of the path parsed.
@@ -52,7 +51,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	index_block = iterate_index(index, NULL);
 	if(index_block == NULL)
 	{
-		/**
+		/*
 		 * Failed to iterate root directory
 		 * TODO validate this error code
 		 */
@@ -60,17 +59,14 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		return NULL;
 	}
 
-	/*
-	 * IF index_block[0] == NULL, aka no children yet
-	 *
-	 */
+	/* IF index_block[0] == NULL, there are no children yet */
 	if(index_block[0] == NULL || tokens[0] == NULL)
 	{
 		if(tokens[0] != NULL)
 		{
 			if(create == false)
 			{
-				/**
+				/*
 				 * Invalid directory
 				 * TODO validate this error code
 				 */
@@ -86,13 +82,15 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		}
 	}
 
-	/**
+	/*
 	 * Create a function that will go through the locations from the index block
-	 * and check if a given file/directory is contained
+	 * and check if a given file/directory is contained.
 	 */
 
-	//tokens[0] cannot be null unless something messed up, since you cannot open
-	//up a file with a path that only contains '/'
+	/*
+	 * tokens[0] cannot be null unless something messed up, since you cannot open
+	 * up a file with a path that only contains '/'
+	 */
 	inode_location[0] = find_inode(index_block, tokens[0]);
 
 	if(inode_location[0] == 0 && create == true || tokens[1] == NULL && create == true)
@@ -100,7 +98,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		inode_location[1] = 0;
 		inode_location[0] = root_dir;
 
-		/**
+		/*
 		 * Inode is root
 		 * TODO validate this error code
 		 */
@@ -111,7 +109,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	/* Invalid file/directory name given, file/directory does not exist */
 	if (inode_location[0] == 0 && create == false)
 	{
-		/**
+		/*
 		 * Invalid directory
 		 * TODO validate this error code
 		 */
@@ -124,7 +122,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		inode parent = *get_inode(inode_location[0]);
 		if(parent.type == 0)
 		{
-			/**
+			/*
 			 * Invalid Path, cannot use file as a directory
 			 * TODO validate this error code
 			 */
@@ -134,7 +132,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		second_last = 1;
 	}
 
-	/**
+	/*
 	 * General structure of the traversal:
 	 * 	- From Inode get index block location
 	 * 	- From index block get locations
@@ -148,20 +146,15 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	{
 		index_block = 0;
 
-		/**
-		 * get the list of locations from the index block
-		 */
-
+		/* get the list of locations from the index block */
 		index = get_index_block(inode_location[0]);
 
-		/**
-		 * index block is empty
-		 */
+		/* index block is empty */
 		index_block = iterate_index(index, NULL);
 
 		if(index_block == NULL)
 		{
-			/**
+			/*
 			 * No Children found
 			 * TODO validate this error code
 			 */
@@ -169,17 +162,13 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 			return NULL;
 		}
 
-		/**
-		 * Find the inode with the given name, the current token
-		 */
+		/* Find the inode with the given name, the current token */
 		inode_location[0] = find_inode(index_block, tokens[i]);
 
-		/**
-		 * Inode not found, aka file/directory not found
-		 */
+		/* Inode not found, aka file/directory not found */
 		if (inode_location[0] == NULL)
 		{
-			/**
+			/*
 			 * Child not found
 			 * TODO validate this error code
 			 */
@@ -190,7 +179,7 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	}
 	inode_location[1] = i;
 
-	/**
+	/*
 	 * Success
 	 * TODO validate this error code
 	 */
