@@ -19,9 +19,9 @@ lib/uuid \
 LIBS := -lm
 
 # All of the sources involved in the build are defined here
--include src.mk
--include tests.mk
--include uuid.mk
+-include src/src.mk
+-include tests/tests.mk
+-include lib/uuid/uuid.mk
 
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(strip $(C_DEPS)),)
