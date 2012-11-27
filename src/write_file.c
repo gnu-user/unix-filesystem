@@ -34,6 +34,8 @@ block* modify_data(int32_t start, uint32_t length, byte* data_buf, byte* actual_
 	uint32_t j = 0;
 	block* data_blocks = NULL;
 	byte* tmp_data_buf = NULL;
+	uint32_t i = 0;
+	locations fbl = NULL;
 
 	/* If the starting point is provided alter the data buffer starting at that point */
 	if (start >= 0)
@@ -425,6 +427,23 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			return -1;
 		}
 
+		/**
+		 * Calculate the number of free blocks
+		 */
+		fbl =  calc_total_free_blocks();
+		if(fbl == NULL)
+		{
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
+		while(fbl[i] != NULL)
+		{
+			i++;
+		}
+		/**
+		 * Display the number of free blocks
+		 */
+		printf("Total Free Blocks = %d\n", i);
 		/*
 		 * return value > 0 if write was successful
 		 * return value <= 0 then the write was a fail

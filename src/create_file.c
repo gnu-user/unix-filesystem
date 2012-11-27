@@ -44,6 +44,8 @@ int sfs_create(char *pathname, int type)
 	int parent_offset = 0;
 	int retval = 0;
 	time_t cur_date;
+	uint32_t i = 0;
+	locations fbl = NULL;
 
 	/* Check for valid type = 0 or = 1 */
 	if(type == 0 || type == 1)
@@ -303,6 +305,17 @@ int sfs_create(char *pathname, int type)
 			return -1;
 		}
 
+		fbl =  calc_total_free_blocks();
+		if(fbl == NULL)
+		{
+			print_error(ERROR_UPDATING_FBL);
+			return -1;
+		}
+		while(fbl[i] != NULL)
+		{
+			i++;
+		}
+		printf("Total Free Blocks = %d\n", i);
 		/*
 		 * return value > 0 the file create was a success
 		 * return value <= 0 the file create was unsuccessful

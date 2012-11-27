@@ -184,12 +184,12 @@ Key strokes: d, /bar/sfs
 Simple
 PASS
 
-34. Open /bar -- open the file
+38. Open /bar -- open the direction
 Key strokes: o, /bar
 Simple
 PASS
 
-38. Read Dir /bar -- read the director
+39. Read Dir /bar -- read the director
 Key strokes: R, 2 (x 2)
 Simple
 PASS
