@@ -25,26 +25,29 @@
 
 inode get_null_inode()
 {
-	inode i = {
-			.name = "",
-			.type = false,
-			.read = true,
-			.write = true,
-			.execute = true,
-			.date_of_create = 0,
-			.date_last_accessed = 0,
-			.date_last_modified = 0,
-			.file_owner = 0,
-			.last_user_modified = 0,
-			.file_size = 0,
-			.location = 0,
-			.encrypted = false,
-			.check_sum = 0,
-			.uuid = NULL
+	/* Initialize an empty/NULL Inode */
+	inode i =
+	{
+		.name = "",
+		.type = false,
+		.read = true,
+		.write = true,
+		.execute = true,
+		.date_of_create = 0,
+		.date_last_accessed = 0,
+		.date_last_modified = 0,
+		.file_owner = 0,
+		.last_user_modified = 0,
+		.file_size = 0,
+		.location = 0,
+		.encrypted = false,
+		.check_sum = 0,
+		.uuid = NULL
 	};
 	uuid_generate(i.uuid);
 	return i;
 }
+
 
 inode* get_inode(uint32_t block_num)
 {
@@ -59,24 +62,21 @@ inode* get_inode(uint32_t block_num)
 	return (inode*) buf;
 }
 
+
 unsigned char* get_uuid(uint32_t block_num)
 {
 	//TODO FIX MEMORY LEAK
 	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
-	//inode* cur_inode = NULL;
-	//unsigned char* uuid = NULL;
 
 	if(retval != 0)
 	{
 		return retval;
 	}
 
-	//cur_inode = (inode*) buf;
-	//uuid = cur_inode->uuid;
-
 	return &((inode*) buf)->uuid;
 }
+
 
 uint32_t get_index_block(uint32_t block_num)
 {
@@ -91,6 +91,7 @@ uint32_t get_index_block(uint32_t block_num)
 	return ((inode*) buf)->location;
 }
 
+
 int get_type(uint32_t block_num)
 {
 	//TODO FIX MEMORY LEAK
@@ -104,11 +105,10 @@ int get_type(uint32_t block_num)
 	return ((inode*) buf)->type;
 }
 
+
 uint32_t get_size(uint32_t block_num)
 {
-	/**
-	 * Check if the type is a file
-	 */
+	/* Check if the type is a file */
 	if (get_type(block_num) != 0)
 	{
 		return -1;
@@ -124,11 +124,10 @@ uint32_t get_size(uint32_t block_num)
 	return ((inode*) buf)->file_size;
 }
 
+
 int get_encrypted(uint32_t block_num)
 {
-	/**
-	 * Check if the type is a file
-	 */
+	/* Check if the type is a file */
 	if(get_type(block_num) != 0)
 	{
 		return 0;
@@ -145,6 +144,7 @@ int get_encrypted(uint32_t block_num)
 	return ((inode*) buf)->encrypted;
 }
 
+
 char* get_name(uint32_t block_num)
 {
 	//TODO FIX MEMORY LEAK
@@ -157,6 +157,7 @@ char* get_name(uint32_t block_num)
 	}
 	return ((inode*) buf)->name;
 }
+
 
 uint32_t get_crc(uint32_t block_num)
 {
@@ -171,6 +172,7 @@ uint32_t get_crc(uint32_t block_num)
 	return ((inode*) buf)->check_sum;
 }
 
+
 uint32_t find_inode(locations index_blocks, char* name)
 {
 	int i = 0;
@@ -178,7 +180,7 @@ uint32_t find_inode(locations index_blocks, char* name)
 
 	while(index_blocks[i] != NULL)
 	{
-		/* Do not perform a string comparison unless both names are the same length */
+		/* Do not perform a string comparison unless both are the same length */
 		inode_name_len = strlen(get_name(index_blocks[i]));
 		if (inode_name_len == strlen(name))
 		{
@@ -192,9 +194,10 @@ uint32_t find_inode(locations index_blocks, char* name)
 	return 0;
 }
 
+
 int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 {
-	/**
+	/*
 	 * Gets the parent's index
 	 * locations_buf = iterate the index (parent_index)
 	 * //add's the inode location of the child to the end of the buffer
@@ -216,9 +219,7 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 
 	buf = allocate_buf(buf, BLKSIZE);
 
-	/**
-	 * Copy the parent into to buffer
-	 */
+	/* Copy the parent into to buffer */
 	buf = (byte *) copy_to_buf((byte *) parent, (byte *) buf, sizeof(inode),
 			BLKSIZE);
 	if(write_block(parent_location, buf) < 0)
@@ -237,23 +238,23 @@ int link_inode_to_parent(uint32_t parent_location, uint32_t inode_location)
 	return 0;
 }
 
+
+/*
+ * locations idxbuf = NULL;
+ * inode parent_inode = get_inode(parent_location);
+ * idx = iterate_index(parent_inode.location);
+ * search idx:
+ *  if idx.index = parent_inode.location
+ *  	idx = remove that index
+ *  	idx = shift remain indices left
+ *  	newidx = rebuild_idx(idx)
+ *  	parent_inode.location = newidx.first_indexlocation
+ *  	write_block(parent_location, parent_inode)
+ *  	return success
+ * return failed // Couldn't find location to unlink in index
+ */
 int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 {
-	//TODO rebuild_index NEEDS TO TAKE A SERIES OF DATA BLOCK LOCATIONS AND MAKE AN INDEX OUT OF THEM
-	/**
-	 * locations idxbuf = NULL;
-	 * inode parent_inode = get_inode(parent_location);
-	 * idx = iterate_index(parent_inode.location);
-	 * search idx:
-	 *  if idx.index = parent_inode.location
-	 *  	idx = remove that index
-	 *  	idx = shift remain indices left
-	 *  	newidx = rebuild_idx(idx)
-	 *  	parent_inode.location = newidx.first_indexlocation
-	 *  	write_block(parent_location, parent_inode)
-	 *  	return success
-	 * return failed // Couldn't find location to unlink in index
-	 */
 	inode* parent_inode = get_inode(parent_location);
 	inode* child_inode = get_inode(inode_location);
 	locations index_block = iterate_index(parent_inode->location, NULL);
@@ -265,18 +266,14 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 
 	if(index_block == NULL || index_block[0] == NULL)
 	{
-		/**
-		 * Empty Index block
-		 */
+		/* Empty Index block */
 		return -1;
 	}
 
 	free_blocks = index_block_locations(parent_inode->location, NULL);
 	if(free_blocks == NULL)
 	{
-		/**
-		 * Index blocks not found
-		 */
+		/* Index blocks not found */
 		return -1;
 	}
 
@@ -285,9 +282,7 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 	{
 		if(strcmp(get_name(index_block[i]),child_inode->name) !=0)
 		{
-			/**
-			 * Child not found
-			 */
+			/* Child not found */
 			memcpy(&new_index_block[i], &index_block[i], 1);
 		}
 		i++;
@@ -304,9 +299,7 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 
 	if(new_index_loc == NULL)
 	{
-		/**
-		 * Rebuild failed
-		 */
+		/* Rebuild failed */
 		return -1;
 	}
 
@@ -314,22 +307,19 @@ int unlink_inode_from_parent(uint32_t parent_location, uint32_t inode_location)
 
 	buf = allocate_buf(buf, BLKSIZE);
 
-	/**
-	 * Copy the parent into to buffer
-	 */
-	buf = (byte *) copy_to_buf((byte *) parent_inode, (byte *) buf, sizeof(inode),
-			BLKSIZE);
+	/* Copy the parent into the buffer */
+	buf = (byte *) copy_to_buf((byte *) parent_inode, (byte *) buf, sizeof(inode), BLKSIZE);
+
 	if(write_block(parent_location, buf) < 0)
 	{
-		/**
-		 * Invalid write
-		 */
+		/* Invalid write */
 		return -1;
 	}
 
 	update_fbl(NULL, free_blocks);
 	return 0;
 }
+
 
 int get_index_entry(inode directory)
 {
@@ -343,6 +333,7 @@ int get_index_entry(inode directory)
 
 	return next;
 }
+
 
 void reset_index_entry()
 {
