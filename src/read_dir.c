@@ -26,29 +26,9 @@
 #include "system_open_file_table.h"
 #include "read_dir.h"
 
-/** sfs_readdir
- * Reads the file name components from a directory file. The first time
- * sfs_readdir is called, the first file name component in the directory will be
- * placed into memory at the location pointed to by mem_pointer. Each successive
- * call to sfs_readdir will place the next name component from the directory into
- * the mem_pointer buffer. When all names have been returned, sfs_readdir will
- * place nothing in the buffer, and return a value of zero to indicate the
- * directory has been completely scanned.
- *
- * @param fd A file descriptor for the file to read data from
- * @param mem_pointer The memory location to store the file name components
- *
- * @return an integer value
- * If the value > 0 the read dir was a success
- * If the value = 0 if there is no contents in dir
- * If the value < 0 the read dir was unsuccessful
- *
- * @exception INVALID_FILE_DESCRIPTOR If the file descriptor specified does not
- * exist
- */
+
 int sfs_readdir(int fd, char *mem_pointer)
 {
-	//TODO test readdir
 	inode directory = get_null_inode();
 	locations index_block = NULL;
 	uint32_t inode_location = 0;
@@ -60,12 +40,10 @@ int sfs_readdir(int fd, char *mem_pointer)
 	if(fd >= 0 && fd < NUMOFL)
 	{
 
-		/*
-		 * Validate the file descriptor
-		 */
+		/* Validate the file descriptor */
 		if(validate_fd(fd) < 0)
 		{
-			/**
+			/*
 			 * file descriptor not found in swoft
 			 * TODO validate this error code
 			 */
@@ -97,6 +75,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 		 * when the directory is empty
 		 */
 		index_block = iterate_index(directory.location, NULL);
+
 		if(index_block == NULL)
 		{
 			/*
@@ -121,7 +100,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 
 		if(num_locations == 0)
 		{
-			/**
+			/*
 			 * Empty Directory Read
 			 * TODO validate this error code
 			 */
@@ -151,9 +130,7 @@ int sfs_readdir(int fd, char *mem_pointer)
 
 		if(write_block(inode_location, buf) < 0)
 		{
-			/*
-			 * TODO validate this error code
-			 */
+			/* TODO validate this error code */
 			free(buf);
 			print_error(DISK_WRITE_ERROR);
 			return -1;
