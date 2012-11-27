@@ -41,7 +41,7 @@ Simple
 PASS
 
 9. Write to a file (/foo, append, 130) -- append 130 bytes to /foo
-Key strokes: w, 1, -1, 130
+Key strokes: w, /foo, -1, 130, stuvwxyz1234567890!@#$%^&*()-_abcdefghijkl67890!@#$%^&*()-_+=\mnopqr+=\][;',./|}{:"<>?`~abcdefghijklmnopqrstuvwxyz12345][;',./|}
 Simple
 PASS
 
@@ -149,6 +149,55 @@ Key strokes: c, 1
 Simple
 PASS
 
+31. Delete /foo -- delete foo
+Key strokes: d, /foo
+Simple
+PASS
+
+32. Make dir /bar/foo -- make directory /bar/foo
+Key strokes: m, /bar/foo
+Simple
+PASS
+
+33. Delete /bar -- invalid delete
+Key strokes: d, /bar
+Simple
+PASS
+
+34. Open /bar/sfs -- open the file
+Key strokes: o, /bar/sfs
+Simple
+PASS
+
+35. Write /bar/sfs -- write to sfs
+Key strokes: w, 1, -1, 128, stuvwxyz1234567890!@#$%^&*()-_abcdefghijkl67890!@#$%^&*()-_+=\mnopqr+=\][;',./|}{:"<>?`~abcdefghijklmnopqrstuvwxyz12345][;',./|}
+Simple
+PASS
+
+36. Read /bar/sfs -- read the file
+Key strokes: r, 1, 0, 128 
+Simple
+PASS
+
+37. Delete /bar/sfs -- delete
+Key strokes: d, /bar/sfs
+Simple
+PASS
+
+34. Open /bar -- open the file
+Key strokes: o, /bar
+Simple
+PASS
+
+38. Read Dir /bar -- read the director
+Key strokes: R, 2 (x 2)
+Simple
+PASS
+
+
 Sequence of test:
- A. 1 - 14 Complex read and write
- B. 1, 5, 7, 19 - 30
+    Complex read and write:
+     A. 1 - 14 
+     B. 1, 5, 7, 19 - 30
+     C. 1, 5, 9, 31
+     D. 1, 32 -  38
