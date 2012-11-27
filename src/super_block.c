@@ -23,6 +23,7 @@
 #include "super_block.h"
 #include "block_func.h"
 
+
 superblock* get_super_block(void)
 {
 	//TODO FIX MEMORY LEAK
@@ -35,6 +36,7 @@ superblock* get_super_block(void)
 	}
 	return (superblock*) buf;
 }
+
 
 uint32_t get_root(void)
 {
@@ -50,6 +52,7 @@ uint32_t get_root(void)
 	return ((superblock*) buf)->root_dir;
 }
 
+
 uint32_t get_free_block_index(void)
 {
 	//TODO FIX MEMORY LEAK
@@ -63,6 +66,7 @@ uint32_t get_free_block_index(void)
 
 	return ((superblock*) buf)->free_block_list;
 }
+
 
 int display_super_block(void)
 {
@@ -83,18 +87,3 @@ int display_super_block(void)
 
 	return 1;
 }
-
-/*int validate_uuid()
-{
-	byte* buf = allocate_buf(buf, BLKSIZE);
-	int retval = read_block(SUPER_BLOCK, buf);
-
-	if(retval != 0)
-	{
-		return retval;
-	}
-
-	((superblock*) buf)->uuid;
-	return 1;
-}*/
-
