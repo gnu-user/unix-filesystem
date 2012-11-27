@@ -27,32 +27,12 @@
 #include <math.h>
 #include "read_file.h"
 
-/** sfs_read
- * Copy the length of bytes of data specified from a regular file to memory
- * location specified by mem_pointer. The parameter start gives the offset
- * of the first byte in the file that should be copied.
- *
- * @param fd A file descriptor for the file to read data from
- * @param start The offset of the first byte in the file that should be copied
- * @param length The length of bytes of data to copy from the file
- * @param mem_pointer The memory location to store the data read from the file
- *
- * @return an integer value,
- * if the value > 0 then the file was read successfully
- * if the value <= 0 then the file was read unsuccessfully
- *
- * @exception FILE_LENGTH_OVERRUN If the file cannot be read correctly because
- * the length of bytes specified exceeds the length of the file, no data will be
- * copied from the file if an overrun occurs.
- *
- * @exception INVALID_FILE_DESCRIPTOR If the file descriptor specified does not
- * exist
- */
+
 int sfs_read(int fd, int start, int length, byte *mem_pointer)
 {
-	//TODO test read
-	//TODO create encryption
-	//TODO create decryption
+	/* TODO create encryption
+	 * TODO create decryption
+	 */
 	inode file_inode = get_null_inode();
 	uint32_t index_block = 0;
 	uint32_t inode_location = 0;
@@ -62,7 +42,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	uint32_t i = 0;
 	byte* temp = NULL;
 
-	//TODO split this into two error codes!!!
+	/* TODO split this into two error codes!!! */
 	if(fd >= 0 && fd < NUMOFL && start >= 0 && length > 0)
 	{
 		/*
@@ -83,15 +63,10 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		 * Read the specified bytes of the given length into the buffer
 		 */
 
-		/*
-		 * Get Inode
-		 * 	- check that it is a file
-		 */
+		/* Get Inode - check that it is a file */
 		file_inode = get_swoft_inode(fd);
 
-		/*
-		 * Get index block
-		 */
+		/* Get index block */
 		index_block = file_inode.location;
 
 		data_blocks = iterate_index(index_block, NULL);
@@ -108,29 +83,16 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 
 		data_buf = get_data(data_blocks);
 
-		/*
-		 * Since start is offset (number of bytes offset)
-		 * ceil(start/BLKSIZE)
-		 */
-
-		/*
-		 * Count the number of data blocks
-		 */
+		/* Count the number of data blocks */
 		if(start+length > calc_num_bytes(data_buf))
 		{
-			/**
+			/*
 			 * Read past end of file
 			 * TODO validate this error code
 			 */
 			print_error(FILE_PAST_EOF);
 			return 0;
 		}
-
-		/*
-		 * copy the data block at start into memory
-		 * TODO figure out how to fix missing reference for ceil
-		 */
-		//start_block = (uint32_t)(ceil((double)(start)/BLKSIZE));
 
 		/*
 		 * data_buf = data_blocks parsed
@@ -160,9 +122,7 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 
 		if(write_block(inode_location, temp) < 0)
 		{
-			/*
-			 * TODO validate this error code
-			 */
+			/* TODO validate this error code */
 			free(temp);
 			print_error(DISK_WRITE_ERROR);
 			return 0;
