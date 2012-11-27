@@ -20,12 +20,6 @@
  */
 
 
-/*
- * Initialize the hard disk bytes to 0 
- * Pre-defined block size
- * Pre-defined bytes per block
- * Initialize the super block
- */
 #include "initialize.h"
 #include "block_func.h"
 #include "super_block.h"
@@ -34,13 +28,14 @@
 #include <math.h>
 #include <stdbool.h>
 
+
 uint32_t FBL_DATA_SIZE;
 uint32_t FBL_TOTAL_SIZE;
 uint32_t ROOT;
 
+
 int sfs_initialize(int erase)
 {
-	//TODO finish create
 	FBL_DATA_SIZE = ceil((double) (NUMBLKS / BLKSIZE));
 	FBL_TOTAL_SIZE = (uint32_t) ceil(
 			FBL_DATA_SIZE / (floor(BLKSIZE / (double) (sizeof(uint32_t))) - 1))
@@ -57,14 +52,12 @@ int sfs_initialize(int erase)
 	{
 		if (erase == 1)
 		{
-			/**
-			 * Erase Disk and reallocate to free block list
-			 */
+			/* Erase Disk and reallocate to free block list */
 			retval = wipe_disk();
 
 			if (retval != 0)
 			{
-				/**
+				/*
 				 * TODO validate this error code
 				 */
 				print_error(DISK_WRITE_ERROR);
@@ -72,30 +65,26 @@ int sfs_initialize(int erase)
 			}
 		}
 
-		/**
+		/*
 		 * Initialize the Superblock struct with a pointer to the free block
 		 * list block, a pointer to the root directory Inode block.
-		 **/
+		 */
 		superblock sb = { NUMBLKS * BLKSIZE, BLKSIZE, FBL_INDEX, ROOT, 0, NULL, 0 };
 
 		uuid_generate(sb.uuid);
 
-		/**
-		 * Allocate a buffer to write to the block.
-		 */
+		/* Allocate a buffer to write to the block. */
 		buf = allocate_buf(buf, BLKSIZE);
 
-		/**
-		 * Copy the superblock into to buffer
-		 */
-		buf = (byte *) copy_to_buf((byte *) &sb, (byte *) buf, sizeof(sb),
-				BLKSIZE);
+		/* Copy the superblock into to buffer */
+		buf = (byte *) copy_to_buf((byte *) &sb, (byte *) buf, sizeof(sb), BLKSIZE);
+
 		retval = write_block(SUPER_BLOCK, buf);
 		free(buf);
 
 		if (retval != 0)
 		{
-			/**
+			/*
 			 * Failed to write SB.
 			 * TODO validate this error code
 			 */
@@ -103,44 +92,48 @@ int sfs_initialize(int erase)
 			return retval;
 		}
 
-		/**
-		 * Initialize the free_block list starting at the next index after the
+		/* Initialize the free_block list starting at the next index after the
 		 * super block
-		 **/
+		 */
 		retval = free_block_init();
 
 		if (retval != 0)
 		{
-			/**
-			 * Failed to write FBL.
+			/* Failed to write FBL.
 			 * TODO validate this error code
 			 */
 			print_error(ERROR_UPDATING_FBL);
 			return retval;
 		}
 
-		/**
+		/*
 		 * Delete the Root directory so it can be re-written
 		 * TODO update this to use proper error handling
 		 */
 		buf = allocate_buf(buf, BLKSIZE);
 		retval = write_block(ROOT, buf);
-		/**
-		 * Failed to delete root directory.
-		 * TODO validate this error code
-		 */
-		//print_error(DISK_WRITE_ERROR);
-		/**
+
+		/* Failed to delete root directory. */
+		if (retval != 0)
+		{
+			/*
+			 * TODO validate this error code
+			 */
+			print_error(DISK_WRITE_ERROR);
+			return retval;
+		}
+
+		/*
 		 * Initialize the root directory. This will be the first block
 		 * initialized outside of the super block. The root_dir will contain an
 		 * Inode that points to a index block that is empty.
 		 * TODO update this to use proper error handling
-		 **/
+		 */
 		retval = sfs_create(root_name, 1);
 
 		if (retval <= 0)
 		{
-			/**
+			/*
 			 * Failed to write root directory.
 			 * TODO validate this error code
 			 */
@@ -148,7 +141,7 @@ int sfs_initialize(int erase)
 			return retval;
 		}
 
-		/**
+		/*
 		 * TODO validate this error code
 		 */
 		print_error(SUCCESS);
@@ -156,13 +149,14 @@ int sfs_initialize(int erase)
 	}
 	else
 	{
-		/**
+		/*
 		 * TODO validate this error code
 		 */
 		print_error(INVALID_PARAMETER);
 		return -1;
 	}
 }
+
 
 int free_block_init(void)
 {
@@ -174,8 +168,7 @@ int free_block_init(void)
 	/* Wipe the entire FBL in memory, everything is marked as free */
 	if (wipe_fbl() == NULL)
 	{
-		/**
-		 * Error occurred updating the FBL in memory
+		/* Error occurred updating the FBL in memory
 		 * TODO validate this error code
 		 */
 		print_error(ERROR_UPDATING_FBL);
@@ -186,8 +179,7 @@ int free_block_init(void)
 	fbl = update_fbl(NULL, NULL);
 	if (fbl == NULL )
 	{
-		/**
-		 * Error occurred updating the FBL in memory
+		/* Error occurred updating the FBL in memory
 		 * TODO validate this error code
 		 */
 		print_error(ERROR_UPDATING_FBL);
@@ -196,20 +188,21 @@ int free_block_init(void)
 
 	/* Write the new FBL to disk */
 	idx = generate_index(FBL_DATA_SIZE);
-	//TODO update this to use proper error handling
-	/**
-	 * Error occurred generating the FBL index.
-	 * TODO validate this error code
-	 */
-	//print_error(INDEX_ALLOCATION_ERROR);
-	//return -1;
+
+	if (idx.index_location == NULL)
+	{
+		/* Error occurred generating the FBL index.
+		 * TODO validate this error code
+		 */
+		print_error(INDEX_ALLOCATION_ERROR);
+		return -1;
+	}
 
 	/* Segment the data blocks and write them at the locations set aside by the index */
 	data_blocks = segment_data_len(fbl, NUMBLKS);
 	if (data_blocks == NULL)
 	{
-		/**
-		 * Error occurred segmenting the output data.
+		/* Error occurred segmenting the output data.
 		 * TODO validate this error code
 		 */
 		free(data_blocks);
@@ -219,18 +212,18 @@ int free_block_init(void)
 
 	while (idx.data_locations[i] != NULL)
 	{
-		write_block(idx.data_locations[i], data_blocks[i]);
-		//TODO update this to use proper error handling
-		/**
-		 * Error occurred writing block to disk.
-		 * TODO validate this error code
-		 */
-		//print_error(DISK_WRITE_ERROR);
-		//return -1;
+		if (write_block(idx.data_locations[i], data_blocks[i]) != 0)
+		{
+			/* Error occurred writing block to disk.
+			 * TODO validate this error code
+			 */
+			print_error(DISK_WRITE_ERROR);
+			return -1;
+		}
 		i++;
 	}
 
-	//TODO validate this error code
+	/* TODO validate this error code */
 	free(data_blocks);
 	print_error(SUCCESS);
 	return 0;
@@ -239,24 +232,20 @@ int free_block_init(void)
 
 int wipe_disk(void)
 {
-	/**
-	 * Create the null block of data
-	 */
+	/* Create the null block of data */
 	byte* buffer = NULL;
 
 	buffer = allocate_buf(buffer, BLKSIZE);
 
 	int retval = 0;
 
-	/**
-	 * Go block to block setting them to null
-	 */
+	/* Go block to block setting them to null */
 	for (uint32_t i = 0; i < NUMBLKS; i++)
 	{
 		retval = write_block(i, buffer);
 		if (retval != 0)
 		{
-			/**
+			/*
 			 * Error occurred writing block to disk.
 			 * TODO validate this error code
 			 */
@@ -265,9 +254,8 @@ int wipe_disk(void)
 		}
 	}
 	free(buffer);
-	/**
-	 * TODO validate this error code
-	 */
+
+	/* TODO validate this error code */
 	print_error(SUCCESS);
 	return 0;
 }
