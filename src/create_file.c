@@ -30,32 +30,8 @@
 #include <time.h>
 
 
-#define CREATE_SIZE 2
-
-/** sfs_create
- * Create a file with the pathname specified if there is not already a file with
- * the same pathname, the pathname must contain the full directory path. The
- * parameter type specifies whether a regular file or a directory file should be
- * created.
- *
- * @param pathname The pathname of file to create, must be full directory path
- * @param type The type of file to create, zero for a regular file, one for a
- * directory file
- *
- * @return a integer value
- * If the value > 0 the file create was a success
- * If the value <= 0 the file create was unsuccessful
- *
- * @exception FILE_EXISTS If the specified file name is already in use
- * @exception INVALID_FILE_TYPE If the file type specified is not a regular file
- * (0) or a directory file (1)
- * @exception INVALID_PATH If the pathname (except the last) does not already exist
- * @exception INSUFFICIENT_DISK_SPACE If the length of the blocks to be written
- * is greater than the amount of available blocks on disk
- */
 int sfs_create(char *pathname, int type)
 {
-	//TODO test create
 	inode new_block = get_null_inode();
 	char** tokens;
 	locations inode_loc = NULL;
@@ -69,14 +45,10 @@ int sfs_create(char *pathname, int type)
 	int retval = 0;
 	time_t cur_date;
 
-	/*
-	 * Check for valid type = 0 or = 1
-	 */
+	/* Check for valid type = 0 or = 1 */
 	if(type == 0 || type == 1)
 	{
-		/*
-		 * Parse the pathname
-		 */
+		/* Parse the pathname */
 		tokens = tokenize_path(pathname);
 		if(tokens == NULL)
 		{
@@ -130,7 +102,7 @@ int sfs_create(char *pathname, int type)
 					i++;
 				}
 
-				if(i%(int)(floor(BLKSIZE/sizeof(uint32_t)) - 1) == 0)
+				if(i % (int)(floor(BLKSIZE/sizeof(uint32_t)) - 1) == 0)
 				{
 					parent_offset++;
 				}
@@ -175,7 +147,7 @@ int sfs_create(char *pathname, int type)
 		 */
 		new_inode_location[0] = get_free_block();
 
-		if(new_inode_location[0] == 0)
+		if (new_inode_location[0] == 0)
 		{
 			/*
 			 * TODO validate this error code
@@ -187,12 +159,12 @@ int sfs_create(char *pathname, int type)
 		/*
 		 * Copy the name into the inode
 		 */
-		if(tokens[0] != NULL)
+		if (tokens[0] != NULL)
 		{
 			strcpy(new_block.name, tokens[inode_loc[1]]);
 		}
-		else{
-
+		else
+		{
 			strncpy(new_block.name, "/", 1);
 		}
 
@@ -200,7 +172,8 @@ int sfs_create(char *pathname, int type)
 		 * Fill in the information to be stored in the Inode.
 		 * Initialize values depending on the file type
 		 */
-		if(type == 0){
+		if (type == 0)
+		{
 			new_block.type = false;
 		}
 		else
@@ -222,8 +195,6 @@ int sfs_create(char *pathname, int type)
 		new_block.date_of_create = cur_date;
 		new_block.date_last_accessed = cur_date;
 		new_block.date_last_modified = cur_date;
-		//file_owner = cur_user;
-		//last_user_modified = cur_user;
 
 		/*
 		 * Generate CRC for inode for unique identifier
@@ -295,14 +266,6 @@ int sfs_create(char *pathname, int type)
 			print_error(DISK_WRITE_ERROR);
 			return 0;
 		}
-
-		/*
-		 * get parents indicies, cause its a directory
-		 * add index onto it (concat)
-		 * Ensure that the number of indexes in the index block is NOT empty at
-		 * this point or else it is invalid
-		 * rebuild index
-		 */
 
 		/*
 		 * Add the inode's location to the parent's index list

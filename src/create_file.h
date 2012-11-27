@@ -25,6 +25,7 @@
 #ifndef CREATE_FILE_H_
 #define CREATE_FILE_H_
 
+#define CREATE_SIZE 2
 
 /**
  * @brief Creates a new file or directory at the path specified.
