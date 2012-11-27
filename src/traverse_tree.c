@@ -53,7 +53,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	{
 		/*
 		 * Failed to iterate root directory
-		 * TODO validate this error code
 		 */
 		print_error(INDEX_ALLOCATION_ERROR);
 		return NULL;
@@ -68,7 +67,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 			{
 				/*
 				 * Invalid directory
-				 * TODO validate this error code
 				 */
 				print_error(INVALID_PATH);
 				return NULL;
@@ -100,7 +98,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 
 		/*
 		 * Inode is root
-		 * TODO validate this error code
 		 */
 		print_error(SUCCESS);
 		return inode_location;
@@ -111,7 +108,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 	{
 		/*
 		 * Invalid directory
-		 * TODO validate this error code
 		 */
 		print_error(INVALID_PATH);
 		return NULL;
@@ -124,7 +120,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		{
 			/*
 			 * Invalid Path, cannot use file as a directory
-			 * TODO validate this error code
 			 */
 			print_error(INVALID_FILE_TYPE);
 			return NULL;
@@ -156,7 +151,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		{
 			/*
 			 * No Children found
-			 * TODO validate this error code
 			 */
 			print_error(INDEX_ALLOCATION_ERROR);
 			return NULL;
@@ -170,7 +164,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 		{
 			/*
 			 * Child not found
-			 * TODO validate this error code
 			 */
 			print_error(FILE_NOT_FOUND);
 			return NULL;
@@ -181,7 +174,6 @@ uint32_t* traverse_file_system(char** tokens, bool create)
 
 	/*
 	 * Success
-	 * TODO validate this error code
 	 */
 	print_error(SUCCESS);
 	return inode_location;

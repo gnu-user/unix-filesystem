@@ -30,9 +30,6 @@
 
 int sfs_read(int fd, int start, int length, byte *mem_pointer)
 {
-	/* TODO create encryption
-	 * TODO create decryption
-	 */
 	inode file_inode = get_null_inode();
 	uint32_t index_block = 0;
 	uint32_t inode_location = 0;
@@ -42,18 +39,13 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 	uint32_t i = 0;
 	byte* temp = NULL;
 
-	/* TODO split this into two error codes!!! */
 	if(fd >= 0 && fd < NUMOFL && start >= 0 && length > 0)
 	{
 		/*
 		 * Validate the file descriptor on the system-wide-open file table
-		 *  - If the file descriptor is not found return error
 		 */
 		if (validate_fd(fd) < 0)
 		{
-			/*
-			 * TODO validate this error code
-			 */
 			print_error(INVALID_FILE_DESCRIPTOR);
 			return 0;
 		}
@@ -80,7 +72,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		{
 			/*
 			 * File is empty
-			 * TODO validate this error code
 			 */
 			print_error(FILE_EMPTY);
 			return 0;
@@ -93,7 +84,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		{
 			/*
 			 * Read past end of file
-			 * TODO validate this error code
 			 */
 			print_error(FILE_PAST_EOF);
 			return 0;
@@ -127,7 +117,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 
 		if(write_block(inode_location, temp) < 0)
 		{
-			/* TODO validate this error code */
 			free(temp);
 			print_error(DISK_WRITE_ERROR);
 			return 0;
@@ -137,7 +126,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		/*
 		 * return value > 0 if the file was read successfully
 		 * return value <= 0 if the file was read unsuccessfully
-		 * TODO validate this error code
 		 */
 		print_error(SUCCESS);
 		return 1;
@@ -145,8 +133,6 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 
 	/*
 	 * Invalid file descriptor OR file_past_eof
-	 * TODO validate this error code
-	 * TODO split this into a 2 different returns
 	 */
 	return 0;
 }

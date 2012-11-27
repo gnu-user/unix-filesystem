@@ -51,7 +51,6 @@ inode get_null_inode()
 
 inode* get_inode(uint32_t block_num)
 {
-	//TODO FIX MEMORY LEAK
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
 
@@ -65,7 +64,6 @@ inode* get_inode(uint32_t block_num)
 
 unsigned char* get_uuid(uint32_t block_num)
 {
-	//TODO FIX MEMORY LEAK
 	byte* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
 
@@ -80,7 +78,6 @@ unsigned char* get_uuid(uint32_t block_num)
 
 uint32_t get_index_block(uint32_t block_num)
 {
-	//TODO FIX MEMORY LEAK
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
 
@@ -94,7 +91,6 @@ uint32_t get_index_block(uint32_t block_num)
 
 int get_type(uint32_t block_num)
 {
-	//TODO FIX MEMORY LEAK
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
 
@@ -113,7 +109,6 @@ uint32_t get_size(uint32_t block_num)
 	{
 		return -1;
 	}
-	//TODO FIX MEMORY LEAK
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
 
@@ -133,7 +128,6 @@ int get_encrypted(uint32_t block_num)
 		return 0;
 	}
 
-	//TODO FIX MEMORY LEAK
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
 
@@ -147,7 +141,6 @@ int get_encrypted(uint32_t block_num)
 
 char* get_name(uint32_t block_num)
 {
-	//TODO FIX MEMORY LEAK
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
 
@@ -161,7 +154,6 @@ char* get_name(uint32_t block_num)
 
 uint32_t get_crc(uint32_t block_num)
 {
-	//TODO FIX MEMORY LEAK
 	char* buf = allocate_buf(buf, BLKSIZE);
 	int retval = read_block(block_num, buf);
 

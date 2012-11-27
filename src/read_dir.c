@@ -69,7 +69,6 @@ int sfs_readdir(int fd, char *mem_pointer)
 
 		/*
 		 * Iterate through the index block
-		 * TODO ensure that iterate_index returns a null value for index_block
 		 * when the directory is empty
 		 */
 		index_block = iterate_index(directory.location, NULL);
@@ -78,7 +77,6 @@ int sfs_readdir(int fd, char *mem_pointer)
 		{
 			/*
 			 * Invalid index block
-			 * TODO validate this error code
 			 */
 			print_error(INDEX_ALLOCATION_ERROR);
 			return -1;
@@ -90,7 +88,6 @@ int sfs_readdir(int fd, char *mem_pointer)
 		{
 			/*
 			 * Invalid index block
-			 * TODO validate this error code
 			 */
 			print_error(INDEX_ALLOCATION_ERROR);
 			return -1;
@@ -100,7 +97,6 @@ int sfs_readdir(int fd, char *mem_pointer)
 		{
 			/*
 			 * Empty Directory Read
-			 * TODO validate this error code
 			 */
 			print_error(DIRECTORY_EMPTY);
 			return 0;
@@ -128,7 +124,6 @@ int sfs_readdir(int fd, char *mem_pointer)
 
 		if(write_block(inode_location, buf) < 0)
 		{
-			/* TODO validate this error code */
 			free(buf);
 			print_error(DISK_WRITE_ERROR);
 			return -1;
@@ -140,16 +135,10 @@ int sfs_readdir(int fd, char *mem_pointer)
 		 * return value = 0 if there is no contents in dir
 		 * return value < 0 for a unsuccessful read dir
 		 */
-		/*
-		 * TODO validate this error code
-		 */
 		print_error(SUCCESS);
 		return 1;
 	}
 
-	/*
-	 * TODO validate and update this error code, why does it return -1?
-	 */
 	print_error(UNKNOWN);
 	return -1;
 }

@@ -32,7 +32,6 @@ int read_block(uint32_t location, byte* buf)
 	return get_block(location, buf);
 }
 
-/* TODO add decrypt block */
 byte* get_data(locations location)
 {
 	int i = 0;

@@ -129,7 +129,6 @@ uint32_t rebuild_index(locations data_locations)
 
 	/* If data locations is NULL or the number of data locations is 0,
 	 * write an empty index and return
-	 * TODO add error handling for write_block/etc.. functions
 	 */
 	if (data_locations == NULL || data_locations[0] == NULL)
 	{
