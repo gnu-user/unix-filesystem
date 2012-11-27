@@ -30,14 +30,9 @@ int sfs_close(int fd)
 	if(fd >= 0 && fd < NUMOFL)
 	{
 
-		/* Validate the file descriptor on the System open file table
-		 * 	- Throw an error otherwise
-		 */
+		/* Validate the file descriptor on the System open file table */
 		if (validate_fd(fd) < 0)
 		{
-			/**
-			 * TODO validate this error message
-			 */
 			print_error(ERROR_UPDATING_SWOFT);
 			return 0;
 		}
@@ -48,14 +43,10 @@ int sfs_close(int fd)
 		/*
 		 * 	return value > 0 the file close was a success
 		 * 	return value <= 0 the file close was unsuccessful
-		 * 	TODO validate this error message
 		 */
 		print_error(SUCCESS);
 		return 1;
 	}
-	/*
-	 * TODO validate this error message
-	 */
 	print_error(UNKNOWN);
 	return 0;
 }

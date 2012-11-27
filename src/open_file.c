@@ -38,7 +38,6 @@ int sfs_open(char *pathname)
 	{
 		/*
 		 * Invalid path name
-		 * TODO validate this error code
 		 */
 		print_error(INVALID_PATH);
 		return -2;
@@ -55,7 +54,6 @@ int sfs_open(char *pathname)
 		{
 			/*
 			 * Read Error
-			 * TODO validate this error code
 			 */
 			print_error(DISK_READ_ERROR);
 			return -1;
@@ -70,7 +68,6 @@ int sfs_open(char *pathname)
 	{
 		/*
 		 * Invalid path or file/directory not found
-		 * TODO validate this error code
 		 */
 		print_error(FILE_NOT_FOUND);
 		return -1;
@@ -83,7 +80,6 @@ int sfs_open(char *pathname)
 	{
 		/*
 		 * Read Error
-		 * TODO validate this error code
 		 */
 		print_error(DISK_READ_ERROR);
 		return -1;
@@ -97,9 +93,6 @@ int sfs_open(char *pathname)
 
 	if(write_block(inode_location[0], buf) < 0)
 	{
-		/*
-		 * TODO validate this error code
-		 */
 		free(buf);
 		print_error(DISK_WRITE_ERROR);
 		return -1;
@@ -189,16 +182,12 @@ int show_information(int fd)
 		uuid_unparse(node.uuid, str);
 		printf("Uuid: %s\n", str);
 
-		/*
-		 * TODO validate that this is the correct return (fd)
-		 */
 		print_error(SUCCESS);
 		return fd;
 	}
 
 	/*
 	 * Invalid file descriptor.
-	 * TODO validate this error code
 	 */
 	print_error(INVALID_FILE_DESCRIPTOR);
 	return -1;

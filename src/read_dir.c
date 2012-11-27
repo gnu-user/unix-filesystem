@@ -45,7 +45,6 @@ int sfs_readdir(int fd, char *mem_pointer)
 		{
 			/*
 			 * file descriptor not found in swoft
-			 * TODO validate this error code
 			 */
 			print_error(INVALID_FILE_DESCRIPTOR);
 			return -1;
@@ -63,7 +62,6 @@ int sfs_readdir(int fd, char *mem_pointer)
 		{
 			/*
 			 * Invalid file type error
-			 * TODO validate this error code
 			 */
 			print_error(INVALID_FILE_TYPE);
 			return -1;

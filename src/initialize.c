@@ -57,9 +57,6 @@ int sfs_initialize(int erase)
 
 			if (retval != 0)
 			{
-				/*
-				 * TODO validate this error code
-				 */
 				print_error(DISK_WRITE_ERROR);
 				return retval;
 			}
@@ -86,7 +83,6 @@ int sfs_initialize(int erase)
 		{
 			/*
 			 * Failed to write SB.
-			 * TODO validate this error code
 			 */
 			print_error(ERROR_UPDATING_SB);
 			return retval;
@@ -99,16 +95,13 @@ int sfs_initialize(int erase)
 
 		if (retval != 0)
 		{
-			/* Failed to write FBL.
-			 * TODO validate this error code
-			 */
+			/* Failed to write FBL */
 			print_error(ERROR_UPDATING_FBL);
 			return retval;
 		}
 
 		/*
 		 * Delete the Root directory so it can be re-written
-		 * TODO update this to use proper error handling
 		 */
 		buf = allocate_buf(buf, BLKSIZE);
 		retval = write_block(ROOT, buf);
@@ -116,9 +109,6 @@ int sfs_initialize(int erase)
 		/* Failed to delete root directory. */
 		if (retval != 0)
 		{
-			/*
-			 * TODO validate this error code
-			 */
 			print_error(DISK_WRITE_ERROR);
 			return retval;
 		}
@@ -127,7 +117,6 @@ int sfs_initialize(int erase)
 		 * Initialize the root directory. This will be the first block
 		 * initialized outside of the super block. The root_dir will contain an
 		 * Inode that points to a index block that is empty.
-		 * TODO update this to use proper error handling
 		 */
 		retval = sfs_create(root_name, 1);
 
@@ -135,23 +124,24 @@ int sfs_initialize(int erase)
 		{
 			/*
 			 * Failed to write root directory.
-			 * TODO validate this error code
 			 */
 			print_error(DISK_WRITE_ERROR);
 			return retval;
 		}
 
 		/*
-		 * TODO validate this error code
+		 * Remove all of the file descriptors from the swoft
 		 */
+		for(int i = 0; i < NUMOFL; i++)
+		{
+			remove_fd(i);
+		}
+
 		print_error(SUCCESS);
 		return 1;
 	}
 	else
 	{
-		/*
-		 * TODO validate this error code
-		 */
 		print_error(INVALID_PARAMETER);
 		return -1;
 	}
@@ -169,7 +159,6 @@ int free_block_init(void)
 	if (wipe_fbl() == NULL)
 	{
 		/* Error occurred updating the FBL in memory
-		 * TODO validate this error code
 		 */
 		print_error(ERROR_UPDATING_FBL);
 		return -1;
@@ -180,7 +169,6 @@ int free_block_init(void)
 	if (fbl == NULL )
 	{
 		/* Error occurred updating the FBL in memory
-		 * TODO validate this error code
 		 */
 		print_error(ERROR_UPDATING_FBL);
 		return -1;
@@ -192,7 +180,6 @@ int free_block_init(void)
 	if (idx.index_location == NULL)
 	{
 		/* Error occurred generating the FBL index.
-		 * TODO validate this error code
 		 */
 		print_error(INDEX_ALLOCATION_ERROR);
 		return -1;
@@ -203,7 +190,6 @@ int free_block_init(void)
 	if (data_blocks == NULL)
 	{
 		/* Error occurred segmenting the output data.
-		 * TODO validate this error code
 		 */
 		free(data_blocks);
 		print_error(ERROR_BUFFER_SEGMENTATION);
@@ -215,7 +201,6 @@ int free_block_init(void)
 		if (write_block(idx.data_locations[i], data_blocks[i]) != 0)
 		{
 			/* Error occurred writing block to disk.
-			 * TODO validate this error code
 			 */
 			print_error(DISK_WRITE_ERROR);
 			return -1;
@@ -223,7 +208,6 @@ int free_block_init(void)
 		i++;
 	}
 
-	/* TODO validate this error code */
 	free(data_blocks);
 	print_error(SUCCESS);
 	return 0;
@@ -247,7 +231,6 @@ int wipe_disk(void)
 		{
 			/*
 			 * Error occurred writing block to disk.
-			 * TODO validate this error code
 			 */
 			print_error(DISK_WRITE_ERROR);
 			return retval;
@@ -255,7 +238,6 @@ int wipe_disk(void)
 	}
 	free(buffer);
 
-	/* TODO validate this error code */
 	print_error(SUCCESS);
 	return 0;
 }

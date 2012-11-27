@@ -37,7 +37,6 @@ int sfs_gettype(char *pathname)
 	{
 		/*
 		 * Invalid path name
-		 * TODO validate this error code
 		 */
 		print_error(INVALID_PATH);
 		return 0;
@@ -50,7 +49,6 @@ int sfs_gettype(char *pathname)
 	{
 		/*
 		 * Invalid path or file/directory not found
-		 * TODO validate this error code
 		 */
 		print_error(FILE_NOT_FOUND);
 		return -1;
@@ -59,9 +57,6 @@ int sfs_gettype(char *pathname)
 	/*
 	 * Retrieve the file type from the Inode
 	 * return the file type from the Inode
-	 *
-	 * TODO validate this error code
-	 * TODO make this use proper error handling
 	 */
 	print_error(SUCCESS);
 	return get_type(inode_location[0]);

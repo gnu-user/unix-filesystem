@@ -54,9 +54,6 @@ int sfs_create(char *pathname, int type)
 		tokens = tokenize_path(pathname);
 		if(tokens == NULL)
 		{
-			/*
-			 * TODO validate this error code
-			 */
 			print_error(INVALID_PATH);
 			return 0;
 		}
@@ -74,17 +71,11 @@ int sfs_create(char *pathname, int type)
 			 */
 			if(inode_loc == NULL)
 			{
-				/*
-				 * TODO validate this error code
-				 */
 				print_error(INVALID_PATH);
 				return 0;
 			}
 
-			/*
-			 * Check if the there is another file with the given name
-			 * 	- If there is another file, there is an invalid file name error
-			 */
+			/* Check if the there is another file with the given name */
 			index_block = iterate_index(get_index_block(inode_loc[0]), NULL);
 
 			if(index_block != NULL)
@@ -123,7 +114,6 @@ int sfs_create(char *pathname, int type)
 			{
 				/*
 				 * Cannot override root
-				 * TODO validate this error code
 				 */
 				print_error(INVALID_PATH);
 				return -1;
@@ -138,7 +128,6 @@ int sfs_create(char *pathname, int type)
 		{
 			/*
 			 * Not enough space
-			 * TODO validate this error code
 			 */
 			print_error(INSUFFICIENT_DISK_SPACE);
 			return -1;
@@ -151,9 +140,6 @@ int sfs_create(char *pathname, int type)
 
 		if (new_inode_location[0] == 0)
 		{
-			/*
-			 * TODO validate this error code
-			 */
 			print_error(INSUFFICIENT_DISK_SPACE);
 			return 0;
 		}
@@ -199,10 +185,6 @@ int sfs_create(char *pathname, int type)
 		new_block.date_last_modified = cur_date;
 
 		/*
-		 * Generate CRC for inode for unique identifier
-		 */
-
-		/*
 		 * Create an index block empty index block
 		 */
 		index_location = generate_index(0);
@@ -211,20 +193,14 @@ int sfs_create(char *pathname, int type)
 		{
 			/*
 			 * De-allocate the inode
-			 * TODO make sure that the new_inode_location is null terminated
 			 */
 
 			if(update_fbl(NULL, new_inode_location) == NULL)
 			{
-				/*
-				 * TODO validate this error code
-				 */
+
 				print_error(ERROR_UPDATING_FBL);
 				return -1;
 			}
-			/*
-			 * TODO validate this error code
-			 */
 			print_error(INDEX_ALLOCATION_ERROR);
 			return 0;
 		}
@@ -238,8 +214,6 @@ int sfs_create(char *pathname, int type)
 
 		/*
 		 * Store the blocks on disk
-		 * 	- If there is an error while writing, de-allocate the blocks
-		 * 	  return error
 		 */
 
 		buf = allocate_buf(buf, BLKSIZE);
@@ -256,15 +230,9 @@ int sfs_create(char *pathname, int type)
 			new_inode_location[1] = index_location.index_location;
 			if(update_fbl(NULL, new_inode_location) == NULL)
 			{
-				/*
-				 * TODO validate this error code
-				 */
 				print_error(ERROR_UPDATING_FBL);
 				return -1;
 			}
-			/*
-			 * TODO validate this error code
-			 */
 			print_error(DISK_WRITE_ERROR);
 			return 0;
 		}
@@ -280,27 +248,18 @@ int sfs_create(char *pathname, int type)
 				new_inode_location[1] = index_location.index_location;
 				if(update_fbl(NULL, new_inode_location) == NULL)
 				{
-					//TODO validate this error code
 					print_error(ERROR_UPDATING_FBL);
 					return -1;
 				}
-				//TODO validate this error code
 				print_error(ERROR_BLOCK_LINKAGE);
 				return 0;
 			}
 		}
 		free(buf);
 
-		/*
-		 * TODO update size of parent
-		 */
-
 		/* Synchronize the FBL, write the FBL in memory to disk */
 		if (sync_fbl() == NULL)
 		{
-			/*
-			 * TODO validate this error code
-			 */
 			print_error(ERROR_UPDATING_FBL);
 			return -1;
 		}
@@ -320,14 +279,10 @@ int sfs_create(char *pathname, int type)
 		/*
 		 * return value > 0 the file create was a success
 		 * return value <= 0 the file create was unsuccessful
-		 * TODO validate this error code
 		 */
 		print_error(SUCCESS);
 		return 1;
 	}
-	/*
-	 * TODO validate this error code
-	 */
 	print_error(INVALID_FILE_TYPE);
 	return 0;
 }

@@ -36,14 +36,11 @@ int sfs_getsize(char *pathname)
 	char** tokens = NULL;
 	int size = 0;
 
-	/* TODO make large if for type check */
 	/* Parse the pathname */
 	tokens = tokenize_path(pathname);
 	if(tokens == NULL)
 	{
-		/* Invalid pathname
-		 * TODO validate this error code
-		 */
+		/* Invalid pathname */
 		print_error(INVALID_PATH);
 		return -1;
 	}
@@ -53,9 +50,7 @@ int sfs_getsize(char *pathname)
 
 	if(inode_location == NULL)
 	{
-		/* Invalid path or file/directory not found
-		 * TODO validate this error code
-		 */
+		/* Invalid path or file/directory not found */
 		print_error(FILE_NOT_FOUND);
 		return -1;
 	}
@@ -75,7 +70,6 @@ int sfs_getsize(char *pathname)
 	{
 		/*
 		 * Invalid index block
-		 * TODO validate this error code
 		 */
 		print_error(INDEX_ALLOCATION_ERROR);
 		return -1;
@@ -116,9 +110,7 @@ int sfs_getsize(char *pathname)
 		print_error(SUCCESS);
 		return size;
 	}
-	/*
-	 * TODO validate this error code
-	 */
+
 	print_error(INVALID_FILE_TYPE);
 	return -1;
 }
