@@ -61,6 +61,12 @@ int sfs_delete(char *pathname)
 		return -1;
 	}
 
+	if (parent_location[0] = get_root())
+	{
+		print_error(INVALID_PARAMETER);
+		return -1;
+	}
+
 	index_block = iterate_index(get_index_block(parent_location[0]), NULL);
 	if(index_block == NULL)
 	{
