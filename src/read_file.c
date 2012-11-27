@@ -66,6 +66,11 @@ int sfs_read(int fd, int start, int length, byte *mem_pointer)
 		/* Get Inode - check that it is a file */
 		file_inode = get_swoft_inode(fd);
 
+		if(file_inode.type != 0)
+		{
+			print_error(INVALID_FILE_TYPE);
+			return 0;
+		}
 		/* Get index block */
 		index_block = file_inode.location;
 

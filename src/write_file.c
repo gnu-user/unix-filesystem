@@ -427,6 +427,9 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 			return -1;
 		}
 
+		/**
+		 * Calculate the number of free blocks
+		 */
 		fbl =  calc_total_free_blocks();
 		if(fbl == NULL)
 		{
@@ -437,6 +440,9 @@ int sfs_write(int fd, int start, int length, byte *mem_pointer)
 		{
 			i++;
 		}
+		/**
+		 * Display the number of free blocks
+		 */
 		printf("Total Free Blocks = %d\n", i);
 		/*
 		 * return value > 0 if write was successful
