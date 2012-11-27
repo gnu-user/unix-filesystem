@@ -51,7 +51,7 @@ typedef struct
 	uint32_t block_size;		/** Block size of the disk, in bytes per block.  */
 	uint32_t free_block_list;	/** Location of the free block list data structure on disk. */
 	uint32_t root_dir;			/** Location of the root directory's inode on disk. */
-	uint32_t device_id;			/** @deprecated Device identifier for the disk. No longer required since UUID was implemented. */
+	uint32_t device_id;			/** Device identifier for the disk. No longer required since UUID was implemented. */
 	uuid_t uuid;				/** Universal unique identifier for the disk. */
 } superblock;
 
