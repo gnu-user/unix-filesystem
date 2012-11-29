@@ -36,6 +36,12 @@ int sfs_delete(char *pathname)
 	locations inode_loc = (locations) calloc(2, sizeof(uint32_t));
 	int type = -1;
 
+	if(strlen(pathname) == 1)
+	{
+		print_error(INVALID_PATH);
+		return -1;
+	}
+
 	/*
 	 * Parse the pathname
 	 */
