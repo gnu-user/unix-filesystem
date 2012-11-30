@@ -36,6 +36,12 @@ int sfs_delete(char *pathname)
 	locations inode_loc = (locations) calloc(2, sizeof(uint32_t));
 	int type = -1;
 
+	if(strlen(pathname) == 1)
+	{
+		print_error(INVALID_PATH);
+		return -1;
+	}
+
 	/*
 	 * Parse the pathname
 	 */
@@ -60,6 +66,12 @@ int sfs_delete(char *pathname)
 		print_error(PARENT_NOT_FOUND);
 		return -1;
 	}
+
+	/*if (parent_location[0] = get_root() && tokens[parent_location[1]] == NULL)
+	{
+		print_error(INVALID_PARAMETER);
+		return -1;
+	}*/
 
 	index_block = iterate_index(get_index_block(parent_location[0]), NULL);
 	if(index_block == NULL)

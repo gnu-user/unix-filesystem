@@ -62,9 +62,9 @@ main()
 	 */
 	while (1) {
 
-		p1 = 0;
-		p2 = 0;
-		p3 = 0;
+		p1 = -1;
+		p2 = -2;
+		p3 = -1;
 		index = 0;
 		while(index < MAX_INPUT_LENGTH+1)
 		{
