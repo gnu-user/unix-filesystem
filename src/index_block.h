@@ -47,7 +47,7 @@
  *
  * @copyright GNU General Public License V3
  */
-typedef uint32_t* index;
+typedef uint32_t* _index;
 
 
 /* @struct data_index

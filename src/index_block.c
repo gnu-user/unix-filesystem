@@ -41,7 +41,7 @@ data_index generate_index(uint32_t num_blocks)
 
 	/* Index location, and index block */
 	uint32_t index_location = 0;
-	index index_block = NULL;
+	_index index_block = NULL;
 
 	/* Get a free block location to write the index */
 	index_location = get_free_block();
@@ -52,7 +52,7 @@ data_index generate_index(uint32_t num_blocks)
 	/* If the number of blocks is 0, write an empty index and return */
 	if (num_blocks == 0)
 	{
-		index_block = (index) calloc(index_len, sizeof(uint32_t));
+		index_block = (_index) calloc(index_len, sizeof(uint32_t));
 		write_block(index_location, (byte *)index_block);
 		free(index_block);
 
@@ -64,7 +64,7 @@ data_index generate_index(uint32_t num_blocks)
 		tmp_data_locations = NULL;
 
 		/* Allocate an index to write to disk */
-		index_block = (index) calloc(index_len, sizeof(uint32_t));
+		index_block = (_index) calloc(index_len, sizeof(uint32_t));
 
 		for (i = 0; i < (index_len - 1); ++i)
 		{
@@ -113,7 +113,7 @@ uint32_t rebuild_index(locations data_locations)
 	/* Index location, and index block */
 	uint32_t index_location = 0;
 	uint32_t first_index_location = 0;
-	index index_block = NULL;
+	_index index_block = NULL;
 
 	/* Get a free block location to write the index */
 	index_location = get_free_block();
@@ -132,7 +132,7 @@ uint32_t rebuild_index(locations data_locations)
 	 */
 	if (data_locations == NULL || data_locations[0] == NULL)
 	{
-		index_block = (index) calloc(index_len, sizeof(uint32_t));
+		index_block = (_index) calloc(index_len, sizeof(uint32_t));
 		write_block(first_index_location, (byte *)index_block);
 		free(index_block);
 
@@ -142,7 +142,7 @@ uint32_t rebuild_index(locations data_locations)
 	while (data_locations[j] != NULL)
 	{
 		/* Allocate an index to write to disk */
-		index_block = (index) calloc(index_len, sizeof(uint32_t));
+		index_block = (_index) calloc(index_len, sizeof(uint32_t));
 
 		for (i = 0; i < (index_len - 1); ++i)
 		{
@@ -191,7 +191,7 @@ locations iterate_index(uint32_t location, locations data_blocks)
 	uint32_t index_len = floor(BLKSIZE / sizeof(location));
 
 	/* Index_block read from disk */
-	index index_block = calloc(index_len, sizeof(location));
+	_index index_block = calloc(index_len, sizeof(location));
 
 	locations tmp_data_blocks = NULL;
 	uint32_t i = 0;
@@ -298,7 +298,7 @@ locations index_block_locations(uint32_t location, locations index_blocks)
 	uint32_t index_len = floor(BLKSIZE / sizeof(location));
 
 	/* Index_block read from disk */
-	index index_block = calloc(index_len, sizeof(location));
+	_index index_block = calloc(index_len, sizeof(location));
 
 	locations tmp_index_blocks = NULL;
 	uint32_t i = 0;
