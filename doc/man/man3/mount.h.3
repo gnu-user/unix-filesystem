@@ -1,0 +1,111 @@
+.TH "mount.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mount.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include 'super_block\&.h'\fP
+.br
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmount\fP (void)"
+.br
+.RI "\fIAttempt to mount the filesystem on disk\&. \fP"
+.ti -1c
+.RI "int \fBvalidate_super_block\fP (void)"
+.br
+.RI "\fIValidate the super block on the disk\&. \fP"
+.ti -1c
+.RI "int \fBvalidate_root_dir\fP (void)"
+.br
+.RI "\fIValidate that there is a root directory on the disk\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int mount (void)"
+
+.PP
+Attempt to mount the filesystem on disk\&. This funcion calls validation methods to ensure that the mount is possible, and file system isn't corrupted\&. It verifies that the unique identifiers and checksums associated with the various structures on disk are valid and in working order\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if value = 1 the file system has passed validation\&. If value = -1 the file system has failed to validate and should be reinitialized\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int validate_root_dir (void)"
+
+.PP
+Validate that there is a root directory on the disk\&. This function checks the location for the root directory on disk specified by the super block, and determines if the file at that location is valid\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if value = 1 the root directory structure which exists on disk passed validation\&. If value = -1, the structure failed validation\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int validate_super_block (void)"
+
+.PP
+Validate the super block on the disk\&. This function determines the integrity of the super block data by validating its unique identifier and checksum\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value\&. If value = 1 the super block has passed validation\&. If the value = -1, the super block has failed validation and should be reinitialized\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

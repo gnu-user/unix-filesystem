@@ -1,0 +1,185 @@
+.TH "write_file.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+write_file.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include 'block_func\&.h'\fP
+.br
+\fC#include 'I_node\&.h'\fP
+.br
+\fC#include 'system_open_file_table\&.h'\fP
+.br
+\fC#include 'index_block\&.h'\fP
+.br
+\fC#include 'write_file\&.h'\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBblock\fP * \fBmodify_data\fP (int32_t start, uint32_t length, \fBbyte\fP *data_buf, \fBbyte\fP *actual_data)"
+.br
+.RI "\fIModifies or appends data in a buffer\&. \fP"
+.ti -1c
+.RI "\fBblock\fP * \fBsegment_data\fP (\fBbyte\fP *data_buf)"
+.br
+.RI "\fISegments a buffer into block sized chunks of data\&. \fP"
+.ti -1c
+.RI "\fBblock\fP * \fBsegment_data_len\fP (\fBbyte\fP *data_buf, uint32_t length)"
+.br
+.RI "\fISegments a buffer into block sized chunks of data\&. \fP"
+.ti -1c
+.RI "int \fBsfs_write\fP (int fd, int start, int length, \fBbyte\fP *mem_pointer)"
+.br
+.RI "\fIWrite data to a file\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBblock\fP* modify_data (int32_tstart, uint32_tlength, \fBbyte\fP *data_buf, \fBbyte\fP *actual_data)"
+
+.PP
+Modifies or appends data in a buffer\&. Modifies the data in the buffer with the actual data provided at the starting point and length of data specified\&. If the starting value is -1 then the data is appended to the buffer for the length specified\&.
+.PP
+\fBNote:\fP
+.RS 4
+In order to provide support for appending data using start = -1, the parameter type MUST be signed, which is int32_t\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstart\fP The starting offset to alter the data at\&. If the value provided is -1, append data to the end of the buffer\&. If start >= 0 then actual data is inserted (overwrites) from start for the length of actual data\&.
+.br
+\fIlength\fP The length of data to overwrite in the buffer, or to append to the buffer\&.
+.br
+\fIdata_buf\fP A pointer to the data buffer to be altered or appended to\&.
+.br
+\fIactual_data\fP The data to overwrite the data buffer with or append to\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a null terminated array of blocks, if an error occurs then NULL is returned\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBblock\fP* segment_data (\fBbyte\fP *data_buf)"
+
+.PP
+Segments a buffer into block sized chunks of data\&. Takes a NULL terminated data buffer and returns an array of blocks, it is similar to modify_data except that no data is actually being modified\&. Returns an array of blocks where the last index is an entire empty block containing NULL\&. If an error occurs NULL is returned\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata_buf\fP A NULL terminated buffer containing the data to be segmented into blocks\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A null terminated array of blocks, where the last index is NULL, if an error occurs then NULL is returned\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBblock\fP* segment_data_len (\fBbyte\fP *data_buf, uint32_tlength)"
+
+.PP
+Segments a buffer into block sized chunks of data\&. Takes a data buffer that in a multiple of BLKSIZE and returns an array of blocks, it is similar to modify_data except that no data is actually being modified\&. Returns a 2D array where each index in the array points a block, the last index points to NULL\&. If an error occurs NULL is returned\&.
+.PP
+\fBPrecondition:\fP
+.RS 4
+data_buf MUST be a buffer that is EXACTLY a multiple of BLKSIZE, it does not necessarily need to be NULL terminated\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata_buf\fP A buffer containing the data to be segmented into blocks\&.
+.br
+\fIlength\fP The length of the buffer in bytes to be segmented into blocks\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a null terminated array of blocks, where the last index is NULL, if an error occurs then NULL is returned\&. 
+.RE
+.PP
+
+.SS "int sfs_write (intfd, intstart, intlength, \fBbyte\fP *mem_pointer)"
+
+.PP
+Write data to a file\&. Write the length bytes of data specified from a memory location to the specified file\&. The parameter start gives the offset of the first byte in the file that should be copied to\&. Alternatively, the value of start may be set to -1, this indicates that the specified number of bytes should be appended to the file\&. Appending (setting start to -1) is the only allowable way to increase the length of a file\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfd\fP A file descriptor for the file to write data to\&.
+.br
+\fIstart\fP The offset of the first byte in the file that should be written to, if start is -1 then the data will be appended to the file\&.
+.br
+\fIlength\fP The length of bytes of data to be written to the file\&.
+.br
+\fImem_pointer\fP The memory location containing the bytes to write to file\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if the value > 0 the file write was a success, and if the value <= 0 the file write was unsuccessful\&.
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIINVALID_FILE_DESCRIPTOR\fP If the file descriptor specified does not exist or is invalid\&.
+.br
+\fIINSUFFICIENT_DISK_SPACE\fP If the length of the blocks to be written plus the size of the index overhead is greater than the amount of free blocks on disk\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

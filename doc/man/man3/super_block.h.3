@@ -1,0 +1,116 @@
+.TH "super_block.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+super_block.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_func\&.h'\fP
+.br
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsuperblock\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsuperblock\fP * \fBget_super_block\fP (void)"
+.br
+.RI "\fIGet a handle to the super block\&. \fP"
+.ti -1c
+.RI "uint32_t \fBget_root\fP (void)"
+.br
+.RI "\fIGet the location of the root directory\&. \fP"
+.ti -1c
+.RI "uint32_t \fBget_free_block_index\fP (void)"
+.br
+.RI "\fIGet the location of the free block list's first index block\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "uint32_t get_free_block_index (void)"
+
+.PP
+Get the location of the free block list's first index block\&. This function is an accessor method for the pseudo-object attribute inside the super block which contains the location of the free block list structure's first index block on disk\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the location of the free block list's index block\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t get_root (void)"
+
+.PP
+Get the location of the root directory\&. This function is an accessor method for the pseudo-object attribute inside the super block which contains the location of the root directory's inode on disk\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the location of root directory on disk\&. If a failure occurs, return 0\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBsuperblock\fP* get_super_block (void)"
+
+.PP
+Get a handle to the super block\&. This function implements a pseudo-object oriented method for accessing the super block data\&. It returns the super block as a pointer to a struct, whose individual members can be accessed\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the super block data\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

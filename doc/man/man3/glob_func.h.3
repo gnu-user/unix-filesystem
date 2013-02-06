@@ -1,0 +1,331 @@
+.TH "glob_func.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+glob_func.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include '\&.\&./lib/uuid/uuid\&.h'\fP
+.br
+\fC#include 'error\&.h'\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBbyte\fP * \fBallocate_buf\fP (\fBbyte\fP *buf, uint32_t size)"
+.br
+.RI "\fIAllocate a buffer to write to memory of a given size\&. \fP"
+.ti -1c
+.RI "\fBbyte\fP * \fBcopy_to_buf\fP (\fBbyte\fP *buf1, \fBbyte\fP *buf2, uint32_t size1, uint32_t size2)"
+.br
+.RI "\fICopy the data from one buffer to another, given the size of both\&. \fP"
+.ti -1c
+.RI "uint32_t \fBcalc_num_bytes\fP (\fBbyte\fP *buf)"
+.br
+.RI "\fICalculate the number of bytes in a byte buffer\&. \fP"
+.ti -1c
+.RI "uint32_t \fBcalc_num_blocks\fP (\fBbyte\fP *buf)"
+.br
+.RI "\fICalculates the number of blocks needed to store data\&. \fP"
+.ti -1c
+.RI "void * \fBconcat\fP (void *src_1, void *src_2, uint32_t size)"
+.br
+.RI "\fIConcatenate two arrays\&. \fP"
+.ti -1c
+.RI "void * \fBconcat_len\fP (void *src_1, void *src_2, uint32_t size, uint32_t len)"
+.br
+.RI "\fIConcatenate two byte arrays\&. \fP"
+.ti -1c
+.RI "char ** \fBtokenize_path\fP (char *pathname)"
+.br
+.RI "\fITokenize a path into an array of tokens\&. \fP"
+.ti -1c
+.RI "bool \fBfree_tokens\fP (char **tokens)"
+.br
+.RI "\fIFrees the memory allocated for the tokens\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBbyte\fP* allocate_buf (\fBbyte\fP *buf, uint32_tsize)"
+
+.PP
+Allocate a buffer to write to memory of a given size\&. \fBParameters:\fP
+.RS 4
+\fIbuf\fP The buffer to allocate the space for\&.
+.br
+\fIsize\fP The size for the new buffer's elements\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the new buffer\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t calc_num_blocks (\fBbyte\fP *buf)"
+
+.PP
+Calculates the number of blocks needed to store data\&. Helper function which calculates the number of blocks needed to store the data, if an error occurs 0 is returned\&. Reads up to MAX_IO_LENGTH + 1, if the buffer is still not terminated then the IO buffer is larger than the maximum specified by the file system, an error occurs and 0 is returned\&.
+.PP
+\fBPrecondition:\fP
+.RS 4
+The buf parameter must be NULL terminated\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbuf\fP A NULL terminated buffer\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of blocks needed to store the given data\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t calc_num_bytes (\fBbyte\fP *buf)"
+
+.PP
+Calculate the number of bytes in a byte buffer\&. \fBPrecondition:\fP
+.RS 4
+The buf parameter must be NULL terminated\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIbuf\fP A NULL terminated buffer\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of bytes inside the buffer, up to the NULL terminator\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "void* concat (void *src_1, void *src_2, uint32_tsize)"
+
+.PP
+Concatenate two arrays\&. Concatenates two NULL termianted arrays, a src_1 and a src_2 array into a single NULL terminated array containing the contents of both arrays\&. The terminating NULL character in src_1 is overwritten by the first character of src_2, and a NULL character is included at the end of the new array\&. A pointer to the resulting array containing the contents of both arrays is then returned\&.
+.PP
+\fBPrecondition:\fP
+.RS 4
+The arrays src_1 and src_2 MUST BE NULL TERMINATED\&.
+.PP
+The arrays to concatenate MUST contain the same data type for the concatenation to function properly\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsrc_1\fP A pointer to a NULL terminated array\&.
+.br
+\fIsrc_2\fP A pointer to a NULL terminated array\&.
+.br
+\fIsize\fP The size in bytes of each item in the array\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the resulting array containing the concatenated results\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "void* concat_len (void *src_1, void *src_2, uint32_tsize, uint32_tlen)"
+
+.PP
+Concatenate two byte arrays\&. Concatenates a specified number of bytes from src_2 to src_1, into a single NULL terminated array containing the contents of both arrays\&. The difference is that when performing concatenation it concatenates a specified number of bytes from src_2 to src_1\&. The terminating NULL character in src_1 is overwritten by the first character of src_2, and a NULL character is included at the end of the new array\&. A pointer to the resulting array containing the contents of both arrays is then returned\&.
+.PP
+\fBPrecondition:\fP
+.RS 4
+The array src_1 MUST BE NULL TERMINATED\&.
+.PP
+The arrays to concatenate MUST contain the same data type for the concatenation to function properly\&.
+.PP
+The specified length, must be <= the length of src_2\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIsrc_1\fP A pointer to a NULL terminated array\&.
+.br
+\fIsrc_2\fP A pointer to an array\&.
+.br
+\fIsize\fP The size in bytes of each item in the array\&.
+.br
+\fIlen\fP The length in BYTES of the data to concatenate from src_2 to src_1\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the resulting array containing the concatenated results\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBbyte\fP* copy_to_buf (\fBbyte\fP *buf1, \fBbyte\fP *buf2, uint32_tsize1, uint32_tsize2)"
+
+.PP
+Copy the data from one buffer to another, given the size of both\&. \fBParameters:\fP
+.RS 4
+\fIbuf1\fP The buffer to copy from\&.
+.br
+\fIbuf2\fP The buffer to copy to\&.
+.br
+\fIsize1\fP The size of the buffer to copy from\&.
+.br
+\fIsize2\fP The size of the buffer to copy to\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the second buffer with the contents of the first buffer inside\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "bool free_tokens (char **tokens)"
+
+.PP
+Frees the memory allocated for the tokens\&. This function is used to free memory used by dynamic memory allocation methods required for two dimensional string manipulation, preventing memory leaks\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fItokens\fP The NULL terminated 2D array filled with tokens to be freed\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns true if the memory was freed, false if an error occurred\&. 
+.RE
+.PP
+
+.SS "char** tokenize_path (char *pathname)"
+
+.PP
+Tokenize a path into an array of tokens\&. Tokenizes the path provided into an array of tokens for each component in the path and returns an array to a null terminated array of tokens\&. For example using pathname = '/foo/bar' the resulting tokens array would be: * [0] => 'foo' [1] => 'bar' [2] => NULL If an error occurs a NULL pointer will be returned\&. Tokens are each a string, therefore the resultant pointer will point to a two-dimensional array of characters\&.
+.PP
+\fBPrecondition:\fP
+.RS 4
+Each component in the pathname must be at most (including the NULL termination) MAX_NAME_LEN otherwise an error occurs, and a NULL pointer returned\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpathname\fP The pathname to tokenize\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the 2D tokens array\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

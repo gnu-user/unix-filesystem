@@ -1,0 +1,49 @@
+.TH "error.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+error.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBprint_error\fP (\fBerror_code\fP errorno)"
+.br
+.RI "\fIPrints an error code\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void print_error (\fBerror_code\fPerrorno)"
+
+.PP
+Prints an error code\&. Outputs the specified error code to the console\&. Fatal errors will cause the application to terminate immediately to prevent file system or disk corruption\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIThe\fP specified error to output\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

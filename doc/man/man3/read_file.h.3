@@ -1,0 +1,67 @@
+.TH "read_file.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+read_file.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_read\fP (int fd, int start, int length, \fBbyte\fP *mem_pointer)"
+.br
+.RI "\fIRead the contents of a file\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int sfs_read (intfd, intstart, intlength, \fBbyte\fP *mem_pointer)"
+
+.PP
+Read the contents of a file\&. Copy the length of bytes of data specified from a regular file to memory location specified by mem_pointer\&. The parameter start gives the offset of the first byte in the file that should be copied\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfd\fP A file descriptor for the file to read data from\&.
+.br
+\fIstart\fP The offset of the first byte in the file that should be copied\&.
+.br
+\fIlength\fP The length of bytes of data to copy from the file\&.
+.br
+\fImem_pointer\fP The memory location to store the data read from the file\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if the value > 0 then the file was read successfully\&. If the value <= 0 then the file failed to be read\&.
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIFILE_LENGTH_OVERRUN\fP If the file cannot be read correctly because the length of bytes specified exceeds the length of the file, no data will be copied from the file if an overrun occurs\&.
+.br
+\fIINVALID_FILE_DESCRIPTOR\fP If the file descriptor specified does not exist\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

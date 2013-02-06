@@ -1,0 +1,55 @@
+.TH "superblock" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+superblock \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <super_block\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "uint32_t \fBsize_of_disk\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBblock_size\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBfree_block_list\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBroot_dir\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBdevice_id\fP"
+.br
+.ti -1c
+.RI "uuid_t \fBuuid\fP"
+.br
+.in -1c
+.SH "Field Documentation"
+.PP 
+.SS "uint32_t block_size"
+Total number of blocks on the disk\&. 
+.SS "uint32_t device_id"
+Location of the root directory's inode on disk\&. 
+.SS "uint32_t \fBfree_block_list\fP"
+Block size of the disk, in bytes per block\&. 
+.SS "uint32_t root_dir"
+Location of the free block list data structure on disk\&. 
+.SS "uint32_t size_of_disk"
+
+.SS "uuid_t uuid"
+\fBDeprecated\fP
+.RS 4
+Device identifier for the disk\&. No longer required since UUID was implemented\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

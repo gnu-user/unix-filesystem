@@ -1,0 +1,283 @@
+.TH "free_block_list.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+free_block_list.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include 'error\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBfree_block_list\fP"
+.br
+.RI "\fIThe \fBfree_block_list\fP is an array containing the free blocks on disk\&. Elements are marked as free (false), or used (true)\&. The super block always points to the first index block of the \fBfree_block_list\fP\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBfree_block_list\fP * \fBget_free_block_list\fP (void)"
+.br
+.RI "\fIObtains a handle to the free block list static instance, regardless of whether it is available in memory or on disk\&. \fP"
+.ti -1c
+.RI "\fBlocations\fP \fBcalc_total_free_blocks\fP (void)"
+.br
+.RI "\fIUsed to calculate the total amount of available disk space\&. \fP"
+.ti -1c
+.RI "\fBlocations\fP \fBcalc_num_free_blocks\fP (uint32_t num_blocks)"
+.br
+.RI "\fIUsed to calculate whether there is enough disk space before starting to create a file on disk\&. \fP"
+.ti -1c
+.RI "uint32_t \fBget_free_block\fP (void)"
+.br
+.RI "\fIFinds the next free block in the static free block list, marks it as used and returns the location of the block\&. \fP"
+.ti -1c
+.RI "\fBfree_block_list\fP * \fBupdate_fbl\fP (\fBlocations\fP used, \fBlocations\fP free)"
+.br
+.RI "\fIAccessor method for the free block list static instance in memory\&. \fP"
+.ti -1c
+.RI "\fBfree_block_list\fP * \fBsync_fbl\fP (void)"
+.br
+.RI "\fISynchronizes the free block static instance in memory by writing it to disk\&. \fP"
+.ti -1c
+.RI "\fBfree_block_list\fP * \fBreset_fbl\fP (void)"
+.br
+.RI "\fIOverwrites the free block list in memory with the most recent version on disk\&. \fP"
+.ti -1c
+.RI "\fBfree_block_list\fP * \fBwipe_fbl\fP (void)"
+.br
+.RI "\fIReinitializes the free block list in memory\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBlocations\fP calc_num_free_blocks (uint32_tnum_blocks)"
+
+.PP
+Used to calculate whether there is enough disk space before starting to create a file on disk\&. Finds the specified number of free blocks in the static instance of the free block list in memory\&. It returns NULL if there are not enough free blocks, otherwise it returns an array of the free locations\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fInum_blocks\fP The number of free blocks needed\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an array of the free locations, or NULL if there are not enough free blocks\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBlocations\fP calc_total_free_blocks (void)"
+
+.PP
+Used to calculate the total amount of available disk space\&. Finds all of the free blocks that exist in the static instance of the free block list in memory and returns them as a locations object\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an array containing all of the free locations\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t get_free_block (void)"
+
+.PP
+Finds the next free block in the static free block list, marks it as used and returns the location of the block\&. This function finds a single free block and then marks that block as used in the free block list, it ensures that the block on disk is empty (all NULL) before returning the block location\&. It essentially operates as a facade for the calc_free_blocks function and the update_fbl function when you only want to get one block at a time\&. If there are no free blocks available, it will return 0 (the superblock's location), which is always used by the superblock\&.
+.PP
+\fBReturns:\fP
+.RS 4
+The location of a free block\&. Return 0 if no free blocks available\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBfree_block_list\fP* get_free_block_list (void)"
+
+.PP
+Obtains a handle to the free block list static instance, regardless of whether it is available in memory or on disk\&. Gets the free block list independently from where it is located\&. If the free block list does not already exist in memory (file system has just started) it will read the free block list from disk using the index provided by the super block and set the static instance of the free block list in memory\&. Then, return the pointer to the static instance in memory\&. If an error occurs, a NULL pointer is returned\&.
+.PP
+\fBReturns:\fP
+.RS 4
+A pointer to the static instance of free block list in memory, NULL if an error occurred\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBfree_block_list\fP* reset_fbl (void)"
+
+.PP
+Overwrites the free block list in memory with the most recent version on disk\&. Resets the free block list in memory by loading the free blocks list from disk and overwriting the static instance of the free block list in memory\&. This function is used to refresh the state of the free block list in memory if an error occurs\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the static instance of free block list in memory, NULL if an error occurred\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBfree_block_list\fP* sync_fbl (void)"
+
+.PP
+Synchronizes the free block static instance in memory by writing it to disk\&. Writes the static free block list in memory to disk\&. This synchronizes the static free block list in memory with the contents on disk, making the current state of the free blocks on disk permanent\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the static instance of free block list in memory, NULL if an error occurred synchronizing the free block list to disk\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBfree_block_list\fP* update_fbl (\fBlocations\fPused, \fBlocations\fPfree)"
+
+.PP
+Accessor method for the free block list static instance in memory\&. The update FBL method updates the static FBL entry in memory\&. It will take an array of all the locations to mark as used as the first argument, and an array of all the locations to mark as unused as the second argument\&. If the arguments used or free are NULL then no blocks are marked for that type\&.
+.PP
+\fBPrecondition:\fP
+.RS 4
+Parameters used and free MUST be NULL terminated arrays of locations\&.
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIused\fP A NULL terminated array of locations to mark as used in the free block list, if it is NULL then no locations are marked as used\&.
+.br
+\fIfree\fP A NULL terminated array of locations to mark as free in the free block list, if it is NULL then no locations are marked as free\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the static instance of free block list in memory, NULL if an error occurred\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBfree_block_list\fP* wipe_fbl (void)"
+
+.PP
+Reinitializes the free block list in memory\&. Wipes the contents of the free block list in memory, which sets all of the locations in the free block list in memory as free\&. This function is used to reset the free block list in memory after initializing a new disk\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the free block list, NULL if an error occurred\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

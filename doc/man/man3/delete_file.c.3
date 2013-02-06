@@ -1,0 +1,67 @@
+.TH "delete_file.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+delete_file.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include 'blockio\&.h'\fP
+.br
+\fC#include 'traverse_tree\&.h'\fP
+.br
+\fC#include 'free_block_list\&.h'\fP
+.br
+\fC#include 'system_open_file_table\&.h'\fP
+.br
+\fC#include 'delete_file\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_delete\fP (char *pathname)"
+.br
+.RI "\fIDelete a file with the pathname specified\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int sfs_delete (char *pathname)"
+
+.PP
+Delete a file with the pathname specified\&. \fBParameters:\fP
+.RS 4
+\fIpathname\fP The pathname of file to create, must be full directory path
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if the value is > 0 then the file was deleted successfully\&. If the value is <= 0 then the file failed to delete\&.
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIFILE_NOT_FOUND\fP If the file at the specified path does not already exist\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

@@ -1,0 +1,110 @@
+.TH "initialize.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+initialize.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_initialize\fP (int erase)"
+.br
+.RI "\fIInitialize the superblock for the file system\&. \fP"
+.ti -1c
+.RI "int \fBfree_block_init\fP (void)"
+.br
+.RI "\fIAllocate all of the blocks in the free block list\&. \fP"
+.ti -1c
+.RI "int \fBwipe_disk\fP (void)"
+.br
+.RI "\fIWipes the drive block by block\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int free_block_init (void)"
+
+.PP
+Allocate all of the blocks in the free block list\&. This function initializes the free block list data structure for the first time\&. This is used only when the disk is being reinitialized\&. In effect, writing all NULL values to this data structure (save for the superblock) marks all values on the disk free to be written on\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if the free block list initialization fails the value will be -1\&. Otherwise, it will be 0\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int sfs_initialize (interase)"
+
+.PP
+Initialize the superblock for the file system\&. \fBParameters:\fP
+.RS 4
+\fIerase\fP Determines whether or not to delete the contents of the file system\&. If this value is 1 then it will erase every block on the disk and then re-create the super block, free block list data structure and the root directory\&. If the value is 0 then it will re-create the super block, the free block list blocks and the root directory\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if the value > 0 then the initialization was successful\&. If the value <= 0 then the initialization failed\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int wipe_disk (void)"
+
+.PP
+Wipes the drive block by block\&. This function ensures that every block on the disk is initialized to zero\&. Failing to wipe the disk when the file system is reinitialized will result in having garbage data residing in all the blocks that have not yet been written to\&. These blocks are marked as free in the free block list structure regardless, so they are simple overwritten and the data inside is ignored\&. This is analogous to a 'quick format' command\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value\&. If the wipe fails the value will be -1, otherwise it will be 0\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

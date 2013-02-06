@@ -1,0 +1,230 @@
+.TH "index_block.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+index_block.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'index_block\&.h'\fP
+.br
+\fC#include 'glob_func\&.h'\fP
+.br
+\fC#include 'block_func\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBdata_index\fP \fBgenerate_index\fP (uint32_t num_blocks)"
+.br
+.RI "\fIGenerates the indexes for the data blocks and then writes the indexes (which contain the locations of data blocks) to disk\&. \fP"
+.ti -1c
+.RI "uint32_t \fBrebuild_index\fP (\fBlocations\fP data_locations)"
+.br
+.RI "\fITakes a series of loose data block locations and builds a new index to link them with an inode\&. \fP"
+.ti -1c
+.RI "\fBlocations\fP \fBiterate_index\fP (uint32_t location, \fBlocations\fP data_blocks)"
+.br
+.RI "\fIThis function takes an index block data structure and returns the locations of all data blocks which it links to\&. \fP"
+.ti -1c
+.RI "uint32_t \fBcalc_index_blocks\fP (uint32_t num_blocks)"
+.br
+.RI "\fICalculates the number of index blocks that are needed in order to write the number of data blocks specified to the file system\&. \fP"
+.ti -1c
+.RI "int \fBcount_files_in_dir\fP (uint32_t location)"
+.br
+.RI "\fIWrapper for iterate_index which simply gives you a count of the number of files in a directory\&. \fP"
+.ti -1c
+.RI "\fBlocations\fP \fBindex_block_locations\fP (uint32_t location, \fBlocations\fP index_blocks)"
+.br
+.RI "\fIProvides the locations of the index blocks within an index block data structure\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "uint32_t calc_index_blocks (uint32_tnum_blocks)"
+
+.PP
+Calculates the number of index blocks that are needed in order to write the number of data blocks specified to the file system\&. This function uses a calculation based on the specified block size of the disk in order to determine how many locations can be indexed within one block, and then divides the number of specified blocks by this value\&. Since fractions of blocks are not allowed, the function then ceilings the resultant value in order to provide the full length of the required data structure\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fInum_blocks\fP The number of data blocks required to be indexed\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of index blocks needed to write the data blocks to the file system\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int count_files_in_dir (uint32_tlocation)"
+
+.PP
+Wrapper for iterate_index which simply gives you a count of the number of files in a directory\&. \fBParameters:\fP
+.RS 4
+\fIlocation\fP The location of the index block on disk to iterate across\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of locations found in the index block\&. If return = 0 then the directory is empty\&. If return > 0 then the function was successful, and if return = -1 then the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBdata_index\fP generate_index (uint32_tnum_blocks)"
+
+.PP
+Generates the indexes for the data blocks and then writes the indexes (which contain the locations of data blocks) to disk\&. This function returns a \fBdata_index\fP pseudo-object which contains the location of the first index block, and the locations of all the data blocks indexed by the all the indices (spanning the entire index data structure)\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fInum_blocks\fP The number of blocks to generate indexes for\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a \fBdata_index\fP struct which contains the location of the first index block, and the locations of all data blocks indexed
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBlocations\fP index_block_locations (uint32_tlocation, \fBlocations\fPindex_blocks)"
+
+.PP
+Provides the locations of the index blocks within an index block data structure\&. This function iterates recursively through the index blocks in an index block data structure and returns a pointer to a NULL terminated array containing all of the index block locations on disk\&. If an error occurs then NULL is returned\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlocation\fP The location of the first index block\&.
+.br
+\fIindex_blocks\fP An argument used by the function when it recursively calls itself, the argument should be NULL when calling index_block_locations for the first index location\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a list of index block locations\&. If there is an error the value returned will be NULL\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBlocations\fP iterate_index (uint32_tlocation, \fBlocations\fPdata_blocks)"
+
+.PP
+This function takes an index block data structure and returns the locations of all data blocks which it links to\&. This function iterates recursively through the index blocks and returns a pointer to a NULL terminated array containing all of the data block locations stored in the indices\&. In the case of large files that require multiple indexes, when we reach the value ceil(BLOCKSIZE/sizeof(uint32_t) which is the last entry in the index block, we recursively call iterate_index on the index block at this index\&. When we reach a NULL location inside the index block, we have reached the end of the indexes\&. The function returns a NULL pointer if an error occurred\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIlocation\fP The location of the first index block to iterate through\&.
+.br
+\fIdata_blocks\fP An argument used by the function when it recursively calls itself, the argument should be NULL when calling iterate_index for the first index location\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to a NULL terminated array containing all of the data block locations stored in the indices, the pointer is NULL if an error occurred\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t rebuild_index (\fBlocations\fPdata_locations)"
+
+.PP
+Takes a series of loose data block locations and builds a new index to link them with an inode\&. This function takes a NULL terminated array of data locations and turns it into a new index structure, then writes it on disk and returns the location of the first index block\&. The function operates similar to generate_index except you already have all the data locations\&. If an error occurs 0 is returned\&. If NO data_locations are specified an empty index is created and the location is returned\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdata_locations\fP A NULL terminated array of data locations, if NO data locations are provided an empty index is created and the location is returned
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The location of the FIRST index block, if an error occurs 0 is returned
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

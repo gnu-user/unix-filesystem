@@ -1,0 +1,52 @@
+.TH "close_file.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+close_file.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_close\fP (int fd)"
+.br
+.RI "\fICloses the file, which indicates that the file is no longer needed\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int sfs_close (intfd)"
+
+.PP
+Closes the file, which indicates that the file is no longer needed\&. \fBParameters:\fP
+.RS 4
+\fIfd\fP A file descriptor for the file to close\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value\&. If the value is > 0 the file close was a success, if the value <= 0 the file close was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+TODO validate this error message
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

@@ -1,0 +1,150 @@
+.TH "error.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+error.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBerror_code\fP { \fBSUCCESS\fP, \fBINVALID_PARAMETER\fP, \fBDISK_READ_ERROR\fP, \fBDISK_WRITE_ERROR\fP, \fBFILE_NOT_FOUND\fP, \fBINVALID_FILE_TYPE\fP, \fBINVALID_FILE_NAME\fP, \fBINVALID_FILE_DESCRIPTOR\fP, \fBINVALID_PATH\fP, \fBINVALID_PATH_LENGTH\fP, \fBINSUFFICIENT_DISK_SPACE\fP, \fBERROR_UPDATING_SB\fP, \fBERROR_UPDATING_FBL\fP, \fBERROR_UPDATING_SWOFT\fP, \fBINDEX_ALLOCATION_ERROR\fP, \fBERROR_BLOCK_LINKAGE\fP, \fBERROR_BUFFER_SEGMENTATION\fP, \fBPARENT_NOT_FOUND\fP, \fBDIRECTORY_HAS_CHILDREN\fP, \fBDIRECTORY_TRAVERSED\fP, \fBDIRECTORY_EMPTY\fP, \fBFILE_EMPTY\fP, \fBFILE_PAST_EOF\fP, \fBUNKNOWN\fP }"
+.br
+.RI "\fIList of error codes with name definitions\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBprint_error\fP (\fBerror_code\fP errorno)"
+.br
+.RI "\fIPrints an error code\&. \fP"
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBerror_code\fP"
+
+.PP
+List of error codes with name definitions\&. Contains a list of constant integers used as error codes with a human-readable name definitions\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fISUCCESS \fP\fP
+.TP
+\fB\fIINVALID_PARAMETER \fP\fP
+No error occurred, execution was successful\&. 
+.TP
+\fB\fIDISK_READ_ERROR \fP\fP
+An invalid parameter was given to the function\&. 
+.TP
+\fB\fIDISK_WRITE_ERROR \fP\fP
+A block of data could not be read from disk\&. 
+.TP
+\fB\fIFILE_NOT_FOUND \fP\fP
+A block of data could not be written to disk\&. 
+.TP
+\fB\fIINVALID_FILE_TYPE \fP\fP
+The specified file could not be found on disk\&. 
+.TP
+\fB\fIINVALID_FILE_NAME \fP\fP
+The file type specified is invalid\&. 
+.TP
+\fB\fIINVALID_FILE_DESCRIPTOR \fP\fP
+The file name specified is invalid\&. 
+.TP
+\fB\fIINVALID_PATH \fP\fP
+The file descriptor specified is invalid or does not exist\&. 
+.TP
+\fB\fIINVALID_PATH_LENGTH \fP\fP
+The path specified is invalid\&. 
+.TP
+\fB\fIINSUFFICIENT_DISK_SPACE \fP\fP
+The path length given is too long, path tokens cannot be longer than 6 characters\&. 
+.TP
+\fB\fIERROR_UPDATING_SB \fP\fP
+The requested operation does not have sufficient blocks available on disk to complete execution\&. 
+.TP
+\fB\fIERROR_UPDATING_FBL \fP\fP
+Fatal error: The super block could not be updated\&. The file system or disk are corrupted\&. 
+.TP
+\fB\fIERROR_UPDATING_SWOFT \fP\fP
+Fatal error: The free block list could not be updated\&. The file system or disk may be corrupted\&. 
+.TP
+\fB\fIINDEX_ALLOCATION_ERROR \fP\fP
+The system-wide open file table cannot be updated\&. This may be indicative of memory corruption\&. 
+.TP
+\fB\fIERROR_BLOCK_LINKAGE \fP\fP
+The given index block data structure is corrupted, invalid, or empty\&. 
+.TP
+\fB\fIERROR_BUFFER_SEGMENTATION \fP\fP
+An error occurred concerning the linkage of an inode to an index block structure\&. 
+.TP
+\fB\fIPARENT_NOT_FOUND \fP\fP
+An error occurred segmenting a buffer into block-sized chunks\&. 
+.TP
+\fB\fIDIRECTORY_HAS_CHILDREN \fP\fP
+An inode has become loose, and its parent cannot be found\&. 
+.TP
+\fB\fIDIRECTORY_TRAVERSED \fP\fP
+An attempt was made to delete a directory which has children\&. Directories must be empty to be deleted\&. 
+.TP
+\fB\fIDIRECTORY_EMPTY \fP\fP
+A directory was fully traversed\&. Further attempts to read the contents of the directory will begin from the top of the structure\&. 
+.TP
+\fB\fIFILE_EMPTY \fP\fP
+An attempt was made to read the contents of an empty directory\&. 
+.TP
+\fB\fIFILE_PAST_EOF \fP\fP
+An attempt was made to perform operations on a file which contains no data\&. 
+.TP
+\fB\fIUNKNOWN \fP\fP
+An attempt was made to write to a file past the current length of the file, without appending\&. Appending is the only allowed way to increase the length of a file\&. An unknown error occurred\&. 
+.SH "Function Documentation"
+.PP 
+.SS "void print_error (\fBerror_code\fPerrorno)"
+
+.PP
+Prints an error code\&. Outputs the specified error code to the console\&. Fatal errors will cause the application to terminate immediately to prevent file system or disk corruption\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIThe\fP specified error to output\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

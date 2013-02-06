@@ -1,0 +1,458 @@
+.TH "I_node.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+I_node.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'I_node\&.h'\fP
+.br
+\fC#include 'block_func\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBinode\fP \fBget_null_inode\fP ()"
+.br
+.RI "\fIGet an inode set to null state\&. \fP"
+.ti -1c
+.RI "\fBinode\fP * \fBget_inode\fP (uint32_t block_num)"
+.br
+.RI "\fIGet the contents of an inode given its location on disk\&. \fP"
+.ti -1c
+.RI "unsigned char * \fBget_uuid\fP (uint32_t block_num)"
+.br
+.RI "\fIGet an inode's UUID given its location on disk\&. \fP"
+.ti -1c
+.RI "uint32_t \fBget_index_block\fP (uint32_t block_num)"
+.br
+.RI "\fIGet the index block which an inode links to given the inode's location on disk\&. \fP"
+.ti -1c
+.RI "int \fBget_type\fP (uint32_t block_num)"
+.br
+.RI "\fIGet the type of file from an inode, whether it is a directory or a data file\&. \fP"
+.ti -1c
+.RI "uint32_t \fBget_size\fP (uint32_t block_num)"
+.br
+.RI "\fIGet size of a file given its inode's location on disk\&. \fP"
+.ti -1c
+.RI "int \fBget_encrypted\fP (uint32_t block_num)"
+.br
+.RI "\fICheck if the specified file is encrypted given its inode's location on disk\&. \fP"
+.ti -1c
+.RI "char * \fBget_name\fP (uint32_t block_num)"
+.br
+.RI "\fIGet the name of the file given its inode's location on disk\&. \fP"
+.ti -1c
+.RI "uint32_t \fBget_crc\fP (uint32_t block_num)"
+.br
+.RI "\fIGet the encryption checksum of a file given its inode's location on disk\&. \fP"
+.ti -1c
+.RI "uint32_t \fBfind_inode\fP (\fBlocations\fP index_blocks, char *name)"
+.br
+.ti -1c
+.RI "int \fBlink_inode_to_parent\fP (uint32_t parent_location, uint32_t inode_location)"
+.br
+.RI "\fILinks the inode to a parent's index structure\&. \fP"
+.ti -1c
+.RI "int \fBunlink_inode_from_parent\fP (uint32_t parent_location, uint32_t inode_location)"
+.br
+.RI "\fIUnlinks a child's inode from the parent's index structure\&. \fP"
+.ti -1c
+.RI "int \fBget_index_entry\fP (\fBinode\fP directory)"
+.br
+.RI "\fIGets the next entry for the current directory and increments the index of the last accessed item within a directory\&. \fP"
+.ti -1c
+.RI "void \fBreset_index_entry\fP ()"
+.br
+.RI "\fIResets the index entry count\&. Attempting to get the next directory item after this function has executed will get the first item in the directory\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "uint32_t find_inode (\fBlocations\fPindex_blocks, char *name)"
+
+.SS "uint32_t get_crc (uint32_tblock_num)"
+
+.PP
+Get the encryption checksum of a file given its inode's location on disk\&. This function retrieves the encryption checksum for a file's data blocks, so that it can be determined whether the encryption and decryption process was completed successfully\&. This is done by retrieving the inode and analyzing the contents based on the defined inode data structure\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The block location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the checksum, which is a string\&. If the function returns NULL, then the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int get_encrypted (uint32_tblock_num)"
+
+.PP
+Check if the specified file is encrypted given its inode's location on disk\&. This function checks whether a file's data blocks are encrypted by retrieving the inode and analyzing the contents based on the defined inode data structure\&. This allows for the file system to determine whether to decrypt the data blocks associated with the file before reading, or whether they are aren't encrypted and can be read normally\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The block location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns whether the file is encrypted\&. If the returned value is 0 then the file is not encrypted and if it is 1 then the file is encrypted\&. Otherwise, the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t get_index_block (uint32_tblock_num)"
+
+.PP
+Get the index block which an inode links to given the inode's location on disk\&. This function retrieves the first index block location from an inode by retrieving the block and analyzing the contents based on the defined inode data structure\&. This allows the inode to be associated with its index block data structure, which in turn allows for the retrieval of all the data blocks associated with the file\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The block location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the location of the index block on disk\&. If index >= 0 then the function was successful, if index < 0 then the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int get_index_entry (\fBinode\fPdirectory)"
+
+.PP
+Gets the next entry for the current directory and increments the index of the last accessed item within a directory\&. This function is used when reading directories\&. Directory elements are retrieved from an index data structure that corresponds with a directory's inode\&. Each of these elements must be iterated through in order to fully traverse a directory's contents\&. After the entire directory contents are traversed, the function returns a zero value\&. If the contents are traversed again, the function restarts from the beginning\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdirectory\fP The inode of the current directory\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the directory element\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBinode\fP* get_inode (uint32_tblock_num)"
+
+.PP
+Get the contents of an inode given its location on disk\&. This function retrieves an inode given its location by retrieving the block and analyzing the contents based on the defined inode data structure\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The block location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the inode at the given location\&. If the returned value is NULL, an inode was not found at the specified location\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "char* get_name (uint32_tblock_num)"
+
+.PP
+Get the name of the file given its inode's location on disk\&. This function determines the human-readable name of a file by retrieving the inode and analyzing the contents based on the defined inode data structure\&. The name is a human-readable string\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The block location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the file's name, which is a string\&. If the function returns NULL, then the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBinode\fP get_null_inode ()"
+
+.PP
+Get an inode set to null state\&. This function generates a single block of null-initialized data using the predefined BLKSIZE constant\&. It then outputs it as type inode\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a null-initialized inode data structure\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t get_size (uint32_tblock_num)"
+
+.PP
+Get size of a file given its inode's location on disk\&. This function retrieves the file size attribute from an inode by retrieving the block and analyzing the contents based on the defined inode data structure\&. This allows for the file system to quickly retrieve the size of the data (in bytes) stored within a file's data blocks\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The block location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the size of the data blocks' contents for the file in bytes\&. If the returned size >= 0, then the function was successful, if the returned size < 0, then the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int get_type (uint32_tblock_num)"
+
+.PP
+Get the type of file from an inode, whether it is a directory or a data file\&. This function retrieves the file type attribute from an inode by retrieving the block and analyzing the contents based on the defined inode data structure\&. This allows for the file system to determine whether an inode is for a data file or a directory\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The block location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the type of the file\&. If the function returns 1, then the inode is for a directory, if the function returns 0, then the inode is for a data file, Otherwise retrieving the type was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "unsigned char* get_uuid (uint32_tblock_num)"
+
+.PP
+Get an inode's UUID given its location on disk\&. This function retrieves a UUID from an inode by retrieving the block and analyzing the contents based on the defined inode data structure\&. UUIDs are human-readable strings, therefore the return type for this operation is an array of characters\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The block location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a pointer to the UUID from within the inode at the given location\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int link_inode_to_parent (uint32_tparent_location, uint32_tinode_location)"
+
+.PP
+Links the inode to a parent's index structure\&. This function works by accessing the specified parent inode, and accessing the index data structure that it links to within its defined inode data structure\&. After accessing this index structure, the specified child inode is appended to the index\&. The index is rebuilt and written to disk, and the newly created index is linked to within the parent's inode\&. This inode is then rewritten at the original location, overwriting the old one\&. Upon completion of this operation the old index blocks are freed\&. If a failure occurs during this operation, the changes are automatically undone\&. The internal implementation of this function utilizes copy-on-write journalling in order to prevent any damage to the file system from failed operations\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent_location\fP The parent's location on disk\&.
+.br
+\fIinode_location\fP The child inode's location on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a value to signify success or failure\&. If the value is >= 0 the function was successful\&. If value is < 0, the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "void reset_index_entry ()"
+
+.PP
+Resets the index entry count\&. Attempting to get the next directory item after this function has executed will get the first item in the directory\&. This function is used to reset the iterator for traversing the contents of a directory structure\&. After this function is called, any further attempts at traversing the contents of a directory will start over again from the first element\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int unlink_inode_from_parent (uint32_tparent_location, uint32_tinode_location)"
+
+.PP
+Unlinks a child's inode from the parent's index structure\&. This function works by accessing the specified parent inode, and accessing the index data structure that it links to within its defined inode data structure\&. After accessing this index structure, the block at each indexed location is loaded and the name attribute within the inode at that block is checked against the name within the specified child inode\&. Once a match is found, the corresponding indexed block is removed from the index structure\&. The index is rebuilt and written to disk, and the newly created index is linked to within the parent's inode\&. This inode is then rewritten at the original location, overwriting the old one\&. Upon completion of this operation the old index blocks are freed\&. If a failure occurs during this operation, the changes are automatically undone\&. The internal implementation of this function utilizes copy-on-write journalling in order to prevent any damage to the file system from failed operations\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIparent_location\fP The parent's location on disk\&.
+.br
+\fIinode_location\fP The child inode's location on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a value to signify success or failure\&. If the value is >= 0 the function was successful\&. If value is < 0, the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

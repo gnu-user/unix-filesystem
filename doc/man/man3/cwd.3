@@ -1,0 +1,54 @@
+.TH "cwd" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cwd \- 
+.PP
+Holds the current working directory data\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <I_node\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBinode\fP \fBdirectory\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBcur_index\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Holds the current working directory data\&. 
+
+This struct holds the current working directory in memory\&. It is used in a pseudo-object oriented fashion in order to encapsulate the data pertaining to the contents of the current working directory and the last directory element that was retrieved from reading the directory contents\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Field Documentation"
+.PP 
+.SS "uint32_t cur_index"
+This contains the inode for the current working directory\&. 
+.SS "\fBinode\fP directory"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

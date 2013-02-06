@@ -1,0 +1,248 @@
+.TH "system_open_file_table.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+system_open_file_table.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'system_open_file_table\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBadd_to_swoft\fP (uint32_t block_num)"
+.br
+.RI "\fIAdd the inode to the system wide open file table\&. \fP"
+.ti -1c
+.RI "int \fBfind_opening\fP (void)"
+.br
+.RI "\fIFinds an open location in the swoft\&. \fP"
+.ti -1c
+.RI "int \fBvalidate_fd\fP (int fd)"
+.br
+.RI "\fIValidate whether the given file descriptor is a valid file descriptor in the system wide open file table\&. \fP"
+.ti -1c
+.RI "\fBinode\fP \fBget_swoft_inode\fP (int fd)"
+.br
+.RI "\fIGet an inode instance from the system wide open file table\&. \fP"
+.ti -1c
+.RI "uint32_t \fBget_inode_loc\fP (int fd)"
+.br
+.RI "\fIGet the location of the inode on disk which corresponds to a file descriptor\&. \fP"
+.ti -1c
+.RI "void \fBremove_fd\fP (int fd)"
+.br
+.RI "\fIRemove a file descriptor from the system wide open file table\&. \fP"
+.ti -1c
+.RI "uint32_t \fBfind_and_remove\fP (uint32_t inode_location)"
+.br
+.RI "\fIFind all the system wide open file table indices that have the same data as the given location on disk, and remove them from the system wide open file table\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBswoft\fP \fBsystem_open_tb\fP = {0}"
+.br
+.RI "\fIThe static instance of the system wide open file table\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int add_to_swoft (uint32_tblock_num)"
+
+.PP
+Add the inode to the system wide open file table\&. This function takes an inode's block location on disk, reads that block, and assigns the returned inode location on disk into memory to a file descriptor - this is an index on the system wide open file table\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIblock_num\fP The inode's location on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if the value >= 0 then the inode was found and added to the system wide open file table\&. If the value = -1 then the table was full\&. If the value = -2 then the inode was not found\&. By default, any other return value signals that the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t find_and_remove (uint32_tinode_location)"
+
+.PP
+Find all the system wide open file table indices that have the same data as the given location on disk, and remove them from the system wide open file table\&. This function is used when deleting files\&. In order to remove all open handles to a file when it is removed from disk, the system wide open file table must have all corresponding handles removed\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIinode_location\fP The location of the inode on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value indicating the number of entries deleted from the system wide open file table\&. 
+.RE
+.PP
+
+.SS "int find_opening (void)"
+
+.PP
+Finds an open location in the swoft\&. This function finds the next open location in the system wide open file table and returns the first location in the swoft that is available\&.
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the first location in the swoft that is available, if the value >= 0 then it is the first available location found\&. Otherwise if the value < 0 then the swoft is full\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "uint32_t get_inode_loc (intfd)"
+
+.PP
+Get the location of the inode on disk which corresponds to a file descriptor\&. This function takes a file descriptor, and if there is a valid inode pseudo-object at that index on the system wide open file table, the location of that object on disk is returned from accessing it within the pseudo-object\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfd\fP The file descriptor\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the location of the inode on disk\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "\fBinode\fP get_swoft_inode (intfd)"
+
+.PP
+Get an inode instance from the system wide open file table\&. This function takes a file descriptor, which is an index on the system wide open file table\&. If there is an inode pseudo-object at the index specified, it is returned\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfd\fP The file descriptor\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the inode instance from the system wide open file table given the file descriptor\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "void remove_fd (intfd)"
+
+.PP
+Remove a file descriptor from the system wide open file table\&. This function accesses an index on the system wide open file table, and frees whatever data is in memory corresponding to that index\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfd\fP The file descriptor to remove\&. 
+.RE
+.PP
+
+.SS "int validate_fd (intfd)"
+
+.PP
+Validate whether the given file descriptor is a valid file descriptor in the system wide open file table\&. \fBParameters:\fP
+.RS 4
+\fIfd\fP The file descriptor\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value, if the value >= 0 the file descriptor was valid, otherwise the file descriptor was invalid, or the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "system_open_tb = {0}"
+
+.PP
+The static instance of the system wide open file table\&. This variable holds the singleton instance of the system wide open file table\&. It represents an instance of a pseudo-object which can only be accessed and modified through the accessor and mutator methods provided\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

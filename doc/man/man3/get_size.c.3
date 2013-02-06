@@ -1,0 +1,67 @@
+.TH "get_size.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+get_size.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include 'blockio\&.h'\fP
+.br
+\fC#include 'traverse_tree\&.h'\fP
+.br
+\fC#include 'get_size\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_getsize\fP (char *pathname)"
+.br
+.RI "\fIGet the size (in blocks) of the file with the pathname specified\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int sfs_getsize (char *pathname)"
+
+.PP
+Get the size (in blocks) of the file with the pathname specified\&. Traverses the index block structure of a given file, reads all the locations inside, and the number of blocks is returned\&. If the file is a data file, the size of the file is returned\&. If the file is a directory, the number of elements within the directory will be returned\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpathname\fP The pathname of the file or directory, must be full directory path\&. Relative paths are not accepted\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the size of the given file\&. If the value < 0 then an error occurred\&.
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIFILE_NOT_FOUND\fP If the file at the given pathname does not exist\&.
+.br
+\fIINVALID_PATH\fP If if the path specified is invalid, incomplete, or does not exist\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

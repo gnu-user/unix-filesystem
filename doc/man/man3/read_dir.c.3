@@ -1,0 +1,69 @@
+.TH "read_dir.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+read_dir.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include 'blockio\&.h'\fP
+.br
+\fC#include 'index_block\&.h'\fP
+.br
+\fC#include 'system_open_file_table\&.h'\fP
+.br
+\fC#include 'read_dir\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_readdir\fP (int fd, char *mem_pointer)"
+.br
+.RI "\fIList the contents of a directory\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int sfs_readdir (intfd, char *mem_pointer)"
+
+.PP
+List the contents of a directory\&. Reads the file name components from a directory file\&. This is done by reading in all the locations from within a directory file's index structure and analyzing the inodes at each location\&. The first time sfs_readdir is called, the first file name component in the directory will be placed into memory at the location pointed to by mem_pointer\&. Each successive call to sfs_readdir will place the next name component from the directory into the mem_pointer buffer\&. When all names have been returned, sfs_readdir will place nothing in the buffer, and return a value of zero to indicate the directory has been completely scanned\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfd\fP A file descriptor for the file to read data from\&.
+.br
+\fImem_pointer\fP The memory location to store the file name components\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value\&. If the value > 0 reading the directory was successful\&. If the value = 0, there is nothing contents in the directory\&. If the value < 0 the directory read operation was unsuccessful\&.
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIINVALID_FILE_DESCRIPTOR\fP If the file descriptor specified does not exist\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

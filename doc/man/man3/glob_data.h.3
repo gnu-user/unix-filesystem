@@ -1,0 +1,178 @@
+.TH "glob_data.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+glob_data.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAX_IO_LENGTH\fP   1024"
+.br
+.RI "\fIDefines the maximum length of any input or output buffer in the test interface for the file system\&. \fP"
+.ti -1c
+.RI "#define \fBIO_BUF_FORMAT\fP   '%512s'"
+.br
+.RI "\fIDefines the format of the input/output buffer\&. \fP"
+.ti -1c
+.RI "#define \fBMAX_INPUT_LENGTH\fP   512"
+.br
+.RI "\fIThis is the maximum length of input strings (e\&.g\&., file names) read from the standard input\&. This should be large enough for most purposes\&. the format definition is necessary because macro substitutions do not take place within quoted strings\&. \fP"
+.ti -1c
+.RI "#define \fBINPUT_BUF_FORMAT\fP   '%1024s'"
+.br
+.RI "\fIDefines the format of the input buffer\&. \fP"
+.ti -1c
+.RI "#define \fBBLKSIZE\fP   128"
+.br
+.RI "\fIDefine if we are doing unit testing instead of executing sfs_test\&. \fP"
+.ti -1c
+.RI "#define \fBNUMBLKS\fP   512"
+.br
+.RI "\fIThe number of blocks on simulated disk\&. \fP"
+.ti -1c
+.RI "#define \fBNUMOFL\fP   32"
+.br
+.RI "\fIThe number of files that can be open at once\&. Determines the size of the system-wide open file table\&. \fP"
+.ti -1c
+.RI "#define \fBMAX_NAME_LEN\fP   7"
+.br
+.RI "\fIThe maximum length of a component in a pathname including the NULL terminator\&. \fP"
+.ti -1c
+.RI "#define \fBSUPER_BLOCK\fP   0"
+.br
+.RI "\fIDetermines the default location of the super block on disk\&. \fP"
+.ti -1c
+.RI "#define \fBFBL_INDEX\fP   1"
+.br
+.RI "\fIDetermines the default location of the free block list's index data structure\&. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef uint8_t \fBbyte\fP"
+.br
+.RI "\fIA byte is defined as an 8-bit unsigned integer\&. \fP"
+.ti -1c
+.RI "typedef \fBbyte\fP \fBblock\fP [\fBBLKSIZE\fP]"
+.br
+.RI "\fIA block is defined as an array of bytes, with each element specified as the size of one block\&. \fP"
+.ti -1c
+.RI "typedef uint32_t * \fBlocations\fP"
+.br
+.RI "\fIA NULL terminated array of locations for blocks on disk\&. Locations' indices are represented by 32-bit unsigned integers\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "uint32_t \fBFBL_DATA_SIZE\fP"
+.br
+.RI "\fIThe size of the free block list data blocks, not including the overhead of the size of each index block needed to index the free block list data blocks\&. \fP"
+.ti -1c
+.RI "uint32_t \fBFBL_TOTAL_SIZE\fP"
+.br
+.RI "\fIThe total size of the free block list data blocks, including the overhead of the size of each index block needed to index the free block list data blocks\&. \fP"
+.ti -1c
+.RI "uint32_t \fBROOT\fP"
+.br
+.RI "\fIThe default location for the root directory's inode\&. \fP"
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BLKSIZE   128"
+
+.PP
+Define if we are doing unit testing instead of executing sfs_test\&. UNIT_TESTING
+.PP
+\fBDeprecated\fP
+.RS 4
+This definition is no longer used since the unit test suite was no longer used and deprecated once the high-level file system functions were implemented\&. 
+.RE
+.PP
+BLKSIZE
+.PP
+The size of blocks on the simulated disk\&. 
+.SS "#define FBL_INDEX   1"
+
+.PP
+Determines the default location of the free block list's index data structure\&. FBL_INDEX 
+.SS "#define INPUT_BUF_FORMAT   '%1024s'"
+
+.PP
+Defines the format of the input buffer\&. INPUT_BUF_FORMAT 
+.SS "#define IO_BUF_FORMAT   '%512s'"
+
+.PP
+Defines the format of the input/output buffer\&. IO_BUF_FORMAT 
+.SS "#define MAX_INPUT_LENGTH   512"
+
+.PP
+This is the maximum length of input strings (e\&.g\&., file names) read from the standard input\&. This should be large enough for most purposes\&. the format definition is necessary because macro substitutions do not take place within quoted strings\&. MAX_INPUT_LENGTH 
+.SS "#define MAX_IO_LENGTH   1024"
+
+.PP
+Defines the maximum length of any input or output buffer in the test interface for the file system\&. MAX_IO_LENGTH
+.PP
+This is the maximum number of bytes that can be read from or written to a file with a single file system call using this program\&. Since files are limited to 512 bytes length, this should be sufficient\&. The format definition is necessary because macro substitutions do not take place within quoted strings\&. The maximum length is defined as 1024 bytes\&. 
+.SS "#define MAX_NAME_LEN   7"
+
+.PP
+The maximum length of a component in a pathname including the NULL terminator\&. MAX_NAME_LEN 
+.SS "#define NUMBLKS   512"
+
+.PP
+The number of blocks on simulated disk\&. NUMBLKS 
+.SS "#define NUMOFL   32"
+
+.PP
+The number of files that can be open at once\&. Determines the size of the system-wide open file table\&. NUMOFL 
+.SS "#define SUPER_BLOCK   0"
+
+.PP
+Determines the default location of the super block on disk\&. SUPER_BLOCK 
+.SH "Typedef Documentation"
+.PP 
+.SS "block"
+
+.PP
+A block is defined as an array of bytes, with each element specified as the size of one block\&. \fBSee Also:\fP
+.RS 4
+\fBBLKSIZE\fP 
+.RE
+.PP
+
+.SS "\fBbyte\fP"
+
+.PP
+A byte is defined as an 8-bit unsigned integer\&. 
+.SS "\fBlocations\fP"
+
+.PP
+A NULL terminated array of locations for blocks on disk\&. Locations' indices are represented by 32-bit unsigned integers\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "FBL_DATA_SIZE"
+
+.PP
+The size of the free block list data blocks, not including the overhead of the size of each index block needed to index the free block list data blocks\&. 
+.SS "FBL_TOTAL_SIZE"
+
+.PP
+The total size of the free block list data blocks, including the overhead of the size of each index block needed to index the free block list data blocks\&. 
+.SS "ROOT"
+
+.PP
+The default location for the root directory's inode\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

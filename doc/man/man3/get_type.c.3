@@ -1,0 +1,63 @@
+.TH "get_type.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+get_type.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'blockio\&.h'\fP
+.br
+\fC#include 'traverse_tree\&.h'\fP
+.br
+\fC#include 'get_type\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_gettype\fP (char *pathname)"
+.br
+.RI "\fIGet the type of the file with the pathname specified\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int sfs_gettype (char *pathname)"
+
+.PP
+Get the type of the file with the pathname specified\&. \fBParameters:\fP
+.RS 4
+\fIpathname\fP The pathname of file to create, must be full directory path\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the file type of the given file\&. If the file type >= 0 then the file type retrieval was a success\&.If the file type is 0, or 1 then it is a file, or directory respectively\&. If the file type > 1 then the file type is not known\&. If the file type < 0 then the file type retrieval failed\&.
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIFILE_NOT_FOUND\fP If the file at the specified path does not exist\&.
+.br
+\fIINVALID_PATH\fP If the specified path is invalid\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

@@ -1,0 +1,119 @@
+.TH "inode" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+inode \- 
+.PP
+Contains the data stored in inodes\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <I_node\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char \fBname\fP [\fBMAX_NAME_LEN\fP]"
+.br
+.ti -1c
+.RI "bool \fBtype\fP"
+.br
+.ti -1c
+.RI "bool \fBread\fP"
+.br
+.ti -1c
+.RI "bool \fBwrite\fP"
+.br
+.ti -1c
+.RI "bool \fBexecute\fP"
+.br
+.ti -1c
+.RI "time_t \fBdate_of_create\fP"
+.br
+.ti -1c
+.RI "time_t \fBdate_last_accessed\fP"
+.br
+.ti -1c
+.RI "time_t \fBdate_last_modified\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBfile_owner\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBlast_user_modified\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBfile_size\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBlocation\fP"
+.br
+.ti -1c
+.RI "bool \fBencrypted\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBcheck_sum\fP"
+.br
+.ti -1c
+.RI "uuid_t \fBuuid\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Contains the data stored in inodes\&. 
+
+This struct defines the data which will be stored inside blocks designated as inodes on the disk\&. In particular, inodes store data pertaining to the attributes of they files they represent, as well as linkages to the index block structure that allows the file system to track their associated data blocks\&. Since files can be either a directory or a data file, inodes provide all the data required to track both types of data structures\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Field Documentation"
+.PP 
+.SS "uint32_t check_sum"
+This flags whether the file's data contents are encrypted\&. 
+.SS "time_t date_last_accessed"
+This stores what the date of creation is for the file in POSIX time format\&. 
+.SS "time_t date_last_modified"
+This stores the date that the file was last accessed by the file system in POSIX time format\&. 
+.SS "time_t date_of_create"
+This flags whether the file is marked as executable or not\&. 
+.SS "bool encrypted"
+This stores the location of the file's first index block on disk\&. 
+.SS "bool execute"
+This flags whether the file is marked as writable or not\&. 
+.SS "uint32_t file_owner"
+This stores the date that the file was last modified by the file system in POSIX time format\&. 
+.SS "uint32_t file_size"
+This stores the name of the last user who modified the file\&. 
+.SS "uint32_t last_user_modified"
+This stores the name of the owner of the file\&. 
+.SS "uint32_t location"
+This stores the size of the file in bytes\&. 
+.SS "char name[\fBMAX_NAME_LEN\fP]"
+
+.SS "bool read"
+The type of file\&. Files can be either data files, or directories\&. 
+.SS "bool type"
+The human-readable name of the file\&. 
+.SS "uuid_t uuid"
+This stores the encryption checksum for the file, to determine whether it has been encrypted or unencrypted correctly\&. 
+.SS "bool write"
+This flags whether the file is marked as readable or not\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

@@ -1,0 +1,80 @@
+.TH "blockio.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+blockio.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include 'blockio\&.h'\fP
+.br
+\fC#include 'glob_data\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDISKFILE\fP   'simdisk\&.data'"
+.br
+.ti -1c
+.RI "#define \fBDISKFILEMODE\fP   S_IRUSR|S_IWUSR|S_IRWXG"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBget_block\fP (uint32_t blknum, \fBbyte\fP *buf)"
+.br
+.RI "\fIRetrieves a block from disk\&. \fP"
+.ti -1c
+.RI "int \fBput_block\fP (uint32_t blknum, \fBbyte\fP *buf)"
+.br
+.RI "\fIWrites a block to disk\&. \fP"
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DISKFILE   'simdisk\&.data'"
+
+.SS "#define DISKFILEMODE   S_IRUSR|S_IWUSR|S_IRWXG"
+
+.SH "Function Documentation"
+.PP 
+.SS "int get_block (uint32_tblknum, \fBbyte\fP *buf)"
+
+.PP
+Retrieves a block from disk\&. \fBParameters:\fP
+.RS 4
+\fIblknum\fP Which disk block to retrieve\&.
+.br
+\fIbuf\fP Where in memory to put the retrieved data\&. 
+.RE
+.PP
+
+.SS "int put_block (uint32_tblknum, \fBbyte\fP *buf)"
+
+.PP
+Writes a block to disk\&. \fBParameters:\fP
+.RS 4
+\fIblknum\fP Which disk block to update\&.
+.br
+\fIbuf\fP Where in memory to get new disk block contents\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

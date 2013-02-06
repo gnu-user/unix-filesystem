@@ -1,0 +1,60 @@
+.TH "traverse_tree.c" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+traverse_tree.c \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include 'traverse_tree\&.h'\fP
+.br
+\fC#include 'super_block\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "uint32_t * \fBtraverse_file_system\fP (char **tokens, bool create)"
+.br
+.RI "\fITraverse the file system structure\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "uint32_t* traverse_file_system (char **tokens, boolcreate)"
+
+.PP
+Traverse the file system structure\&. Given the tokens for the path, traverse the file system to either the last token or the second last based on the value in the create flag\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fItokens\fP The pre-parsed pathname tokens\&.
+.br
+\fIcreate\fP Flags whether to get the parent directory or the child entity if create is true, get the parent\&. Otherwise, get the child\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a location on disk\&. If create is true, the location of the parent is returned and the last token in the tokens array\&. If create is false, the location of the inode is returned and the second element will be null\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

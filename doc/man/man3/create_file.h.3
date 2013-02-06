@@ -1,0 +1,78 @@
+.TH "create_file.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+create_file.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBCREATE_SIZE\fP   2"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_create\fP (char *pathname, int type)"
+.br
+.RI "\fICreates a new file or directory at the path specified\&. \fP"
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define CREATE_SIZE   2"
+
+.SH "Function Documentation"
+.PP 
+.SS "int sfs_create (char *pathname, inttype)"
+
+.PP
+Creates a new file or directory at the path specified\&. Create a file with the pathname specified\&. If there is not already a file with the same pathname, the pathname must contain the full directory path\&. The parameter type specifies whether a regular file or a directory file should be created\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpathname\fP The pathname of file to create, it must be a full directory path\&.
+.br
+\fItype\fP The type of file to create, zero for a regular file, one for a directory\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value\&. If the value > 0 the file creation was a success, and if the value <= 0 the file createion was unsuccessful\&.
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIINVALID_FILE_NAME\fP If the specified file name is already in use\&.
+.br
+\fIINVALID_FILE_TYPE\fP If the file type specified is not a regular file (0) or a directory file (1)\&.
+.br
+\fIINVALID_PATH\fP If the pathname specified does not already exist\&.
+.br
+\fIINSUFFICIENT_DISK_SPACE\fP If the length of the blocks to be written is greater than the amount of available blocks on disk\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

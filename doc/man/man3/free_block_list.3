@@ -1,0 +1,31 @@
+.TH "free_block_list" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+free_block_list \- 
+.PP
+The \fBfree_block_list\fP is an array containing the free blocks on disk\&. Elements are marked as free (false), or used (true)\&. The super block always points to the first index block of the \fBfree_block_list\fP\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <free_block_list\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "bool \fBfree_blocks\fP [\fBNUMBLKS\fP]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The \fBfree_block_list\fP is an array containing the free blocks on disk\&. Elements are marked as free (false), or used (true)\&. The super block always points to the first index block of the \fBfree_block_list\fP\&. 
+.SH "Field Documentation"
+.PP 
+.SS "bool free_blocks[\fBNUMBLKS\fP]"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

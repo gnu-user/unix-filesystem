@@ -1,0 +1,124 @@
+.TH "block_func.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+block_func.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'blockio\&.h'\fP
+.br
+\fC#include 'glob_data\&.h'\fP
+.br
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBwrite_block\fP (uint32_t location, \fBbyte\fP *buf)"
+.br
+.RI "\fIA wrapper for the put_block function\&. \fP"
+.ti -1c
+.RI "int \fBread_block\fP (uint32_t location, \fBbyte\fP *buf)"
+.br
+.RI "\fIA wrapper for the get_block function\&. \fP"
+.ti -1c
+.RI "\fBbyte\fP * \fBget_data\fP (\fBlocations\fP location)"
+.br
+.RI "\fIGet the data blocks and concatenate them into a large byte buffer\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBbyte\fP* get_data (\fBlocations\fPlocation)"
+
+.PP
+Get the data blocks and concatenate them into a large byte buffer\&. \fBParameters:\fP
+.RS 4
+\fIlocation\fP The locations of the data blocks on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the data_buffer containing all of the bytes of data\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int read_block (uint32_tlocation, \fBbyte\fP *buf)"
+
+.PP
+A wrapper for the get_block function\&. \fBParameters:\fP
+.RS 4
+\fIlocation\fP The location on disk for the buffer to be written to\&.
+.br
+\fIThe\fP buffer to store on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value\&. If the value >= 0 the function was successful\&. Otherwise, the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int write_block (uint32_tlocation, \fBbyte\fP *buf)"
+
+.PP
+A wrapper for the put_block function\&. \fBParameters:\fP
+.RS 4
+\fIlocation\fP The location on disk for the buffer to be written to\&.
+.br
+\fIThe\fP buffer to store on disk\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value\&. If the value >= 0, the function was successful\&. Otherwise, the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

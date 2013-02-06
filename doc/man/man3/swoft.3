@@ -1,0 +1,54 @@
+.TH "swoft" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+swoft \- 
+.PP
+Pseudo-object containing the array of open file descriptors\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <system_open_file_table\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "uint32_t \fBfd\fP [\fBNUMOFL\fP]"
+.br
+.ti -1c
+.RI "bool \fBtaken\fP [\fBNUMOFL\fP]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Pseudo-object containing the array of open file descriptors\&. 
+
+The system wide open file table contains an array of file descriptors, which are locations of inodes that have been read from the disk into memory\&. These are used as handles to the files which exist on disk, and are synchronized with the data on disk upon modification\&. One instance needs to exist per file\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Field Documentation"
+.PP 
+.SS "uint32_t fd[\fBNUMOFL\fP]"
+
+.SS "bool taken[\fBNUMOFL\fP]"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.

@@ -1,0 +1,95 @@
+.TH "open_file.h" 3 "Mon Nov 26 2012" "Version 1.0" "SneakyFS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+open_file.h \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'error\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsfs_open\fP (char *pathname)"
+.br
+.RI "\fIOpens the file specified by the pathname, if the file is successfully opened a file descriptor is returned\&. \fP"
+.ti -1c
+.RI "int \fBshow_information\fP (int fd)"
+.br
+.RI "\fIShow all of the information stored in the given file descriptor\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int sfs_open (char *pathname)"
+
+.PP
+Opens the file specified by the pathname, if the file is successfully opened a file descriptor is returned\&. Since file descriptors are simply copies of inodes, this function traverses the specified path and attempts to find the inode with a name that matches the one specified in the path\&. This is done by traversing the index blocks at each token in the path specified, and checking the name of the path token against the inodes at each location specified by the index\&. Once the inode with the name matching the final path token has been found, the inode pseudo-object returned is added to the system-wide open file table\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpathname\fP The full pathname of a file\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns a file descriptor for the file opened\&. If the fd >= 0 then the file has successfully opened\&. If the fd < 0 then the file has failed to open\&.
+.RE
+.PP
+\fBExceptions:\fP
+.RS 4
+\fIFILE_NOT_FOUND\fP If the file at the specified path does not exist\&.
+.br
+\fIINVALID_PATH\fP If the specified path is invalid\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SS "int show_information (intfd)"
+
+.PP
+Show all of the information stored in the given file descriptor\&. Since file descriptors are simply inode pseudo-objects, this function simply prints the attributes associated with an inode's defined data structure\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfd\fP integer, the file descriptor\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns an integer value\&. The function is adjusted to output the file descriptor if the file descriptor is retrieved successfully, to allow for it to be used on the return line\&. If the value returned is >= 0 then the function successfully retrieved a file descriptor\&. If the value < 0 then the function was unsuccessful\&.
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Daniel Smullen
+.PP
+Jonathan Gillett
+.PP
+Joseph Heron
+.RE
+.PP
+\fBCopyright:\fP
+.RS 4
+GNU General Public License V3 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SneakyFS from the source code\&.
