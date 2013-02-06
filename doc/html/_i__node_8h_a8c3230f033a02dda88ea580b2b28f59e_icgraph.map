@@ -1,0 +1,10 @@
+<map id="get_index_block" name="get_index_block">
+<area shape="rect" id="node3" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="367,29,449,56"/>
+<area shape="rect" id="node10" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="367,80,449,107"/>
+<area shape="rect" id="node13" href="$get__size_8h.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="363,232,453,259"/>
+<area shape="rect" id="node16" href="$traverse__tree_8h.html#a91c00022d1ad5207d846646fac32e4b0" title="Traverse the file system structure." alt="" coords="171,131,314,157"/>
+<area shape="rect" id="node5" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="502,29,597,56"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="645,105,715,132"/>
+<area shape="rect" id="node21" href="$get__type_8h.html#a8ce020071b4ba304d7bb45b6c1e246f5" title="Get the type of the file with the pathname specified." alt="" coords="504,181,595,208"/>
+<area shape="rect" id="node24" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="512,131,587,157"/>
+</map>

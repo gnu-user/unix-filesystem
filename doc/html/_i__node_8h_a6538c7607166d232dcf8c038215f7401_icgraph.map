@@ -1,0 +1,8 @@
+<map id="get_type" name="get_type">
+<area shape="rect" id="node3" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="281,5,364,32"/>
+<area shape="rect" id="node7" href="$get__size_8h.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="278,68,367,95"/>
+<area shape="rect" id="node10" href="$get__type_8h.html#a8ce020071b4ba304d7bb45b6c1e246f5" title="Get the type of the file with the pathname specified." alt="" coords="277,131,368,157"/>
+<area shape="rect" id="node13" href="$_i__node_8h.html#affd01175a63d68d783c31998d23cd77f" title="Get size of a file given its inode&#39;s location on disk." alt="" coords="142,93,213,120"/>
+<area shape="rect" id="node16" href="$_i__node_8h.html#acadfff325e7e1a17fce217c0a8ab8196" title="Check if the specified file is encrypted given its inode&#39;s location on disk." alt="" coords="125,195,229,221"/>
+<area shape="rect" id="node5" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="416,68,485,95"/>
+</map>

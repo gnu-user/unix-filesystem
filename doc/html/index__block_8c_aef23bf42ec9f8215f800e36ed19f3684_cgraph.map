@@ -1,0 +1,8 @@
+<map id="generate_index" name="generate_index">
+<area shape="rect" id="node3" href="$free__block__list_8c.html#acbfc0a3810742af6e976d135071261e1" title="Finds the next free block in the static free block list, marks it as used and returns the location of..." alt="" coords="165,56,272,83"/>
+<area shape="rect" id="node7" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="352,107,440,133"/>
+<area shape="rect" id="node14" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="176,157,261,184"/>
+<area shape="rect" id="node5" href="$free__block__list_8c.html#a82bb5a646a9f221b4b1b333cd1e142ea" title="Used to calculate whether there is enough disk space before starting to create a file on disk..." alt="" coords="320,5,472,32"/>
+<area shape="rect" id="node11" href="$free__block__list_8c.html#adafbfcac2573a9ee6a15645d4fe825c0" title="Accessor method for the free block list static instance in memory." alt="" coords="355,56,437,83"/>
+<area shape="rect" id="node9" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="521,107,599,133"/>
+</map>

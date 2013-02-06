@@ -1,0 +1,6 @@
+<map id="get_free_block" name="get_free_block">
+<area shape="rect" id="node3" href="$free__block__list_8c.html#a82bb5a646a9f221b4b1b333cd1e142ea" title="Used to calculate whether there is enough disk space before starting to create a file on disk..." alt="" coords="160,5,312,32"/>
+<area shape="rect" id="node5" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="192,56,280,83"/>
+<area shape="rect" id="node9" href="$free__block__list_8c.html#adafbfcac2573a9ee6a15645d4fe825c0" title="Accessor method for the free block list static instance in memory." alt="" coords="195,107,277,133"/>
+<area shape="rect" id="node7" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="361,56,439,83"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="print_error" name="print_error">
+<area shape="rect" id="node3" href="$close__file_8h.html#ab89c6dcbc639c5fb3348a6935c12912d" title="Closes the file, which indicates that the file is no longer needed." alt="" coords="489,45,567,71"/>
+<area shape="rect" id="node7" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="337,222,420,249"/>
+<area shape="rect" id="node9" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="481,146,575,173"/>
+<area shape="rect" id="node13" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="337,298,420,325"/>
+<area shape="rect" id="node16" href="$get__size_8h.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="334,349,423,375"/>
+<area shape="rect" id="node19" href="$get__type_8h.html#a8ce020071b4ba304d7bb45b6c1e246f5" title="Get the type of the file with the pathname specified." alt="" coords="333,399,424,426"/>
+<area shape="rect" id="node22" href="$index__block_8h.html#a1b873a6bb0f0535b8044df681c21fe20" title="Wrapper for iterate_index which simply gives you a count of the number of files in a directory..." alt="" coords="144,450,267,477"/>
+<area shape="rect" id="node25" href="$read__dir_8h.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="335,450,422,477"/>
+<area shape="rect" id="node29" href="$initialize_8h.html#a00a2a52d3dc5dd4ec595881132e0e280" title="Allocate all of the blocks in the free block list." alt="" coords="325,95,432,122"/>
+<area shape="rect" id="node32" href="$initialize_8h.html#a5d12386ac7070191a232be9a77f40d6d" title="Wipes the drive block by block." alt="" coords="165,146,245,173"/>
+<area shape="rect" id="node35" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="341,539,416,566"/>
+<area shape="rect" id="node38" href="$open__file_8h.html#a69191ccea40f8fffb8fef924f235650e" title="Show all of the information stored in the given file descriptor." alt="" coords="143,551,267,578"/>
+<area shape="rect" id="node42" href="$read__file_8h.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="492,614,564,641"/>
+<area shape="rect" id="node45" href="$traverse__tree_8h.html#a91c00022d1ad5207d846646fac32e4b0" title="Traverse the file system structure." alt="" coords="134,349,277,375"/>
+<area shape="rect" id="node52" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="491,683,565,710"/>
+<area shape="rect" id="node5" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="624,374,693,401"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="sync_fbl" name="sync_fbl">
+<area shape="rect" id="node3" href="$super__block_8c.html#a6bea61bb8314c0f57646b8337d5adf48" title="Get the location of the free block list&#39;s first index block." alt="" coords="126,32,271,59"/>
+<area shape="rect" id="node11" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="151,107,247,133"/>
+<area shape="rect" id="node19" href="$write__file_8c.html#a0a44cca95b59aaddaa4767ac5adb546d" title="Segments a buffer into block sized chunks of data." alt="" coords="135,157,263,184"/>
+<area shape="rect" id="node21" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="155,208,243,235"/>
+<area shape="rect" id="node5" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="321,5,413,32"/>
+<area shape="rect" id="node7" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="324,56,409,83"/>
+<area shape="rect" id="node9" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="462,56,541,83"/>
+<area shape="rect" id="node14" href="$glob__func_8c.html#ae6b48ca0727ba8a874b5442254e1d31a" title="Concatenate two arrays." alt="" coords="336,107,397,133"/>
+<area shape="rect" id="node16" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="324,157,409,184"/>
+<area shape="rect" id="node23" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="327,208,406,235"/>
+</map>

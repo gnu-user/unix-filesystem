@@ -1,0 +1,21 @@
+<map id="sfs_readdir" name="sfs_readdir">
+<area shape="rect" id="node3" href="$_i__node_8c.html#ad59a7398af73012142f32ee8fc377b61" title="Get an inode set to null state." alt="" coords="151,5,257,32"/>
+<area shape="rect" id="node5" href="$system__open__file__table_8c.html#abcb97049b41ee4a0a04800b6b48efd6c" title="Validate whether the given file descriptor is a valid file descriptor in the system wide open file ta..." alt="" coords="161,56,247,83"/>
+<area shape="rect" id="node7" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="323,120,403,147"/>
+<area shape="rect" id="node9" href="$system__open__file__table_8c.html#aad11d05dccc34b2921e2482e743f32e6" title="Get an inode instance from the system wide open file table." alt="" coords="145,309,263,336"/>
+<area shape="rect" id="node11" href="$_i__node_8c.html#a82f261d23645f5610e7c32f3b34d919c" title="Get the contents of an inode given its location on disk." alt="" coords="323,309,402,336"/>
+<area shape="rect" id="node13" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="459,360,551,387"/>
+<area shape="rect" id="node19" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="315,208,411,235"/>
+<area shape="rect" id="node27" href="$index__block_8c.html#a1b873a6bb0f0535b8044df681c21fe20" title="Wrapper for iterate_index which simply gives you a count of the number of files in a directory..." alt="" coords="143,157,265,184"/>
+<area shape="rect" id="node31" href="$_i__node_8c.html#ac258a0605f7df0133f98740fca57b093" title="Gets the next entry for the current directory and increments the index of the last accessed item with..." alt="" coords="147,461,261,488"/>
+<area shape="rect" id="node34" href="$_i__node_8c.html#a74ed9af1146cb8faf7ad6ffe11c4ca88" title="Resets the index entry count. Attempting to get the next directory item after this function has execu..." alt="" coords="141,512,267,539"/>
+<area shape="rect" id="node36" href="$_i__node_8c.html#a82ee207647edbab6ce13634925926122" title="Get the name of the file given its inode&#39;s location on disk." alt="" coords="323,360,402,387"/>
+<area shape="rect" id="node40" href="$system__open__file__table_8c.html#a58c99881ad30ffc6348f9007334740b2" title="Get the location of the inode on disk which corresponds to a file descriptor." alt="" coords="153,563,255,589"/>
+<area shape="rect" id="node43" href="$glob__func_8c.html#a29366f8689bb05dc0f4abe8f6415756b" title="Copy the data from one buffer to another, given the size of both." alt="" coords="157,613,251,640"/>
+<area shape="rect" id="node45" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="160,664,248,691"/>
+<area shape="rect" id="node15" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="463,309,548,336"/>
+<area shape="rect" id="node17" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="601,309,679,336"/>
+<area shape="rect" id="node22" href="$glob__func_8c.html#ae6b48ca0727ba8a874b5442254e1d31a" title="Concatenate two arrays." alt="" coords="475,233,536,260"/>
+<area shape="rect" id="node24" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="463,183,548,209"/>
+<area shape="rect" id="node47" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="323,664,402,691"/>
+</map>

@@ -1,0 +1,24 @@
+<map id="sfs_open" name="sfs_open">
+<area shape="rect" id="node3" href="$glob__func_8c.html#af1ee345363b6472fc32adc42a849f378" title="Tokenize a path into an array of tokens." alt="" coords="149,5,251,32"/>
+<area shape="rect" id="node7" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="339,435,419,461"/>
+<area shape="rect" id="node9" href="$super__block_8c.html#a5bdef04f60586e309e3e42e89326d62d" title="Get the location of the root directory." alt="" coords="509,157,579,184"/>
+<area shape="rect" id="node11" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="651,208,743,235"/>
+<area shape="rect" id="node17" href="$traverse__tree_8c.html#a91c00022d1ad5207d846646fac32e4b0" title="Traverse the file system structure." alt="" coords="129,333,271,360"/>
+<area shape="rect" id="node39" href="$_i__node_8c.html#a82f261d23645f5610e7c32f3b34d919c" title="Get the contents of an inode given its location on disk." alt="" coords="505,473,583,500"/>
+<area shape="rect" id="node45" href="$glob__func_8c.html#a29366f8689bb05dc0f4abe8f6415756b" title="Copy the data from one buffer to another, given the size of both." alt="" coords="153,485,247,512"/>
+<area shape="rect" id="node47" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="156,688,244,715"/>
+<area shape="rect" id="node51" href="$open__file_8c.html#a69191ccea40f8fffb8fef924f235650e" title="Show all of the information stored in the given file descriptor." alt="" coords="138,435,262,461"/>
+<area shape="rect" id="node57" href="$system__open__file__table_8c.html#aeda1a7f2db1183bbb89437b6a07d2c71" title="Add the inode to the system wide open file table." alt="" coords="150,536,250,563"/>
+<area shape="rect" id="node5" href="$glob__func_8c.html#a2fe7ca36f076470a50c2a5a7146de61d" title="Frees the memory allocated for the tokens." alt="" coords="333,5,424,32"/>
+<area shape="rect" id="node13" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="655,259,740,285"/>
+<area shape="rect" id="node15" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="793,259,871,285"/>
+<area shape="rect" id="node20" href="$_i__node_8c.html#a8c3230f033a02dda88ea580b2b28f59e" title="Get the index block which an inode links to given the inode&#39;s location on disk." alt="" coords="486,259,602,285"/>
+<area shape="rect" id="node24" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="331,333,427,360"/>
+<area shape="rect" id="node33" href="$_i__node_8c.html#a37821b1523b1431305feddc288c16355" title="find_inode" alt="" coords="338,208,419,235"/>
+<area shape="rect" id="node27" href="$glob__func_8c.html#ae6b48ca0727ba8a874b5442254e1d31a" title="Concatenate two arrays." alt="" coords="513,360,575,387"/>
+<area shape="rect" id="node29" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="501,309,587,336"/>
+<area shape="rect" id="node35" href="$_i__node_8c.html#a82ee207647edbab6ce13634925926122" title="Get the name of the file given its inode&#39;s location on disk." alt="" coords="505,208,583,235"/>
+<area shape="rect" id="node49" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="339,688,418,715"/>
+<area shape="rect" id="node53" href="$system__open__file__table_8c.html#aad11d05dccc34b2921e2482e743f32e6" title="Get an inode instance from the system wide open file table." alt="" coords="320,485,437,512"/>
+<area shape="rect" id="node59" href="$system__open__file__table_8c.html#ad0b54d7f70662d95ea7cd7429913cb9e" title="Finds an open location in the swoft." alt="" coords="331,587,426,613"/>
+</map>

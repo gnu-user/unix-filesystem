@@ -1,0 +1,7 @@
+<map id="sync_fbl" name="sync_fbl">
+<area shape="rect" id="node3" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="125,56,208,83"/>
+<area shape="rect" id="node10" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="263,107,345,133"/>
+<area shape="rect" id="node13" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="129,157,204,184"/>
+<area shape="rect" id="node5" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="257,5,351,32"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="400,81,469,108"/>
+</map>

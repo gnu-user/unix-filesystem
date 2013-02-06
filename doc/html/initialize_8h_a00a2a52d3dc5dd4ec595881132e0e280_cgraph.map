@@ -1,0 +1,12 @@
+<map id="free_block_init" name="free_block_init">
+<area shape="rect" id="node3" href="$free__block__list_8c.html#a9e849ebe5efb8153894a337356a4e328" title="Reinitializes the free block list in memory." alt="" coords="189,5,259,32"/>
+<area shape="rect" id="node5" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="184,56,264,83"/>
+<area shape="rect" id="node7" href="$free__block__list_8c.html#adafbfcac2573a9ee6a15645d4fe825c0" title="Accessor method for the free block list static instance in memory." alt="" coords="525,107,608,133"/>
+<area shape="rect" id="node9" href="$index__block_8c.html#aef23bf42ec9f8215f800e36ed19f3684" title="Generates the indexes for the data blocks and then writes the indexes (which contain the locations of..." alt="" coords="169,183,279,209"/>
+<area shape="rect" id="node15" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="523,208,611,235"/>
+<area shape="rect" id="node23" href="$write__file_8c.html#a0a44cca95b59aaddaa4767ac5adb546d" title="Segments a buffer into block sized chunks of data." alt="" coords="160,360,288,387"/>
+<area shape="rect" id="node11" href="$free__block__list_8c.html#acbfc0a3810742af6e976d135071261e1" title="Finds the next free block in the static free block list, marks it as used and returns the location of..." alt="" coords="336,157,443,184"/>
+<area shape="rect" id="node21" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="347,259,432,285"/>
+<area shape="rect" id="node13" href="$free__block__list_8c.html#a82bb5a646a9f221b4b1b333cd1e142ea" title="Used to calculate whether there is enough disk space before starting to create a file on disk..." alt="" coords="491,157,643,184"/>
+<area shape="rect" id="node17" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="691,208,770,235"/>
+</map>

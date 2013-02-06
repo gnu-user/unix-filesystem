@@ -1,0 +1,18 @@
+<map id="write_block" name="write_block">
+<area shape="rect" id="node3" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="677,262,760,289"/>
+<area shape="rect" id="node5" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="811,110,906,137"/>
+<area shape="rect" id="node10" href="$free__block__list_8h.html#acbfc0a3810742af6e976d135071261e1" title="Finds the next free block in the static free block list, marks it as used and returns the location of..." alt="" coords="141,364,248,390"/>
+<area shape="rect" id="node13" href="$_i__node_8h.html#ae46cace88988ba2b1d6fd8e63f68db5b" title="Unlinks a child&#39;s inode from the parent&#39;s index structure." alt="" coords="456,440,627,466"/>
+<area shape="rect" id="node18" href="$index__block_8h.html#aef23bf42ec9f8215f800e36ed19f3684" title="Generates the indexes for the data blocks and then writes the indexes (which contain the locations of..." alt="" coords="297,161,407,188"/>
+<area shape="rect" id="node21" href="$initialize_8h.html#a00a2a52d3dc5dd4ec595881132e0e280" title="Allocate all of the blocks in the free block list." alt="" coords="488,110,595,137"/>
+<area shape="rect" id="node24" href="$index__block_8h.html#afd54d9d51e9832a5a52ac0aa470b0d12" title="Takes a series of loose data block locations and builds a new index to link them with an inode..." alt="" coords="303,414,401,441"/>
+<area shape="rect" id="node26" href="$_i__node_8h.html#ad53d6e5ae20699bd6a8702c0e1a58d3a" title="Links the inode to a parent&#39;s index structure." alt="" coords="471,313,612,340"/>
+<area shape="rect" id="node30" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="504,516,579,542"/>
+<area shape="rect" id="node34" href="$free__block__list_8h.html#a1a24d3e02317587656b22b7207cdb3fe" title="Synchronizes the free block static instance in memory by writing it to disk." alt="" coords="317,617,387,644"/>
+<area shape="rect" id="node45" href="$initialize_8h.html#a5d12386ac7070191a232be9a77f40d6d" title="Wipes the drive block by block." alt="" coords="155,9,235,36"/>
+<area shape="rect" id="node48" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="821,656,896,682"/>
+<area shape="rect" id="node51" href="$read__dir_8h.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="675,718,762,745"/>
+<area shape="rect" id="node54" href="$read__file_8h.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="823,766,895,793"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="955,593,1024,620"/>
+<area shape="rect" id="node15" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="677,593,760,620"/>
+</map>

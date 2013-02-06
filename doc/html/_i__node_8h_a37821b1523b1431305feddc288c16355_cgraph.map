@@ -1,0 +1,6 @@
+<map id="find_inode" name="find_inode">
+<area shape="rect" id="node3" href="$_i__node_8c.html#a82ee207647edbab6ce13634925926122" title="Get the name of the file given its inode&#39;s location on disk." alt="" coords="137,31,215,57"/>
+<area shape="rect" id="node5" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="265,5,357,32"/>
+<area shape="rect" id="node7" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="268,56,353,83"/>
+<area shape="rect" id="node9" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="406,56,485,83"/>
+</map>

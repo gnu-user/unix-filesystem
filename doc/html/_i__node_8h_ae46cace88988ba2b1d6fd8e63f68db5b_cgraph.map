@@ -1,0 +1,19 @@
+<map id="unlink_inode_from_parent" name="unlink_inode_from_parent">
+<area shape="rect" id="node3" href="$_i__node_8c.html#a82f261d23645f5610e7c32f3b34d919c" title="Get the contents of an inode given its location on disk." alt="" coords="261,44,339,71"/>
+<area shape="rect" id="node5" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="437,18,529,44"/>
+<area shape="rect" id="node11" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="252,119,348,146"/>
+<area shape="rect" id="node19" href="$index__block_8c.html#aa8336ecef5a6f9f6881a3e6a498bc543" title="Provides the locations of the index blocks within an index block data structure." alt="" coords="225,194,375,220"/>
+<area shape="rect" id="node25" href="$glob__func_8c.html#a3caff7b79c5ce4e5d5a4583b86d8e5bc" title="Calculates the number of blocks needed to store data." alt="" coords="239,244,361,271"/>
+<area shape="rect" id="node29" href="$free__block__list_8c.html#acbfc0a3810742af6e976d135071261e1" title="Finds the next free block in the static free block list, marks it as used and returns the location of..." alt="" coords="429,396,536,423"/>
+<area shape="rect" id="node33" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="621,346,709,372"/>
+<area shape="rect" id="node37" href="$free__block__list_8c.html#adafbfcac2573a9ee6a15645d4fe825c0" title="Accessor method for the free block list static instance in memory." alt="" coords="624,447,707,474"/>
+<area shape="rect" id="node39" href="$index__block_8c.html#afd54d9d51e9832a5a52ac0aa470b0d12" title="Takes a series of loose data block locations and builds a new index to link them with an inode..." alt="" coords="251,346,349,372"/>
+<area shape="rect" id="node44" href="$glob__func_8c.html#a29366f8689bb05dc0f4abe8f6415756b" title="Copy the data from one buffer to another, given the size of both." alt="" coords="253,498,347,524"/>
+<area shape="rect" id="node7" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="440,92,525,119"/>
+<area shape="rect" id="node9" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="626,92,705,119"/>
+<area shape="rect" id="node14" href="$glob__func_8c.html#ae6b48ca0727ba8a874b5442254e1d31a" title="Concatenate two arrays." alt="" coords="452,194,513,220"/>
+<area shape="rect" id="node16" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="440,143,525,170"/>
+<area shape="rect" id="node27" href="$glob__func_8c.html#aed567cb73e667eeb50d5c1320ee29f38" title="Calculate the number of bytes in a byte buffer." alt="" coords="424,244,541,271"/>
+<area shape="rect" id="node31" href="$free__block__list_8c.html#a82bb5a646a9f221b4b1b333cd1e142ea" title="Used to calculate whether there is enough disk space before starting to create a file on disk..." alt="" coords="589,396,741,423"/>
+<area shape="rect" id="node35" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="790,346,869,372"/>
+</map>

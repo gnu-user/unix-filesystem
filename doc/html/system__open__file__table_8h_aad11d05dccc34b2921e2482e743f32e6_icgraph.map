@@ -1,0 +1,8 @@
+<map id="get_swoft_inode" name="get_swoft_inode">
+<area shape="rect" id="node3" href="$open__file_8h.html#a69191ccea40f8fffb8fef924f235650e" title="Show all of the information stored in the given file descriptor." alt="" coords="171,5,295,32"/>
+<area shape="rect" id="node9" href="$read__dir_8h.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="345,56,431,83"/>
+<area shape="rect" id="node12" href="$read__file_8h.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="352,107,424,133"/>
+<area shape="rect" id="node15" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="196,157,271,184"/>
+<area shape="rect" id="node5" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="351,5,425,32"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="480,81,549,108"/>
+</map>

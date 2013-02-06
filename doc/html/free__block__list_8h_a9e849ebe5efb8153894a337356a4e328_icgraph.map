@@ -1,0 +1,5 @@
+<map id="wipe_fbl" name="wipe_fbl">
+<area shape="rect" id="node3" href="$initialize_8h.html#a00a2a52d3dc5dd4ec595881132e0e280" title="Allocate all of the blocks in the free block list." alt="" coords="125,5,232,32"/>
+<area shape="rect" id="node5" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="281,5,375,32"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="424,5,493,32"/>
+</map>

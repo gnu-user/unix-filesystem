@@ -1,0 +1,39 @@
+<map id="allocate_buf" name="allocate_buf">
+<area shape="rect" id="node3" href="$block__func_8h.html#a758063a96fe0be00a4b59b9869a0af62" title="Get the data blocks and concatenate them into a large byte buffer." alt="" coords="391,90,463,117"/>
+<area shape="rect" id="node5" href="$read__file_8h.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="596,90,668,117"/>
+<area shape="rect" id="node9" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="595,242,669,269"/>
+<area shape="rect" id="node12" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="756,926,839,953"/>
+<area shape="rect" id="node14" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="891,1230,986,1257"/>
+<area shape="rect" id="node18" href="$_i__node_8h.html#a82f261d23645f5610e7c32f3b34d919c" title="Get the contents of an inode given its location on disk." alt="" coords="181,470,259,497"/>
+<area shape="rect" id="node20" href="$_i__node_8h.html#ad53d6e5ae20699bd6a8702c0e1a58d3a" title="Links the inode to a parent&#39;s index structure." alt="" coords="356,1000,497,1026"/>
+<area shape="rect" id="node23" href="$_i__node_8h.html#ae46cace88988ba2b1d6fd8e63f68db5b" title="Unlinks a child&#39;s inode from the parent&#39;s index structure." alt="" coords="341,496,512,522"/>
+<area shape="rect" id="node28" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="760,394,835,421"/>
+<area shape="rect" id="node31" href="$read__dir_8h.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="589,141,675,168"/>
+<area shape="rect" id="node56" href="$_i__node_8h.html#a0626a73db422faeaffe6ec35cfbfa8d4" title="Get an inode&#39;s UUID given its location on disk." alt="" coords="185,949,255,976"/>
+<area shape="rect" id="node64" href="$_i__node_8h.html#a8c3230f033a02dda88ea580b2b28f59e" title="Get the index block which an inode links to given the inode&#39;s location on disk." alt="" coords="369,1053,485,1080"/>
+<area shape="rect" id="node70" href="$_i__node_8h.html#a6538c7607166d232dcf8c038215f7401" title="Get the type of file from an inode, whether it is a directory or a data file." alt="" coords="391,1268,463,1294"/>
+<area shape="rect" id="node75" href="$_i__node_8h.html#affd01175a63d68d783c31998d23cd77f" title="Get size of a file given its inode&#39;s location on disk." alt="" coords="597,1408,667,1434"/>
+<area shape="rect" id="node78" href="$_i__node_8h.html#acadfff325e7e1a17fce217c0a8ab8196" title="Check if the specified file is encrypted given its inode&#39;s location on disk." alt="" coords="580,1458,684,1485"/>
+<area shape="rect" id="node82" href="$_i__node_8h.html#a82ee207647edbab6ce13634925926122" title="Get the name of the file given its inode&#39;s location on disk." alt="" coords="181,242,259,269"/>
+<area shape="rect" id="node90" href="$_i__node_8h.html#a4f639886bd6633685f3b80960f8e942d" title="Get the encryption checksum of a file given its inode&#39;s location on disk." alt="" coords="187,1610,253,1637"/>
+<area shape="rect" id="node95" href="$initialize_8h.html#a5d12386ac7070191a232be9a77f40d6d" title="Wipes the drive block by block." alt="" coords="180,1484,260,1510"/>
+<area shape="rect" id="node101" href="$super__block_8h.html#ac90e51acfc45bd4a7daa71817ab3508a" title="Get a handle to the super block." alt="" coords="161,844,279,870"/>
+<area shape="rect" id="node108" href="$super__block_8h.html#a5bdef04f60586e309e3e42e89326d62d" title="Get the location of the root directory." alt="" coords="392,898,461,925"/>
+<area shape="rect" id="node113" href="$super__block_8h.html#a6bea61bb8314c0f57646b8337d5adf48" title="Get the location of the free block list&#39;s first index block." alt="" coords="147,597,293,624"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="1035,662,1104,689"/>
+<area shape="rect" id="node34" href="$system__open__file__table_8h.html#aeda1a7f2db1183bbb89437b6a07d2c71" title="Add the inode to the system wide open file table." alt="" coords="582,344,682,370"/>
+<area shape="rect" id="node37" href="$system__open__file__table_8h.html#aad11d05dccc34b2921e2482e743f32e6" title="Get an inode instance from the system wide open file table." alt="" coords="368,242,485,269"/>
+<area shape="rect" id="node45" href="$traverse__tree_8h.html#a91c00022d1ad5207d846646fac32e4b0" title="Traverse the file system structure." alt="" coords="561,901,703,928"/>
+<area shape="rect" id="node25" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="756,622,839,649"/>
+<area shape="rect" id="node39" href="$open__file_8h.html#a69191ccea40f8fffb8fef924f235650e" title="Show all of the information stored in the given file descriptor." alt="" coords="570,192,694,218"/>
+<area shape="rect" id="node49" href="$get__size_8h.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="753,1306,842,1333"/>
+<area shape="rect" id="node52" href="$get__type_8h.html#a8ce020071b4ba304d7bb45b6c1e246f5" title="Get the type of the file with the pathname specified." alt="" coords="752,977,843,1004"/>
+<area shape="rect" id="node58" href="$mount_8h.html#a578d64ff5c10d5db2372ecf78e855b11" title="Validate that there is a root directory on the disk." alt="" coords="573,952,691,978"/>
+<area shape="rect" id="node61" href="$mount_8h.html#ad8988b7a3c735f8499da90b745024829" title="Attempt to mount the filesystem on disk." alt="" coords="768,692,827,718"/>
+<area shape="rect" id="node84" href="$_i__node_8h.html#a37821b1523b1431305feddc288c16355" title="find_inode" alt="" coords="386,660,467,686"/>
+<area shape="rect" id="node103" href="$mount_8h.html#ae235328c90c13a872983bba459cae85a" title="Validate the super block on the disk." alt="" coords="560,698,704,725"/>
+<area shape="rect" id="node106" href="$super__block_8c.html#a9b470cc4211f6874b557a6455bab0abf" title="display_super_block" alt="" coords="357,844,497,870"/>
+<area shape="rect" id="node115" href="$free__block__list_8h.html#a1a24d3e02317587656b22b7207cdb3fe" title="Synchronizes the free block static instance in memory by writing it to disk." alt="" coords="391,597,462,624"/>
+<area shape="rect" id="node120" href="$free__block__list_8h.html#ae1a3d63476e1321750e8e4aedbc53f07" title="Overwrites the free block list in memory with the most recent version on disk." alt="" coords="391,546,463,573"/>
+<area shape="rect" id="node123" href="$free__block__list_8h.html#a4fb9e58d343f5d00bfddf8b2aabe4a05" title="Obtains a handle to the free block list static instance, regardless of whether it is available in mem..." alt="" coords="567,648,697,674"/>
+</map>

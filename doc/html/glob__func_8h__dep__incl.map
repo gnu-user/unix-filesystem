@@ -1,0 +1,24 @@
+<map id="glob_func.h" name="glob_func.h">
+<area shape="rect" id="node3" href="$super__block_8h.html" title="super_block.h" alt="" coords="254,80,356,107"/>
+<area shape="rect" id="node20" href="$_i__node_8h.html" title="I_node.h" alt="" coords="664,80,736,107"/>
+<area shape="rect" id="node49" href="$glob__func_8c.html" title="glob_func.c" alt="" coords="761,80,849,107"/>
+<area shape="rect" id="node51" href="$index__block_8c.html" title="index_block.c" alt="" coords="874,80,976,107"/>
+<area shape="rect" id="node5" href="$create__file_8c.html" title="create_file.c" alt="" coords="197,229,291,256"/>
+<area shape="rect" id="node7" href="$mount_8h.html" title="mount.h" alt="" coords="173,155,243,181"/>
+<area shape="rect" id="node14" href="$initialize_8c.html" title="initialize.c" alt="" coords="368,155,447,181"/>
+<area shape="rect" id="node16" href="$super__block_8c.html" title="super_block.c" alt="" coords="46,155,148,181"/>
+<area shape="rect" id="node18" href="$traverse__tree_8c.html" title="traverse_tree.c" alt="" coords="315,229,424,256"/>
+<area shape="rect" id="node10" href="$mount_8c.html" title="mount.c" alt="" coords="5,229,75,256"/>
+<area shape="rect" id="node12" href="$sfstest_8c.html" title="sfstest.c" alt="" coords="99,229,172,256"/>
+<area shape="rect" id="node22" href="$traverse__tree_8h.html" title="traverse_tree.h" alt="" coords="541,155,651,181"/>
+<area shape="rect" id="node34" href="$system__open__file__table_8h.html" title="system_open_file_table.h" alt="" coords="845,155,1016,181"/>
+<area shape="rect" id="node44" href="$write__file_8c.html" title="write_file.c" alt="" coords="888,229,973,256"/>
+<area shape="rect" id="node46" href="$_i__node_8c.html" title="I_node.c" alt="" coords="737,155,809,181"/>
+<area shape="rect" id="node25" href="$delete__file_8c.html" title="delete_file.c" alt="" coords="771,229,863,256"/>
+<area shape="rect" id="node27" href="$get__size_8c.html" title="get_size.c" alt="" coords="448,229,529,256"/>
+<area shape="rect" id="node29" href="$get__type_8c.html" title="get_type.c" alt="" coords="555,229,636,256"/>
+<area shape="rect" id="node31" href="$open__file_8c.html" title="open_file.c" alt="" coords="661,229,747,256"/>
+<area shape="rect" id="node38" href="$read__dir_8c.html" title="read_dir.c" alt="" coords="1299,229,1377,256"/>
+<area shape="rect" id="node40" href="$read__file_8c.html" title="read_file.c" alt="" coords="997,229,1079,256"/>
+<area shape="rect" id="node42" href="$system__open__file__table_8c.html" title="system_open_file_table.c" alt="" coords="1104,229,1275,256"/>
+</map>

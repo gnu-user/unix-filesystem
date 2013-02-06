@@ -1,0 +1,12 @@
+<map id="copy_to_buf" name="copy_to_buf">
+<area shape="rect" id="node3" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="380,39,463,65"/>
+<area shape="rect" id="node5" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="555,89,650,116"/>
+<area shape="rect" id="node10" href="$_i__node_8h.html#ad53d6e5ae20699bd6a8702c0e1a58d3a" title="Links the inode to a parent&#39;s index structure." alt="" coords="147,39,288,65"/>
+<area shape="rect" id="node13" href="$_i__node_8h.html#ae46cace88988ba2b1d6fd8e63f68db5b" title="Unlinks a child&#39;s inode from the parent&#39;s index structure." alt="" coords="336,140,507,167"/>
+<area shape="rect" id="node19" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="384,191,459,217"/>
+<area shape="rect" id="node22" href="$read__dir_8h.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="559,241,646,268"/>
+<area shape="rect" id="node25" href="$read__file_8h.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="181,292,253,319"/>
+<area shape="rect" id="node28" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="180,343,255,369"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="699,191,768,217"/>
+<area shape="rect" id="node15" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="561,140,644,167"/>
+</map>

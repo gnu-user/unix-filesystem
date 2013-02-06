@@ -1,0 +1,21 @@
+<map id="iterate_index" name="iterate_index">
+<area shape="rect" id="node3" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="536,84,619,110"/>
+<area shape="rect" id="node10" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="536,286,619,313"/>
+<area shape="rect" id="node13" href="$free__block__list_8h.html#a1a24d3e02317587656b22b7207cdb3fe" title="Synchronizes the free block static instance in memory by writing it to disk." alt="" coords="343,236,414,262"/>
+<area shape="rect" id="node17" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="540,388,615,414"/>
+<area shape="rect" id="node20" href="$free__block__list_8h.html#ae1a3d63476e1321750e8e4aedbc53f07" title="Overwrites the free block list in memory with the most recent version on disk." alt="" coords="343,438,415,465"/>
+<area shape="rect" id="node29" href="$_i__node_8h.html#ad53d6e5ae20699bd6a8702c0e1a58d3a" title="Links the inode to a parent&#39;s index structure." alt="" coords="308,33,449,60"/>
+<area shape="rect" id="node32" href="$_i__node_8h.html#ae46cace88988ba2b1d6fd8e63f68db5b" title="Unlinks a child&#39;s inode from the parent&#39;s index structure." alt="" coords="293,286,464,313"/>
+<area shape="rect" id="node35" href="$index__block_8h.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="149,361,245,388"/>
+<area shape="rect" id="node44" href="$index__block_8h.html#a1b873a6bb0f0535b8044df681c21fe20" title="Wrapper for iterate_index which simply gives you a count of the number of files in a directory..." alt="" coords="317,489,440,516"/>
+<area shape="rect" id="node49" href="$read__dir_8h.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="534,552,621,578"/>
+<area shape="rect" id="node53" href="$read__file_8h.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="343,641,415,668"/>
+<area shape="rect" id="node56" href="$traverse__tree_8h.html#a91c00022d1ad5207d846646fac32e4b0" title="Traverse the file system structure." alt="" coords="307,134,450,161"/>
+<area shape="rect" id="node5" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="691,134,786,161"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="835,312,904,338"/>
+<area shape="rect" id="node23" href="$free__block__list_8h.html#a4fb9e58d343f5d00bfddf8b2aabe4a05" title="Obtains a handle to the free block list static instance, regardless of whether it is available in mem..." alt="" coords="512,438,643,465"/>
+<area shape="rect" id="node25" href="$mount_8h.html#ad8988b7a3c735f8499da90b745024829" title="Attempt to mount the filesystem on disk." alt="" coords="709,438,768,465"/>
+<area shape="rect" id="node46" href="$get__size_8h.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="533,337,622,364"/>
+<area shape="rect" id="node61" href="$get__type_8h.html#a8ce020071b4ba304d7bb45b6c1e246f5" title="Get the type of the file with the pathname specified." alt="" coords="693,236,784,262"/>
+<area shape="rect" id="node64" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="701,185,776,212"/>
+</map>

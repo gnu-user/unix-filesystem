@@ -1,0 +1,7 @@
+<map id="get_uuid" name="get_uuid">
+<area shape="rect" id="node3" href="$mount_8h.html#a578d64ff5c10d5db2372ecf78e855b11" title="Validate that there is a root directory on the disk." alt="" coords="125,81,243,108"/>
+<area shape="rect" id="node5" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="291,56,373,83"/>
+<area shape="rect" id="node12" href="$mount_8h.html#ad8988b7a3c735f8499da90b745024829" title="Attempt to mount the filesystem on disk." alt="" coords="440,107,499,133"/>
+<area shape="rect" id="node7" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="422,5,517,32"/>
+<area shape="rect" id="node9" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="565,56,635,83"/>
+</map>

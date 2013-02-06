@@ -1,0 +1,5 @@
+<map id="count_files_in_dir" name="count_files_in_dir">
+<area shape="rect" id="node3" href="$get__size_8h.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="177,5,266,32"/>
+<area shape="rect" id="node7" href="$read__dir_8h.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="178,56,265,83"/>
+<area shape="rect" id="node5" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="315,31,384,57"/>
+</map>

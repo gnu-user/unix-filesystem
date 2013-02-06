@@ -1,0 +1,12 @@
+<map id="get_root" name="get_root">
+<area shape="rect" id="node3" href="$mount_8h.html#a578d64ff5c10d5db2372ecf78e855b11" title="Validate that there is a root directory on the disk." alt="" coords="136,107,253,133"/>
+<area shape="rect" id="node15" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="323,157,397,184"/>
+<area shape="rect" id="node18" href="$traverse__tree_8h.html#a91c00022d1ad5207d846646fac32e4b0" title="Traverse the file system structure." alt="" coords="123,208,266,235"/>
+<area shape="rect" id="node5" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="319,107,401,133"/>
+<area shape="rect" id="node12" href="$mount_8h.html#ad8988b7a3c735f8499da90b745024829" title="Attempt to mount the filesystem on disk." alt="" coords="472,5,531,32"/>
+<area shape="rect" id="node7" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="454,107,549,133"/>
+<area shape="rect" id="node9" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="597,157,667,184"/>
+<area shape="rect" id="node21" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="460,208,543,235"/>
+<area shape="rect" id="node24" href="$get__size_8h.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="457,259,546,285"/>
+<area shape="rect" id="node27" href="$get__type_8h.html#a8ce020071b4ba304d7bb45b6c1e246f5" title="Get the type of the file with the pathname specified." alt="" coords="315,309,405,336"/>
+</map>

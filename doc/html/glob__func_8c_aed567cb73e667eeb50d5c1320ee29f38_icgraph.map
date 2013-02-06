@@ -1,0 +1,8 @@
+<map id="calc_num_bytes" name="calc_num_bytes">
+<area shape="rect" id="node3" href="$glob__func_8h.html#a3caff7b79c5ce4e5d5a4583b86d8e5bc" title="Calculates the number of blocks needed to store data." alt="" coords="171,5,293,32"/>
+<area shape="rect" id="node11" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="389,56,464,83"/>
+<area shape="rect" id="node14" href="$read__file_8h.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="565,107,637,133"/>
+<area shape="rect" id="node5" href="$_i__node_8h.html#ae46cace88988ba2b1d6fd8e63f68db5b" title="Unlinks a child&#39;s inode from the parent&#39;s index structure." alt="" coords="341,5,512,32"/>
+<area shape="rect" id="node7" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="560,5,643,32"/>
+<area shape="rect" id="node9" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="691,56,760,83"/>
+</map>

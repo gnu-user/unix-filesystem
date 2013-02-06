@@ -1,0 +1,6 @@
+<map id="get_inode_loc" name="get_inode_loc">
+<area shape="rect" id="node3" href="$read__dir_8h.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="158,5,245,32"/>
+<area shape="rect" id="node7" href="$read__file_8h.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="165,56,237,83"/>
+<area shape="rect" id="node10" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="164,107,239,133"/>
+<area shape="rect" id="node5" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="293,56,363,83"/>
+</map>

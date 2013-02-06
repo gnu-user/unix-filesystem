@@ -1,0 +1,33 @@
+<map id="sfs_write" name="sfs_write">
+<area shape="rect" id="node3" href="$_i__node_8c.html#ad59a7398af73012142f32ee8fc377b61" title="Get an inode set to null state." alt="" coords="151,5,257,32"/>
+<area shape="rect" id="node5" href="$system__open__file__table_8c.html#abcb97049b41ee4a0a04800b6b48efd6c" title="Validate whether the given file descriptor is a valid file descriptor in the system wide open file ta..." alt="" coords="161,56,247,83"/>
+<area shape="rect" id="node7" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="164,107,244,133"/>
+<area shape="rect" id="node9" href="$system__open__file__table_8c.html#aad11d05dccc34b2921e2482e743f32e6" title="Get an inode instance from the system wide open file table." alt="" coords="145,216,263,243"/>
+<area shape="rect" id="node13" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="558,225,650,252"/>
+<area shape="rect" id="node19" href="$system__open__file__table_8c.html#a58c99881ad30ffc6348f9007334740b2" title="Get the location of the inode on disk which corresponds to a file descriptor." alt="" coords="153,1008,255,1035"/>
+<area shape="rect" id="node21" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="356,427,452,453"/>
+<area shape="rect" id="node29" href="$index__block_8c.html#aa8336ecef5a6f9f6881a3e6a498bc543" title="Provides the locations of the index blocks within an index block data structure." alt="" coords="329,552,479,579"/>
+<area shape="rect" id="node35" href="$block__func_8c.html#a758063a96fe0be00a4b59b9869a0af62" title="Get the data blocks and concatenate them into a large byte buffer." alt="" coords="368,251,440,277"/>
+<area shape="rect" id="node40" href="$glob__func_8c.html#a3caff7b79c5ce4e5d5a4583b86d8e5bc" title="Calculates the number of blocks needed to store data." alt="" coords="143,1109,265,1136"/>
+<area shape="rect" id="node42" href="$glob__func_8c.html#aed567cb73e667eeb50d5c1320ee29f38" title="Calculate the number of bytes in a byte buffer." alt="" coords="345,1084,463,1111"/>
+<area shape="rect" id="node45" href="$write__file_8c.html#afa4abb6cfe6d1a2e92e9f514a117e531" title="Modifies or appends data in a buffer." alt="" coords="157,704,251,731"/>
+<area shape="rect" id="node50" href="$free__block__list_8c.html#a82bb5a646a9f221b4b1b333cd1e142ea" title="Used to calculate whether there is enough disk space before starting to create a file on disk..." alt="" coords="528,881,680,908"/>
+<area shape="rect" id="node52" href="$index__block_8c.html#a7bfc6472e986ea83b6f5a14def157883" title="Calculates the number of index blocks that are needed in order to write the number of data blocks spe..." alt="" coords="139,1160,269,1187"/>
+<area shape="rect" id="node54" href="$free__block__list_8c.html#acbfc0a3810742af6e976d135071261e1" title="Finds the next free block in the static free block list, marks it as used and returns the location of..." alt="" coords="351,856,457,883"/>
+<area shape="rect" id="node57" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="560,780,648,807"/>
+<area shape="rect" id="node61" href="$free__block__list_8c.html#adafbfcac2573a9ee6a15645d4fe825c0" title="Accessor method for the free block list static instance in memory." alt="" coords="563,957,645,984"/>
+<area shape="rect" id="node64" href="$free__block__list_8c.html#ae1a3d63476e1321750e8e4aedbc53f07" title="Overwrites the free block list in memory with the most recent version on disk." alt="" coords="168,364,240,391"/>
+<area shape="rect" id="node72" href="$index__block_8c.html#afd54d9d51e9832a5a52ac0aa470b0d12" title="Takes a series of loose data block locations and builds a new index to link them with an inode..." alt="" coords="155,805,253,832"/>
+<area shape="rect" id="node77" href="$glob__func_8c.html#a29366f8689bb05dc0f4abe8f6415756b" title="Copy the data from one buffer to another, given the size of both." alt="" coords="157,1211,251,1237"/>
+<area shape="rect" id="node80" href="$free__block__list_8c.html#a1a24d3e02317587656b22b7207cdb3fe" title="Synchronizes the free block static instance in memory by writing it to disk." alt="" coords="169,477,239,504"/>
+<area shape="rect" id="node87" href="$free__block__list_8c.html#a4006c8928b03cc8367e345842cd263ae" title="Used to calculate the total amount of available disk space." alt="" coords="128,1261,280,1288"/>
+<area shape="rect" id="node11" href="$_i__node_8c.html#a82f261d23645f5610e7c32f3b34d919c" title="Get the contents of an inode given its location on disk." alt="" coords="365,200,443,227"/>
+<area shape="rect" id="node15" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="561,327,647,353"/>
+<area shape="rect" id="node17" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="729,327,807,353"/>
+<area shape="rect" id="node24" href="$glob__func_8c.html#ae6b48ca0727ba8a874b5442254e1d31a" title="Concatenate two arrays." alt="" coords="573,464,635,491"/>
+<area shape="rect" id="node26" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="561,533,647,560"/>
+<area shape="rect" id="node47" href="$write__file_8c.html#a3b52a4078bc59ea042a076f962d42847" title="Segments a buffer into block sized chunks of data." alt="" coords="352,653,456,680"/>
+<area shape="rect" id="node59" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="729,780,807,807"/>
+<area shape="rect" id="node66" href="$super__block_8c.html#a6bea61bb8314c0f57646b8337d5adf48" title="Get the location of the free block list&#39;s first index block." alt="" coords="331,352,477,379"/>
+<area shape="rect" id="node84" href="$write__file_8c.html#a0a44cca95b59aaddaa4767ac5adb546d" title="Segments a buffer into block sized chunks of data." alt="" coords="340,477,468,504"/>
+</map>

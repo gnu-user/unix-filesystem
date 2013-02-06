@@ -1,0 +1,16 @@
+<map id="mount" name="mount">
+<area shape="rect" id="node3" href="$mount_8c.html#ae235328c90c13a872983bba459cae85a" title="Validate the super block on the disk." alt="" coords="112,107,256,133"/>
+<area shape="rect" id="node13" href="$mount_8c.html#a578d64ff5c10d5db2372ecf78e855b11" title="Validate that there is a root directory on the disk." alt="" coords="304,56,421,83"/>
+<area shape="rect" id="node23" href="$free__block__list_8c.html#a4fb9e58d343f5d00bfddf8b2aabe4a05" title="Obtains a handle to the free block list static instance, regardless of whether it is available in mem..." alt="" coords="119,183,249,209"/>
+<area shape="rect" id="node5" href="$super__block_8c.html#ac90e51acfc45bd4a7daa71817ab3508a" title="Get a handle to the super block." alt="" coords="484,107,601,133"/>
+<area shape="rect" id="node7" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="665,69,757,96"/>
+<area shape="rect" id="node9" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="668,145,753,172"/>
+<area shape="rect" id="node11" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="806,145,885,172"/>
+<area shape="rect" id="node15" href="$_i__node_8c.html#a0626a73db422faeaffe6ec35cfbfa8d4" title="Get an inode&#39;s UUID given its location on disk." alt="" coords="507,5,578,32"/>
+<area shape="rect" id="node19" href="$super__block_8c.html#a5bdef04f60586e309e3e42e89326d62d" title="Get the location of the root directory." alt="" coords="508,56,577,83"/>
+<area shape="rect" id="node25" href="$free__block__list_8c.html#ae1a3d63476e1321750e8e4aedbc53f07" title="Overwrites the free block list in memory with the most recent version on disk." alt="" coords="327,196,399,223"/>
+<area shape="rect" id="node27" href="$super__block_8c.html#a6bea61bb8314c0f57646b8337d5adf48" title="Get the location of the free block list&#39;s first index block." alt="" coords="470,157,615,184"/>
+<area shape="rect" id="node31" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="495,283,591,309"/>
+<area shape="rect" id="node34" href="$glob__func_8c.html#ae6b48ca0727ba8a874b5442254e1d31a" title="Concatenate two arrays." alt="" coords="680,257,741,284"/>
+<area shape="rect" id="node36" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="668,308,753,335"/>
+</map>

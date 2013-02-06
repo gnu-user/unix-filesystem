@@ -1,0 +1,8 @@
+<map id="count_files_in_dir" name="count_files_in_dir">
+<area shape="rect" id="node3" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="176,56,272,83"/>
+<area shape="rect" id="node14" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="184,107,264,133"/>
+<area shape="rect" id="node5" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="320,5,405,32"/>
+<area shape="rect" id="node9" href="$glob__func_8c.html#ae6b48ca0727ba8a874b5442254e1d31a" title="Concatenate two arrays." alt="" coords="332,56,393,83"/>
+<area shape="rect" id="node11" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="320,107,405,133"/>
+<area shape="rect" id="node7" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="454,5,533,32"/>
+</map>

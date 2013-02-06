@@ -1,0 +1,51 @@
+<map id="sfs_test" name="sfs_test">
+<area shape="rect" id="node3" href="$mount_8c.html#ad8988b7a3c735f8499da90b745024829" title="Attempt to mount the filesystem on disk." alt="" coords="141,208,200,235"/>
+<area shape="rect" id="node22" href="$open__file_8c.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="133,385,208,412"/>
+<area shape="rect" id="node55" href="$read__file_8c.html#a967ba612f53d696f2c63f49ae35c4f37" title="Read the contents of a file." alt="" coords="303,1789,375,1816"/>
+<area shape="rect" id="node76" href="$write__file_8c.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="301,2664,376,2691"/>
+<area shape="rect" id="node121" href="$read__dir_8c.html#a7b19aab55aa6358fab1f66a63810b358" title="List the contents of a directory." alt="" coords="295,1120,382,1147"/>
+<area shape="rect" id="node144" href="$close__file_8c.html#ab89c6dcbc639c5fb3348a6935c12912d" title="Closes the file, which indicates that the file is no longer needed." alt="" coords="131,1423,210,1449"/>
+<area shape="rect" id="node150" href="$create__file_8c.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="297,2157,380,2184"/>
+<area shape="rect" id="node167" href="$delete__file_8c.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="297,1347,380,1373"/>
+<area shape="rect" id="node178" href="$get__size_8c.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="294,613,383,640"/>
+<area shape="rect" id="node186" href="$get__type_8c.html#a8ce020071b4ba304d7bb45b6c1e246f5" title="Get the type of the file with the pathname specified." alt="" coords="293,512,384,539"/>
+<area shape="rect" id="node191" href="$initialize_8c.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="123,1941,218,1968"/>
+<area shape="rect" id="node5" href="$mount_8c.html#ae235328c90c13a872983bba459cae85a" title="Validate the super block on the disk." alt="" coords="267,5,411,32"/>
+<area shape="rect" id="node7" href="$mount_8c.html#a578d64ff5c10d5db2372ecf78e855b11" title="Validate that there is a root directory on the disk." alt="" coords="476,107,593,133"/>
+<area shape="rect" id="node13" href="$free__block__list_8c.html#a4fb9e58d343f5d00bfddf8b2aabe4a05" title="Obtains a handle to the free block list static instance, regardless of whether it is available in mem..." alt="" coords="273,1840,404,1867"/>
+<area shape="rect" id="node9" href="$super__block_8c.html#a5bdef04f60586e309e3e42e89326d62d" title="Get the location of the root directory." alt="" coords="683,309,752,336"/>
+<area shape="rect" id="node11" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="854,1196,946,1223"/>
+<area shape="rect" id="node15" href="$free__block__list_8c.html#ae1a3d63476e1321750e8e4aedbc53f07" title="Overwrites the free block list in memory with the most recent version on disk." alt="" coords="499,2056,571,2083"/>
+<area shape="rect" id="node17" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="669,1904,765,1931"/>
+<area shape="rect" id="node19" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="857,2157,943,2184"/>
+<area shape="rect" id="node24" href="$glob__func_8c.html#af1ee345363b6472fc32adc42a849f378" title="Tokenize a path into an array of tokens." alt="" coords="483,563,586,589"/>
+<area shape="rect" id="node26" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="677,765,757,792"/>
+<area shape="rect" id="node29" href="$traverse__tree_8c.html#a91c00022d1ad5207d846646fac32e4b0" title="Traverse the file system structure." alt="" coords="463,512,606,539"/>
+<area shape="rect" id="node37" href="$_i__node_8c.html#a82f261d23645f5610e7c32f3b34d919c" title="Get the contents of an inode given its location on disk." alt="" coords="678,461,757,488"/>
+<area shape="rect" id="node42" href="$glob__func_8c.html#a29366f8689bb05dc0f4abe8f6415756b" title="Copy the data from one buffer to another, given the size of both." alt="" coords="488,2107,581,2133"/>
+<area shape="rect" id="node44" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="856,2816,944,2843"/>
+<area shape="rect" id="node46" href="$open__file_8c.html#a69191ccea40f8fffb8fef924f235650e" title="Show all of the information stored in the given file descriptor." alt="" coords="277,436,401,463"/>
+<area shape="rect" id="node52" href="$system__open__file__table_8c.html#aeda1a7f2db1183bbb89437b6a07d2c71" title="Add the inode to the system wide open file table." alt="" coords="289,259,389,285"/>
+<area shape="rect" id="node32" href="$_i__node_8c.html#a8c3230f033a02dda88ea580b2b28f59e" title="Get the index block which an inode links to given the inode&#39;s location on disk." alt="" coords="659,1196,775,1223"/>
+<area shape="rect" id="node48" href="$system__open__file__table_8c.html#aad11d05dccc34b2921e2482e743f32e6" title="Get an inode instance from the system wide open file table." alt="" coords="476,1120,593,1147"/>
+<area shape="rect" id="node57" href="$_i__node_8c.html#ad59a7398af73012142f32ee8fc377b61" title="Get an inode set to null state." alt="" coords="482,2005,587,2032"/>
+<area shape="rect" id="node59" href="$system__open__file__table_8c.html#abcb97049b41ee4a0a04800b6b48efd6c" title="Validate whether the given file descriptor is a valid file descriptor in the system wide open file ta..." alt="" coords="492,1600,577,1627"/>
+<area shape="rect" id="node64" href="$block__func_8c.html#a758063a96fe0be00a4b59b9869a0af62" title="Get the data blocks and concatenate them into a large byte buffer." alt="" coords="681,2157,753,2184"/>
+<area shape="rect" id="node68" href="$glob__func_8c.html#aed567cb73e667eeb50d5c1320ee29f38" title="Calculate the number of bytes in a byte buffer." alt="" coords="659,3221,776,3248"/>
+<area shape="rect" id="node71" href="$system__open__file__table_8c.html#a58c99881ad30ffc6348f9007334740b2" title="Get the location of the inode on disk which corresponds to a file descriptor." alt="" coords="483,1752,586,1779"/>
+<area shape="rect" id="node84" href="$index__block_8c.html#aa8336ecef5a6f9f6881a3e6a498bc543" title="Provides the locations of the index blocks within an index block data structure." alt="" coords="459,1347,610,1373"/>
+<area shape="rect" id="node89" href="$glob__func_8c.html#a3caff7b79c5ce4e5d5a4583b86d8e5bc" title="Calculates the number of blocks needed to store data." alt="" coords="473,3221,596,3248"/>
+<area shape="rect" id="node93" href="$write__file_8c.html#afa4abb6cfe6d1a2e92e9f514a117e531" title="Modifies or appends data in a buffer." alt="" coords="671,2411,764,2437"/>
+<area shape="rect" id="node96" href="$free__block__list_8c.html#a82bb5a646a9f221b4b1b333cd1e142ea" title="Used to calculate whether there is enough disk space before starting to create a file on disk..." alt="" coords="824,3171,976,3197"/>
+<area shape="rect" id="node98" href="$index__block_8c.html#a7bfc6472e986ea83b6f5a14def157883" title="Calculates the number of index blocks that are needed in order to write the number of data blocks spe..." alt="" coords="470,3373,599,3400"/>
+<area shape="rect" id="node100" href="$free__block__list_8c.html#acbfc0a3810742af6e976d135071261e1" title="Finds the next free block in the static free block list, marks it as used and returns the location of..." alt="" coords="664,3069,771,3096"/>
+<area shape="rect" id="node104" href="$free__block__list_8c.html#adafbfcac2573a9ee6a15645d4fe825c0" title="Accessor method for the free block list static instance in memory." alt="" coords="859,2968,941,2995"/>
+<area shape="rect" id="node108" href="$index__block_8c.html#afd54d9d51e9832a5a52ac0aa470b0d12" title="Takes a series of loose data block locations and builds a new index to link them with an inode..." alt="" coords="485,3019,584,3045"/>
+<area shape="rect" id="node115" href="$free__block__list_8c.html#a1a24d3e02317587656b22b7207cdb3fe" title="Synchronizes the free block static instance in memory by writing it to disk." alt="" coords="499,2309,570,2336"/>
+<area shape="rect" id="node119" href="$free__block__list_8c.html#a4006c8928b03cc8367e345842cd263ae" title="Used to calculate the total amount of available disk space." alt="" coords="459,2563,611,2589"/>
+<area shape="rect" id="node128" href="$index__block_8c.html#a1b873a6bb0f0535b8044df681c21fe20" title="Wrapper for iterate_index which simply gives you a count of the number of files in a directory..." alt="" coords="473,816,596,843"/>
+<area shape="rect" id="node132" href="$_i__node_8c.html#ac258a0605f7df0133f98740fca57b093" title="Gets the next entry for the current directory and increments the index of the last accessed item with..." alt="" coords="477,917,592,944"/>
+<area shape="rect" id="node135" href="$_i__node_8c.html#a74ed9af1146cb8faf7ad6ffe11c4ca88" title="Resets the index entry count. Attempting to get the next directory item after this function has execu..." alt="" coords="472,968,597,995"/>
+<area shape="rect" id="node137" href="$_i__node_8c.html#a82ee207647edbab6ce13634925926122" title="Get the name of the file given its inode&#39;s location on disk." alt="" coords="678,1120,757,1147"/>
+<area shape="rect" id="node148" href="$system__open__file__table_8c.html#a1fee41fff36c3d8dd9447612777a3bba" title="Remove a file descriptor from the system wide open file table." alt="" coords="297,1941,380,1968"/>
+</map>

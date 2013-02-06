@@ -1,0 +1,14 @@
+<map id="traverse_file_system" name="traverse_file_system">
+<area shape="rect" id="node3" href="$super__block_8c.html#a5bdef04f60586e309e3e42e89326d62d" title="Get the location of the root directory." alt="" coords="365,56,435,83"/>
+<area shape="rect" id="node11" href="$_i__node_8c.html#a8c3230f033a02dda88ea580b2b28f59e" title="Get the index block which an inode links to given the inode&#39;s location on disk." alt="" coords="342,107,458,133"/>
+<area shape="rect" id="node15" href="$index__block_8c.html#a58c6c55e76e88de10da638a624574947" title="This function takes an index block data structure and returns the locations of all data blocks which ..." alt="" coords="197,232,293,259"/>
+<area shape="rect" id="node23" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="205,283,285,309"/>
+<area shape="rect" id="node25" href="$_i__node_8c.html#a37821b1523b1431305feddc288c16355" title="find_inode" alt="" coords="205,157,286,184"/>
+<area shape="rect" id="node31" href="$_i__node_8c.html#a82f261d23645f5610e7c32f3b34d919c" title="Get the contents of an inode given its location on disk." alt="" coords="361,5,439,32"/>
+<area shape="rect" id="node5" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="507,56,599,83"/>
+<area shape="rect" id="node7" href="$block__func_8c.html#a1dcadd38a012a1218ab2100bda116861" title="A wrapper for the get_block function." alt="" coords="511,107,596,133"/>
+<area shape="rect" id="node9" href="$blockio_8c.html#aba494f8ba12c5888abc3991a9a1a4fa0" title="Retrieves a block from disk." alt="" coords="649,107,727,133"/>
+<area shape="rect" id="node18" href="$glob__func_8c.html#ae6b48ca0727ba8a874b5442254e1d31a" title="Concatenate two arrays." alt="" coords="369,259,431,285"/>
+<area shape="rect" id="node20" href="$glob__func_8c.html#a12db81dbcf4d3c41013509bb19d7053c" title="Concatenate two byte arrays." alt="" coords="357,309,443,336"/>
+<area shape="rect" id="node27" href="$_i__node_8c.html#a82ee207647edbab6ce13634925926122" title="Get the name of the file given its inode&#39;s location on disk." alt="" coords="361,157,439,184"/>
+</map>

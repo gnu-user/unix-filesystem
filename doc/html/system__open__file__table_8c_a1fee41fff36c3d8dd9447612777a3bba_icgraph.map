@@ -1,0 +1,5 @@
+<map id="remove_fd" name="remove_fd">
+<area shape="rect" id="node3" href="$close__file_8h.html#ab89c6dcbc639c5fb3348a6935c12912d" title="Closes the file, which indicates that the file is no longer needed." alt="" coords="145,5,223,32"/>
+<area shape="rect" id="node7" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="137,56,231,83"/>
+<area shape="rect" id="node5" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="280,31,349,57"/>
+</map>

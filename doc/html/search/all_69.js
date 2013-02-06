@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['i_5fnode_2ec',['I_node.c',['../_i__node_8c.html',1,'']]],
+  ['i_5fnode_2eh',['I_node.h',['../_i__node_8h.html',1,'']]],
+  ['index',['index',['../index__block_8h.html#a6784e1c334dfceb8f017667c0b0f6a3e',1,'index_block.h']]],
+  ['index_5fallocation_5ferror',['INDEX_ALLOCATION_ERROR',['../error_8h.html#a88a76ee847c844cc47b94caac600689dafb262c03b590ee38c8acb1fbc0051ab2',1,'error.h']]],
+  ['index_5fblock_2ec',['index_block.c',['../index__block_8c.html',1,'']]],
+  ['index_5fblock_2eh',['index_block.h',['../index__block_8h.html',1,'']]],
+  ['index_5fblock_5flocations',['index_block_locations',['../index__block_8c.html#aa8336ecef5a6f9f6881a3e6a498bc543',1,'index_block_locations(uint32_t location, locations index_blocks):&#160;index_block.c'],['../index__block_8h.html#aa8336ecef5a6f9f6881a3e6a498bc543',1,'index_block_locations(uint32_t location, locations index_blocks):&#160;index_block.c']]],
+  ['index_5flocation',['index_location',['../structdata__index.html#a9f7ac2c27413909a97f1ba11bfd7ff98',1,'data_index']]],
+  ['initialize_2ec',['initialize.c',['../initialize_8c.html',1,'']]],
+  ['initialize_2eh',['initialize.h',['../initialize_8h.html',1,'']]],
+  ['inode',['inode',['../structinode.html',1,'']]],
+  ['input_5fbuf_5fformat',['INPUT_BUF_FORMAT',['../glob__data_8h.html#aa2dfbf8b30809589e42b2cb018c99358',1,'glob_data.h']]],
+  ['insufficient_5fdisk_5fspace',['INSUFFICIENT_DISK_SPACE',['../error_8h.html#a88a76ee847c844cc47b94caac600689da54c5aa0c8b218cd4c010d2c915b561f4',1,'error.h']]],
+  ['invalid_5ffile_5fdescriptor',['INVALID_FILE_DESCRIPTOR',['../error_8h.html#a88a76ee847c844cc47b94caac600689dac06646da8ff920852222236c9b2e5f9a',1,'error.h']]],
+  ['invalid_5ffile_5fname',['INVALID_FILE_NAME',['../error_8h.html#a88a76ee847c844cc47b94caac600689da5bd12c3506a0cd6b0b44e585a62d09bc',1,'error.h']]],
+  ['invalid_5ffile_5ftype',['INVALID_FILE_TYPE',['../error_8h.html#a88a76ee847c844cc47b94caac600689dae4a3e5ca71c2a78a052942e209022823',1,'error.h']]],
+  ['invalid_5fparameter',['INVALID_PARAMETER',['../error_8h.html#a88a76ee847c844cc47b94caac600689da0d213a9ce640867b78937ff030c6c76f',1,'error.h']]],
+  ['invalid_5fpath',['INVALID_PATH',['../error_8h.html#a88a76ee847c844cc47b94caac600689da65c8ffdd83b744c8685263689ab8043e',1,'error.h']]],
+  ['invalid_5fpath_5flength',['INVALID_PATH_LENGTH',['../error_8h.html#a88a76ee847c844cc47b94caac600689dafbe0cb7d86b9208a280a5ad930428a01',1,'error.h']]],
+  ['invalid_5fuuid',['INVALID_UUID',['../mount_8c.html#a68e36ad943fd93115744b6e13fec4b64',1,'mount.c']]],
+  ['io_5fbuf_5fformat',['IO_BUF_FORMAT',['../glob__data_8h.html#a7cd8c9dbf0e8ded6e30634fa5b53b667',1,'glob_data.h']]],
+  ['io_5fbuffer',['io_buffer',['../sfstest_8c.html#aa59de164da6603e8dd1f6843203dab61',1,'sfstest.c']]],
+  ['iterate_5findex',['iterate_index',['../index__block_8c.html#a58c6c55e76e88de10da638a624574947',1,'iterate_index(uint32_t location, locations data_blocks):&#160;index_block.c'],['../index__block_8h.html#a58c6c55e76e88de10da638a624574947',1,'iterate_index(uint32_t location, locations data_blocks):&#160;index_block.c']]]
+];

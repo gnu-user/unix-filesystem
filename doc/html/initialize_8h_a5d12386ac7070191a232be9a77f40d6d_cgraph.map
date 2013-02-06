@@ -1,0 +1,6 @@
+<map id="wipe_disk" name="wipe_disk">
+<area shape="rect" id="node3" href="$glob__func_8c.html#a4f496ee5ac2e8ea15ed2d44dd16828a1" title="Allocate a buffer to write to memory of a given size." alt="" coords="134,5,226,32"/>
+<area shape="rect" id="node5" href="$block__func_8c.html#a8d2c516f00e918d009b5fbaf1cfa463b" title="A wrapper for the put_block function." alt="" coords="136,56,224,83"/>
+<area shape="rect" id="node9" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="140,107,220,133"/>
+<area shape="rect" id="node7" href="$blockio_8c.html#a800219862241422fe7dee4411b4b995e" title="Writes a block to disk." alt="" coords="275,56,354,83"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="find_opening" name="find_opening">
+<area shape="rect" id="node3" href="$system__open__file__table_8h.html#aeda1a7f2db1183bbb89437b6a07d2c71" title="Add the inode to the system wide open file table." alt="" coords="150,5,250,32"/>
+<area shape="rect" id="node5" href="$open__file_8h.html#ae482b5d82cfd7a92ea1f2815c5965f3c" title="Opens the file specified by the pathname, if the file is successfully opened a file descriptor is ret..." alt="" coords="299,5,373,32"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="421,5,491,32"/>
+</map>

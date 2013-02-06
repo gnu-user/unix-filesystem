@@ -1,0 +1,6 @@
+<map id="calc_num_blocks" name="calc_num_blocks">
+<area shape="rect" id="node3" href="$_i__node_8h.html#ae46cace88988ba2b1d6fd8e63f68db5b" title="Unlinks a child&#39;s inode from the parent&#39;s index structure." alt="" coords="176,5,347,32"/>
+<area shape="rect" id="node9" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="399,56,473,83"/>
+<area shape="rect" id="node5" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="395,5,477,32"/>
+<area shape="rect" id="node7" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="525,31,595,57"/>
+</map>

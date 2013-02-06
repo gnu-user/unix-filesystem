@@ -1,0 +1,10 @@
+<map id="index_block_locations" name="index_block_locations">
+<area shape="rect" id="node3" href="$delete__file_8h.html#ad7cc263f6e467c2eb2f8f73a6eb9d1c3" title="Delete a file with the pathname specified." alt="" coords="424,6,507,33"/>
+<area shape="rect" id="node7" href="$get__size_8h.html#a9abcf2f46b77ed569f2a64407e656d22" title="Get the size (in blocks) of the file with the pathname specified." alt="" coords="558,57,647,83"/>
+<area shape="rect" id="node10" href="$_i__node_8h.html#ad53d6e5ae20699bd6a8702c0e1a58d3a" title="Links the inode to a parent&#39;s index structure." alt="" coords="220,133,361,159"/>
+<area shape="rect" id="node18" href="$_i__node_8h.html#ae46cace88988ba2b1d6fd8e63f68db5b" title="Unlinks a child&#39;s inode from the parent&#39;s index structure." alt="" coords="205,31,376,58"/>
+<area shape="rect" id="node22" href="$write__file_8h.html#a27cf11a1ac685bf2dbd4feca5f2a68dd" title="Write data to a file." alt="" coords="428,183,503,210"/>
+<area shape="rect" id="node5" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="699,107,768,134"/>
+<area shape="rect" id="node12" href="$create__file_8h.html#a10498692a07aacf1e88110005e3f2f3f" title="Creates a new file or directory at the path specified." alt="" coords="424,133,507,159"/>
+<area shape="rect" id="node14" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="555,158,650,185"/>
+</map>

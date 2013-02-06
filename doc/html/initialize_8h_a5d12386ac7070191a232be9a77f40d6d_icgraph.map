@@ -1,0 +1,4 @@
+<map id="wipe_disk" name="wipe_disk">
+<area shape="rect" id="node3" href="$initialize_8h.html#a19433b013c630f41f2a2162275594858" title="Initialize the superblock for the file system." alt="" coords="134,5,229,32"/>
+<area shape="rect" id="node5" href="$sfstest_8c.html#a88d3b903798a494fd7297714fd0e5c4c" title="sfs_test" alt="" coords="277,5,347,32"/>
+</map>

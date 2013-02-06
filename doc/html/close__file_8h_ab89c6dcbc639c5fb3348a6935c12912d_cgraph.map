@@ -1,0 +1,5 @@
+<map id="sfs_close" name="sfs_close">
+<area shape="rect" id="node3" href="$system__open__file__table_8c.html#abcb97049b41ee4a0a04800b6b48efd6c" title="Validate whether the given file descriptor is a valid file descriptor in the system wide open file ta..." alt="" coords="133,5,219,32"/>
+<area shape="rect" id="node5" href="$error_8c.html#af85f0519da49c9e50bf3d1feffa74ef3" title="Prints an error code." alt="" coords="136,56,216,83"/>
+<area shape="rect" id="node7" href="$system__open__file__table_8c.html#a1fee41fff36c3d8dd9447612777a3bba" title="Remove a file descriptor from the system wide open file table." alt="" coords="135,107,217,133"/>
+</map>
