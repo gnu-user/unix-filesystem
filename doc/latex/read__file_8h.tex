@@ -1,0 +1,99 @@
+\hypertarget{read__file_8h}{\section{read\-\_\-file.\-h File Reference}
+\label{read__file_8h}\index{read\-\_\-file.\-h@{read\-\_\-file.\-h}}
+}
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+Include dependency graph for read\-\_\-file.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=140pt]{read__file_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=140pt]{read__file_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{read__file_8h_a967ba612f53d696f2c63f49ae35c4f37}{sfs\-\_\-read} (int fd, int start, int length, \hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$mem\-\_\-pointer)
+\begin{DoxyCompactList}\small\item\em Read the contents of a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{read__file_8h_a967ba612f53d696f2c63f49ae35c4f37}{\index{read\-\_\-file.\-h@{read\-\_\-file.\-h}!sfs\-\_\-read@{sfs\-\_\-read}}
+\index{sfs\-\_\-read@{sfs\-\_\-read}!read_file.h@{read\-\_\-file.\-h}}
+\subsubsection[{sfs\-\_\-read}]{\setlength{\rightskip}{0pt plus 5cm}int sfs\-\_\-read (
+\begin{DoxyParamCaption}
+\item[{int}]{fd, }
+\item[{int}]{start, }
+\item[{int}]{length, }
+\item[{{\bf byte} $\ast$}]{mem\-\_\-pointer}
+\end{DoxyParamCaption}
+)}}\label{read__file_8h_a967ba612f53d696f2c63f49ae35c4f37}
+
+
+Read the contents of a file. 
+
+Copy the length of bytes of data specified from a regular file to memory location specified by mem\-\_\-pointer. The parameter start gives the offset of the first byte in the file that should be copied.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & A file descriptor for the file to read data from.\\
+\hline
+{\em start} & The offset of the first byte in the file that should be copied.\\
+\hline
+{\em length} & The length of bytes of data to copy from the file.\\
+\hline
+{\em mem\-\_\-pointer} & The memory location to store the data read from the file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value, if the value $>$ 0 then the file was read successfully. If the value $<$= 0 then the file failed to be read.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em F\-I\-L\-E\-\_\-\-L\-E\-N\-G\-T\-H\-\_\-\-O\-V\-E\-R\-R\-U\-N} & If the file cannot be read correctly because the length of bytes specified exceeds the length of the file, no data will be copied from the file if an overrun occurs.\\
+\hline
+{\em I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-I\-L\-E\-\_\-\-D\-E\-S\-C\-R\-I\-P\-T\-O\-R} & If the file descriptor specified does not exist.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{read__file_8h_a967ba612f53d696f2c63f49ae35c4f37_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{read__file_8h_a967ba612f53d696f2c63f49ae35c4f37_icgraph}
+\end{center}
+\end{figure}
+
+

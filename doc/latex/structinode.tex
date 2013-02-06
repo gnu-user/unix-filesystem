@@ -1,0 +1,115 @@
+\hypertarget{structinode}{\section{inode Struct Reference}
+\label{structinode}\index{inode@{inode}}
+}
+
+
+Contains the data stored in inodes.  
+
+
+
+
+{\ttfamily \#include $<$I\-\_\-node.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{structinode_af869a309a32425813b56b839f9659b24}{name} \mbox{[}\hyperlink{glob__data_8h_afd709f201d7643c3909621f620ea648a}{M\-A\-X\-\_\-\-N\-A\-M\-E\-\_\-\-L\-E\-N}\mbox{]}
+\item 
+bool \hyperlink{structinode_a565421f589059ae13581e05b505cf5f0}{type}
+\item 
+bool \hyperlink{structinode_af49a80be54293d8b153cd2a3dfd4e068}{read}
+\item 
+bool \hyperlink{structinode_ab4d8d1259f524270d625ab8933700d27}{write}
+\item 
+bool \hyperlink{structinode_a253e08d8b620206d485babf8a40d53db}{execute}
+\item 
+time\-\_\-t \hyperlink{structinode_a6fcc067af656e07c0d52cb7890be4a1f}{date\-\_\-of\-\_\-create}
+\item 
+time\-\_\-t \hyperlink{structinode_a3b1b10b96addbc06de562360c44d44c2}{date\-\_\-last\-\_\-accessed}
+\item 
+time\-\_\-t \hyperlink{structinode_a6c79d9f7a8c07080347292608eff8cbd}{date\-\_\-last\-\_\-modified}
+\item 
+uint32\-\_\-t \hyperlink{structinode_a3f405dba01154bed631df46b0a27d593}{file\-\_\-owner}
+\item 
+uint32\-\_\-t \hyperlink{structinode_a735957d2fe21c7a191634c86079317d0}{last\-\_\-user\-\_\-modified}
+\item 
+uint32\-\_\-t \hyperlink{structinode_acfc905fb689f590842c0152e3b8cd92e}{file\-\_\-size}
+\item 
+uint32\-\_\-t \hyperlink{structinode_a8f37ff59738c23420be43a6b1ba69769}{location}
+\item 
+bool \hyperlink{structinode_a8a32018f1892e247f08ea9a91f5505e6}{encrypted}
+\item 
+uint32\-\_\-t \hyperlink{structinode_a609a9abb9ba167b63027aad986198118}{check\-\_\-sum}
+\item 
+uuid\-\_\-t \hyperlink{structinode_a0c9cfc131b27ae3b98b1533bba4c58ef}{uuid}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains the data stored in inodes. 
+
+This struct defines the data which will be stored inside blocks designated as inodes on the disk. In particular, inodes store data pertaining to the attributes of they files they represent, as well as linkages to the index block structure that allows the file system to track their associated data blocks. Since files can be either a directory or a data file, inodes provide all the data required to track both types of data structures.
+
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+\subsection{Field Documentation}
+\hypertarget{structinode_a609a9abb9ba167b63027aad986198118}{\index{inode@{inode}!check\-\_\-sum@{check\-\_\-sum}}
+\index{check\-\_\-sum@{check\-\_\-sum}!inode@{inode}}
+\subsubsection[{check\-\_\-sum}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t check\-\_\-sum}}\label{structinode_a609a9abb9ba167b63027aad986198118}
+This flags whether the file's data contents are encrypted. \hypertarget{structinode_a3b1b10b96addbc06de562360c44d44c2}{\index{inode@{inode}!date\-\_\-last\-\_\-accessed@{date\-\_\-last\-\_\-accessed}}
+\index{date\-\_\-last\-\_\-accessed@{date\-\_\-last\-\_\-accessed}!inode@{inode}}
+\subsubsection[{date\-\_\-last\-\_\-accessed}]{\setlength{\rightskip}{0pt plus 5cm}time\-\_\-t date\-\_\-last\-\_\-accessed}}\label{structinode_a3b1b10b96addbc06de562360c44d44c2}
+This stores what the date of creation is for the file in P\-O\-S\-I\-X time format. \hypertarget{structinode_a6c79d9f7a8c07080347292608eff8cbd}{\index{inode@{inode}!date\-\_\-last\-\_\-modified@{date\-\_\-last\-\_\-modified}}
+\index{date\-\_\-last\-\_\-modified@{date\-\_\-last\-\_\-modified}!inode@{inode}}
+\subsubsection[{date\-\_\-last\-\_\-modified}]{\setlength{\rightskip}{0pt plus 5cm}time\-\_\-t date\-\_\-last\-\_\-modified}}\label{structinode_a6c79d9f7a8c07080347292608eff8cbd}
+This stores the date that the file was last accessed by the file system in P\-O\-S\-I\-X time format. \hypertarget{structinode_a6fcc067af656e07c0d52cb7890be4a1f}{\index{inode@{inode}!date\-\_\-of\-\_\-create@{date\-\_\-of\-\_\-create}}
+\index{date\-\_\-of\-\_\-create@{date\-\_\-of\-\_\-create}!inode@{inode}}
+\subsubsection[{date\-\_\-of\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}time\-\_\-t date\-\_\-of\-\_\-create}}\label{structinode_a6fcc067af656e07c0d52cb7890be4a1f}
+This flags whether the file is marked as executable or not. \hypertarget{structinode_a8a32018f1892e247f08ea9a91f5505e6}{\index{inode@{inode}!encrypted@{encrypted}}
+\index{encrypted@{encrypted}!inode@{inode}}
+\subsubsection[{encrypted}]{\setlength{\rightskip}{0pt plus 5cm}bool encrypted}}\label{structinode_a8a32018f1892e247f08ea9a91f5505e6}
+This stores the location of the file's first index block on disk. \hypertarget{structinode_a253e08d8b620206d485babf8a40d53db}{\index{inode@{inode}!execute@{execute}}
+\index{execute@{execute}!inode@{inode}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}bool execute}}\label{structinode_a253e08d8b620206d485babf8a40d53db}
+This flags whether the file is marked as writable or not. \hypertarget{structinode_a3f405dba01154bed631df46b0a27d593}{\index{inode@{inode}!file\-\_\-owner@{file\-\_\-owner}}
+\index{file\-\_\-owner@{file\-\_\-owner}!inode@{inode}}
+\subsubsection[{file\-\_\-owner}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t file\-\_\-owner}}\label{structinode_a3f405dba01154bed631df46b0a27d593}
+This stores the date that the file was last modified by the file system in P\-O\-S\-I\-X time format. \hypertarget{structinode_acfc905fb689f590842c0152e3b8cd92e}{\index{inode@{inode}!file\-\_\-size@{file\-\_\-size}}
+\index{file\-\_\-size@{file\-\_\-size}!inode@{inode}}
+\subsubsection[{file\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t file\-\_\-size}}\label{structinode_acfc905fb689f590842c0152e3b8cd92e}
+This stores the name of the last user who modified the file. \hypertarget{structinode_a735957d2fe21c7a191634c86079317d0}{\index{inode@{inode}!last\-\_\-user\-\_\-modified@{last\-\_\-user\-\_\-modified}}
+\index{last\-\_\-user\-\_\-modified@{last\-\_\-user\-\_\-modified}!inode@{inode}}
+\subsubsection[{last\-\_\-user\-\_\-modified}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t last\-\_\-user\-\_\-modified}}\label{structinode_a735957d2fe21c7a191634c86079317d0}
+This stores the name of the owner of the file. \hypertarget{structinode_a8f37ff59738c23420be43a6b1ba69769}{\index{inode@{inode}!location@{location}}
+\index{location@{location}!inode@{inode}}
+\subsubsection[{location}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t location}}\label{structinode_a8f37ff59738c23420be43a6b1ba69769}
+This stores the size of the file in bytes. \hypertarget{structinode_af869a309a32425813b56b839f9659b24}{\index{inode@{inode}!name@{name}}
+\index{name@{name}!inode@{inode}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}char name\mbox{[}{\bf M\-A\-X\-\_\-\-N\-A\-M\-E\-\_\-\-L\-E\-N}\mbox{]}}}\label{structinode_af869a309a32425813b56b839f9659b24}
+\hypertarget{structinode_af49a80be54293d8b153cd2a3dfd4e068}{\index{inode@{inode}!read@{read}}
+\index{read@{read}!inode@{inode}}
+\subsubsection[{read}]{\setlength{\rightskip}{0pt plus 5cm}bool read}}\label{structinode_af49a80be54293d8b153cd2a3dfd4e068}
+The type of file. Files can be either data files, or directories. \hypertarget{structinode_a565421f589059ae13581e05b505cf5f0}{\index{inode@{inode}!type@{type}}
+\index{type@{type}!inode@{inode}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}bool type}}\label{structinode_a565421f589059ae13581e05b505cf5f0}
+The human-\/readable name of the file. \hypertarget{structinode_a0c9cfc131b27ae3b98b1533bba4c58ef}{\index{inode@{inode}!uuid@{uuid}}
+\index{uuid@{uuid}!inode@{inode}}
+\subsubsection[{uuid}]{\setlength{\rightskip}{0pt plus 5cm}uuid\-\_\-t uuid}}\label{structinode_a0c9cfc131b27ae3b98b1533bba4c58ef}
+This stores the encryption checksum for the file, to determine whether it has been encrypted or unencrypted correctly. \hypertarget{structinode_ab4d8d1259f524270d625ab8933700d27}{\index{inode@{inode}!write@{write}}
+\index{write@{write}!inode@{inode}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}bool write}}\label{structinode_ab4d8d1259f524270d625ab8933700d27}
+This flags whether the file is marked as readable or not. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_i__node_8h}{I\-\_\-node.\-h}\end{DoxyCompactItemize}

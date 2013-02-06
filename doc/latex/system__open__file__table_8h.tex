@@ -1,0 +1,370 @@
+\hypertarget{system__open__file__table_8h}{\section{system\-\_\-open\-\_\-file\-\_\-table.\-h File Reference}
+\label{system__open__file__table_8h}\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+}
+{\ttfamily \#include \char`\"{}I\-\_\-node.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/uuid/uuid.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+Include dependency graph for system\-\_\-open\-\_\-file\-\_\-table.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{system__open__file__table_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{system__open__file__table_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structswoft}{swoft}
+\begin{DoxyCompactList}\small\item\em Pseudo-\/object containing the array of open file descriptors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{system__open__file__table_8h_aeda1a7f2db1183bbb89437b6a07d2c71}{add\-\_\-to\-\_\-swoft} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Add the inode to the system wide open file table. \end{DoxyCompactList}\item 
+int \hyperlink{system__open__file__table_8h_ad0b54d7f70662d95ea7cd7429913cb9e}{find\-\_\-opening} (void)
+\begin{DoxyCompactList}\small\item\em Finds an open location in the swoft. \end{DoxyCompactList}\item 
+int \hyperlink{system__open__file__table_8h_abcb97049b41ee4a0a04800b6b48efd6c}{validate\-\_\-fd} (int fd)
+\begin{DoxyCompactList}\small\item\em Validate whether the given file descriptor is a valid file descriptor in the system wide open file table. \end{DoxyCompactList}\item 
+\hyperlink{structinode}{inode} \hyperlink{system__open__file__table_8h_aad11d05dccc34b2921e2482e743f32e6}{get\-\_\-swoft\-\_\-inode} (int fd)
+\begin{DoxyCompactList}\small\item\em Get an inode instance from the system wide open file table. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{system__open__file__table_8h_a58c99881ad30ffc6348f9007334740b2}{get\-\_\-inode\-\_\-loc} (int fd)
+\begin{DoxyCompactList}\small\item\em Get the location of the inode on disk which corresponds to a file descriptor. \end{DoxyCompactList}\item 
+void \hyperlink{system__open__file__table_8h_a1fee41fff36c3d8dd9447612777a3bba}{remove\-\_\-fd} (int fd)
+\begin{DoxyCompactList}\small\item\em Remove a file descriptor from the system wide open file table. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{system__open__file__table_8h_a9bedb4fdbf5ea0c28eda1919649a0157}{find\-\_\-and\-\_\-remove} (uint32\-\_\-t inode\-\_\-location)
+\begin{DoxyCompactList}\small\item\em Find all the system wide open file table indices that have the same data as the given location on disk, and remove them from the system wide open file table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structswoft}{swoft} \hyperlink{system__open__file__table_8h_a9003db2c42954f5f64cc951d7123ea94}{system\-\_\-open\-\_\-tb}
+\begin{DoxyCompactList}\small\item\em The static instance of the system wide open file table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{system__open__file__table_8h_aeda1a7f2db1183bbb89437b6a07d2c71}{\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}!add\-\_\-to\-\_\-swoft@{add\-\_\-to\-\_\-swoft}}
+\index{add\-\_\-to\-\_\-swoft@{add\-\_\-to\-\_\-swoft}!system_open_file_table.h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+\subsubsection[{add\-\_\-to\-\_\-swoft}]{\setlength{\rightskip}{0pt plus 5cm}int add\-\_\-to\-\_\-swoft (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{system__open__file__table_8h_aeda1a7f2db1183bbb89437b6a07d2c71}
+
+
+Add the inode to the system wide open file table. 
+
+This function takes an inode's block location on disk, reads that block, and assigns the returned inode location on disk into memory to a file descriptor -\/ this is an index on the system wide open file table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The inode's location on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value, if the value $>$= 0 then the inode was found and added to the system wide open file table. If the value = -\/1 then the table was full. If the value = -\/2 then the inode was not found. By default, any other return value signals that the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{system__open__file__table_8h_aeda1a7f2db1183bbb89437b6a07d2c71_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{system__open__file__table_8h_aeda1a7f2db1183bbb89437b6a07d2c71_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{system__open__file__table_8h_a9bedb4fdbf5ea0c28eda1919649a0157}{\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}!find\-\_\-and\-\_\-remove@{find\-\_\-and\-\_\-remove}}
+\index{find\-\_\-and\-\_\-remove@{find\-\_\-and\-\_\-remove}!system_open_file_table.h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+\subsubsection[{find\-\_\-and\-\_\-remove}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t find\-\_\-and\-\_\-remove (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{inode\-\_\-location}
+\end{DoxyParamCaption}
+)}}\label{system__open__file__table_8h_a9bedb4fdbf5ea0c28eda1919649a0157}
+
+
+Find all the system wide open file table indices that have the same data as the given location on disk, and remove them from the system wide open file table. 
+
+This function is used when deleting files. In order to remove all open handles to a file when it is removed from disk, the system wide open file table must have all corresponding handles removed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inode\-\_\-location} & The location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value indicating the number of entries deleted from the system wide open file table. 
+\end{DoxyReturn}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{system__open__file__table_8h_a9bedb4fdbf5ea0c28eda1919649a0157_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{system__open__file__table_8h_ad0b54d7f70662d95ea7cd7429913cb9e}{\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}!find\-\_\-opening@{find\-\_\-opening}}
+\index{find\-\_\-opening@{find\-\_\-opening}!system_open_file_table.h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+\subsubsection[{find\-\_\-opening}]{\setlength{\rightskip}{0pt plus 5cm}int find\-\_\-opening (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{system__open__file__table_8h_ad0b54d7f70662d95ea7cd7429913cb9e}
+
+
+Finds an open location in the swoft. 
+
+This function finds the next open location in the system wide open file table and returns the first location in the swoft that is available.
+
+\begin{DoxyReturn}{Returns}
+Returns the first location in the swoft that is available, if the value $>$= 0 then it is the first available location found. Otherwise if the value $<$ 0 then the swoft is full.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{system__open__file__table_8h_ad0b54d7f70662d95ea7cd7429913cb9e_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{system__open__file__table_8h_a58c99881ad30ffc6348f9007334740b2}{\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}!get\-\_\-inode\-\_\-loc@{get\-\_\-inode\-\_\-loc}}
+\index{get\-\_\-inode\-\_\-loc@{get\-\_\-inode\-\_\-loc}!system_open_file_table.h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+\subsubsection[{get\-\_\-inode\-\_\-loc}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t get\-\_\-inode\-\_\-loc (
+\begin{DoxyParamCaption}
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)}}\label{system__open__file__table_8h_a58c99881ad30ffc6348f9007334740b2}
+
+
+Get the location of the inode on disk which corresponds to a file descriptor. 
+
+This function takes a file descriptor, and if there is a valid inode pseudo-\/object at that index on the system wide open file table, the location of that object on disk is returned from accessing it within the pseudo-\/object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the location of the inode on disk.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{system__open__file__table_8h_a58c99881ad30ffc6348f9007334740b2_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{system__open__file__table_8h_aad11d05dccc34b2921e2482e743f32e6}{\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}!get\-\_\-swoft\-\_\-inode@{get\-\_\-swoft\-\_\-inode}}
+\index{get\-\_\-swoft\-\_\-inode@{get\-\_\-swoft\-\_\-inode}!system_open_file_table.h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+\subsubsection[{get\-\_\-swoft\-\_\-inode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inode} get\-\_\-swoft\-\_\-inode (
+\begin{DoxyParamCaption}
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)}}\label{system__open__file__table_8h_aad11d05dccc34b2921e2482e743f32e6}
+
+
+Get an inode instance from the system wide open file table. 
+
+This function takes a file descriptor, which is an index on the system wide open file table. If there is an inode pseudo-\/object at the index specified, it is returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the inode instance from the system wide open file table given the file descriptor.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{system__open__file__table_8h_aad11d05dccc34b2921e2482e743f32e6_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{system__open__file__table_8h_aad11d05dccc34b2921e2482e743f32e6_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{system__open__file__table_8h_a1fee41fff36c3d8dd9447612777a3bba}{\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}!remove\-\_\-fd@{remove\-\_\-fd}}
+\index{remove\-\_\-fd@{remove\-\_\-fd}!system_open_file_table.h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+\subsubsection[{remove\-\_\-fd}]{\setlength{\rightskip}{0pt plus 5cm}void remove\-\_\-fd (
+\begin{DoxyParamCaption}
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)}}\label{system__open__file__table_8h_a1fee41fff36c3d8dd9447612777a3bba}
+
+
+Remove a file descriptor from the system wide open file table. 
+
+This function accesses an index on the system wide open file table, and frees whatever data is in memory corresponding to that index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor to remove. \\
+\hline
+\end{DoxyParams}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{system__open__file__table_8h_a1fee41fff36c3d8dd9447612777a3bba_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{system__open__file__table_8h_abcb97049b41ee4a0a04800b6b48efd6c}{\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}!validate\-\_\-fd@{validate\-\_\-fd}}
+\index{validate\-\_\-fd@{validate\-\_\-fd}!system_open_file_table.h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+\subsubsection[{validate\-\_\-fd}]{\setlength{\rightskip}{0pt plus 5cm}int validate\-\_\-fd (
+\begin{DoxyParamCaption}
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)}}\label{system__open__file__table_8h_abcb97049b41ee4a0a04800b6b48efd6c}
+
+
+Validate whether the given file descriptor is a valid file descriptor in the system wide open file table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value, if the value $>$= 0 the file descriptor was valid, otherwise the file descriptor was invalid, or the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{system__open__file__table_8h_abcb97049b41ee4a0a04800b6b48efd6c_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{system__open__file__table_8h_a9003db2c42954f5f64cc951d7123ea94}{\index{system\-\_\-open\-\_\-file\-\_\-table.\-h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}!system\-\_\-open\-\_\-tb@{system\-\_\-open\-\_\-tb}}
+\index{system\-\_\-open\-\_\-tb@{system\-\_\-open\-\_\-tb}!system_open_file_table.h@{system\-\_\-open\-\_\-file\-\_\-table.\-h}}
+\subsubsection[{system\-\_\-open\-\_\-tb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf swoft} system\-\_\-open\-\_\-tb}}\label{system__open__file__table_8h_a9003db2c42954f5f64cc951d7123ea94}
+
+
+The static instance of the system wide open file table. 
+
+This variable holds the singleton instance of the system wide open file table. It represents an instance of a pseudo-\/object which can only be accessed and modified through the accessor and mutator methods provided.
+
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}

@@ -1,0 +1,83 @@
+\hypertarget{delete__file_8c}{\section{delete\-\_\-file.\-c File Reference}
+\label{delete__file_8c}\index{delete\-\_\-file.\-c@{delete\-\_\-file.\-c}}
+}
+{\ttfamily \#include \char`\"{}glob\-\_\-data.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}blockio.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}traverse\-\_\-tree.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}free\-\_\-block\-\_\-list.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system\-\_\-open\-\_\-file\-\_\-table.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}delete\-\_\-file.\-h\char`\"{}}\\*
+Include dependency graph for delete\-\_\-file.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delete__file_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{delete__file_8c_ad7cc263f6e467c2eb2f8f73a6eb9d1c3}{sfs\-\_\-delete} (char $\ast$pathname)
+\begin{DoxyCompactList}\small\item\em Delete a file with the pathname specified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{delete__file_8c_ad7cc263f6e467c2eb2f8f73a6eb9d1c3}{\index{delete\-\_\-file.\-c@{delete\-\_\-file.\-c}!sfs\-\_\-delete@{sfs\-\_\-delete}}
+\index{sfs\-\_\-delete@{sfs\-\_\-delete}!delete_file.c@{delete\-\_\-file.\-c}}
+\subsubsection[{sfs\-\_\-delete}]{\setlength{\rightskip}{0pt plus 5cm}int sfs\-\_\-delete (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pathname}
+\end{DoxyParamCaption}
+)}}\label{delete__file_8c_ad7cc263f6e467c2eb2f8f73a6eb9d1c3}
+
+
+Delete a file with the pathname specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pathname} & The pathname of file to create, must be full directory path\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value, if the value is $>$ 0 then the file was deleted successfully. If the value is $<$= 0 then the file failed to delete.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em F\-I\-L\-E\-\_\-\-N\-O\-T\-\_\-\-F\-O\-U\-N\-D} & If the file at the specified path does not already exist.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{delete__file_8c_ad7cc263f6e467c2eb2f8f73a6eb9d1c3_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{delete__file_8c_ad7cc263f6e467c2eb2f8f73a6eb9d1c3_icgraph}
+\end{center}
+\end{figure}
+
+

@@ -1,0 +1,91 @@
+\hypertarget{read__dir_8h}{\section{read\-\_\-dir.\-h File Reference}
+\label{read__dir_8h}\index{read\-\_\-dir.\-h@{read\-\_\-dir.\-h}}
+}
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+Include dependency graph for read\-\_\-dir.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=138pt]{read__dir_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=138pt]{read__dir_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{read__dir_8h_a7b19aab55aa6358fab1f66a63810b358}{sfs\-\_\-readdir} (int fd, char $\ast$mem\-\_\-pointer)
+\begin{DoxyCompactList}\small\item\em List the contents of a directory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{read__dir_8h_a7b19aab55aa6358fab1f66a63810b358}{\index{read\-\_\-dir.\-h@{read\-\_\-dir.\-h}!sfs\-\_\-readdir@{sfs\-\_\-readdir}}
+\index{sfs\-\_\-readdir@{sfs\-\_\-readdir}!read_dir.h@{read\-\_\-dir.\-h}}
+\subsubsection[{sfs\-\_\-readdir}]{\setlength{\rightskip}{0pt plus 5cm}int sfs\-\_\-readdir (
+\begin{DoxyParamCaption}
+\item[{int}]{fd, }
+\item[{char $\ast$}]{mem\-\_\-pointer}
+\end{DoxyParamCaption}
+)}}\label{read__dir_8h_a7b19aab55aa6358fab1f66a63810b358}
+
+
+List the contents of a directory. 
+
+Reads the file name components from a directory file. This is done by reading in all the locations from within a directory file's index structure and analyzing the inodes at each location. The first time sfs\-\_\-readdir is called, the first file name component in the directory will be placed into memory at the location pointed to by mem\-\_\-pointer. Each successive call to sfs\-\_\-readdir will place the next name component from the directory into the mem\-\_\-pointer buffer. When all names have been returned, sfs\-\_\-readdir will place nothing in the buffer, and return a value of zero to indicate the directory has been completely scanned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & A file descriptor for the file to read data from.\\
+\hline
+{\em mem\-\_\-pointer} & The memory location to store the file name components.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value. If the value $>$ 0 reading the directory was successful. If the value = 0, there is nothing contents in the directory. If the value $<$ 0 the directory read operation was unsuccessful.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-I\-L\-E\-\_\-\-D\-E\-S\-C\-R\-I\-P\-T\-O\-R} & If the file descriptor specified does not exist.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{read__dir_8h_a7b19aab55aa6358fab1f66a63810b358_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{read__dir_8h_a7b19aab55aa6358fab1f66a63810b358_icgraph}
+\end{center}
+\end{figure}
+
+

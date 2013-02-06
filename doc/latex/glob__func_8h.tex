@@ -1,0 +1,447 @@
+\hypertarget{glob__func_8h}{\section{glob\-\_\-func.\-h File Reference}
+\label{glob__func_8h}\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}}
+}
+{\ttfamily \#include \char`\"{}glob\-\_\-data.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/uuid/uuid.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$stdint.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+Include dependency graph for glob\-\_\-func.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$ \hyperlink{glob__func_8h_a4f496ee5ac2e8ea15ed2d44dd16828a1}{allocate\-\_\-buf} (\hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf, uint32\-\_\-t size)
+\begin{DoxyCompactList}\small\item\em Allocate a buffer to write to memory of a given size. \end{DoxyCompactList}\item 
+\hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$ \hyperlink{glob__func_8h_a29366f8689bb05dc0f4abe8f6415756b}{copy\-\_\-to\-\_\-buf} (\hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf1, \hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf2, uint32\-\_\-t size1, uint32\-\_\-t size2)
+\begin{DoxyCompactList}\small\item\em Copy the data from one buffer to another, given the size of both. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{glob__func_8h_aed567cb73e667eeb50d5c1320ee29f38}{calc\-\_\-num\-\_\-bytes} (\hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Calculate the number of bytes in a byte buffer. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{glob__func_8h_a3caff7b79c5ce4e5d5a4583b86d8e5bc}{calc\-\_\-num\-\_\-blocks} (\hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Calculates the number of blocks needed to store data. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{glob__func_8h_ae6b48ca0727ba8a874b5442254e1d31a}{concat} (void $\ast$src\-\_\-1, void $\ast$src\-\_\-2, uint32\-\_\-t size)
+\begin{DoxyCompactList}\small\item\em Concatenate two arrays. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{glob__func_8h_a12db81dbcf4d3c41013509bb19d7053c}{concat\-\_\-len} (void $\ast$src\-\_\-1, void $\ast$src\-\_\-2, uint32\-\_\-t size, uint32\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Concatenate two byte arrays. \end{DoxyCompactList}\item 
+char $\ast$$\ast$ \hyperlink{glob__func_8h_af1ee345363b6472fc32adc42a849f378}{tokenize\-\_\-path} (char $\ast$pathname)
+\begin{DoxyCompactList}\small\item\em Tokenize a path into an array of tokens. \end{DoxyCompactList}\item 
+bool \hyperlink{glob__func_8h_a2fe7ca36f076470a50c2a5a7146de61d}{free\-\_\-tokens} (char $\ast$$\ast$tokens)
+\begin{DoxyCompactList}\small\item\em Frees the memory allocated for the tokens. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{glob__func_8h_a4f496ee5ac2e8ea15ed2d44dd16828a1}{\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}!allocate\-\_\-buf@{allocate\-\_\-buf}}
+\index{allocate\-\_\-buf@{allocate\-\_\-buf}!glob_func.h@{glob\-\_\-func.\-h}}
+\subsubsection[{allocate\-\_\-buf}]{\setlength{\rightskip}{0pt plus 5cm}{\bf byte}$\ast$ allocate\-\_\-buf (
+\begin{DoxyParamCaption}
+\item[{{\bf byte} $\ast$}]{buf, }
+\item[{uint32\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)}}\label{glob__func_8h_a4f496ee5ac2e8ea15ed2d44dd16828a1}
+
+
+Allocate a buffer to write to memory of a given size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & The buffer to allocate the space for.\\
+\hline
+{\em size} & The size for the new buffer's elements.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the new buffer.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h_a4f496ee5ac2e8ea15ed2d44dd16828a1_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{glob__func_8h_a3caff7b79c5ce4e5d5a4583b86d8e5bc}{\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}!calc\-\_\-num\-\_\-blocks@{calc\-\_\-num\-\_\-blocks}}
+\index{calc\-\_\-num\-\_\-blocks@{calc\-\_\-num\-\_\-blocks}!glob_func.h@{glob\-\_\-func.\-h}}
+\subsubsection[{calc\-\_\-num\-\_\-blocks}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t calc\-\_\-num\-\_\-blocks (
+\begin{DoxyParamCaption}
+\item[{{\bf byte} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{glob__func_8h_a3caff7b79c5ce4e5d5a4583b86d8e5bc}
+
+
+Calculates the number of blocks needed to store data. 
+
+Helper function which calculates the number of blocks needed to store the data, if an error occurs 0 is returned. Reads up to M\-A\-X\-\_\-\-I\-O\-\_\-\-L\-E\-N\-G\-T\-H + 1, if the buffer is still not terminated then the I\-O buffer is larger than the maximum specified by the file system, an error occurs and 0 is returned.
+
+\begin{DoxyPrecond}{Precondition}
+The buf parameter must be N\-U\-L\-L terminated.
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & A N\-U\-L\-L terminated buffer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of blocks needed to store the given data.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{glob__func_8h_a3caff7b79c5ce4e5d5a4583b86d8e5bc_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h_a3caff7b79c5ce4e5d5a4583b86d8e5bc_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{glob__func_8h_aed567cb73e667eeb50d5c1320ee29f38}{\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}!calc\-\_\-num\-\_\-bytes@{calc\-\_\-num\-\_\-bytes}}
+\index{calc\-\_\-num\-\_\-bytes@{calc\-\_\-num\-\_\-bytes}!glob_func.h@{glob\-\_\-func.\-h}}
+\subsubsection[{calc\-\_\-num\-\_\-bytes}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t calc\-\_\-num\-\_\-bytes (
+\begin{DoxyParamCaption}
+\item[{{\bf byte} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{glob__func_8h_aed567cb73e667eeb50d5c1320ee29f38}
+
+
+Calculate the number of bytes in a byte buffer. 
+
+\begin{DoxyPrecond}{Precondition}
+The buf parameter must be N\-U\-L\-L terminated.
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & A N\-U\-L\-L terminated buffer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of bytes inside the buffer, up to the N\-U\-L\-L terminator.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h_aed567cb73e667eeb50d5c1320ee29f38_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{glob__func_8h_ae6b48ca0727ba8a874b5442254e1d31a}{\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}!concat@{concat}}
+\index{concat@{concat}!glob_func.h@{glob\-\_\-func.\-h}}
+\subsubsection[{concat}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ concat (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{src\-\_\-1, }
+\item[{void $\ast$}]{src\-\_\-2, }
+\item[{uint32\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)}}\label{glob__func_8h_ae6b48ca0727ba8a874b5442254e1d31a}
+
+
+Concatenate two arrays. 
+
+Concatenates two N\-U\-L\-L termianted arrays, a src\-\_\-1 and a src\-\_\-2 array into a single N\-U\-L\-L terminated array containing the contents of both arrays. The terminating N\-U\-L\-L character in src\-\_\-1 is overwritten by the first character of src\-\_\-2, and a N\-U\-L\-L character is included at the end of the new array. A pointer to the resulting array containing the contents of both arrays is then returned.
+
+\begin{DoxyPrecond}{Precondition}
+The arrays src\-\_\-1 and src\-\_\-2 M\-U\-S\-T B\-E N\-U\-L\-L T\-E\-R\-M\-I\-N\-A\-T\-E\-D.
+
+The arrays to concatenate M\-U\-S\-T contain the same data type for the concatenation to function properly.
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em src\-\_\-1} & A pointer to a N\-U\-L\-L terminated array.\\
+\hline
+{\em src\-\_\-2} & A pointer to a N\-U\-L\-L terminated array.\\
+\hline
+{\em size} & The size in bytes of each item in the array.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the resulting array containing the concatenated results.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h_ae6b48ca0727ba8a874b5442254e1d31a_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{glob__func_8h_a12db81dbcf4d3c41013509bb19d7053c}{\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}!concat\-\_\-len@{concat\-\_\-len}}
+\index{concat\-\_\-len@{concat\-\_\-len}!glob_func.h@{glob\-\_\-func.\-h}}
+\subsubsection[{concat\-\_\-len}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ concat\-\_\-len (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{src\-\_\-1, }
+\item[{void $\ast$}]{src\-\_\-2, }
+\item[{uint32\-\_\-t}]{size, }
+\item[{uint32\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{glob__func_8h_a12db81dbcf4d3c41013509bb19d7053c}
+
+
+Concatenate two byte arrays. 
+
+Concatenates a specified number of bytes from src\-\_\-2 to src\-\_\-1, into a single N\-U\-L\-L terminated array containing the contents of both arrays. The difference is that when performing concatenation it concatenates a specified number of bytes from src\-\_\-2 to src\-\_\-1. The terminating N\-U\-L\-L character in src\-\_\-1 is overwritten by the first character of src\-\_\-2, and a N\-U\-L\-L character is included at the end of the new array. A pointer to the resulting array containing the contents of both arrays is then returned.
+
+\begin{DoxyPrecond}{Precondition}
+The array src\-\_\-1 M\-U\-S\-T B\-E N\-U\-L\-L T\-E\-R\-M\-I\-N\-A\-T\-E\-D.
+
+The arrays to concatenate M\-U\-S\-T contain the same data type for the concatenation to function properly.
+
+The specified length, must be $<$= the length of src\-\_\-2.
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em src\-\_\-1} & A pointer to a N\-U\-L\-L terminated array.\\
+\hline
+{\em src\-\_\-2} & A pointer to an array.\\
+\hline
+{\em size} & The size in bytes of each item in the array.\\
+\hline
+{\em len} & The length in B\-Y\-T\-E\-S of the data to concatenate from src\-\_\-2 to src\-\_\-1.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the resulting array containing the concatenated results.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h_a12db81dbcf4d3c41013509bb19d7053c_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{glob__func_8h_a29366f8689bb05dc0f4abe8f6415756b}{\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}!copy\-\_\-to\-\_\-buf@{copy\-\_\-to\-\_\-buf}}
+\index{copy\-\_\-to\-\_\-buf@{copy\-\_\-to\-\_\-buf}!glob_func.h@{glob\-\_\-func.\-h}}
+\subsubsection[{copy\-\_\-to\-\_\-buf}]{\setlength{\rightskip}{0pt plus 5cm}{\bf byte}$\ast$ copy\-\_\-to\-\_\-buf (
+\begin{DoxyParamCaption}
+\item[{{\bf byte} $\ast$}]{buf1, }
+\item[{{\bf byte} $\ast$}]{buf2, }
+\item[{uint32\-\_\-t}]{size1, }
+\item[{uint32\-\_\-t}]{size2}
+\end{DoxyParamCaption}
+)}}\label{glob__func_8h_a29366f8689bb05dc0f4abe8f6415756b}
+
+
+Copy the data from one buffer to another, given the size of both. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf1} & The buffer to copy from.\\
+\hline
+{\em buf2} & The buffer to copy to.\\
+\hline
+{\em size1} & The size of the buffer to copy from.\\
+\hline
+{\em size2} & The size of the buffer to copy to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the second buffer with the contents of the first buffer inside.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h_a29366f8689bb05dc0f4abe8f6415756b_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{glob__func_8h_a2fe7ca36f076470a50c2a5a7146de61d}{\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}!free\-\_\-tokens@{free\-\_\-tokens}}
+\index{free\-\_\-tokens@{free\-\_\-tokens}!glob_func.h@{glob\-\_\-func.\-h}}
+\subsubsection[{free\-\_\-tokens}]{\setlength{\rightskip}{0pt plus 5cm}bool free\-\_\-tokens (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{tokens}
+\end{DoxyParamCaption}
+)}}\label{glob__func_8h_a2fe7ca36f076470a50c2a5a7146de61d}
+
+
+Frees the memory allocated for the tokens. 
+
+This function is used to free memory used by dynamic memory allocation methods required for two dimensional string manipulation, preventing memory leaks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The N\-U\-L\-L terminated 2\-D array filled with tokens to be freed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if the memory was freed, false if an error occurred. 
+\end{DoxyReturn}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h_a2fe7ca36f076470a50c2a5a7146de61d_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{glob__func_8h_af1ee345363b6472fc32adc42a849f378}{\index{glob\-\_\-func.\-h@{glob\-\_\-func.\-h}!tokenize\-\_\-path@{tokenize\-\_\-path}}
+\index{tokenize\-\_\-path@{tokenize\-\_\-path}!glob_func.h@{glob\-\_\-func.\-h}}
+\subsubsection[{tokenize\-\_\-path}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$$\ast$ tokenize\-\_\-path (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pathname}
+\end{DoxyParamCaption}
+)}}\label{glob__func_8h_af1ee345363b6472fc32adc42a849f378}
+
+
+Tokenize a path into an array of tokens. 
+
+Tokenizes the path provided into an array of tokens for each component in the path and returns an array to a null terminated array of tokens. For example using pathname = \char`\"{}/foo/bar\char`\"{} the resulting tokens array would be\-: $\ast$ \mbox{[}0\mbox{]} =$>$ \char`\"{}foo\char`\"{} \mbox{[}1\mbox{]} =$>$ \char`\"{}bar\char`\"{} \mbox{[}2\mbox{]} =$>$ N\-U\-L\-L If an error occurs a N\-U\-L\-L pointer will be returned. Tokens are each a string, therefore the resultant pointer will point to a two-\/dimensional array of characters.
+
+\begin{DoxyPrecond}{Precondition}
+Each component in the pathname must be at most (including the N\-U\-L\-L termination) M\-A\-X\-\_\-\-N\-A\-M\-E\-\_\-\-L\-E\-N otherwise an error occurs, and a N\-U\-L\-L pointer returned.
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em pathname} & The pathname to tokenize.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the 2\-D tokens array.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{glob__func_8h_af1ee345363b6472fc32adc42a849f378_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{glob__func_8h_af1ee345363b6472fc32adc42a849f378_icgraph}
+\end{center}
+\end{figure}
+
+

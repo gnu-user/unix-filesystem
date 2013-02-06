@@ -1,0 +1,185 @@
+\hypertarget{mount_8c}{\section{mount.\-c File Reference}
+\label{mount_8c}\index{mount.\-c@{mount.\-c}}
+}
+{\ttfamily \#include \char`\"{}mount.\-h\char`\"{}}\\*
+Include dependency graph for mount.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mount_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{mount_8c_ad8988b7a3c735f8499da90b745024829}{mount} (void)
+\begin{DoxyCompactList}\small\item\em Attempt to mount the filesystem on disk. \end{DoxyCompactList}\item 
+int \hyperlink{mount_8c_ae235328c90c13a872983bba459cae85a}{validate\-\_\-super\-\_\-block} (void)
+\begin{DoxyCompactList}\small\item\em Validate the super block on the disk. \end{DoxyCompactList}\item 
+int \hyperlink{mount_8c_a578d64ff5c10d5db2372ecf78e855b11}{validate\-\_\-root\-\_\-dir} (void)
+\begin{DoxyCompactList}\small\item\em Validate that there is a root directory on the disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{mount_8c_a68e36ad943fd93115744b6e13fec4b64}{I\-N\-V\-A\-L\-I\-D\-\_\-\-U\-U\-I\-D} = \char`\"{}Invalid U\-U\-I\-D.\textbackslash{}n\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{mount_8c_ad8988b7a3c735f8499da90b745024829}{\index{mount.\-c@{mount.\-c}!mount@{mount}}
+\index{mount@{mount}!mount.c@{mount.\-c}}
+\subsubsection[{mount}]{\setlength{\rightskip}{0pt plus 5cm}int mount (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mount_8c_ad8988b7a3c735f8499da90b745024829}
+
+
+Attempt to mount the filesystem on disk. 
+
+This funcion calls validation methods to ensure that the mount is possible, and file system isn't corrupted. It verifies that the unique identifiers and checksums associated with the various structures on disk are valid and in working order.
+
+\begin{DoxyReturn}{Returns}
+Returns an integer value, if value = 1 the file system has passed validation. If value = -\/1 the file system has failed to validate and should be reinitialized.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mount_8c_ad8988b7a3c735f8499da90b745024829_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{mount_8c_ad8988b7a3c735f8499da90b745024829_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{mount_8c_a578d64ff5c10d5db2372ecf78e855b11}{\index{mount.\-c@{mount.\-c}!validate\-\_\-root\-\_\-dir@{validate\-\_\-root\-\_\-dir}}
+\index{validate\-\_\-root\-\_\-dir@{validate\-\_\-root\-\_\-dir}!mount.c@{mount.\-c}}
+\subsubsection[{validate\-\_\-root\-\_\-dir}]{\setlength{\rightskip}{0pt plus 5cm}int validate\-\_\-root\-\_\-dir (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mount_8c_a578d64ff5c10d5db2372ecf78e855b11}
+
+
+Validate that there is a root directory on the disk. 
+
+This function checks the location for the root directory on disk specified by the super block, and determines if the file at that location is valid.
+
+\begin{DoxyReturn}{Returns}
+Returns an integer value, if value = 1 the root directory structure which exists on disk passed validation. If value = -\/1, the structure failed validation.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mount_8c_a578d64ff5c10d5db2372ecf78e855b11_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mount_8c_a578d64ff5c10d5db2372ecf78e855b11_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{mount_8c_ae235328c90c13a872983bba459cae85a}{\index{mount.\-c@{mount.\-c}!validate\-\_\-super\-\_\-block@{validate\-\_\-super\-\_\-block}}
+\index{validate\-\_\-super\-\_\-block@{validate\-\_\-super\-\_\-block}!mount.c@{mount.\-c}}
+\subsubsection[{validate\-\_\-super\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}int validate\-\_\-super\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mount_8c_ae235328c90c13a872983bba459cae85a}
+
+
+Validate the super block on the disk. 
+
+This function determines the integrity of the super block data by validating its unique identifier and checksum.
+
+\begin{DoxyReturn}{Returns}
+Returns an integer value. If value = 1 the super block has passed validation. If the value = -\/1, the super block has failed validation and should be reinitialized.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mount_8c_ae235328c90c13a872983bba459cae85a_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mount_8c_ae235328c90c13a872983bba459cae85a_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{mount_8c_a68e36ad943fd93115744b6e13fec4b64}{\index{mount.\-c@{mount.\-c}!I\-N\-V\-A\-L\-I\-D\-\_\-\-U\-U\-I\-D@{I\-N\-V\-A\-L\-I\-D\-\_\-\-U\-U\-I\-D}}
+\index{I\-N\-V\-A\-L\-I\-D\-\_\-\-U\-U\-I\-D@{I\-N\-V\-A\-L\-I\-D\-\_\-\-U\-U\-I\-D}!mount.c@{mount.\-c}}
+\subsubsection[{I\-N\-V\-A\-L\-I\-D\-\_\-\-U\-U\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ I\-N\-V\-A\-L\-I\-D\-\_\-\-U\-U\-I\-D = \char`\"{}Invalid U\-U\-I\-D.\textbackslash{}n\char`\"{}}}\label{mount_8c_a68e36ad943fd93115744b6e13fec4b64}

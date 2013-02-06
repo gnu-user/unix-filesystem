@@ -1,0 +1,50 @@
+\hypertarget{structswoft}{\section{swoft Struct Reference}
+\label{structswoft}\index{swoft@{swoft}}
+}
+
+
+Pseudo-\/object containing the array of open file descriptors.  
+
+
+
+
+{\ttfamily \#include $<$system\-\_\-open\-\_\-file\-\_\-table.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\-\_\-t \hyperlink{structswoft_a9d67be2cf79bebabe7084963238d6340}{fd} \mbox{[}\hyperlink{glob__data_8h_a8cb920b3b277c4d76122688e1177883d}{N\-U\-M\-O\-F\-L}\mbox{]}
+\item 
+bool \hyperlink{structswoft_a7d989b9d4ff7182b0fe7b396fd704a46}{taken} \mbox{[}\hyperlink{glob__data_8h_a8cb920b3b277c4d76122688e1177883d}{N\-U\-M\-O\-F\-L}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Pseudo-\/object containing the array of open file descriptors. 
+
+The system wide open file table contains an array of file descriptors, which are locations of inodes that have been read from the disk into memory. These are used as handles to the files which exist on disk, and are synchronized with the data on disk upon modification. One instance needs to exist per file.
+
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+\subsection{Field Documentation}
+\hypertarget{structswoft_a9d67be2cf79bebabe7084963238d6340}{\index{swoft@{swoft}!fd@{fd}}
+\index{fd@{fd}!swoft@{swoft}}
+\subsubsection[{fd}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t fd\mbox{[}{\bf N\-U\-M\-O\-F\-L}\mbox{]}}}\label{structswoft_a9d67be2cf79bebabe7084963238d6340}
+\hypertarget{structswoft_a7d989b9d4ff7182b0fe7b396fd704a46}{\index{swoft@{swoft}!taken@{taken}}
+\index{taken@{taken}!swoft@{swoft}}
+\subsubsection[{taken}]{\setlength{\rightskip}{0pt plus 5cm}bool taken\mbox{[}{\bf N\-U\-M\-O\-F\-L}\mbox{]}}}\label{structswoft_a7d989b9d4ff7182b0fe7b396fd704a46}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{system__open__file__table_8h}{system\-\_\-open\-\_\-file\-\_\-table.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,87 @@
+\hypertarget{traverse__tree_8h}{\section{traverse\-\_\-tree.\-h File Reference}
+\label{traverse__tree_8h}\index{traverse\-\_\-tree.\-h@{traverse\-\_\-tree.\-h}}
+}
+{\ttfamily \#include \char`\"{}I\-\_\-node.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+Include dependency graph for traverse\-\_\-tree.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{traverse__tree_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{traverse__tree_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\-\_\-t $\ast$ \hyperlink{traverse__tree_8h_a91c00022d1ad5207d846646fac32e4b0}{traverse\-\_\-file\-\_\-system} (char $\ast$$\ast$tokens, bool create)
+\begin{DoxyCompactList}\small\item\em Traverse the file system structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{traverse__tree_8h_a91c00022d1ad5207d846646fac32e4b0}{\index{traverse\-\_\-tree.\-h@{traverse\-\_\-tree.\-h}!traverse\-\_\-file\-\_\-system@{traverse\-\_\-file\-\_\-system}}
+\index{traverse\-\_\-file\-\_\-system@{traverse\-\_\-file\-\_\-system}!traverse_tree.h@{traverse\-\_\-tree.\-h}}
+\subsubsection[{traverse\-\_\-file\-\_\-system}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t$\ast$ traverse\-\_\-file\-\_\-system (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{tokens, }
+\item[{bool}]{create}
+\end{DoxyParamCaption}
+)}}\label{traverse__tree_8h_a91c00022d1ad5207d846646fac32e4b0}
+
+
+Traverse the file system structure. 
+
+Given the tokens for the path, traverse the file system to either the last token or the second last based on the value in the create flag.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The pre-\/parsed pathname tokens.\\
+\hline
+{\em create} & Flags whether to get the parent directory or the child entity if create is true, get the parent. Otherwise, get the child.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a location on disk. If create is true, the location of the parent is returned and the last token in the tokens array. If create is false, the location of the inode is returned and the second element will be null.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{traverse__tree_8h_a91c00022d1ad5207d846646fac32e4b0_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{traverse__tree_8h_a91c00022d1ad5207d846646fac32e4b0_icgraph}
+\end{center}
+\end{figure}
+
+

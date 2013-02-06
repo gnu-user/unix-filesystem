@@ -1,0 +1,393 @@
+\hypertarget{index__block_8h}{\section{index\-\_\-block.\-h File Reference}
+\label{index__block_8h}\index{index\-\_\-block.\-h@{index\-\_\-block.\-h}}
+}
+{\ttfamily \#include \char`\"{}glob\-\_\-data.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+Include dependency graph for index\-\_\-block.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{index__block_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structdata__index}{data\-\_\-index}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint32\-\_\-t $\ast$ \hyperlink{index__block_8h_a6784e1c334dfceb8f017667c0b0f6a3e}{index}
+\begin{DoxyCompactList}\small\item\em This type definition uses an array of 32-\/bit unsigned integers to represent index locations on disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structdata__index}{data\-\_\-index} \hyperlink{index__block_8h_aef23bf42ec9f8215f800e36ed19f3684}{generate\-\_\-index} (uint32\-\_\-t num\-\_\-blocks)
+\begin{DoxyCompactList}\small\item\em Generates the indexes for the data blocks and then writes the indexes (which contain the locations of data blocks) to disk. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{index__block_8h_afd54d9d51e9832a5a52ac0aa470b0d12}{rebuild\-\_\-index} (\hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} data\-\_\-locations)
+\begin{DoxyCompactList}\small\item\em Takes a series of loose data block locations and builds a new index to link them with an inode. \end{DoxyCompactList}\item 
+\hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} \hyperlink{index__block_8h_a58c6c55e76e88de10da638a624574947}{iterate\-\_\-index} (uint32\-\_\-t location, \hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} data\-\_\-blocks)
+\begin{DoxyCompactList}\small\item\em This function takes an index block data structure and returns the locations of all data blocks which it links to. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{index__block_8h_a7bfc6472e986ea83b6f5a14def157883}{calc\-\_\-index\-\_\-blocks} (uint32\-\_\-t num\-\_\-blocks)
+\begin{DoxyCompactList}\small\item\em Calculates the number of index blocks that are needed in order to write the number of data blocks specified to the file system. \end{DoxyCompactList}\item 
+int \hyperlink{index__block_8h_a1b873a6bb0f0535b8044df681c21fe20}{count\-\_\-files\-\_\-in\-\_\-dir} (uint32\-\_\-t location)
+\begin{DoxyCompactList}\small\item\em Wrapper for iterate\-\_\-index which simply gives you a count of the number of files in a directory. \end{DoxyCompactList}\item 
+\hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} \hyperlink{index__block_8h_aa8336ecef5a6f9f6881a3e6a498bc543}{index\-\_\-block\-\_\-locations} (uint32\-\_\-t location, \hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} index\-\_\-blocks)
+\begin{DoxyCompactList}\small\item\em Provides the locations of the index blocks within an index block data structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{index__block_8h_a6784e1c334dfceb8f017667c0b0f6a3e}{\index{index\-\_\-block.\-h@{index\-\_\-block.\-h}!index@{index}}
+\index{index@{index}!index_block.h@{index\-\_\-block.\-h}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}{\bf index}}}\label{index__block_8h_a6784e1c334dfceb8f017667c0b0f6a3e}
+
+
+This type definition uses an array of 32-\/bit unsigned integers to represent index locations on disk. 
+
+This type definition represents an index block data structure. It is supported by pseudo-\/object oriented methods in order to return arrays of variables to functions by way of pointer arithmetic based logical segmentations of data types in memory.
+
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\hypertarget{index__block_8h_a7bfc6472e986ea83b6f5a14def157883}{\index{index\-\_\-block.\-h@{index\-\_\-block.\-h}!calc\-\_\-index\-\_\-blocks@{calc\-\_\-index\-\_\-blocks}}
+\index{calc\-\_\-index\-\_\-blocks@{calc\-\_\-index\-\_\-blocks}!index_block.h@{index\-\_\-block.\-h}}
+\subsubsection[{calc\-\_\-index\-\_\-blocks}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t calc\-\_\-index\-\_\-blocks (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{num\-\_\-blocks}
+\end{DoxyParamCaption}
+)}}\label{index__block_8h_a7bfc6472e986ea83b6f5a14def157883}
+
+
+Calculates the number of index blocks that are needed in order to write the number of data blocks specified to the file system. 
+
+This function uses a calculation based on the specified block size of the disk in order to determine how many locations can be indexed within one block, and then divides the number of specified blocks by this value. Since fractions of blocks are not allowed, the function then ceilings the resultant value in order to provide the full length of the required data structure.
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\-\_\-blocks} & The number of data blocks required to be indexed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of index blocks needed to write the data blocks to the file system.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_a7bfc6472e986ea83b6f5a14def157883_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{index__block_8h_a1b873a6bb0f0535b8044df681c21fe20}{\index{index\-\_\-block.\-h@{index\-\_\-block.\-h}!count\-\_\-files\-\_\-in\-\_\-dir@{count\-\_\-files\-\_\-in\-\_\-dir}}
+\index{count\-\_\-files\-\_\-in\-\_\-dir@{count\-\_\-files\-\_\-in\-\_\-dir}!index_block.h@{index\-\_\-block.\-h}}
+\subsubsection[{count\-\_\-files\-\_\-in\-\_\-dir}]{\setlength{\rightskip}{0pt plus 5cm}int count\-\_\-files\-\_\-in\-\_\-dir (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{location}
+\end{DoxyParamCaption}
+)}}\label{index__block_8h_a1b873a6bb0f0535b8044df681c21fe20}
+
+
+Wrapper for iterate\-\_\-index which simply gives you a count of the number of files in a directory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The location of the index block on disk to iterate across.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of locations found in the index block. If return = 0 then the directory is empty. If return $>$ 0 then the function was successful, and if return = -\/1 then the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_a1b873a6bb0f0535b8044df681c21fe20_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_a1b873a6bb0f0535b8044df681c21fe20_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{index__block_8h_aef23bf42ec9f8215f800e36ed19f3684}{\index{index\-\_\-block.\-h@{index\-\_\-block.\-h}!generate\-\_\-index@{generate\-\_\-index}}
+\index{generate\-\_\-index@{generate\-\_\-index}!index_block.h@{index\-\_\-block.\-h}}
+\subsubsection[{generate\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}{\bf data\-\_\-index} generate\-\_\-index (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{num\-\_\-blocks}
+\end{DoxyParamCaption}
+)}}\label{index__block_8h_aef23bf42ec9f8215f800e36ed19f3684}
+
+
+Generates the indexes for the data blocks and then writes the indexes (which contain the locations of data blocks) to disk. 
+
+This function returns a \hyperlink{structdata__index}{data\-\_\-index} pseudo-\/object which contains the location of the first index block, and the locations of all the data blocks indexed by the all the indices (spanning the entire index data structure).
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\-\_\-blocks} & The number of blocks to generate indexes for.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a \hyperlink{structdata__index}{data\-\_\-index} struct which contains the location of the first index block, and the locations of all data blocks indexed
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_aef23bf42ec9f8215f800e36ed19f3684_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_aef23bf42ec9f8215f800e36ed19f3684_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{index__block_8h_aa8336ecef5a6f9f6881a3e6a498bc543}{\index{index\-\_\-block.\-h@{index\-\_\-block.\-h}!index\-\_\-block\-\_\-locations@{index\-\_\-block\-\_\-locations}}
+\index{index\-\_\-block\-\_\-locations@{index\-\_\-block\-\_\-locations}!index_block.h@{index\-\_\-block.\-h}}
+\subsubsection[{index\-\_\-block\-\_\-locations}]{\setlength{\rightskip}{0pt plus 5cm}{\bf locations} index\-\_\-block\-\_\-locations (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{location, }
+\item[{{\bf locations}}]{index\-\_\-blocks}
+\end{DoxyParamCaption}
+)}}\label{index__block_8h_aa8336ecef5a6f9f6881a3e6a498bc543}
+
+
+Provides the locations of the index blocks within an index block data structure. 
+
+This function iterates recursively through the index blocks in an index block data structure and returns a pointer to a N\-U\-L\-L terminated array containing all of the index block locations on disk. If an error occurs then N\-U\-L\-L is returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The location of the first index block.\\
+\hline
+{\em index\-\_\-blocks} & An argument used by the function when it recursively calls itself, the argument should be N\-U\-L\-L when calling index\-\_\-block\-\_\-locations for the first index location.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a list of index block locations. If there is an error the value returned will be N\-U\-L\-L.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_aa8336ecef5a6f9f6881a3e6a498bc543_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_aa8336ecef5a6f9f6881a3e6a498bc543_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{index__block_8h_a58c6c55e76e88de10da638a624574947}{\index{index\-\_\-block.\-h@{index\-\_\-block.\-h}!iterate\-\_\-index@{iterate\-\_\-index}}
+\index{iterate\-\_\-index@{iterate\-\_\-index}!index_block.h@{index\-\_\-block.\-h}}
+\subsubsection[{iterate\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}{\bf locations} iterate\-\_\-index (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{location, }
+\item[{{\bf locations}}]{data\-\_\-blocks}
+\end{DoxyParamCaption}
+)}}\label{index__block_8h_a58c6c55e76e88de10da638a624574947}
+
+
+This function takes an index block data structure and returns the locations of all data blocks which it links to. 
+
+This function iterates recursively through the index blocks and returns a pointer to a N\-U\-L\-L terminated array containing all of the data block locations stored in the indices. In the case of large files that require multiple indexes, when we reach the value ceil(B\-L\-O\-C\-K\-S\-I\-Z\-E/sizeof(uint32\-\_\-t) which is the last entry in the index block, we recursively call iterate\-\_\-index on the index block at this index. When we reach a N\-U\-L\-L location inside the index block, we have reached the end of the indexes. The function returns a N\-U\-L\-L pointer if an error occurred.
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The location of the first index block to iterate through.\\
+\hline
+{\em data\-\_\-blocks} & An argument used by the function when it recursively calls itself, the argument should be N\-U\-L\-L when calling iterate\-\_\-index for the first index location.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to a N\-U\-L\-L terminated array containing all of the data block locations stored in the indices, the pointer is N\-U\-L\-L if an error occurred.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_a58c6c55e76e88de10da638a624574947_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_a58c6c55e76e88de10da638a624574947_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{index__block_8h_afd54d9d51e9832a5a52ac0aa470b0d12}{\index{index\-\_\-block.\-h@{index\-\_\-block.\-h}!rebuild\-\_\-index@{rebuild\-\_\-index}}
+\index{rebuild\-\_\-index@{rebuild\-\_\-index}!index_block.h@{index\-\_\-block.\-h}}
+\subsubsection[{rebuild\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t rebuild\-\_\-index (
+\begin{DoxyParamCaption}
+\item[{{\bf locations}}]{data\-\_\-locations}
+\end{DoxyParamCaption}
+)}}\label{index__block_8h_afd54d9d51e9832a5a52ac0aa470b0d12}
+
+
+Takes a series of loose data block locations and builds a new index to link them with an inode. 
+
+This function takes a N\-U\-L\-L terminated array of data locations and turns it into a new index structure, then writes it on disk and returns the location of the first index block. The function operates similar to generate\-\_\-index except you already have all the data locations. If an error occurs 0 is returned. If N\-O data\-\_\-locations are specified an empty index is created and the location is returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\-\_\-locations} & A N\-U\-L\-L terminated array of data locations, if N\-O data locations are provided an empty index is created and the location is returned\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The location of the F\-I\-R\-S\-T index block, if an error occurs 0 is returned
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_afd54d9d51e9832a5a52ac0aa470b0d12_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{index__block_8h_afd54d9d51e9832a5a52ac0aa470b0d12_icgraph}
+\end{center}
+\end{figure}
+
+

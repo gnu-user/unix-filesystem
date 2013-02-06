@@ -1,0 +1,196 @@
+\hypertarget{super__block_8c}{\section{super\-\_\-block.\-c File Reference}
+\label{super__block_8c}\index{super\-\_\-block.\-c@{super\-\_\-block.\-c}}
+}
+{\ttfamily \#include \char`\"{}super\-\_\-block.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}block\-\_\-func.\-h\char`\"{}}\\*
+Include dependency graph for super\-\_\-block.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{super__block_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structsuperblock}{superblock} $\ast$ \hyperlink{super__block_8c_ac90e51acfc45bd4a7daa71817ab3508a}{get\-\_\-super\-\_\-block} (void)
+\begin{DoxyCompactList}\small\item\em Get a handle to the super block. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{super__block_8c_a5bdef04f60586e309e3e42e89326d62d}{get\-\_\-root} (void)
+\begin{DoxyCompactList}\small\item\em Get the location of the root directory. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{super__block_8c_a6bea61bb8314c0f57646b8337d5adf48}{get\-\_\-free\-\_\-block\-\_\-index} (void)
+\begin{DoxyCompactList}\small\item\em Get the location of the free block list's first index block. \end{DoxyCompactList}\item 
+int \hyperlink{super__block_8c_a9b470cc4211f6874b557a6455bab0abf}{display\-\_\-super\-\_\-block} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{super__block_8c_a9b470cc4211f6874b557a6455bab0abf}{\index{super\-\_\-block.\-c@{super\-\_\-block.\-c}!display\-\_\-super\-\_\-block@{display\-\_\-super\-\_\-block}}
+\index{display\-\_\-super\-\_\-block@{display\-\_\-super\-\_\-block}!super_block.c@{super\-\_\-block.\-c}}
+\subsubsection[{display\-\_\-super\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}int display\-\_\-super\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{super__block_8c_a9b470cc4211f6874b557a6455bab0abf}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{super__block_8c_a9b470cc4211f6874b557a6455bab0abf_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{super__block_8c_a6bea61bb8314c0f57646b8337d5adf48}{\index{super\-\_\-block.\-c@{super\-\_\-block.\-c}!get\-\_\-free\-\_\-block\-\_\-index@{get\-\_\-free\-\_\-block\-\_\-index}}
+\index{get\-\_\-free\-\_\-block\-\_\-index@{get\-\_\-free\-\_\-block\-\_\-index}!super_block.c@{super\-\_\-block.\-c}}
+\subsubsection[{get\-\_\-free\-\_\-block\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t get\-\_\-free\-\_\-block\-\_\-index (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{super__block_8c_a6bea61bb8314c0f57646b8337d5adf48}
+
+
+Get the location of the free block list's first index block. 
+
+This function is an accessor method for the pseudo-\/object attribute inside the super block which contains the location of the free block list structure's first index block on disk.
+
+\begin{DoxyReturn}{Returns}
+Returns the location of the free block list's index block.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{super__block_8c_a6bea61bb8314c0f57646b8337d5adf48_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{super__block_8c_a6bea61bb8314c0f57646b8337d5adf48_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{super__block_8c_a5bdef04f60586e309e3e42e89326d62d}{\index{super\-\_\-block.\-c@{super\-\_\-block.\-c}!get\-\_\-root@{get\-\_\-root}}
+\index{get\-\_\-root@{get\-\_\-root}!super_block.c@{super\-\_\-block.\-c}}
+\subsubsection[{get\-\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t get\-\_\-root (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{super__block_8c_a5bdef04f60586e309e3e42e89326d62d}
+
+
+Get the location of the root directory. 
+
+This function is an accessor method for the pseudo-\/object attribute inside the super block which contains the location of the root directory's inode on disk.
+
+\begin{DoxyReturn}{Returns}
+Returns the location of root directory on disk. If a failure occurs, return 0.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{super__block_8c_a5bdef04f60586e309e3e42e89326d62d_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{super__block_8c_a5bdef04f60586e309e3e42e89326d62d_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{super__block_8c_ac90e51acfc45bd4a7daa71817ab3508a}{\index{super\-\_\-block.\-c@{super\-\_\-block.\-c}!get\-\_\-super\-\_\-block@{get\-\_\-super\-\_\-block}}
+\index{get\-\_\-super\-\_\-block@{get\-\_\-super\-\_\-block}!super_block.c@{super\-\_\-block.\-c}}
+\subsubsection[{get\-\_\-super\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}{\bf superblock}$\ast$ get\-\_\-super\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{super__block_8c_ac90e51acfc45bd4a7daa71817ab3508a}
+
+
+Get a handle to the super block. 
+
+This function implements a pseudo-\/object oriented method for accessing the super block data. It returns the super block as a pointer to a struct, whose individual members can be accessed.
+
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the super block data.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{super__block_8c_ac90e51acfc45bd4a7daa71817ab3508a_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{super__block_8c_ac90e51acfc45bd4a7daa71817ab3508a_icgraph}
+\end{center}
+\end{figure}
+
+

@@ -1,0 +1,727 @@
+\hypertarget{_i__node_8c}{\section{I\-\_\-node.\-c File Reference}
+\label{_i__node_8c}\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}}
+}
+{\ttfamily \#include \char`\"{}I\-\_\-node.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}block\-\_\-func.\-h\char`\"{}}\\*
+Include dependency graph for I\-\_\-node.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structinode}{inode} \hyperlink{_i__node_8c_ad59a7398af73012142f32ee8fc377b61}{get\-\_\-null\-\_\-inode} ()
+\begin{DoxyCompactList}\small\item\em Get an inode set to null state. \end{DoxyCompactList}\item 
+\hyperlink{structinode}{inode} $\ast$ \hyperlink{_i__node_8c_a82f261d23645f5610e7c32f3b34d919c}{get\-\_\-inode} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Get the contents of an inode given its location on disk. \end{DoxyCompactList}\item 
+unsigned char $\ast$ \hyperlink{_i__node_8c_a0626a73db422faeaffe6ec35cfbfa8d4}{get\-\_\-uuid} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Get an inode's U\-U\-I\-D given its location on disk. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{_i__node_8c_a8c3230f033a02dda88ea580b2b28f59e}{get\-\_\-index\-\_\-block} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Get the index block which an inode links to given the inode's location on disk. \end{DoxyCompactList}\item 
+int \hyperlink{_i__node_8c_a6538c7607166d232dcf8c038215f7401}{get\-\_\-type} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Get the type of file from an inode, whether it is a directory or a data file. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{_i__node_8c_affd01175a63d68d783c31998d23cd77f}{get\-\_\-size} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Get size of a file given its inode's location on disk. \end{DoxyCompactList}\item 
+int \hyperlink{_i__node_8c_acadfff325e7e1a17fce217c0a8ab8196}{get\-\_\-encrypted} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Check if the specified file is encrypted given its inode's location on disk. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{_i__node_8c_a82ee207647edbab6ce13634925926122}{get\-\_\-name} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Get the name of the file given its inode's location on disk. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{_i__node_8c_a4f639886bd6633685f3b80960f8e942d}{get\-\_\-crc} (uint32\-\_\-t block\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Get the encryption checksum of a file given its inode's location on disk. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{_i__node_8c_a37821b1523b1431305feddc288c16355}{find\-\_\-inode} (\hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} index\-\_\-blocks, char $\ast$name)
+\item 
+int \hyperlink{_i__node_8c_ad53d6e5ae20699bd6a8702c0e1a58d3a}{link\-\_\-inode\-\_\-to\-\_\-parent} (uint32\-\_\-t parent\-\_\-location, uint32\-\_\-t inode\-\_\-location)
+\begin{DoxyCompactList}\small\item\em Links the inode to a parent's index structure. \end{DoxyCompactList}\item 
+int \hyperlink{_i__node_8c_ae46cace88988ba2b1d6fd8e63f68db5b}{unlink\-\_\-inode\-\_\-from\-\_\-parent} (uint32\-\_\-t parent\-\_\-location, uint32\-\_\-t inode\-\_\-location)
+\begin{DoxyCompactList}\small\item\em Unlinks a child's inode from the parent's index structure. \end{DoxyCompactList}\item 
+int \hyperlink{_i__node_8c_ac258a0605f7df0133f98740fca57b093}{get\-\_\-index\-\_\-entry} (\hyperlink{structinode}{inode} directory)
+\begin{DoxyCompactList}\small\item\em Gets the next entry for the current directory and increments the index of the last accessed item within a directory. \end{DoxyCompactList}\item 
+void \hyperlink{_i__node_8c_a74ed9af1146cb8faf7ad6ffe11c4ca88}{reset\-\_\-index\-\_\-entry} ()
+\begin{DoxyCompactList}\small\item\em Resets the index entry count. Attempting to get the next directory item after this function has executed will get the first item in the directory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{_i__node_8c_a37821b1523b1431305feddc288c16355}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!find\-\_\-inode@{find\-\_\-inode}}
+\index{find\-\_\-inode@{find\-\_\-inode}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{find\-\_\-inode}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t find\-\_\-inode (
+\begin{DoxyParamCaption}
+\item[{{\bf locations}}]{index\-\_\-blocks, }
+\item[{char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_a37821b1523b1431305feddc288c16355}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a37821b1523b1431305feddc288c16355_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a37821b1523b1431305feddc288c16355_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_a4f639886bd6633685f3b80960f8e942d}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-crc@{get\-\_\-crc}}
+\index{get\-\_\-crc@{get\-\_\-crc}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-crc}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t get\-\_\-crc (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_a4f639886bd6633685f3b80960f8e942d}
+
+
+Get the encryption checksum of a file given its inode's location on disk. 
+
+This function retrieves the encryption checksum for a file's data blocks, so that it can be determined whether the encryption and decryption process was completed successfully. This is done by retrieving the inode and analyzing the contents based on the defined inode data structure.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The block location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the checksum, which is a string. If the function returns N\-U\-L\-L, then the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{_i__node_8c_a4f639886bd6633685f3b80960f8e942d_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_acadfff325e7e1a17fce217c0a8ab8196}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-encrypted@{get\-\_\-encrypted}}
+\index{get\-\_\-encrypted@{get\-\_\-encrypted}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-encrypted}]{\setlength{\rightskip}{0pt plus 5cm}int get\-\_\-encrypted (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_acadfff325e7e1a17fce217c0a8ab8196}
+
+
+Check if the specified file is encrypted given its inode's location on disk. 
+
+This function checks whether a file's data blocks are encrypted by retrieving the inode and analyzing the contents based on the defined inode data structure. This allows for the file system to determine whether to decrypt the data blocks associated with the file before reading, or whether they are aren't encrypted and can be read normally.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The block location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns whether the file is encrypted. If the returned value is 0 then the file is not encrypted and if it is 1 then the file is encrypted. Otherwise, the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_acadfff325e7e1a17fce217c0a8ab8196_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_a8c3230f033a02dda88ea580b2b28f59e}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-index\-\_\-block@{get\-\_\-index\-\_\-block}}
+\index{get\-\_\-index\-\_\-block@{get\-\_\-index\-\_\-block}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-index\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t get\-\_\-index\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_a8c3230f033a02dda88ea580b2b28f59e}
+
+
+Get the index block which an inode links to given the inode's location on disk. 
+
+This function retrieves the first index block location from an inode by retrieving the block and analyzing the contents based on the defined inode data structure. This allows the inode to be associated with its index block data structure, which in turn allows for the retrieval of all the data blocks associated with the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The block location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the location of the index block on disk. If index $>$= 0 then the function was successful, if index $<$ 0 then the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a8c3230f033a02dda88ea580b2b28f59e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a8c3230f033a02dda88ea580b2b28f59e_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_ac258a0605f7df0133f98740fca57b093}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-index\-\_\-entry@{get\-\_\-index\-\_\-entry}}
+\index{get\-\_\-index\-\_\-entry@{get\-\_\-index\-\_\-entry}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-index\-\_\-entry}]{\setlength{\rightskip}{0pt plus 5cm}int get\-\_\-index\-\_\-entry (
+\begin{DoxyParamCaption}
+\item[{{\bf inode}}]{directory}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_ac258a0605f7df0133f98740fca57b093}
+
+
+Gets the next entry for the current directory and increments the index of the last accessed item within a directory. 
+
+This function is used when reading directories. Directory elements are retrieved from an index data structure that corresponds with a directory's inode. Each of these elements must be iterated through in order to fully traverse a directory's contents. After the entire directory contents are traversed, the function returns a zero value. If the contents are traversed again, the function restarts from the beginning.
+
+
+\begin{DoxyParams}{Parameters}
+{\em directory} & The inode of the current directory.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the directory element.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_ac258a0605f7df0133f98740fca57b093_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_a82f261d23645f5610e7c32f3b34d919c}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-inode@{get\-\_\-inode}}
+\index{get\-\_\-inode@{get\-\_\-inode}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-inode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inode}$\ast$ get\-\_\-inode (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_a82f261d23645f5610e7c32f3b34d919c}
+
+
+Get the contents of an inode given its location on disk. 
+
+This function retrieves an inode given its location by retrieving the block and analyzing the contents based on the defined inode data structure.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The block location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the inode at the given location. If the returned value is N\-U\-L\-L, an inode was not found at the specified location.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{_i__node_8c_a82f261d23645f5610e7c32f3b34d919c_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a82f261d23645f5610e7c32f3b34d919c_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_a82ee207647edbab6ce13634925926122}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-name@{get\-\_\-name}}
+\index{get\-\_\-name@{get\-\_\-name}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ get\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_a82ee207647edbab6ce13634925926122}
+
+
+Get the name of the file given its inode's location on disk. 
+
+This function determines the human-\/readable name of a file by retrieving the inode and analyzing the contents based on the defined inode data structure. The name is a human-\/readable string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The block location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the file's name, which is a string. If the function returns N\-U\-L\-L, then the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{_i__node_8c_a82ee207647edbab6ce13634925926122_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a82ee207647edbab6ce13634925926122_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_ad59a7398af73012142f32ee8fc377b61}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-null\-\_\-inode@{get\-\_\-null\-\_\-inode}}
+\index{get\-\_\-null\-\_\-inode@{get\-\_\-null\-\_\-inode}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-null\-\_\-inode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf inode} get\-\_\-null\-\_\-inode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_ad59a7398af73012142f32ee8fc377b61}
+
+
+Get an inode set to null state. 
+
+This function generates a single block of null-\/initialized data using the predefined B\-L\-K\-S\-I\-Z\-E constant. It then outputs it as type inode.
+
+\begin{DoxyReturn}{Returns}
+Returns a null-\/initialized inode data structure.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_ad59a7398af73012142f32ee8fc377b61_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_affd01175a63d68d783c31998d23cd77f}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-size@{get\-\_\-size}}
+\index{get\-\_\-size@{get\-\_\-size}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t get\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_affd01175a63d68d783c31998d23cd77f}
+
+
+Get size of a file given its inode's location on disk. 
+
+This function retrieves the file size attribute from an inode by retrieving the block and analyzing the contents based on the defined inode data structure. This allows for the file system to quickly retrieve the size of the data (in bytes) stored within a file's data blocks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The block location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the size of the data blocks' contents for the file in bytes. If the returned size $>$= 0, then the function was successful, if the returned size $<$ 0, then the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_affd01175a63d68d783c31998d23cd77f_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{_i__node_8c_affd01175a63d68d783c31998d23cd77f_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_a6538c7607166d232dcf8c038215f7401}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-type@{get\-\_\-type}}
+\index{get\-\_\-type@{get\-\_\-type}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}int get\-\_\-type (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_a6538c7607166d232dcf8c038215f7401}
+
+
+Get the type of file from an inode, whether it is a directory or a data file. 
+
+This function retrieves the file type attribute from an inode by retrieving the block and analyzing the contents based on the defined inode data structure. This allows for the file system to determine whether an inode is for a data file or a directory.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The block location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the type of the file. If the function returns 1, then the inode is for a directory, if the function returns 0, then the inode is for a data file, Otherwise retrieving the type was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{_i__node_8c_a6538c7607166d232dcf8c038215f7401_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a6538c7607166d232dcf8c038215f7401_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_a0626a73db422faeaffe6ec35cfbfa8d4}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!get\-\_\-uuid@{get\-\_\-uuid}}
+\index{get\-\_\-uuid@{get\-\_\-uuid}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{get\-\_\-uuid}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char$\ast$ get\-\_\-uuid (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{block\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_a0626a73db422faeaffe6ec35cfbfa8d4}
+
+
+Get an inode's U\-U\-I\-D given its location on disk. 
+
+This function retrieves a U\-U\-I\-D from an inode by retrieving the block and analyzing the contents based on the defined inode data structure. U\-U\-I\-Ds are human-\/readable strings, therefore the return type for this operation is an array of characters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\-\_\-num} & The block location of the inode on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the U\-U\-I\-D from within the inode at the given location.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{_i__node_8c_a0626a73db422faeaffe6ec35cfbfa8d4_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a0626a73db422faeaffe6ec35cfbfa8d4_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_ad53d6e5ae20699bd6a8702c0e1a58d3a}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!link\-\_\-inode\-\_\-to\-\_\-parent@{link\-\_\-inode\-\_\-to\-\_\-parent}}
+\index{link\-\_\-inode\-\_\-to\-\_\-parent@{link\-\_\-inode\-\_\-to\-\_\-parent}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{link\-\_\-inode\-\_\-to\-\_\-parent}]{\setlength{\rightskip}{0pt plus 5cm}int link\-\_\-inode\-\_\-to\-\_\-parent (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{parent\-\_\-location, }
+\item[{uint32\-\_\-t}]{inode\-\_\-location}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_ad53d6e5ae20699bd6a8702c0e1a58d3a}
+
+
+Links the inode to a parent's index structure. 
+
+This function works by accessing the specified parent inode, and accessing the index data structure that it links to within its defined inode data structure. After accessing this index structure, the specified child inode is appended to the index. The index is rebuilt and written to disk, and the newly created index is linked to within the parent's inode. This inode is then rewritten at the original location, overwriting the old one. Upon completion of this operation the old index blocks are freed. If a failure occurs during this operation, the changes are automatically undone. The internal implementation of this function utilizes copy-\/on-\/write journalling in order to prevent any damage to the file system from failed operations.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent\-\_\-location} & The parent's location on disk.\\
+\hline
+{\em inode\-\_\-location} & The child inode's location on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a value to signify success or failure. If the value is $>$= 0 the function was successful. If value is $<$ 0, the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_ad53d6e5ae20699bd6a8702c0e1a58d3a_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_ad53d6e5ae20699bd6a8702c0e1a58d3a_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_a74ed9af1146cb8faf7ad6ffe11c4ca88}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!reset\-\_\-index\-\_\-entry@{reset\-\_\-index\-\_\-entry}}
+\index{reset\-\_\-index\-\_\-entry@{reset\-\_\-index\-\_\-entry}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{reset\-\_\-index\-\_\-entry}]{\setlength{\rightskip}{0pt plus 5cm}void reset\-\_\-index\-\_\-entry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_a74ed9af1146cb8faf7ad6ffe11c4ca88}
+
+
+Resets the index entry count. Attempting to get the next directory item after this function has executed will get the first item in the directory. 
+
+This function is used to reset the iterator for traversing the contents of a directory structure. After this function is called, any further attempts at traversing the contents of a directory will start over again from the first element.
+
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_a74ed9af1146cb8faf7ad6ffe11c4ca88_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_i__node_8c_ae46cace88988ba2b1d6fd8e63f68db5b}{\index{I\-\_\-node.\-c@{I\-\_\-node.\-c}!unlink\-\_\-inode\-\_\-from\-\_\-parent@{unlink\-\_\-inode\-\_\-from\-\_\-parent}}
+\index{unlink\-\_\-inode\-\_\-from\-\_\-parent@{unlink\-\_\-inode\-\_\-from\-\_\-parent}!I_node.c@{I\-\_\-node.\-c}}
+\subsubsection[{unlink\-\_\-inode\-\_\-from\-\_\-parent}]{\setlength{\rightskip}{0pt plus 5cm}int unlink\-\_\-inode\-\_\-from\-\_\-parent (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{parent\-\_\-location, }
+\item[{uint32\-\_\-t}]{inode\-\_\-location}
+\end{DoxyParamCaption}
+)}}\label{_i__node_8c_ae46cace88988ba2b1d6fd8e63f68db5b}
+
+
+Unlinks a child's inode from the parent's index structure. 
+
+This function works by accessing the specified parent inode, and accessing the index data structure that it links to within its defined inode data structure. After accessing this index structure, the block at each indexed location is loaded and the name attribute within the inode at that block is checked against the name within the specified child inode. Once a match is found, the corresponding indexed block is removed from the index structure. The index is rebuilt and written to disk, and the newly created index is linked to within the parent's inode. This inode is then rewritten at the original location, overwriting the old one. Upon completion of this operation the old index blocks are freed. If a failure occurs during this operation, the changes are automatically undone. The internal implementation of this function utilizes copy-\/on-\/write journalling in order to prevent any damage to the file system from failed operations.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent\-\_\-location} & The parent's location on disk.\\
+\hline
+{\em inode\-\_\-location} & The child inode's location on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a value to signify success or failure. If the value is $>$= 0 the function was successful. If value is $<$ 0, the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_ae46cace88988ba2b1d6fd8e63f68db5b_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_i__node_8c_ae46cace88988ba2b1d6fd8e63f68db5b_icgraph}
+\end{center}
+\end{figure}
+
+

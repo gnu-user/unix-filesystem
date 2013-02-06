@@ -1,0 +1,108 @@
+\hypertarget{create__file_8h}{\section{create\-\_\-file.\-h File Reference}
+\label{create__file_8h}\index{create\-\_\-file.\-h@{create\-\_\-file.\-h}}
+}
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+Include dependency graph for create\-\_\-file.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=150pt]{create__file_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=150pt]{create__file_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{create__file_8h_a24b6ce12efa0d5ace6b2869080b3ea12}{C\-R\-E\-A\-T\-E\-\_\-\-S\-I\-Z\-E}~2
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{create__file_8h_a10498692a07aacf1e88110005e3f2f3f}{sfs\-\_\-create} (char $\ast$pathname, int type)
+\begin{DoxyCompactList}\small\item\em Creates a new file or directory at the path specified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{create__file_8h_a24b6ce12efa0d5ace6b2869080b3ea12}{\index{create\-\_\-file.\-h@{create\-\_\-file.\-h}!C\-R\-E\-A\-T\-E\-\_\-\-S\-I\-Z\-E@{C\-R\-E\-A\-T\-E\-\_\-\-S\-I\-Z\-E}}
+\index{C\-R\-E\-A\-T\-E\-\_\-\-S\-I\-Z\-E@{C\-R\-E\-A\-T\-E\-\_\-\-S\-I\-Z\-E}!create_file.h@{create\-\_\-file.\-h}}
+\subsubsection[{C\-R\-E\-A\-T\-E\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R\-E\-A\-T\-E\-\_\-\-S\-I\-Z\-E~2}}\label{create__file_8h_a24b6ce12efa0d5ace6b2869080b3ea12}
+
+
+\subsection{Function Documentation}
+\hypertarget{create__file_8h_a10498692a07aacf1e88110005e3f2f3f}{\index{create\-\_\-file.\-h@{create\-\_\-file.\-h}!sfs\-\_\-create@{sfs\-\_\-create}}
+\index{sfs\-\_\-create@{sfs\-\_\-create}!create_file.h@{create\-\_\-file.\-h}}
+\subsubsection[{sfs\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}int sfs\-\_\-create (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pathname, }
+\item[{int}]{type}
+\end{DoxyParamCaption}
+)}}\label{create__file_8h_a10498692a07aacf1e88110005e3f2f3f}
+
+
+Creates a new file or directory at the path specified. 
+
+Create a file with the pathname specified. If there is not already a file with the same pathname, the pathname must contain the full directory path. The parameter type specifies whether a regular file or a directory file should be created.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pathname} & The pathname of file to create, it must be a full directory path.\\
+\hline
+{\em type} & The type of file to create, zero for a regular file, one for a directory.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value. If the value $>$ 0 the file creation was a success, and if the value $<$= 0 the file createion was unsuccessful.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-I\-L\-E\-\_\-\-N\-A\-M\-E} & If the specified file name is already in use.\\
+\hline
+{\em I\-N\-V\-A\-L\-I\-D\-\_\-\-F\-I\-L\-E\-\_\-\-T\-Y\-P\-E} & If the file type specified is not a regular file (0) or a directory file (1).\\
+\hline
+{\em I\-N\-V\-A\-L\-I\-D\-\_\-\-P\-A\-T\-H} & If the pathname specified does not already exist.\\
+\hline
+{\em I\-N\-S\-U\-F\-F\-I\-C\-I\-E\-N\-T\-\_\-\-D\-I\-S\-K\-\_\-\-S\-P\-A\-C\-E} & If the length of the blocks to be written is greater than the amount of available blocks on disk.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{create__file_8h_a10498692a07aacf1e88110005e3f2f3f_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{create__file_8h_a10498692a07aacf1e88110005e3f2f3f_icgraph}
+\end{center}
+\end{figure}
+
+

@@ -1,0 +1,82 @@
+\hypertarget{get__type_8c}{\section{get\-\_\-type.\-c File Reference}
+\label{get__type_8c}\index{get\-\_\-type.\-c@{get\-\_\-type.\-c}}
+}
+{\ttfamily \#include \char`\"{}blockio.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}traverse\-\_\-tree.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}get\-\_\-type.\-h\char`\"{}}\\*
+Include dependency graph for get\-\_\-type.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__type_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{get__type_8c_a8ce020071b4ba304d7bb45b6c1e246f5}{sfs\-\_\-gettype} (char $\ast$pathname)
+\begin{DoxyCompactList}\small\item\em Get the type of the file with the pathname specified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{get__type_8c_a8ce020071b4ba304d7bb45b6c1e246f5}{\index{get\-\_\-type.\-c@{get\-\_\-type.\-c}!sfs\-\_\-gettype@{sfs\-\_\-gettype}}
+\index{sfs\-\_\-gettype@{sfs\-\_\-gettype}!get_type.c@{get\-\_\-type.\-c}}
+\subsubsection[{sfs\-\_\-gettype}]{\setlength{\rightskip}{0pt plus 5cm}int sfs\-\_\-gettype (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pathname}
+\end{DoxyParamCaption}
+)}}\label{get__type_8c_a8ce020071b4ba304d7bb45b6c1e246f5}
+
+
+Get the type of the file with the pathname specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pathname} & The pathname of file to create, must be full directory path.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the file type of the given file. If the file type $>$= 0 then the file type retrieval was a success.\-If the file type is 0, or 1 then it is a file, or directory respectively. If the file type $>$ 1 then the file type is not known. If the file type $<$ 0 then the file type retrieval failed.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em F\-I\-L\-E\-\_\-\-N\-O\-T\-\_\-\-F\-O\-U\-N\-D} & If the file at the specified path does not exist.\\
+\hline
+{\em I\-N\-V\-A\-L\-I\-D\-\_\-\-P\-A\-T\-H} & If the specified path is invalid.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__type_8c_a8ce020071b4ba304d7bb45b6c1e246f5_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{get__type_8c_a8ce020071b4ba304d7bb45b6c1e246f5_icgraph}
+\end{center}
+\end{figure}
+
+

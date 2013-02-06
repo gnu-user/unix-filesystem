@@ -1,0 +1,403 @@
+\hypertarget{free__block__list_8c}{\section{free\-\_\-block\-\_\-list.\-c File Reference}
+\label{free__block__list_8c}\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}}
+}
+{\ttfamily \#include \char`\"{}free\-\_\-block\-\_\-list.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+Include dependency graph for free\-\_\-block\-\_\-list.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structfree__block__list}{free\-\_\-block\-\_\-list} $\ast$ \hyperlink{free__block__list_8c_a4fb9e58d343f5d00bfddf8b2aabe4a05}{get\-\_\-free\-\_\-block\-\_\-list} (void)
+\begin{DoxyCompactList}\small\item\em Obtains a handle to the free block list static instance, regardless of whether it is available in memory or on disk. \end{DoxyCompactList}\item 
+\hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} \hyperlink{free__block__list_8c_a4006c8928b03cc8367e345842cd263ae}{calc\-\_\-total\-\_\-free\-\_\-blocks} (void)
+\begin{DoxyCompactList}\small\item\em Used to calculate the total amount of available disk space. \end{DoxyCompactList}\item 
+\hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} \hyperlink{free__block__list_8c_a82bb5a646a9f221b4b1b333cd1e142ea}{calc\-\_\-num\-\_\-free\-\_\-blocks} (uint32\-\_\-t num\-\_\-blocks)
+\begin{DoxyCompactList}\small\item\em Used to calculate whether there is enough disk space before starting to create a file on disk. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{free__block__list_8c_acbfc0a3810742af6e976d135071261e1}{get\-\_\-free\-\_\-block} (void)
+\begin{DoxyCompactList}\small\item\em Finds the next free block in the static free block list, marks it as used and returns the location of the block. \end{DoxyCompactList}\item 
+\hyperlink{structfree__block__list}{free\-\_\-block\-\_\-list} $\ast$ \hyperlink{free__block__list_8c_adafbfcac2573a9ee6a15645d4fe825c0}{update\-\_\-fbl} (\hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} used, \hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} free)
+\begin{DoxyCompactList}\small\item\em Accessor method for the free block list static instance in memory. \end{DoxyCompactList}\item 
+\hyperlink{structfree__block__list}{free\-\_\-block\-\_\-list} $\ast$ \hyperlink{free__block__list_8c_a1a24d3e02317587656b22b7207cdb3fe}{sync\-\_\-fbl} (void)
+\begin{DoxyCompactList}\small\item\em Synchronizes the free block static instance in memory by writing it to disk. \end{DoxyCompactList}\item 
+\hyperlink{structfree__block__list}{free\-\_\-block\-\_\-list} $\ast$ \hyperlink{free__block__list_8c_ae1a3d63476e1321750e8e4aedbc53f07}{reset\-\_\-fbl} (void)
+\begin{DoxyCompactList}\small\item\em Overwrites the free block list in memory with the most recent version on disk. \end{DoxyCompactList}\item 
+\hyperlink{structfree__block__list}{free\-\_\-block\-\_\-list} $\ast$ \hyperlink{free__block__list_8c_a9e849ebe5efb8153894a337356a4e328}{wipe\-\_\-fbl} (void)
+\begin{DoxyCompactList}\small\item\em Reinitializes the free block list in memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{free__block__list_8c_a82bb5a646a9f221b4b1b333cd1e142ea}{\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}!calc\-\_\-num\-\_\-free\-\_\-blocks@{calc\-\_\-num\-\_\-free\-\_\-blocks}}
+\index{calc\-\_\-num\-\_\-free\-\_\-blocks@{calc\-\_\-num\-\_\-free\-\_\-blocks}!free_block_list.c@{free\-\_\-block\-\_\-list.\-c}}
+\subsubsection[{calc\-\_\-num\-\_\-free\-\_\-blocks}]{\setlength{\rightskip}{0pt plus 5cm}{\bf locations} calc\-\_\-num\-\_\-free\-\_\-blocks (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{num\-\_\-blocks}
+\end{DoxyParamCaption}
+)}}\label{free__block__list_8c_a82bb5a646a9f221b4b1b333cd1e142ea}
+
+
+Used to calculate whether there is enough disk space before starting to create a file on disk. 
+
+Finds the specified number of free blocks in the static instance of the free block list in memory. It returns N\-U\-L\-L if there are not enough free blocks, otherwise it returns an array of the free locations.
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\-\_\-blocks} & The number of free blocks needed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an array of the free locations, or N\-U\-L\-L if there are not enough free blocks.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_a82bb5a646a9f221b4b1b333cd1e142ea_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{free__block__list_8c_a4006c8928b03cc8367e345842cd263ae}{\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}!calc\-\_\-total\-\_\-free\-\_\-blocks@{calc\-\_\-total\-\_\-free\-\_\-blocks}}
+\index{calc\-\_\-total\-\_\-free\-\_\-blocks@{calc\-\_\-total\-\_\-free\-\_\-blocks}!free_block_list.c@{free\-\_\-block\-\_\-list.\-c}}
+\subsubsection[{calc\-\_\-total\-\_\-free\-\_\-blocks}]{\setlength{\rightskip}{0pt plus 5cm}{\bf locations} calc\-\_\-total\-\_\-free\-\_\-blocks (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{free__block__list_8c_a4006c8928b03cc8367e345842cd263ae}
+
+
+Used to calculate the total amount of available disk space. 
+
+Finds all of the free blocks that exist in the static instance of the free block list in memory and returns them as a locations object.
+
+\begin{DoxyReturn}{Returns}
+Returns an array containing all of the free locations.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_a4006c8928b03cc8367e345842cd263ae_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{free__block__list_8c_acbfc0a3810742af6e976d135071261e1}{\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}!get\-\_\-free\-\_\-block@{get\-\_\-free\-\_\-block}}
+\index{get\-\_\-free\-\_\-block@{get\-\_\-free\-\_\-block}!free_block_list.c@{free\-\_\-block\-\_\-list.\-c}}
+\subsubsection[{get\-\_\-free\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t get\-\_\-free\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{free__block__list_8c_acbfc0a3810742af6e976d135071261e1}
+
+
+Finds the next free block in the static free block list, marks it as used and returns the location of the block. 
+
+This function finds a single free block and then marks that block as used in the free block list, it ensures that the block on disk is empty (all N\-U\-L\-L) before returning the block location. It essentially operates as a facade for the calc\-\_\-free\-\_\-blocks function and the update\-\_\-fbl function when you only want to get one block at a time. If there are no free blocks available, it will return 0 (the superblock's location), which is always used by the superblock.
+
+\begin{DoxyReturn}{Returns}
+The location of a free block. Return 0 if no free blocks available.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_acbfc0a3810742af6e976d135071261e1_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_acbfc0a3810742af6e976d135071261e1_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{free__block__list_8c_a4fb9e58d343f5d00bfddf8b2aabe4a05}{\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}!get\-\_\-free\-\_\-block\-\_\-list@{get\-\_\-free\-\_\-block\-\_\-list}}
+\index{get\-\_\-free\-\_\-block\-\_\-list@{get\-\_\-free\-\_\-block\-\_\-list}!free_block_list.c@{free\-\_\-block\-\_\-list.\-c}}
+\subsubsection[{get\-\_\-free\-\_\-block\-\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf free\-\_\-block\-\_\-list}$\ast$ get\-\_\-free\-\_\-block\-\_\-list (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{free__block__list_8c_a4fb9e58d343f5d00bfddf8b2aabe4a05}
+
+
+Obtains a handle to the free block list static instance, regardless of whether it is available in memory or on disk. 
+
+Gets the free block list independently from where it is located. If the free block list does not already exist in memory (file system has just started) it will read the free block list from disk using the index provided by the super block and set the static instance of the free block list in memory. Then, return the pointer to the static instance in memory. If an error occurs, a N\-U\-L\-L pointer is returned.
+
+\begin{DoxyReturn}{Returns}
+A pointer to the static instance of free block list in memory, N\-U\-L\-L if an error occurred.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_a4fb9e58d343f5d00bfddf8b2aabe4a05_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{free__block__list_8c_a4fb9e58d343f5d00bfddf8b2aabe4a05_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{free__block__list_8c_ae1a3d63476e1321750e8e4aedbc53f07}{\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}!reset\-\_\-fbl@{reset\-\_\-fbl}}
+\index{reset\-\_\-fbl@{reset\-\_\-fbl}!free_block_list.c@{free\-\_\-block\-\_\-list.\-c}}
+\subsubsection[{reset\-\_\-fbl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf free\-\_\-block\-\_\-list}$\ast$ reset\-\_\-fbl (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{free__block__list_8c_ae1a3d63476e1321750e8e4aedbc53f07}
+
+
+Overwrites the free block list in memory with the most recent version on disk. 
+
+Resets the free block list in memory by loading the free blocks list from disk and overwriting the static instance of the free block list in memory. This function is used to refresh the state of the free block list in memory if an error occurs.
+
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the static instance of free block list in memory, N\-U\-L\-L if an error occurred.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_ae1a3d63476e1321750e8e4aedbc53f07_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_ae1a3d63476e1321750e8e4aedbc53f07_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{free__block__list_8c_a1a24d3e02317587656b22b7207cdb3fe}{\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}!sync\-\_\-fbl@{sync\-\_\-fbl}}
+\index{sync\-\_\-fbl@{sync\-\_\-fbl}!free_block_list.c@{free\-\_\-block\-\_\-list.\-c}}
+\subsubsection[{sync\-\_\-fbl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf free\-\_\-block\-\_\-list}$\ast$ sync\-\_\-fbl (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{free__block__list_8c_a1a24d3e02317587656b22b7207cdb3fe}
+
+
+Synchronizes the free block static instance in memory by writing it to disk. 
+
+Writes the static free block list in memory to disk. This synchronizes the static free block list in memory with the contents on disk, making the current state of the free blocks on disk permanent.
+
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the static instance of free block list in memory, N\-U\-L\-L if an error occurred synchronizing the free block list to disk.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_a1a24d3e02317587656b22b7207cdb3fe_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_a1a24d3e02317587656b22b7207cdb3fe_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{free__block__list_8c_adafbfcac2573a9ee6a15645d4fe825c0}{\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}!update\-\_\-fbl@{update\-\_\-fbl}}
+\index{update\-\_\-fbl@{update\-\_\-fbl}!free_block_list.c@{free\-\_\-block\-\_\-list.\-c}}
+\subsubsection[{update\-\_\-fbl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf free\-\_\-block\-\_\-list}$\ast$ update\-\_\-fbl (
+\begin{DoxyParamCaption}
+\item[{{\bf locations}}]{used, }
+\item[{{\bf locations}}]{free}
+\end{DoxyParamCaption}
+)}}\label{free__block__list_8c_adafbfcac2573a9ee6a15645d4fe825c0}
+
+
+Accessor method for the free block list static instance in memory. 
+
+The update F\-B\-L method updates the static F\-B\-L entry in memory. It will take an array of all the locations to mark as used as the first argument, and an array of all the locations to mark as unused as the second argument. If the arguments used or free are N\-U\-L\-L then no blocks are marked for that type.
+
+\begin{DoxyPrecond}{Precondition}
+Parameters used and free M\-U\-S\-T be N\-U\-L\-L terminated arrays of locations.
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em used} & A N\-U\-L\-L terminated array of locations to mark as used in the free block list, if it is N\-U\-L\-L then no locations are marked as used.\\
+\hline
+{\em free} & A N\-U\-L\-L terminated array of locations to mark as free in the free block list, if it is N\-U\-L\-L then no locations are marked as free.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the static instance of free block list in memory, N\-U\-L\-L if an error occurred.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_adafbfcac2573a9ee6a15645d4fe825c0_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{free__block__list_8c_a9e849ebe5efb8153894a337356a4e328}{\index{free\-\_\-block\-\_\-list.\-c@{free\-\_\-block\-\_\-list.\-c}!wipe\-\_\-fbl@{wipe\-\_\-fbl}}
+\index{wipe\-\_\-fbl@{wipe\-\_\-fbl}!free_block_list.c@{free\-\_\-block\-\_\-list.\-c}}
+\subsubsection[{wipe\-\_\-fbl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf free\-\_\-block\-\_\-list}$\ast$ wipe\-\_\-fbl (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{free__block__list_8c_a9e849ebe5efb8153894a337356a4e328}
+
+
+Reinitializes the free block list in memory. 
+
+Wipes the contents of the free block list in memory, which sets all of the locations in the free block list in memory as free. This function is used to reset the free block list in memory after initializing a new disk.
+
+\begin{DoxyReturn}{Returns}
+Returns a pointer to the free block list, N\-U\-L\-L if an error occurred.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{free__block__list_8c_a9e849ebe5efb8153894a337356a4e328_icgraph}
+\end{center}
+\end{figure}
+
+

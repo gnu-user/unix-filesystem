@@ -1,0 +1,216 @@
+\hypertarget{initialize_8c}{\section{initialize.\-c File Reference}
+\label{initialize_8c}\index{initialize.\-c@{initialize.\-c}}
+}
+{\ttfamily \#include \char`\"{}initialize.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}block\-\_\-func.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}super\-\_\-block.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}free\-\_\-block\-\_\-list.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}index\-\_\-block.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+Include dependency graph for initialize.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{initialize_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{initialize_8c_a19433b013c630f41f2a2162275594858}{sfs\-\_\-initialize} (int erase)
+\begin{DoxyCompactList}\small\item\em Initialize the superblock for the file system. \end{DoxyCompactList}\item 
+int \hyperlink{initialize_8c_a00a2a52d3dc5dd4ec595881132e0e280}{free\-\_\-block\-\_\-init} (void)
+\begin{DoxyCompactList}\small\item\em Allocate all of the blocks in the free block list. \end{DoxyCompactList}\item 
+int \hyperlink{initialize_8c_a5d12386ac7070191a232be9a77f40d6d}{wipe\-\_\-disk} (void)
+\begin{DoxyCompactList}\small\item\em Wipes the drive block by block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\-\_\-t \hyperlink{initialize_8c_a9a80c586908201543ced906192708b52}{F\-B\-L\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E}
+\begin{DoxyCompactList}\small\item\em The size of the free block list data blocks, not including the overhead of the size of each index block needed to index the free block list data blocks. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{initialize_8c_ab48d395b6931819dab7ce843cd8b54b7}{F\-B\-L\-\_\-\-T\-O\-T\-A\-L\-\_\-\-S\-I\-Z\-E}
+\begin{DoxyCompactList}\small\item\em The total size of the free block list data blocks, including the overhead of the size of each index block needed to index the free block list data blocks. \end{DoxyCompactList}\item 
+uint32\-\_\-t \hyperlink{initialize_8c_a8569e39497748dbfcb38c4dbb4241689}{R\-O\-O\-T}
+\begin{DoxyCompactList}\small\item\em The default location for the root directory's inode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{initialize_8c_a00a2a52d3dc5dd4ec595881132e0e280}{\index{initialize.\-c@{initialize.\-c}!free\-\_\-block\-\_\-init@{free\-\_\-block\-\_\-init}}
+\index{free\-\_\-block\-\_\-init@{free\-\_\-block\-\_\-init}!initialize.c@{initialize.\-c}}
+\subsubsection[{free\-\_\-block\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}int free\-\_\-block\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{initialize_8c_a00a2a52d3dc5dd4ec595881132e0e280}
+
+
+Allocate all of the blocks in the free block list. 
+
+This function initializes the free block list data structure for the first time. This is used only when the disk is being reinitialized. In effect, writing all N\-U\-L\-L values to this data structure (save for the superblock) marks all values on the disk free to be written on.
+
+\begin{DoxyReturn}{Returns}
+Returns an integer value, if the free block list initialization fails the value will be -\/1. Otherwise, it will be 0.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{initialize_8c_a00a2a52d3dc5dd4ec595881132e0e280_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{initialize_8c_a00a2a52d3dc5dd4ec595881132e0e280_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{initialize_8c_a19433b013c630f41f2a2162275594858}{\index{initialize.\-c@{initialize.\-c}!sfs\-\_\-initialize@{sfs\-\_\-initialize}}
+\index{sfs\-\_\-initialize@{sfs\-\_\-initialize}!initialize.c@{initialize.\-c}}
+\subsubsection[{sfs\-\_\-initialize}]{\setlength{\rightskip}{0pt plus 5cm}int sfs\-\_\-initialize (
+\begin{DoxyParamCaption}
+\item[{int}]{erase}
+\end{DoxyParamCaption}
+)}}\label{initialize_8c_a19433b013c630f41f2a2162275594858}
+
+
+Initialize the superblock for the file system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em erase} & Determines whether or not to delete the contents of the file system. If this value is 1 then it will erase every block on the disk and then re-\/create the super block, free block list data structure and the root directory. If the value is 0 then it will re-\/create the super block, the free block list blocks and the root directory.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value, if the value $>$ 0 then the initialization was successful. If the value $<$= 0 then the initialization failed.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{initialize_8c_a19433b013c630f41f2a2162275594858_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{initialize_8c_a19433b013c630f41f2a2162275594858_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{initialize_8c_a5d12386ac7070191a232be9a77f40d6d}{\index{initialize.\-c@{initialize.\-c}!wipe\-\_\-disk@{wipe\-\_\-disk}}
+\index{wipe\-\_\-disk@{wipe\-\_\-disk}!initialize.c@{initialize.\-c}}
+\subsubsection[{wipe\-\_\-disk}]{\setlength{\rightskip}{0pt plus 5cm}int wipe\-\_\-disk (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{initialize_8c_a5d12386ac7070191a232be9a77f40d6d}
+
+
+Wipes the drive block by block. 
+
+This function ensures that every block on the disk is initialized to zero. Failing to wipe the disk when the file system is reinitialized will result in having garbage data residing in all the blocks that have not yet been written to. These blocks are marked as free in the free block list structure regardless, so they are simple overwritten and the data inside is ignored. This is analogous to a \char`\"{}quick format\char`\"{} command.
+
+\begin{DoxyReturn}{Returns}
+Returns an integer value. If the wipe fails the value will be -\/1, otherwise it will be 0.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{initialize_8c_a5d12386ac7070191a232be9a77f40d6d_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{initialize_8c_a5d12386ac7070191a232be9a77f40d6d_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{initialize_8c_a9a80c586908201543ced906192708b52}{\index{initialize.\-c@{initialize.\-c}!F\-B\-L\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E@{F\-B\-L\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E}}
+\index{F\-B\-L\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E@{F\-B\-L\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E}!initialize.c@{initialize.\-c}}
+\subsubsection[{F\-B\-L\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t F\-B\-L\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E}}\label{initialize_8c_a9a80c586908201543ced906192708b52}
+
+
+The size of the free block list data blocks, not including the overhead of the size of each index block needed to index the free block list data blocks. 
+
+\hypertarget{initialize_8c_ab48d395b6931819dab7ce843cd8b54b7}{\index{initialize.\-c@{initialize.\-c}!F\-B\-L\-\_\-\-T\-O\-T\-A\-L\-\_\-\-S\-I\-Z\-E@{F\-B\-L\-\_\-\-T\-O\-T\-A\-L\-\_\-\-S\-I\-Z\-E}}
+\index{F\-B\-L\-\_\-\-T\-O\-T\-A\-L\-\_\-\-S\-I\-Z\-E@{F\-B\-L\-\_\-\-T\-O\-T\-A\-L\-\_\-\-S\-I\-Z\-E}!initialize.c@{initialize.\-c}}
+\subsubsection[{F\-B\-L\-\_\-\-T\-O\-T\-A\-L\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t F\-B\-L\-\_\-\-T\-O\-T\-A\-L\-\_\-\-S\-I\-Z\-E}}\label{initialize_8c_ab48d395b6931819dab7ce843cd8b54b7}
+
+
+The total size of the free block list data blocks, including the overhead of the size of each index block needed to index the free block list data blocks. 
+
+\hypertarget{initialize_8c_a8569e39497748dbfcb38c4dbb4241689}{\index{initialize.\-c@{initialize.\-c}!R\-O\-O\-T@{R\-O\-O\-T}}
+\index{R\-O\-O\-T@{R\-O\-O\-T}!initialize.c@{initialize.\-c}}
+\subsubsection[{R\-O\-O\-T}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t R\-O\-O\-T}}\label{initialize_8c_a8569e39497748dbfcb38c4dbb4241689}
+
+
+The default location for the root directory's inode. 
+

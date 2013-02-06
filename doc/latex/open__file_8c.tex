@@ -1,0 +1,141 @@
+\hypertarget{open__file_8c}{\section{open\-\_\-file.\-c File Reference}
+\label{open__file_8c}\index{open\-\_\-file.\-c@{open\-\_\-file.\-c}}
+}
+{\ttfamily \#include \char`\"{}system\-\_\-open\-\_\-file\-\_\-table.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}traverse\-\_\-tree.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}open\-\_\-file.\-h\char`\"{}}\\*
+Include dependency graph for open\-\_\-file.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{open__file_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{open__file_8c_ae482b5d82cfd7a92ea1f2815c5965f3c}{sfs\-\_\-open} (char $\ast$pathname)
+\begin{DoxyCompactList}\small\item\em Opens the file specified by the pathname, if the file is successfully opened a file descriptor is returned. \end{DoxyCompactList}\item 
+int \hyperlink{open__file_8c_a69191ccea40f8fffb8fef924f235650e}{show\-\_\-information} (int fd)
+\begin{DoxyCompactList}\small\item\em Show all of the information stored in the given file descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{open__file_8c_ae482b5d82cfd7a92ea1f2815c5965f3c}{\index{open\-\_\-file.\-c@{open\-\_\-file.\-c}!sfs\-\_\-open@{sfs\-\_\-open}}
+\index{sfs\-\_\-open@{sfs\-\_\-open}!open_file.c@{open\-\_\-file.\-c}}
+\subsubsection[{sfs\-\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}int sfs\-\_\-open (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pathname}
+\end{DoxyParamCaption}
+)}}\label{open__file_8c_ae482b5d82cfd7a92ea1f2815c5965f3c}
+
+
+Opens the file specified by the pathname, if the file is successfully opened a file descriptor is returned. 
+
+Since file descriptors are simply copies of inodes, this function traverses the specified path and attempts to find the inode with a name that matches the one specified in the path. This is done by traversing the index blocks at each token in the path specified, and checking the name of the path token against the inodes at each location specified by the index. Once the inode with the name matching the final path token has been found, the inode pseudo-\/object returned is added to the system-\/wide open file table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pathname} & The full pathname of a file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a file descriptor for the file opened. If the fd $>$= 0 then the file has successfully opened. If the fd $<$ 0 then the file has failed to open.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em F\-I\-L\-E\-\_\-\-N\-O\-T\-\_\-\-F\-O\-U\-N\-D} & If the file at the specified path does not exist.\\
+\hline
+{\em I\-N\-V\-A\-L\-I\-D\-\_\-\-P\-A\-T\-H} & If the specified path is invalid.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{open__file_8c_ae482b5d82cfd7a92ea1f2815c5965f3c_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{open__file_8c_ae482b5d82cfd7a92ea1f2815c5965f3c_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{open__file_8c_a69191ccea40f8fffb8fef924f235650e}{\index{open\-\_\-file.\-c@{open\-\_\-file.\-c}!show\-\_\-information@{show\-\_\-information}}
+\index{show\-\_\-information@{show\-\_\-information}!open_file.c@{open\-\_\-file.\-c}}
+\subsubsection[{show\-\_\-information}]{\setlength{\rightskip}{0pt plus 5cm}int show\-\_\-information (
+\begin{DoxyParamCaption}
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)}}\label{open__file_8c_a69191ccea40f8fffb8fef924f235650e}
+
+
+Show all of the information stored in the given file descriptor. 
+
+Since file descriptors are simply inode pseudo-\/objects, this function simply prints the attributes associated with an inode's defined data structure.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & integer, the file descriptor.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value. The function is adjusted to output the file descriptor if the file descriptor is retrieved successfully, to allow for it to be used on the return line. If the value returned is $>$= 0 then the function successfully retrieved a file descriptor. If the value $<$ 0 then the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{open__file_8c_a69191ccea40f8fffb8fef924f235650e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{open__file_8c_a69191ccea40f8fffb8fef924f235650e_icgraph}
+\end{center}
+\end{figure}
+
+

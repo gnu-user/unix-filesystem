@@ -1,0 +1,85 @@
+\hypertarget{get__size_8c}{\section{get\-\_\-size.\-c File Reference}
+\label{get__size_8c}\index{get\-\_\-size.\-c@{get\-\_\-size.\-c}}
+}
+{\ttfamily \#include \char`\"{}glob\-\_\-data.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}blockio.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}traverse\-\_\-tree.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}get\-\_\-size.\-h\char`\"{}}\\*
+Include dependency graph for get\-\_\-size.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__size_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{get__size_8c_a9abcf2f46b77ed569f2a64407e656d22}{sfs\-\_\-getsize} (char $\ast$pathname)
+\begin{DoxyCompactList}\small\item\em Get the size (in blocks) of the file with the pathname specified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{get__size_8c_a9abcf2f46b77ed569f2a64407e656d22}{\index{get\-\_\-size.\-c@{get\-\_\-size.\-c}!sfs\-\_\-getsize@{sfs\-\_\-getsize}}
+\index{sfs\-\_\-getsize@{sfs\-\_\-getsize}!get_size.c@{get\-\_\-size.\-c}}
+\subsubsection[{sfs\-\_\-getsize}]{\setlength{\rightskip}{0pt plus 5cm}int sfs\-\_\-getsize (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pathname}
+\end{DoxyParamCaption}
+)}}\label{get__size_8c_a9abcf2f46b77ed569f2a64407e656d22}
+
+
+Get the size (in blocks) of the file with the pathname specified. 
+
+Traverses the index block structure of a given file, reads all the locations inside, and the number of blocks is returned. If the file is a data file, the size of the file is returned. If the file is a directory, the number of elements within the directory will be returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pathname} & The pathname of the file or directory, must be full directory path. Relative paths are not accepted.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the size of the given file. If the value $<$ 0 then an error occurred.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em F\-I\-L\-E\-\_\-\-N\-O\-T\-\_\-\-F\-O\-U\-N\-D} & If the file at the given pathname does not exist.\\
+\hline
+{\em I\-N\-V\-A\-L\-I\-D\-\_\-\-P\-A\-T\-H} & If if the path specified is invalid, incomplete, or does not exist.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{get__size_8c_a9abcf2f46b77ed569f2a64407e656d22_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{get__size_8c_a9abcf2f46b77ed569f2a64407e656d22_icgraph}
+\end{center}
+\end{figure}
+
+

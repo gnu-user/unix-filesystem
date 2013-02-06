@@ -1,0 +1,93 @@
+\hypertarget{blockio_8h}{\section{blockio.\-h File Reference}
+\label{blockio_8h}\index{blockio.\-h@{blockio.\-h}}
+}
+{\ttfamily \#include \char`\"{}glob\-\_\-data.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+Include dependency graph for blockio.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{blockio_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blockio_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{blockio_8h_aba494f8ba12c5888abc3991a9a1a4fa0}{get\-\_\-block} (uint32\-\_\-t blknum, \hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Retrieves a block from disk. \end{DoxyCompactList}\item 
+int \hyperlink{blockio_8h_a800219862241422fe7dee4411b4b995e}{put\-\_\-block} (uint32\-\_\-t blknum, \hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Writes a block to disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{blockio_8h_aba494f8ba12c5888abc3991a9a1a4fa0}{\index{blockio.\-h@{blockio.\-h}!get\-\_\-block@{get\-\_\-block}}
+\index{get\-\_\-block@{get\-\_\-block}!blockio.h@{blockio.\-h}}
+\subsubsection[{get\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}int get\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{blknum, }
+\item[{{\bf byte} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{blockio_8h_aba494f8ba12c5888abc3991a9a1a4fa0}
+
+
+Retrieves a block from disk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blknum} & Which disk block to retrieve.\\
+\hline
+{\em buf} & Where in memory to put the retrieved data. \\
+\hline
+\end{DoxyParams}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blockio_8h_aba494f8ba12c5888abc3991a9a1a4fa0_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{blockio_8h_a800219862241422fe7dee4411b4b995e}{\index{blockio.\-h@{blockio.\-h}!put\-\_\-block@{put\-\_\-block}}
+\index{put\-\_\-block@{put\-\_\-block}!blockio.h@{blockio.\-h}}
+\subsubsection[{put\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}int put\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{blknum, }
+\item[{{\bf byte} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{blockio_8h_a800219862241422fe7dee4411b4b995e}
+
+
+Writes a block to disk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blknum} & Which disk block to update.\\
+\hline
+{\em buf} & Where in memory to get new disk block contents. \\
+\hline
+\end{DoxyParams}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{blockio_8h_a800219862241422fe7dee4411b4b995e_icgraph}
+\end{center}
+\end{figure}
+
+

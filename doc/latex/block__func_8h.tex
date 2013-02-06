@@ -1,0 +1,199 @@
+\hypertarget{block__func_8h}{\section{block\-\_\-func.\-h File Reference}
+\label{block__func_8h}\index{block\-\_\-func.\-h@{block\-\_\-func.\-h}}
+}
+{\ttfamily \#include \char`\"{}blockio.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}glob\-\_\-data.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}error.\-h\char`\"{}}\\*
+Include dependency graph for block\-\_\-func.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{block__func_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block__func_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{block__func_8h_a8d2c516f00e918d009b5fbaf1cfa463b}{write\-\_\-block} (uint32\-\_\-t location, \hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em A wrapper for the put\-\_\-block function. \end{DoxyCompactList}\item 
+int \hyperlink{block__func_8h_a1dcadd38a012a1218ab2100bda116861}{read\-\_\-block} (uint32\-\_\-t location, \hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em A wrapper for the get\-\_\-block function. \end{DoxyCompactList}\item 
+\hyperlink{glob__data_8h_a82b52bf2b45e214a8f2100ebfdf1aee4}{byte} $\ast$ \hyperlink{block__func_8h_a758063a96fe0be00a4b59b9869a0af62}{get\-\_\-data} (\hyperlink{glob__data_8h_a9d4937e46b9fac69334d5fc7ea3f37a6}{locations} location)
+\begin{DoxyCompactList}\small\item\em Get the data blocks and concatenate them into a large byte buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{block__func_8h_a758063a96fe0be00a4b59b9869a0af62}{\index{block\-\_\-func.\-h@{block\-\_\-func.\-h}!get\-\_\-data@{get\-\_\-data}}
+\index{get\-\_\-data@{get\-\_\-data}!block_func.h@{block\-\_\-func.\-h}}
+\subsubsection[{get\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf byte}$\ast$ get\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{{\bf locations}}]{location}
+\end{DoxyParamCaption}
+)}}\label{block__func_8h_a758063a96fe0be00a4b59b9869a0af62}
+
+
+Get the data blocks and concatenate them into a large byte buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The locations of the data blocks on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the data\-\_\-buffer containing all of the bytes of data.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{block__func_8h_a758063a96fe0be00a4b59b9869a0af62_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{block__func_8h_a758063a96fe0be00a4b59b9869a0af62_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{block__func_8h_a1dcadd38a012a1218ab2100bda116861}{\index{block\-\_\-func.\-h@{block\-\_\-func.\-h}!read\-\_\-block@{read\-\_\-block}}
+\index{read\-\_\-block@{read\-\_\-block}!block_func.h@{block\-\_\-func.\-h}}
+\subsubsection[{read\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}int read\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{location, }
+\item[{{\bf byte} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{block__func_8h_a1dcadd38a012a1218ab2100bda116861}
+
+
+A wrapper for the get\-\_\-block function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The location on disk for the buffer to be written to.\\
+\hline
+{\em The} & buffer to store on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value. If the value $>$= 0 the function was successful. Otherwise, the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{block__func_8h_a1dcadd38a012a1218ab2100bda116861_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block__func_8h_a1dcadd38a012a1218ab2100bda116861_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{block__func_8h_a8d2c516f00e918d009b5fbaf1cfa463b}{\index{block\-\_\-func.\-h@{block\-\_\-func.\-h}!write\-\_\-block@{write\-\_\-block}}
+\index{write\-\_\-block@{write\-\_\-block}!block_func.h@{block\-\_\-func.\-h}}
+\subsubsection[{write\-\_\-block}]{\setlength{\rightskip}{0pt plus 5cm}int write\-\_\-block (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{location, }
+\item[{{\bf byte} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{block__func_8h_a8d2c516f00e918d009b5fbaf1cfa463b}
+
+
+A wrapper for the put\-\_\-block function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The location on disk for the buffer to be written to.\\
+\hline
+{\em The} & buffer to store on disk.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer value. If the value $>$= 0, the function was successful. Otherwise, the function was unsuccessful.
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Daniel Smullen
+
+Jonathan Gillett
+
+Joseph Heron
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+G\-N\-U General Public License V3 
+\end{DoxyCopyright}
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{block__func_8h_a8d2c516f00e918d009b5fbaf1cfa463b_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block__func_8h_a8d2c516f00e918d009b5fbaf1cfa463b_icgraph}
+\end{center}
+\end{figure}
+
+

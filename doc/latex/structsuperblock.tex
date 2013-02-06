@@ -1,0 +1,48 @@
+\hypertarget{structsuperblock}{\section{superblock Struct Reference}
+\label{structsuperblock}\index{superblock@{superblock}}
+}
+
+
+{\ttfamily \#include $<$super\-\_\-block.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\-\_\-t \hyperlink{structsuperblock_a42dadb3b15d8f871bf1bc132b1ede650}{size\-\_\-of\-\_\-disk}
+\item 
+uint32\-\_\-t \hyperlink{structsuperblock_a9e3fb1e50a1c71b2337df296222d9553}{block\-\_\-size}
+\item 
+uint32\-\_\-t \hyperlink{structsuperblock_a1ca5e6fd54241f9c2f848530a51bf66c}{free\-\_\-block\-\_\-list}
+\item 
+uint32\-\_\-t \hyperlink{structsuperblock_aec71d39272df61eb33d94a4675d349be}{root\-\_\-dir}
+\item 
+uint32\-\_\-t \hyperlink{structsuperblock_a658c495cd1900eadce3b800e3ebdac7a}{device\-\_\-id}
+\item 
+uuid\-\_\-t \hyperlink{structsuperblock_a0c9cfc131b27ae3b98b1533bba4c58ef}{uuid}
+\end{DoxyCompactItemize}
+
+
+\subsection{Field Documentation}
+\hypertarget{structsuperblock_a9e3fb1e50a1c71b2337df296222d9553}{\index{superblock@{superblock}!block\-\_\-size@{block\-\_\-size}}
+\index{block\-\_\-size@{block\-\_\-size}!superblock@{superblock}}
+\subsubsection[{block\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t block\-\_\-size}}\label{structsuperblock_a9e3fb1e50a1c71b2337df296222d9553}
+Total number of blocks on the disk. \hypertarget{structsuperblock_a658c495cd1900eadce3b800e3ebdac7a}{\index{superblock@{superblock}!device\-\_\-id@{device\-\_\-id}}
+\index{device\-\_\-id@{device\-\_\-id}!superblock@{superblock}}
+\subsubsection[{device\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t device\-\_\-id}}\label{structsuperblock_a658c495cd1900eadce3b800e3ebdac7a}
+Location of the root directory's inode on disk. \hypertarget{structsuperblock_a1ca5e6fd54241f9c2f848530a51bf66c}{\index{superblock@{superblock}!free\-\_\-block\-\_\-list@{free\-\_\-block\-\_\-list}}
+\index{free\-\_\-block\-\_\-list@{free\-\_\-block\-\_\-list}!superblock@{superblock}}
+\subsubsection[{free\-\_\-block\-\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t {\bf free\-\_\-block\-\_\-list}}}\label{structsuperblock_a1ca5e6fd54241f9c2f848530a51bf66c}
+Block size of the disk, in bytes per block. \hypertarget{structsuperblock_aec71d39272df61eb33d94a4675d349be}{\index{superblock@{superblock}!root\-\_\-dir@{root\-\_\-dir}}
+\index{root\-\_\-dir@{root\-\_\-dir}!superblock@{superblock}}
+\subsubsection[{root\-\_\-dir}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t root\-\_\-dir}}\label{structsuperblock_aec71d39272df61eb33d94a4675d349be}
+Location of the free block list data structure on disk. \hypertarget{structsuperblock_a42dadb3b15d8f871bf1bc132b1ede650}{\index{superblock@{superblock}!size\-\_\-of\-\_\-disk@{size\-\_\-of\-\_\-disk}}
+\index{size\-\_\-of\-\_\-disk@{size\-\_\-of\-\_\-disk}!superblock@{superblock}}
+\subsubsection[{size\-\_\-of\-\_\-disk}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t size\-\_\-of\-\_\-disk}}\label{structsuperblock_a42dadb3b15d8f871bf1bc132b1ede650}
+\hypertarget{structsuperblock_a0c9cfc131b27ae3b98b1533bba4c58ef}{\index{superblock@{superblock}!uuid@{uuid}}
+\index{uuid@{uuid}!superblock@{superblock}}
+\subsubsection[{uuid}]{\setlength{\rightskip}{0pt plus 5cm}uuid\-\_\-t uuid}}\label{structsuperblock_a0c9cfc131b27ae3b98b1533bba4c58ef}
+Device identifier for the disk. No longer required since U\-U\-I\-D was implemented. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{super__block_8h}{super\-\_\-block.\-h}\end{DoxyCompactItemize}
