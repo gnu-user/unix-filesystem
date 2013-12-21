@@ -314,7 +314,7 @@ extern char* get_name(uint32_t block_num);
 extern uint32_t get_crc(uint32_t block_num);
 
 
-/*
+/**
  * @brief Traverses the index structure of a directory and returns the location of the inode with
  * the name that matches the request.
  *

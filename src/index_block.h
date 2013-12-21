@@ -50,7 +50,8 @@
 typedef uint32_t* index;
 
 
-/* @struct data_index
+/** 
+ * @struct data_index
  *
  * @brief A data structure containing the location of the first index
  * of an index data structure and an array of the data locations.
